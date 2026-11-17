@@ -9,6 +9,14 @@
 //!
 //! Até os módulos serem preenchidos na S2, o crate expõe `RegError` comum.
 
+pub mod cnpj;
 pub mod error;
+pub mod ipoc;
+pub mod money;
+pub mod period;
 
+pub use cnpj::CnpjIdentifier;
 pub use error::RegError;
+pub use ipoc::Ipoc;
+pub use money::{Centavos, MonetaryUnit};
+pub use period::{DataBase, Vigencia};
