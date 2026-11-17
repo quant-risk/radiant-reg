@@ -55,3 +55,4 @@ frontend/next-env.d.ts.bak
 frontend/.env.pubkey
 backend/radiant.db*
 .env.pubkey
+.playwright-mcp/
