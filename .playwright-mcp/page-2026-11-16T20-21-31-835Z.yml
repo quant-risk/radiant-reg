@@ -1,0 +1,631 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e4]:
+    - generic [ref=f5e5]:
+      - list [ref=f5e7]:
+        - listitem [ref=f5e8]:
+          - link "Ir para o conteúdo 1" [ref=f5e9] [cursor=pointer]:
+            - /url: "#inicioConteudo"
+        - listitem [ref=f5e10]:
+          - link "Ir para o menu 2" [ref=f5e11] [cursor=pointer]:
+            - /url: "#inicioMenu"
+        - listitem [ref=f5e12]:
+          - link "Ir para o rodapé 3" [ref=f5e13] [cursor=pointer]:
+            - /url: "#inicioRodape"
+      - generic [ref=f5e14]:
+        - banner [ref=f5e15]:
+          - generic [ref=f5e16]:
+            - list [ref=f5e19]:
+              - listitem [ref=f5e20]:
+                - link "Acessibilidade" [ref=f5e21] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+              - listitem [ref=f5e22]:
+                - link "Alto Contraste" [ref=f5e23] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f5e24]:
+                - link [ref=f5e25] [cursor=pointer]:
+                  - /url: /en
+                  - emphasis [ref=f5e26]: English
+            - link "Banco Central do Brasil":
+              - /url: /
+              - img "Banco Central do Brasil" [ref=f5e27] [cursor=pointer]
+        - navigation [ref=f5e28]:
+          - list [ref=f5e173]:
+            - listitem [ref=f5e174]:
+              - button "Acesso à<br> informação" [ref=f5e175] [cursor=pointer]:
+                - generic [ref=f5e176]: Acesso à informação
+            - listitem [ref=f5e177]:
+              - button "Política<br> monetária" [ref=f5e178] [cursor=pointer]:
+                - generic [ref=f5e179]: Política monetária
+            - listitem [ref=f5e180]:
+              - button "Estabilidade<br> financeira" [ref=f5e181] [cursor=pointer]:
+                - generic [ref=f5e182]: Estabilidade financeira
+            - listitem [ref=f5e183]:
+              - button "Estatísticas" [ref=f5e184] [cursor=pointer]
+            - listitem [ref=f5e186]:
+              - button "Cédulas e<br> moedas" [ref=f5e187] [cursor=pointer]:
+                - generic [ref=f5e188]: Cédulas e moedas
+            - listitem [ref=f5e189]:
+              - button "Publicações e<br> pesquisa" [ref=f5e190] [cursor=pointer]:
+                - generic [ref=f5e191]: Publicações e pesquisa
+            - listitem [ref=f5e192]:
+              - button "Buscar no site" [ref=f5e193] [cursor=pointer]:
+                - generic [ref=f5e194]: search
+        - navigation "breadcrumb" [ref=f5e196]:
+          - list [ref=f5e197]:
+            - listitem [ref=f5e198]:
+              - link "Home" [ref=f5e199] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f5e200]:
+              - text: ">"
+              - link "Estabilidade financeira" [ref=f5e201] [cursor=pointer]:
+                - /url: /estabilidadefinanceira
+            - listitem [ref=f5e202]:
+              - text: ">"
+              - link "Sistema Financeiro Nacional" [ref=f5e203] [cursor=pointer]:
+                - /url: /estabilidadefinanceira/sfn
+            - listitem [ref=f5e204]:
+              - text: ">"
+              - link "Sistemas e informações ao BC" [ref=f5e205] [cursor=pointer]:
+                - /url: /meubc/servicos%3Faba%3Dtodosservicosinstituicaosupervisionada
+            - listitem [ref=f5e206]:
+              - text: ">"
+              - link "Sistema de Informações de Créditos (SCR)" [ref=f5e207] [cursor=pointer]:
+                - /url: /estabilidadefinanceira/scr
+            - listitem [ref=f5e208]: "> Documento 3040 e Documento 3026"
+      - main [ref=f5e34]:
+        - generic [ref=f5e210]:
+          - heading "Documento 3040 e Documento 3026" [level=1] [ref=f5e211]
+          - generic [ref=f5e212]:
+            - generic [ref=f5e213]:
+              - generic [ref=f5e214]:
+                - paragraph [ref=f5e215]:
+                  - text: Disponibilização das informações iniciais para a elaboração do
+                  - strong [ref=f5e216]: Documento 3040 – Dados de Risco de Crédito
+                  - text: .
+                - heading "Leiaute" [level=3] [ref=f5e217]
+                - paragraph [ref=f5e218]:
+                  - strong [ref=f5e219]: (NR)
+                  - link "Leiaute do documento 3040" [ref=f5e220] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_Leiaute.xls
+                  - text: (XLS) - Descreve os campos e os domínios contidos no documento 3040 - Dados de Risco de Crédito.
+                - paragraph [ref=f5e221]:
+                  - link "Leiaute do documento 3042" [ref=f5e222] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3042_Leiaute.xls
+                  - text: (XLS) - Descreve os campos e atributos contidos no documento 3042 - Arquivo para substituição (correção) parcial do documento 3040.
+                - heading "Instruções de Preenchimento" [level=3] [ref=f5e223]
+                - paragraph [ref=f5e224]:
+                  - strong [ref=f5e225]: (NR)
+                  - link "Instruções de Preenchimento do Documento 3040" [ref=f5e226] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR_InstrucoesDePreenchimento_Doc3040.pdf
+                  - text: (PDF) - Descreve conceitos, estrutura do referido documento, instruções detalhadas de preenchimento de informações individualizadas e informações agregadas do documento 3040.
+                - paragraph [ref=f5e227]:
+                  - strong [ref=f5e228]: (NR)
+                  - link "Instruções de Preenchimento do Documento 3044" [ref=f5e229] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR_InstrucoesDePreenchimento_Doc3044.pdf
+                  - text: (PDF) - Descreve conceitos, estrutura do referido documento, instruções detalhadas de preenchimento de informações individualizadas e informações agregadas do documento 3044.
+                - paragraph [ref=f5e230]:
+                  - link "Equivalência entre modalidades dos Documentos 3040 e 3050" [ref=f5e231] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Equival%C3%AAncia_entre_modalidades_dos_documentos_3040_e_3050.pdf
+                  - text: (PDF) - Descreve as modalidades do Documento 3050 e respectivas correspondências no Documento 3040.
+                - paragraph [ref=f5e232]:
+                  - link "Equivalência entre modalidades nas publicações do Desig e modalidades do SCR" [ref=f5e233] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Equivalencia_Modalidades.xlsx
+                  - text: (XLSX) – Descreve as modalidades constantes nas publicações do Desig e respectivas correspondências no SCR.
+                - paragraph [ref=f5e234]:
+                  - strong [ref=f5e235]: (NR)
+                  - link "Instruções complementares relativas a informações de operações de crédito voltadas a programas governamentais" [ref=f5e236] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Instrucoes_Especificas_Programas_Publicos.pdf
+                  - text: (PDF) - Descreve as informações especificamente criadas no documento 3040 para registro de particularidades em operações de crédito relativas a alterações regulatórias e programas relacionados à crise do Covid-19.
+                - paragraph [ref=f5e237]:
+                  - link "Detalhamento de Informações ao SCR por FIDCs" [ref=f5e238] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_DetalhamentoFIDC.pdf
+                  - text: (PDF) - Descreve instruções de preenchimento do Documento 3040 específicas para os FIDCs.
+                - paragraph [ref=f5e239]:
+                  - link "Exemplo de distribuição de vencimentos nos vértices - Sistema SAC" [ref=f5e240] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR_exemplo_SAC_Doc3040.pdf
+                  - text: (PDF) - Exemplo de distribuição de vencimentos nos vértices, em uma operação de Crédito Imobiliário - Sistema SAC.
+                - paragraph [ref=f5e241]:
+                  - link "Exemplo de distribuição de vencimentos nos vértices - Sistema PRICE" [ref=f5e242] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR_exemplo_PRICE_Doc3040.pdf
+                  - text: (PDF) - Exemplo de distribuição de vencimentos nos vértices, em uma operação de Empréstimo Consignado - Sistema PRICE.
+                - paragraph [ref=f5e243]:
+                  - link "Exemplo de distribuição de vencimentos nos vértices - Atraso" [ref=f5e244] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR_exemplo_Atraso_Doc3040.pdf
+                  - text: (PDF) - Exemplo de distribuição de vencimentos nos vértices, em uma operação de Empréstimo Consignado - Atraso.
+                - paragraph [ref=f5e245]:
+                  - link "Exemplos de preenchimento dos atributos de Fluxo Financeiro" [ref=f5e246] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR_exemplos_Fluxo_Financeiro.pdf
+                  - text: (PDF) - Exemplos de preenchimento dos campos relativos ao Fluxo Financeiro.
+                - heading "Manuais" [level=3] [ref=f5e247]
+                - paragraph [ref=f5e248]:
+                  - link "Manual de Particionamento de Arquivos" [ref=f5e249] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/ManualParticionamento.pdf
+                  - text: (PDF) - Detalha o enquadramento e descreve a montagem do documento 3040 sob a ótica do particionamento de arquivos XML do documento 3040.
+                - paragraph [ref=f5e250]:
+                  - link "Manual de Utilização do Aplicativo Validador" [ref=f5e251] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/ManualValidador3040.pdf
+                  - text: (PDF) - Instrui o uso e descreve características do aplicativo validador que deve ser utilizado obrigatoriamente antes do envio do documento 3040 ao Banco Central.
+                - paragraph [ref=f5e252]:
+                  - link "Manual de Envio do Documento 3040" [ref=f5e253] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/ManualEnvio3040.pdf
+                  - text: (PDF) - Detalha o processo de envio do documento 3040.
+                - paragraph [ref=f5e254]:
+                  - link "Manual de Solicitação de Dispensas para FIDCs" [ref=f5e255] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_FIDC_DispensasEnvio.pdf
+                  - text: (PDF) - Detalha o processo de solicitação de dispensa de envio do documento 3040 por parte dos FIDCs.
+                - paragraph [ref=f5e256]:
+                  - link "Manual de Informações de Negociação de Operações" [ref=f5e257] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_Manual_de_Informacoes_de_Negociacao_de_Operacoes.pdf
+                  - text: (PDF) - Detalha as operações de cessão sob a ótica de informação ao SCR no documento 3040.
+                - paragraph [ref=f5e258]:
+                  - link "Manual do Painel de Gestão" [ref=f5e259] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_Manual_PainelGestao.pdf
+                  - text: (PDF) - Detalha a interface web para gerir de documentos relativos ao Sistema de Informações de Crédito – SCR.
+                - paragraph [ref=f5e260]:
+                  - link "Manual de Restrições Legais e Administrativas" [ref=f5e261] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_Manual_RestricoesLegaisAdministrativas.pdf
+                  - text: (PDF) - Detalha conceitos, cadastro, reversões, alterações e cancelamentos de Restrições Legais e Administrativas.
+                - paragraph [ref=f5e262]:
+                  - link "Manual do Documento 3042" [ref=f5e263] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Manual_SubstituicaoParcial_3042.pdf
+                  - text: (PDF) - Detalha a funcionalidade e características do arquivo de substituição (correção) parcial para o documento 3040.
+                - paragraph [ref=f5e264]:
+                  - link "Manual de Resposta" [ref=f5e265] [cursor=pointer]:
+                    - /url: https://www.bcb.gov.br/content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Manual%20Resposta%20Q72.pdf
+                  - text: (PDF) - Detalha o processo de envio do arquivo de resposta a questionamentos de qualidade Q72 envolvendo operações atípicas.
+                - paragraph [ref=f5e266]
+                - heading "Validação do Documento" [level=3] [ref=f5e267]
+                - paragraph [ref=f5e268]:
+                  - strong [ref=f5e269]: (NR)
+                  - link "Aplicativo Validador" [ref=f5e270] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_Validador.zip
+                  - text: (ZIP) - Aplicativo para validação do documento 3040 na própria instituição financeira. Deve ser utilizado antes do envio do documento ao Banco Central. Para instruções de uso, acessar o Manual de utilização do aplicativo validador - Versão Atual - Release 14345 - Versão Anterior - Release 13891.
+                - paragraph [ref=f5e271]:
+                  - strong [ref=f5e272]: (NR)
+                  - link "Planilha de Críticas" [ref=f5e273] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_Criticas.xls
+                  - text: (XLS) - Descreve as regras sintáticas e semânticas aplicadas pelo validador no documento 3040.
+                - heading "Validação Bacen" [level=3] [ref=f5e274]
+                - paragraph [ref=f5e275]:
+                  - strong [ref=f5e276]: (NR)
+                  - link "Regras de Validação Bacen" [ref=f5e277] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_RegrasValidacaoBacen.xls
+                  - text: (XLS) - Descreve as regras utilizadas para a validação feita no Banco Central intra e interdocumentos.
+                - heading "Consultas ao SCR de Instituições Financeiras" [level=3] [ref=f5e278]
+                - paragraph [ref=f5e279]:
+                  - strong [ref=f5e280]: Conceitos
+                  - text: Detalhamento sobre conceitos apresentados nas diversas formas de consultas ao SCR.
+                  - link "Manual com Conceitos de Consultas ao SCR" [ref=f5e281] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_ConceitosDeConsultas.pdf
+                  - text: (PDF) - Detalha os resultados das consultas via arquivo e via Web Service para equivalência na montagem da consulta ao SCR via Web.
+                - paragraph [ref=f5e282]:
+                  - strong [ref=f5e283]: Consulta via Arquivos
+                  - text: Consulta realizada por lotes através do envio e recebimento de arquivos. Deverá ser feita através do envio do documento 3045 e recebimento do documento 3046.
+                  - link "Leiaute dos documentos 3045 e 3046" [ref=f5e284] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3045-46_Leiaute.xls
+                  - text: (XLS) - Detalha estrutura XML dos documentos 3045 e 3046.
+                  - strong [ref=f5e285]: (NR)
+                  - link "Exemplo do documento 3045" [ref=f5e286] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3045_Exemplo.xml
+                  - text: (XML) - Exemplo de um documento 3045.
+                  - link "Exemplo do documento 3046" [ref=f5e287] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3046_Exemplo.xml
+                  - text: (XML) - Exemplo de um documento 3046.
+                - paragraph [ref=f5e288]:
+                  - strong [ref=f5e289]: (NR)
+                  - link "Exemplo do documento 3046 detalhado" [ref=f5e290] [cursor=pointer]:
+                    - /url: https://www.bcb.gov.br/content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3046_DetalhadoExemplo.xml
+                  - text: (XML) - Exemplo de um documento 3046 detalhado.
+                - paragraph [ref=f5e291]:
+                  - strong [ref=f5e292]: (NR)
+                  - link "Arquivo XML Schema (XSD) do documento 3045" [ref=f5e293] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3045.xsd
+                  - text: (XML) - Arquivo para validação sintática do documento 3045. Esta validação não é obrigatória, apenas serve como referência para o envio do documento.
+                - paragraph [ref=f5e294]:
+                  - strong [ref=f5e295]:
+                    - text: Consulta via
+                    - emphasis [ref=f5e296]: Web Service
+                  - text: Consulta realizada através de aplicação desenvolvida pela instituição financeira através de comunicação
+                  - emphasis [ref=f5e297]: Web Service
+                  - text: .
+                  - link "Manual de Consulta via Web Service" [ref=f5e298] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_Manual_de_Consulta_Web_Service.pdf
+                  - text: (PDF) - Detalha procedimentos, pré-requisitos, e formatos de chamado e retorno de consultas realizadas através de chamadas via
+                  - emphasis [ref=f5e299]: Web Service
+                  - text: .
+                - paragraph [ref=f5e300]:
+                  - strong [ref=f5e301]:
+                    - strong [ref=f5e302]: (NR)
+                  - link "Manual de Consulta via Web Service Detalhada" [ref=f5e303] [cursor=pointer]:
+                    - /url: https://www.bcb.gov.br/content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Manual_Consulta_Webservice_detalhada.pdf
+                  - text: (PDF) - Detalha procedimentos, pré-requisitos, e formatos de chamado e retorno de consultas realizadas através de chamadas via
+                  - emphasis [ref=f5e304]: Web Service
+                  - text: . Este serviço retorna os dados do tomador em nível de operação de crédito.
+                - heading [level=3] [ref=f5e305]
+                - heading "Consulta ao SCR de Garantidores e Câmaras de Depósito, Registro, Compensação e Liquidação" [level=3] [ref=f5e306]
+                - paragraph [ref=f5e307]:
+                  - link "Manual de consulta" [ref=f5e308] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Manual_de_Consulta_Garantidores_Registradoras.pdf
+                  - text: (PDF) - Detalha os procedimentos para autorização e transferência dos documentos 3055 e 3056.
+                - paragraph [ref=f5e309]:
+                  - link "Leiaute dos documentos 3055 e 3056" [ref=f5e310] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3055-56_Leiaute.xlsx
+                  - text: (XLSX) - Detalha a estrutura XML dos documentos 3055 e 3056.
+                - paragraph [ref=f5e311]:
+                  - link "Exemplo do documento 3055" [ref=f5e312] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Exemplo_3055.xml
+                  - text: (XML) - Exemplo de um documento 3055.
+                - paragraph [ref=f5e313]:
+                  - link "Exemplo do documento 3056" [ref=f5e314] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/Exemplo_3056.xml
+                  - text: (XML) - Exemplo de um documento 3056.
+                - heading [level=3] [ref=f5e315]
+                - heading "Documento 3026" [level=3] [ref=f5e316]
+                - paragraph [ref=f5e317]:
+                  - link "Instruções de Preenchimento do Documento 3026" [ref=f5e318] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3026_InstrucoesDePreenchimento.pdf
+                  - text: (PDF) - Instruções de Preenchimento do Documento 3026 - Descreve instruções de preenchimento de informações e referências normativas do documento 3026.
+                - paragraph [ref=f5e319]:
+                  - link "Leiaute do Documento 3026" [ref=f5e320] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3026_Leiaute.xls
+                  - text: (XLS) - Detalha a estrutura XML do documento 3026.
+                - paragraph [ref=f5e321]:
+                  - link "Arquivo XML Schema (XSD) do documento 3026" [ref=f5e322] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/scr3026.201112.xml
+                  - text: (XML) - Arquivo para validação sintática do documento 3026. Esta validação não é obrigatória, apenas serve como referência para o envio do documento.
+                - paragraph [ref=f5e323]:
+                  - link "Exemplo XML do documento 3026" [ref=f5e324] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3026_Exemplo.xml
+                  - text: (XML) - Exemplo em arquivo XML de um documento 3026.
+                - heading "Exemplos do documento 3040" [level=3] [ref=f5e325]
+                - paragraph [ref=f5e326]: "Para visualizar os exemplos com a estrutura do documento 3040, clique nos links abaixo:"
+                - paragraph [ref=f5e327]:
+                  - text: "-"
+                  - link "Exemplo de informações básicas de operações de crédito" [ref=f5e328] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/exemploDocPadraoInfosBasicas.xml
+                  - text: (XML)
+                - paragraph [ref=f5e329]:
+                  - text: "-"
+                  - link "Exemplo de operações com parcelas de crédito a liberar" [ref=f5e330] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/exemploCreditosLiberar.xml
+                  - text: (XML)
+                - paragraph [ref=f5e331]:
+                  - text: "-"
+                  - link "Exemplo de modalidade de operação - limite de crédito" [ref=f5e332] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/exemploLimiteCredito.xml
+                  - text: (XML)
+                - paragraph [ref=f5e333]:
+                  - text: "-"
+                  - link "Exemplo de cessão de operação com coobrigação - ponta cedente" [ref=f5e334] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/exemploCessao_IF29507878Cedente.xml
+                  - text: (XML)
+                - paragraph [ref=f5e335]:
+                  - text: "-"
+                  - link "Exemplo de cessão de operação com coobrigação - ponta cessionário" [ref=f5e336] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/exemploCessao_IF02533346Cessionaria.xml
+                  - text: (XML)
+                - paragraph [ref=f5e337]:
+                  - text: "-"
+                  - link "Exemplo de agregação com campo 'Desempenho da Operação'" [ref=f5e338] [cursor=pointer]:
+                    - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/exemploDesempenhoOperacao.xml
+                  - text: (XML)
+                - paragraph [ref=f5e339]: Veja leiautes dos arquivos clicando no link “Leiaute do documento 3040” (item 1 desta página).
+              - button "Histórico de Atualizações expand_less" [ref=f5e344] [cursor=pointer]:
+                - generic [ref=f5e345]: Histórico de Atualizações
+                - generic [ref=f5e346]: expand_less
+            - generic [ref=f5e347]:
+              - generic [ref=f5e348]:
+                - heading "Acesso" [level=4] [ref=f5e349]
+                - link "SCR2" [ref=f5e350] [cursor=pointer]:
+                  - /url: https://scr.bcb.gov.br/scr/dologin
+                - text: Sistema para Consulta com Painel de Gestão de documentos e gerenciamento de Restrições Legais e Administrativas.
+                - list [ref=f5e351]:
+                  - listitem [ref=f5e352]: No Painel de Gestão, pode-se pedir a Dispensa de Envio do Documento 3040 e a Autorização de Envio de Documentos em nome de outra instituição financeira.
+                  - listitem [ref=f5e353]:
+                    - strong [ref=f5e354]: (NR)
+                    - text: Dúvidas sobre como fazer a
+                    - link "Dispensa de Envio do Documento 3040 (PDF)." [ref=f5e355] [cursor=pointer]:
+                      - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/SCR3040_Dispensa_de_Envio.pdf
+                - separator [ref=f5e356]
+              - generic [ref=f5e357]:
+                - heading "Notícias em RSS" [level=4] [ref=f5e358]
+                - link "As últimas notícias sobre o sistema SCR2 - Documento 3040" [ref=f5e359] [cursor=pointer]:
+                  - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/scrdoc3040/noticias_Doc3040.xml
+                - text: .
+              - generic [ref=f5e360]:
+                - separator [ref=f5e361]
+                - heading "Legislação" [level=4] [ref=f5e362]
+                - link "Normativos específicos" [ref=f5e363] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/scrnormasemvigor
+                - link "Busca de Normas" [ref=f5e364] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/buscanormas
+                - separator [ref=f5e365]
+                - heading "FAQ" [level=4] [ref=f5e366]
+                - link "Perguntas frequentes sobre documento 3040" [ref=f5e367] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/scrdoc3040_faq
+                - separator [ref=f5e368]
+                - heading "Fale Conosco" [level=4] [ref=f5e369]
+                - text: "Para dúvidas sobre o documento 3040:"
+                - link "scr.gestao@bcb.gov.br" [ref=f5e370] [cursor=pointer]:
+                  - /url: mailto:scr.gestao@bcb.gov.br
+                - text: .
+      - button "Vá para o topo" [ref=f5e39] [cursor=pointer]:
+        - generic [aria-hidden] [ref=f5e40]: expand_less
+      - contentinfo [ref=f5e41]:
+        - generic [ref=f5e45]:
+          - generic [ref=f5e46]: Siga o BC
+          - list [ref=f5e47]:
+            - listitem [ref=f5e48]:
+              - link "Instagram oficial do Banco Central do Brasil" [ref=f5e49] [cursor=pointer]:
+                - /url: http://www.instagram.com/bancocentraldobrasil/
+            - listitem [ref=f5e55]:
+              - link "Linkedin oficial do Banco Central do Brasil" [ref=f5e56] [cursor=pointer]:
+                - /url: http://br.linkedin.com/company/banco-central-do-brasil
+            - listitem [ref=f5e61]:
+              - link "X oficial do Banco Central do Brasil" [ref=f5e62] [cursor=pointer]:
+                - /url: http://twitter.com/bancocentralbr
+            - listitem [ref=f5e66]:
+              - link "Canal oficial do Banco Central do Brasil no WhatsApp" [ref=f5e67] [cursor=pointer]:
+                - /url: https://whatsapp.com/channel/0029VaB1KjR6BIEjJMs4HN1O
+            - listitem [ref=f5e72]:
+              - link "Canal oficial do Banco Central do Brasil no YouTube" [ref=f5e73] [cursor=pointer]:
+                - /url: http://www.youtube.com/user/BancoCentralBR
+            - listitem [ref=f5e77]:
+              - link "TikTok oficial do Banco Central do Brasil" [ref=f5e78] [cursor=pointer]:
+                - /url: https://www.tiktok.com/@bancocentraldobrasil
+            - listitem [ref=f5e82]:
+              - link "Facebook oficial do Banco Central do Brasil" [ref=f5e83] [cursor=pointer]:
+                - /url: http://pt-br.facebook.com/bancocentraldobrasil/
+            - listitem [ref=f5e87]:
+              - link "Threads oficial do Banco Central do Brasil" [ref=f5e88] [cursor=pointer]:
+                - /url: https://www.threads.net/@bancocentraldobrasil
+            - listitem [ref=f5e92]:
+              - link "Telegram oficial do Banco Central do Brasil" [ref=f5e93] [cursor=pointer]:
+                - /url: https://t.me/bancocentraloficial
+            - listitem [ref=f5e97]:
+              - link "Flickr oficial do Banco Central do Brasil" [ref=f5e98] [cursor=pointer]:
+                - /url: http://www.flickr.com/photos/134175749@N03/
+            - listitem [ref=f5e103]:
+              - link "Assinar notícias" [ref=f5e104] [cursor=pointer]:
+                - /url: /assinar-noticias
+            - listitem [ref=f5e114]:
+              - link "RSS - Feeds do BC" [ref=f5e115] [cursor=pointer]:
+                - /url: /acessoinformacao/rss
+            - listitem [ref=f5e121]:
+              - link "Calendário do Banco Central do Brasil" [ref=f5e122] [cursor=pointer]:
+                - /url: /acessoinformacao/calendariobc_ics
+        - generic [ref=f5e373]:
+          - generic [ref=f5e374]:
+            - paragraph [ref=f5e375]:
+              - strong [ref=f5e376]:
+                - link "Acesso à informação" [ref=f5e377] [cursor=pointer]:
+                  - /url: /acessoinformacao
+            - list [ref=f5e378]:
+              - listitem [ref=f5e379]:
+                - link "Institucional" [ref=f5e380] [cursor=pointer]:
+                  - /url: /acessoinformacao/institucional
+              - listitem [ref=f5e381]:
+                - link "Ações e programas" [ref=f5e382] [cursor=pointer]:
+                  - /url: /acessoinformacao/acoesprogramas
+              - listitem [ref=f5e383]:
+                - link "Participação social" [ref=f5e384] [cursor=pointer]:
+                  - /url: /acessoinformacao/participacaosocial
+              - listitem [ref=f5e385]:
+                - link "Auditorias" [ref=f5e386] [cursor=pointer]:
+                  - /url: /acessoinformacao/auditorias
+              - listitem [ref=f5e387]:
+                - link "Convênios e Transferências" [ref=f5e388] [cursor=pointer]:
+                  - /url: /acessoinformacao/convenios-e-transferencias
+              - listitem [ref=f5e389]:
+                - link "Receitas e despesas" [ref=f5e390] [cursor=pointer]:
+                  - /url: /acessoinformacao/receitas-e-despesas
+              - listitem [ref=f5e391]:
+                - link "Licitações e Contratos" [ref=f5e392] [cursor=pointer]:
+                  - /url: /acessoinformacao/licitacoes-e-contratos
+              - listitem [ref=f5e393]:
+                - link "Servidores" [ref=f5e394] [cursor=pointer]:
+                  - /url: /acessoinformacao/carreira
+              - listitem [ref=f5e395]:
+                - link "Informações classificadas" [ref=f5e396] [cursor=pointer]:
+                  - /url: /acessoinformacao/informacoesclassificadas
+              - listitem [ref=f5e397]:
+                - link "Serviço de Informações ao Cidadão (SIC)" [ref=f5e398] [cursor=pointer]:
+                  - /url: /acessoinformacao/sic
+              - listitem [ref=f5e399]:
+                - link "Perguntas frequentes" [ref=f5e400] [cursor=pointer]:
+                  - /url: /meubc/faqs
+              - listitem [ref=f5e401]:
+                - link "Dados Abertos" [ref=f5e402] [cursor=pointer]:
+                  - /url: /acessoinformacao/dadosabertos
+              - listitem [ref=f5e403]:
+                - link "Sanções Administrativas" [ref=f5e404] [cursor=pointer]:
+                  - /url: /acessoinformacao/sancoes-administrativas
+              - listitem [ref=f5e405]:
+                - link "Lei Geral de Proteção de Dados Pessoais (LGPD)" [ref=f5e406] [cursor=pointer]:
+                  - /url: /acessoinformacao/lgpd
+              - listitem [ref=f5e407]:
+                - link "Transparência e prestação de contas" [ref=f5e408] [cursor=pointer]:
+                  - /url: /acessoinformacao/transparencia-e-prestacao-de-contas
+          - generic [ref=f5e409]:
+            - paragraph [ref=f5e410]:
+              - strong [ref=f5e411]:
+                - link "Política monetária" [ref=f5e412] [cursor=pointer]:
+                  - /url: /controleinflacao
+            - list [ref=f5e413]:
+              - listitem [ref=f5e414]:
+                - link "Metas para a inflação" [ref=f5e415] [cursor=pointer]:
+                  - /url: /controleinflacao/metainflacao
+              - listitem [ref=f5e416]:
+                - link "O que é inflação" [ref=f5e417] [cursor=pointer]:
+                  - /url: /controleinflacao/oqueinflacao
+              - listitem [ref=f5e418]:
+                - link "Comitê de Política Monetária (Copom)" [ref=f5e419] [cursor=pointer]:
+                  - /url: /controleinflacao/copom
+              - listitem [ref=f5e420]:
+                - link "Comunicados do Copom" [ref=f5e421] [cursor=pointer]:
+                  - /url: /controleinflacao/comunicadoscopom
+              - listitem [ref=f5e422]:
+                - link "Atas do Copom" [ref=f5e423] [cursor=pointer]:
+                  - /url: /publicacoes/atascopom
+              - listitem [ref=f5e424]:
+                - link "Relatório de Política Monetária" [ref=f5e425] [cursor=pointer]:
+                  - /url: /publicacoes/rpm
+              - listitem [ref=f5e426]:
+                - link "Expectativas de mercado" [ref=f5e427] [cursor=pointer]:
+                  - /url: /controleinflacao/expectativasmercado
+          - generic [ref=f5e428]:
+            - paragraph [ref=f5e429]:
+              - strong [ref=f5e430]:
+                - link "Estabilidade financeira" [ref=f5e431] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira
+            - list [ref=f5e432]:
+              - listitem [ref=f5e433]:
+                - link "Normas" [ref=f5e434] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/regulacao
+              - listitem [ref=f5e435]:
+                - link "Supervisão" [ref=f5e436] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/supervisao
+              - listitem [ref=f5e437]:
+                - link "Sistema Financeiro Nacional" [ref=f5e438] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/sfn
+              - listitem [ref=f5e439]:
+                - link "Sistema de Pagamentos Brasileiro (SPB)" [ref=f5e440] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/spb
+              - listitem [ref=f5e441]:
+                - link "Câmbio e capitais internacionais" [ref=f5e442] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/cambioecapitais
+              - listitem [ref=f5e443]:
+                - link "Comitê de Estabilidade Financeira (Comef)" [ref=f5e444] [cursor=pointer]:
+                  - /url: /acessoinformacao/comef
+              - listitem [ref=f5e445]:
+                - link "Relatório de Estabilidade Financeira" [ref=f5e446] [cursor=pointer]:
+                  - /url: /publicacoes/ref
+          - generic [ref=f5e447]:
+            - paragraph [ref=f5e448]:
+              - strong [ref=f5e449]:
+                - link "Estatísticas" [ref=f5e450] [cursor=pointer]:
+                  - /url: /estatisticas
+            - list [ref=f5e451]:
+              - listitem [ref=f5e452]:
+                - link "Taxas de Juros" [ref=f5e453] [cursor=pointer]:
+                  - /url: /estatisticas/txjuros
+              - listitem [ref=f5e454]:
+                - link "Notas econômico-financeiras" [ref=f5e455] [cursor=pointer]:
+                  - /url: /estatisticas/notaseconomicofinanceiras
+              - listitem [ref=f5e456]:
+                - link "Séries temporais (SGS)" [ref=f5e457] [cursor=pointer]:
+                  - /url: https://www3.bcb.gov.br/sgspub/
+              - listitem [ref=f5e458]:
+                - link "Tabelas especiais" [ref=f5e459] [cursor=pointer]:
+                  - /url: /estatisticas/tabelasespeciais
+              - listitem [ref=f5e460]:
+                - link "Indicadores Econômicos Selecionados" [ref=f5e461] [cursor=pointer]:
+                  - /url: /estatisticas/indicadoresselecionados
+              - listitem [ref=f5e462]:
+                - link "Poupança" [ref=f5e463] [cursor=pointer]:
+                  - /url: /estatisticas/poupanca
+              - listitem [ref=f5e464]:
+                - link "Mais estatísticas" [ref=f5e465] [cursor=pointer]:
+                  - /url: /estatisticas/maisestatisticas
+              - listitem [ref=f5e466]:
+                - link "Calendário de divulgação" [ref=f5e467] [cursor=pointer]:
+                  - /url: /estatisticas/notas_calendario
+          - generic [ref=f5e468]:
+            - paragraph [ref=f5e469]:
+              - strong [ref=f5e470]:
+                - link "Cédulas e moedas" [ref=f5e471] [cursor=pointer]:
+                  - /url: /cedulasemoedas
+            - list [ref=f5e472]:
+              - listitem [ref=f5e473]:
+                - link "Cédulas" [ref=f5e474] [cursor=pointer]:
+                  - /url: /cedulasemoedas/cedulas
+              - listitem [ref=f5e475]:
+                - link "Moedas" [ref=f5e476] [cursor=pointer]:
+                  - /url: /cedulasemoedas/moedas
+              - listitem [ref=f5e477]:
+                - link "Serviços" [ref=f5e478] [cursor=pointer]:
+                  - /url: /cedulasemoedas/servicoscedulasmoedas
+              - listitem [ref=f5e479]:
+                - link "Dinheiro em circulação" [ref=f5e480] [cursor=pointer]:
+                  - /url: https://www3.bcb.gov.br/mec-circulante/
+              - listitem [ref=f5e481]:
+                - link "O caminho do dinheiro" [ref=f5e482] [cursor=pointer]:
+                  - /url: /cedulasemoedas/caminhododinheiro
+          - generic [ref=f5e483]:
+            - paragraph [ref=f5e484]:
+              - strong [ref=f5e485]:
+                - link "Publicações e pesquisa" [ref=f5e486] [cursor=pointer]:
+                  - /url: /publicacoes
+            - list [ref=f5e487]:
+              - listitem [ref=f5e488]:
+                - link "Atas do Copom" [ref=f5e489] [cursor=pointer]:
+                  - /url: /publicacoes/atascopom
+              - listitem [ref=f5e490]:
+                - link "Relatório de Política Monetária" [ref=f5e491] [cursor=pointer]:
+                  - /url: /publicacoes/rpm
+              - listitem [ref=f5e492]:
+                - link "Relatório de Estabilidade Financeira" [ref=f5e493] [cursor=pointer]:
+                  - /url: /publicacoes/ref
+              - listitem [ref=f5e494]:
+                - link "Relatório Integrado do BC" [ref=f5e495] [cursor=pointer]:
+                  - /url: /publicacoes/relatoriointegrado
+              - listitem [ref=f5e496]:
+                - link "Estudos especiais do Banco Central" [ref=f5e497] [cursor=pointer]:
+                  - /url: /publicacoes/estudosespeciais
+              - listitem [ref=f5e498]:
+                - link "Sondagens do BC" [ref=f5e499] [cursor=pointer]:
+                  - /url: /publicacoes/sondagens-do-bc
+              - listitem [ref=f5e500]:
+                - link "Pesquisa no BC" [ref=f5e501] [cursor=pointer]:
+                  - /url: /publicacoes/pesquisa
+              - listitem [ref=f5e502]:
+                - link "Mais publicações" [ref=f5e503] [cursor=pointer]:
+                  - /url: /publicacoes/maispublicacoes
+        - generic [ref=f5e133]:
+          - generic [ref=f5e134]: Garantir a estabilidade de preços, zelar por um sistema financeiro sólido e eficiente, e fomentar o bem-estar econômico da sociedade.
+          - generic [ref=f5e135]:
+            - generic [ref=f5e136]: "Atendimento: 145 (custo de ligação local)"
+            - list [ref=f5e137]:
+              - listitem [ref=f5e138]:
+                - link "Fale conosco" [ref=f5e139] [cursor=pointer]:
+                  - /url: /acessoinformacao/faleconosco
+                - text: "|"
+              - listitem [ref=f5e140]:
+                - link "Política de privacidade" [ref=f5e141] [cursor=pointer]:
+                  - /url: /acessoinformacao/politicaprivacidade
+                - text: "|"
+              - listitem [ref=f5e142]:
+                - link "Política de acessibilidade" [ref=f5e143] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+            - generic [ref=f5e144]:
+              - text: © Banco Central do Brasil -
+              - link "Todos os direitos reservados" [ref=f5e145] [cursor=pointer]:
+                - /url: /acessoinformacao/direitosautorais
+    - generic [ref=f5e147]:
+      - link "Ir para o conteúdo" [ref=f5e149] [cursor=pointer]:
+        - /url: "#conteudo"
+      - generic [ref=f5e150]:
+        - link "GovBR" [ref=f5e151] [cursor=pointer]:
+          - /url: https://gov.br/
+        - navigation [ref=f5e152]:
+          - list [ref=f5e153]:
+            - listitem [ref=f5e154]
+            - listitem [ref=f5e155]:
+              - link "Acesso à informação" [ref=f5e156] [cursor=pointer]:
+                - /url: http://www.gov.br/acessoainformacao/
+            - listitem [ref=f5e157]
+            - listitem [ref=f5e158]:
+              - link "Participe" [ref=f5e159] [cursor=pointer]:
+                - /url: https://www.gov.br/pt-br/participacao-social/
+            - listitem [ref=f5e160]
+            - listitem [ref=f5e161]:
+              - link "Legislação" [ref=f5e162] [cursor=pointer]:
+                - /url: http://www4.planalto.gov.br/legislacao/
+            - listitem [ref=f5e163]
+            - listitem [ref=f5e164]:
+              - link "Órgãos do Governo" [ref=f5e165] [cursor=pointer]:
+                - /url: http://www.gov.br/pt-br/orgaos-do-governo
+  - generic [ref=f5e167] [cursor=pointer]:
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f5e168]
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f5e169]
+  - generic [ref=f5e171] [cursor=pointer]

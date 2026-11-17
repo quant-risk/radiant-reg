@@ -1,0 +1,420 @@
+- generic [active] [ref=f21e1]:
+  - generic [ref=f21e4]:
+    - generic [ref=f21e5]:
+      - list [ref=f21e7]:
+        - listitem [ref=f21e8]:
+          - link "Ir para o conteúdo 1" [ref=f21e9] [cursor=pointer]:
+            - /url: "#inicioConteudo"
+        - listitem [ref=f21e10]:
+          - link "Ir para o menu 2" [ref=f21e11] [cursor=pointer]:
+            - /url: "#inicioMenu"
+        - listitem [ref=f21e12]:
+          - link "Ir para o rodapé 3" [ref=f21e13] [cursor=pointer]:
+            - /url: "#inicioRodape"
+      - generic [ref=f21e14]:
+        - banner [ref=f21e15]:
+          - generic [ref=f21e16]:
+            - list [ref=f21e19]:
+              - listitem [ref=f21e20]:
+                - link "Acessibilidade" [ref=f21e21] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+              - listitem [ref=f21e22]:
+                - link "Alto Contraste" [ref=f21e23] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f21e24]:
+                - link [ref=f21e25] [cursor=pointer]:
+                  - /url: /en
+                  - emphasis [ref=f21e26]: English
+            - link "Banco Central do Brasil":
+              - /url: /
+              - img "Banco Central do Brasil" [ref=f21e27] [cursor=pointer]
+        - navigation [ref=f21e28]:
+          - list [ref=f21e35]:
+            - listitem [ref=f21e36]:
+              - button "Acesso à<br> informação" [ref=f21e37] [cursor=pointer]:
+                - generic [ref=f21e38]: Acesso à informação
+            - listitem [ref=f21e39]:
+              - button "Política<br> monetária" [ref=f21e40] [cursor=pointer]:
+                - generic [ref=f21e41]: Política monetária
+            - listitem [ref=f21e42]:
+              - button "Estabilidade<br> financeira" [ref=f21e43] [cursor=pointer]:
+                - generic [ref=f21e44]: Estabilidade financeira
+            - listitem [ref=f21e45]:
+              - button "Estatísticas" [ref=f21e46] [cursor=pointer]
+            - listitem [ref=f21e48]:
+              - button "Cédulas e<br> moedas" [ref=f21e49] [cursor=pointer]:
+                - generic [ref=f21e50]: Cédulas e moedas
+            - listitem [ref=f21e51]:
+              - button "Publicações e<br> pesquisa" [ref=f21e52] [cursor=pointer]:
+                - generic [ref=f21e53]: Publicações e pesquisa
+            - listitem [ref=f21e54]:
+              - button "Buscar no site" [ref=f21e55] [cursor=pointer]:
+                - generic [ref=f21e56]: search
+        - navigation "breadcrumb" [ref=f21e58]:
+          - list [ref=f21e59]:
+            - listitem [ref=f21e60]:
+              - link "Home" [ref=f21e61] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f21e62]:
+              - text: ">"
+              - link "Estabilidade financeira" [ref=f21e63] [cursor=pointer]:
+                - /url: /estabilidadefinanceira
+            - listitem [ref=f21e64]:
+              - text: ">"
+              - link "Normas" [ref=f21e65] [cursor=pointer]:
+                - /url: /estabilidadefinanceira/regulacao
+            - listitem [ref=f21e66]:
+              - text: ">"
+              - link "Busca de normas" [ref=f21e67] [cursor=pointer]:
+                - /url: /estabilidadefinanceira/buscanormas
+            - listitem [ref=f21e68]: "> Normativo"
+      - main [ref=f21e69]:
+        - generic [ref=f21e340]:
+          - heading "Resolução CMN n° 4.956 de 21/10/2021" [level=2] [ref=f21e341]
+          - generic [ref=f21e342]:
+            - generic [ref=f21e343]:
+              - button "Imprimir" [ref=f21e344] [cursor=pointer]
+              - generic [ref=f21e346]:
+                - paragraph [ref=f21e347]: RESOLUÇÃO CMN Nº 4.956, DE 21 DE OUTUBRO DE 2021
+                - paragraph [ref=f21e348]: Estabelece limite máximo para o montante de exposição em ouro, em moeda estrangeira e em operações sujeitas à variação cambial.
+                - paragraph [ref=f21e349]: O Banco Central do Brasil, na forma do art. 9º da Lei nº 4.595, de 31 de dezembro de 1964, torna público que o Conselho Monetário Nacional, em sessão realizada em 21 de outubro de 2021, tendo em vista o disposto no art. 4º, incisos VIII e XI, da referida Lei,
+                - paragraph [ref=f21e350]:
+                  - generic [ref=f21e351]: "R E S O L V E U :"
+                - paragraph [ref=f21e352]:
+                  - generic [ref=f21e353]: Art. 1º Esta Resolução estabelece o limite máximo para a exposição em ouro, em moeda estrangeira e em operações sujeitas à variação cambial das instituições financeiras e demais instituições autorizadas a funcionar pelo Banco Central do Brasil.
+                - paragraph [ref=f21e354]: "Parágrafo único. Não estão sujeitas ao disposto nesta Resolução:"
+                - paragraph [ref=f21e355]: I - as administradoras de consórcio e as instituições de pagamento, que devem observar a regulamentação emitida pelo Banco Central do Brasil, no exercício de suas atribuições legais; e
+                - paragraph [ref=f21e356]: II - as instituições enquadradas no Segmento 5 (S5), nos termos da Resolução nº 4.553, de 30 de janeiro de 2017.
+                - paragraph [ref=f21e357]:
+                  - generic [ref=f21e358]: Art. 2º As instituições mencionadas no art. 1º devem observar o limite máximo de 30% (trinta por cento) do seu Patrimônio de Referência (PR), apurado nos termos da Resolução CMN nº 4.955, de 21 de outubro de 2021, para a exposição em ouro, em moeda estrangeira e em operações sujeitas à variação cambial.
+                - paragraph [ref=f21e359]:
+                  - generic [ref=f21e360]:
+                    - text: § 1º O cumprimento do limite de que trata o
+                    - strong [ref=f21e361]: caput
+                    - text: deve ocorrer permanentemente.
+                - paragraph [ref=f21e362]:
+                  - generic [ref=f21e363]:
+                    - text: § 2º O cumprimento do limite de que trata o
+                    - strong [ref=f21e364]: caput
+                    - text: deve ocorrer de forma consolidada para as instituições integrantes de um mesmo conglomerado prudencial, nos termos do Padrão Contábil das Instituições Reguladas pelo Banco Central do Brasil (Cosif).
+                - paragraph [ref=f21e365]: § 3º Os procedimentos e parâmetros para apuração do valor da exposição em ouro, em moeda estrangeira e em operações sujeitas à variação cambial serão estabelecidos pelo Banco Central do Brasil.
+                - paragraph [ref=f21e366]: Art. 3º O Banco Central do Brasil poderá alterar o limite de que trata o art. 2º, observado o valor mínimo de 15% (quinze por cento) e o valor máximo de 75% (setenta e cinco por cento) do PR.
+                - paragraph [ref=f21e367]: Art. 4º Os processos e os controles relativos ao limite estabelecido nesta Resolução constituem responsabilidade do diretor para gerenciamento de riscos (CRO), indicado nos termos da Resolução nº 4.557, de 23 de fevereiro de 2017.
+                - paragraph [ref=f21e368]: "Art. 5º Ficam revogadas:"
+                - paragraph [ref=f21e369]: I - a Resolução nº 3.488, de 29 de agosto de 2007; e
+                - paragraph [ref=f21e370]: II - a Resolução nº 4.388, de 18 de dezembro de 2014.
+                - paragraph [ref=f21e371]: Parágrafo único. As citações à Resolução nº 3.488, de 2007, passam a ter como referência esta Resolução.
+                - paragraph [ref=f21e372]:
+                  - generic [ref=f21e373]: Art. 6º Esta Resolução entra em vigor em 3 de janeiro de 2022.
+                - paragraph [ref=f21e374]:
+                  - generic [ref=f21e375]: Roberto de Oliveira Campos NetoPresidente do Banco Central do Brasil
+            - generic [ref=f21e376]:
+              - list [ref=f21e377]:
+                - listitem [ref=f21e378]:
+                  - link "Exposição de motivos (PDF 319222kb)" [ref=f21e379] [cursor=pointer]:
+                    - /url: https://normativos.bcb.gov.br/Votos/CMN/202185/VOTO_DO_CMN_85_2021_BCB_SECRE_Numerado_Manualmente_01.pdf
+              - generic [ref=f21e380]:
+                - heading "DOU" [level=3] [ref=f21e381]
+                - paragraph [ref=f21e382]: Publicada no DOU de 25/10/2021, Seção 1, p. 34.
+                - paragraph [ref=f21e383]: Os textos não substituem a publicação no DOU e no Sisbacen.
+              - generic [ref=f21e384]:
+                - heading "Assunto" [level=3] [ref=f21e385]
+                - paragraph [ref=f21e386]: Estabelece limite máximo para o montante de exposição em ouro, em moeda estrangeira e em operações sujeitas à variação cambial.
+              - generic [ref=f21e387]:
+                - heading "Normas Vinculadas" [level=3] [ref=f21e388]
+                - tablist [ref=f21e389]:
+                  - tab [ref=f21e392] [cursor=pointer]:
+                    - button [ref=f21e394]:
+                      - button "Resolução CMN" [ref=f21e395]
+                - tablist [ref=f21e397]:
+                  - tab [ref=f21e400] [cursor=pointer]:
+                    - button [ref=f21e402]:
+                      - button "Resolução BCB" [ref=f21e403]
+                - tablist
+                - tablist [ref=f21e405]:
+                  - tab [ref=f21e408] [cursor=pointer]:
+                    - button [ref=f21e410]:
+                      - button "Instrução Normativa BCB" [ref=f21e411]
+                - tablist
+                - tablist
+              - button "Referências" [ref=f21e416] [cursor=pointer]
+      - button "Vá para o topo" [ref=f21e72] [cursor=pointer]:
+        - generic [aria-hidden] [ref=f21e73]: expand_less
+      - contentinfo [ref=f21e74]:
+        - generic [ref=f21e78]:
+          - generic [ref=f21e79]: Siga o BC
+          - list [ref=f21e80]:
+            - listitem [ref=f21e81]:
+              - link "Instagram oficial do Banco Central do Brasil" [ref=f21e82] [cursor=pointer]:
+                - /url: http://www.instagram.com/bancocentraldobrasil/
+            - listitem [ref=f21e88]:
+              - link "Linkedin oficial do Banco Central do Brasil" [ref=f21e89] [cursor=pointer]:
+                - /url: http://br.linkedin.com/company/banco-central-do-brasil
+            - listitem [ref=f21e94]:
+              - link "X oficial do Banco Central do Brasil" [ref=f21e95] [cursor=pointer]:
+                - /url: http://twitter.com/bancocentralbr
+            - listitem [ref=f21e99]:
+              - link "Canal oficial do Banco Central do Brasil no WhatsApp" [ref=f21e100] [cursor=pointer]:
+                - /url: https://whatsapp.com/channel/0029VaB1KjR6BIEjJMs4HN1O
+            - listitem [ref=f21e105]:
+              - link "Canal oficial do Banco Central do Brasil no YouTube" [ref=f21e106] [cursor=pointer]:
+                - /url: http://www.youtube.com/user/BancoCentralBR
+            - listitem [ref=f21e110]:
+              - link "TikTok oficial do Banco Central do Brasil" [ref=f21e111] [cursor=pointer]:
+                - /url: https://www.tiktok.com/@bancocentraldobrasil
+            - listitem [ref=f21e115]:
+              - link "Facebook oficial do Banco Central do Brasil" [ref=f21e116] [cursor=pointer]:
+                - /url: http://pt-br.facebook.com/bancocentraldobrasil/
+            - listitem [ref=f21e120]:
+              - link "Threads oficial do Banco Central do Brasil" [ref=f21e121] [cursor=pointer]:
+                - /url: https://www.threads.net/@bancocentraldobrasil
+            - listitem [ref=f21e125]:
+              - link "Telegram oficial do Banco Central do Brasil" [ref=f21e126] [cursor=pointer]:
+                - /url: https://t.me/bancocentraloficial
+            - listitem [ref=f21e130]:
+              - link "Flickr oficial do Banco Central do Brasil" [ref=f21e131] [cursor=pointer]:
+                - /url: http://www.flickr.com/photos/134175749@N03/
+            - listitem [ref=f21e136]:
+              - link "Assinar notícias" [ref=f21e137] [cursor=pointer]:
+                - /url: /assinar-noticias
+            - listitem [ref=f21e147]:
+              - link "RSS - Feeds do BC" [ref=f21e148] [cursor=pointer]:
+                - /url: /acessoinformacao/rss
+            - listitem [ref=f21e154]:
+              - link "Calendário do Banco Central do Brasil" [ref=f21e155] [cursor=pointer]:
+                - /url: /acessoinformacao/calendariobc_ics
+        - generic [ref=f21e166]:
+          - generic [ref=f21e167]:
+            - paragraph [ref=f21e168]:
+              - strong [ref=f21e169]:
+                - link "Acesso à informação" [ref=f21e170] [cursor=pointer]:
+                  - /url: /acessoinformacao
+            - list [ref=f21e171]:
+              - listitem [ref=f21e172]:
+                - link "Institucional" [ref=f21e173] [cursor=pointer]:
+                  - /url: /acessoinformacao/institucional
+              - listitem [ref=f21e174]:
+                - link "Ações e programas" [ref=f21e175] [cursor=pointer]:
+                  - /url: /acessoinformacao/acoesprogramas
+              - listitem [ref=f21e176]:
+                - link "Participação social" [ref=f21e177] [cursor=pointer]:
+                  - /url: /acessoinformacao/participacaosocial
+              - listitem [ref=f21e178]:
+                - link "Auditorias" [ref=f21e179] [cursor=pointer]:
+                  - /url: /acessoinformacao/auditorias
+              - listitem [ref=f21e180]:
+                - link "Convênios e Transferências" [ref=f21e181] [cursor=pointer]:
+                  - /url: /acessoinformacao/convenios-e-transferencias
+              - listitem [ref=f21e182]:
+                - link "Receitas e despesas" [ref=f21e183] [cursor=pointer]:
+                  - /url: /acessoinformacao/receitas-e-despesas
+              - listitem [ref=f21e184]:
+                - link "Licitações e Contratos" [ref=f21e185] [cursor=pointer]:
+                  - /url: /acessoinformacao/licitacoes-e-contratos
+              - listitem [ref=f21e186]:
+                - link "Servidores" [ref=f21e187] [cursor=pointer]:
+                  - /url: /acessoinformacao/carreira
+              - listitem [ref=f21e188]:
+                - link "Informações classificadas" [ref=f21e189] [cursor=pointer]:
+                  - /url: /acessoinformacao/informacoesclassificadas
+              - listitem [ref=f21e190]:
+                - link "Serviço de Informações ao Cidadão (SIC)" [ref=f21e191] [cursor=pointer]:
+                  - /url: /acessoinformacao/sic
+              - listitem [ref=f21e192]:
+                - link "Perguntas frequentes" [ref=f21e193] [cursor=pointer]:
+                  - /url: /meubc/faqs
+              - listitem [ref=f21e194]:
+                - link "Dados Abertos" [ref=f21e195] [cursor=pointer]:
+                  - /url: /acessoinformacao/dadosabertos
+              - listitem [ref=f21e196]:
+                - link "Sanções Administrativas" [ref=f21e197] [cursor=pointer]:
+                  - /url: /acessoinformacao/sancoes-administrativas
+              - listitem [ref=f21e198]:
+                - link "Lei Geral de Proteção de Dados Pessoais (LGPD)" [ref=f21e199] [cursor=pointer]:
+                  - /url: /acessoinformacao/lgpd
+              - listitem [ref=f21e200]:
+                - link "Transparência e prestação de contas" [ref=f21e201] [cursor=pointer]:
+                  - /url: /acessoinformacao/transparencia-e-prestacao-de-contas
+          - generic [ref=f21e202]:
+            - paragraph [ref=f21e203]:
+              - strong [ref=f21e204]:
+                - link "Política monetária" [ref=f21e205] [cursor=pointer]:
+                  - /url: /controleinflacao
+            - list [ref=f21e206]:
+              - listitem [ref=f21e207]:
+                - link "Metas para a inflação" [ref=f21e208] [cursor=pointer]:
+                  - /url: /controleinflacao/metainflacao
+              - listitem [ref=f21e209]:
+                - link "O que é inflação" [ref=f21e210] [cursor=pointer]:
+                  - /url: /controleinflacao/oqueinflacao
+              - listitem [ref=f21e211]:
+                - link "Comitê de Política Monetária (Copom)" [ref=f21e212] [cursor=pointer]:
+                  - /url: /controleinflacao/copom
+              - listitem [ref=f21e213]:
+                - link "Comunicados do Copom" [ref=f21e214] [cursor=pointer]:
+                  - /url: /controleinflacao/comunicadoscopom
+              - listitem [ref=f21e215]:
+                - link "Atas do Copom" [ref=f21e216] [cursor=pointer]:
+                  - /url: /publicacoes/atascopom
+              - listitem [ref=f21e217]:
+                - link "Relatório de Política Monetária" [ref=f21e218] [cursor=pointer]:
+                  - /url: /publicacoes/rpm
+              - listitem [ref=f21e219]:
+                - link "Expectativas de mercado" [ref=f21e220] [cursor=pointer]:
+                  - /url: /controleinflacao/expectativasmercado
+          - generic [ref=f21e221]:
+            - paragraph [ref=f21e222]:
+              - strong [ref=f21e223]:
+                - link "Estabilidade financeira" [ref=f21e224] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira
+            - list [ref=f21e225]:
+              - listitem [ref=f21e226]:
+                - link "Normas" [ref=f21e227] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/regulacao
+              - listitem [ref=f21e228]:
+                - link "Supervisão" [ref=f21e229] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/supervisao
+              - listitem [ref=f21e230]:
+                - link "Sistema Financeiro Nacional" [ref=f21e231] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/sfn
+              - listitem [ref=f21e232]:
+                - link "Sistema de Pagamentos Brasileiro (SPB)" [ref=f21e233] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/spb
+              - listitem [ref=f21e234]:
+                - link "Câmbio e capitais internacionais" [ref=f21e235] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/cambioecapitais
+              - listitem [ref=f21e236]:
+                - link "Comitê de Estabilidade Financeira (Comef)" [ref=f21e237] [cursor=pointer]:
+                  - /url: /acessoinformacao/comef
+              - listitem [ref=f21e238]:
+                - link "Relatório de Estabilidade Financeira" [ref=f21e239] [cursor=pointer]:
+                  - /url: /publicacoes/ref
+          - generic [ref=f21e240]:
+            - paragraph [ref=f21e241]:
+              - strong [ref=f21e242]:
+                - link "Estatísticas" [ref=f21e243] [cursor=pointer]:
+                  - /url: /estatisticas
+            - list [ref=f21e244]:
+              - listitem [ref=f21e245]:
+                - link "Taxas de Juros" [ref=f21e246] [cursor=pointer]:
+                  - /url: /estatisticas/txjuros
+              - listitem [ref=f21e247]:
+                - link "Notas econômico-financeiras" [ref=f21e248] [cursor=pointer]:
+                  - /url: /estatisticas/notaseconomicofinanceiras
+              - listitem [ref=f21e249]:
+                - link "Séries temporais (SGS)" [ref=f21e250] [cursor=pointer]:
+                  - /url: https://www3.bcb.gov.br/sgspub/
+              - listitem [ref=f21e251]:
+                - link "Tabelas especiais" [ref=f21e252] [cursor=pointer]:
+                  - /url: /estatisticas/tabelasespeciais
+              - listitem [ref=f21e253]:
+                - link "Indicadores Econômicos Selecionados" [ref=f21e254] [cursor=pointer]:
+                  - /url: /estatisticas/indicadoresselecionados
+              - listitem [ref=f21e255]:
+                - link "Poupança" [ref=f21e256] [cursor=pointer]:
+                  - /url: /estatisticas/poupanca
+              - listitem [ref=f21e257]:
+                - link "Mais estatísticas" [ref=f21e258] [cursor=pointer]:
+                  - /url: /estatisticas/maisestatisticas
+              - listitem [ref=f21e259]:
+                - link "Calendário de divulgação" [ref=f21e260] [cursor=pointer]:
+                  - /url: /estatisticas/notas_calendario
+          - generic [ref=f21e261]:
+            - paragraph [ref=f21e262]:
+              - strong [ref=f21e263]:
+                - link "Cédulas e moedas" [ref=f21e264] [cursor=pointer]:
+                  - /url: /cedulasemoedas
+            - list [ref=f21e265]:
+              - listitem [ref=f21e266]:
+                - link "Cédulas" [ref=f21e267] [cursor=pointer]:
+                  - /url: /cedulasemoedas/cedulas
+              - listitem [ref=f21e268]:
+                - link "Moedas" [ref=f21e269] [cursor=pointer]:
+                  - /url: /cedulasemoedas/moedas
+              - listitem [ref=f21e270]:
+                - link "Serviços" [ref=f21e271] [cursor=pointer]:
+                  - /url: /cedulasemoedas/servicoscedulasmoedas
+              - listitem [ref=f21e272]:
+                - link "Dinheiro em circulação" [ref=f21e273] [cursor=pointer]:
+                  - /url: https://www3.bcb.gov.br/mec-circulante/
+              - listitem [ref=f21e274]:
+                - link "O caminho do dinheiro" [ref=f21e275] [cursor=pointer]:
+                  - /url: /cedulasemoedas/caminhododinheiro
+          - generic [ref=f21e276]:
+            - paragraph [ref=f21e277]:
+              - strong [ref=f21e278]:
+                - link "Publicações e pesquisa" [ref=f21e279] [cursor=pointer]:
+                  - /url: /publicacoes
+            - list [ref=f21e280]:
+              - listitem [ref=f21e281]:
+                - link "Atas do Copom" [ref=f21e282] [cursor=pointer]:
+                  - /url: /publicacoes/atascopom
+              - listitem [ref=f21e283]:
+                - link "Relatório de Política Monetária" [ref=f21e284] [cursor=pointer]:
+                  - /url: /publicacoes/rpm
+              - listitem [ref=f21e285]:
+                - link "Relatório de Estabilidade Financeira" [ref=f21e286] [cursor=pointer]:
+                  - /url: /publicacoes/ref
+              - listitem [ref=f21e287]:
+                - link "Relatório Integrado do BC" [ref=f21e288] [cursor=pointer]:
+                  - /url: /publicacoes/relatoriointegrado
+              - listitem [ref=f21e289]:
+                - link "Estudos especiais do Banco Central" [ref=f21e290] [cursor=pointer]:
+                  - /url: /publicacoes/estudosespeciais
+              - listitem [ref=f21e291]:
+                - link "Sondagens do BC" [ref=f21e292] [cursor=pointer]:
+                  - /url: /publicacoes/sondagens-do-bc
+              - listitem [ref=f21e293]:
+                - link "Pesquisa no BC" [ref=f21e294] [cursor=pointer]:
+                  - /url: /publicacoes/pesquisa
+              - listitem [ref=f21e295]:
+                - link "Mais publicações" [ref=f21e296] [cursor=pointer]:
+                  - /url: /publicacoes/maispublicacoes
+        - generic [ref=f21e299]:
+          - generic [ref=f21e300]: Garantir a estabilidade de preços, zelar por um sistema financeiro sólido e eficiente, e fomentar o bem-estar econômico da sociedade.
+          - generic [ref=f21e301]:
+            - generic [ref=f21e302]: "Atendimento: 145 (custo de ligação local)"
+            - list [ref=f21e303]:
+              - listitem [ref=f21e304]:
+                - link "Fale conosco" [ref=f21e305] [cursor=pointer]:
+                  - /url: /acessoinformacao/faleconosco
+                - text: "|"
+              - listitem [ref=f21e306]:
+                - link "Política de privacidade" [ref=f21e307] [cursor=pointer]:
+                  - /url: /acessoinformacao/politicaprivacidade
+                - text: "|"
+              - listitem [ref=f21e308]:
+                - link "Política de acessibilidade" [ref=f21e309] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+            - generic [ref=f21e310]:
+              - text: © Banco Central do Brasil -
+              - link "Todos os direitos reservados" [ref=f21e311] [cursor=pointer]:
+                - /url: /acessoinformacao/direitosautorais
+    - generic [ref=f21e313]:
+      - link "Ir para o conteúdo" [ref=f21e315] [cursor=pointer]:
+        - /url: "#conteudo"
+      - generic [ref=f21e316]:
+        - link "GovBR" [ref=f21e317] [cursor=pointer]:
+          - /url: https://gov.br/
+        - navigation [ref=f21e318]:
+          - list [ref=f21e319]:
+            - listitem [ref=f21e320]
+            - listitem [ref=f21e321]:
+              - link "Acesso à informação" [ref=f21e322] [cursor=pointer]:
+                - /url: http://www.gov.br/acessoainformacao/
+            - listitem [ref=f21e323]
+            - listitem [ref=f21e324]:
+              - link "Participe" [ref=f21e325] [cursor=pointer]:
+                - /url: https://www.gov.br/pt-br/participacao-social/
+            - listitem [ref=f21e326]
+            - listitem [ref=f21e327]:
+              - link "Legislação" [ref=f21e328] [cursor=pointer]:
+                - /url: http://www4.planalto.gov.br/legislacao/
+            - listitem [ref=f21e329]
+            - listitem [ref=f21e330]:
+              - link "Órgãos do Governo" [ref=f21e331] [cursor=pointer]:
+                - /url: http://www.gov.br/pt-br/orgaos-do-governo
+  - generic [ref=f21e333] [cursor=pointer]:
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f21e334]
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f21e335]
+  - generic [ref=f21e337] [cursor=pointer]

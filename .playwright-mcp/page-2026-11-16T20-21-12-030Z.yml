@@ -1,0 +1,125 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e4]:
+    - generic [ref=f5e5]:
+      - list [ref=f5e7]:
+        - listitem [ref=f5e8]:
+          - link "Ir para o conteúdo 1" [ref=f5e9] [cursor=pointer]:
+            - /url: "#inicioConteudo"
+        - listitem [ref=f5e10]:
+          - link "Ir para o menu 2" [ref=f5e11] [cursor=pointer]:
+            - /url: "#inicioMenu"
+        - listitem [ref=f5e12]:
+          - link "Ir para o rodapé 3" [ref=f5e13] [cursor=pointer]:
+            - /url: "#inicioRodape"
+      - generic [ref=f5e14]:
+        - banner [ref=f5e15]:
+          - generic [ref=f5e16]:
+            - list [ref=f5e19]:
+              - listitem [ref=f5e20]:
+                - link "Acessibilidade" [ref=f5e21] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+              - listitem [ref=f5e22]:
+                - link "Alto Contraste" [ref=f5e23] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f5e24]:
+                - link [ref=f5e25] [cursor=pointer]:
+                  - /url: /en
+                  - emphasis [ref=f5e26]: English
+            - link "Banco Central do Brasil":
+              - /url: /
+              - img "Banco Central do Brasil" [ref=f5e27] [cursor=pointer]
+        - navigation [ref=f5e28]
+      - main [ref=f5e34]
+      - button "Vá para o topo" [ref=f5e39] [cursor=pointer]:
+        - generic [aria-hidden] [ref=f5e40]: expand_less
+      - contentinfo [ref=f5e41]:
+        - generic [ref=f5e45]:
+          - generic [ref=f5e46]: Siga o BC
+          - list [ref=f5e47]:
+            - listitem [ref=f5e48]:
+              - link "Instagram oficial do Banco Central do Brasil" [ref=f5e49] [cursor=pointer]:
+                - /url: http://www.instagram.com/bancocentraldobrasil/
+            - listitem [ref=f5e55]:
+              - link "Linkedin oficial do Banco Central do Brasil" [ref=f5e56] [cursor=pointer]:
+                - /url: http://br.linkedin.com/company/banco-central-do-brasil
+            - listitem [ref=f5e61]:
+              - link "X oficial do Banco Central do Brasil" [ref=f5e62] [cursor=pointer]:
+                - /url: http://twitter.com/bancocentralbr
+            - listitem [ref=f5e66]:
+              - link "Canal oficial do Banco Central do Brasil no WhatsApp" [ref=f5e67] [cursor=pointer]:
+                - /url: https://whatsapp.com/channel/0029VaB1KjR6BIEjJMs4HN1O
+            - listitem [ref=f5e72]:
+              - link "Canal oficial do Banco Central do Brasil no YouTube" [ref=f5e73] [cursor=pointer]:
+                - /url: http://www.youtube.com/user/BancoCentralBR
+            - listitem [ref=f5e77]:
+              - link "TikTok oficial do Banco Central do Brasil" [ref=f5e78] [cursor=pointer]:
+                - /url: https://www.tiktok.com/@bancocentraldobrasil
+            - listitem [ref=f5e82]:
+              - link "Facebook oficial do Banco Central do Brasil" [ref=f5e83] [cursor=pointer]:
+                - /url: http://pt-br.facebook.com/bancocentraldobrasil/
+            - listitem [ref=f5e87]:
+              - link "Threads oficial do Banco Central do Brasil" [ref=f5e88] [cursor=pointer]:
+                - /url: https://www.threads.net/@bancocentraldobrasil
+            - listitem [ref=f5e92]:
+              - link "Telegram oficial do Banco Central do Brasil" [ref=f5e93] [cursor=pointer]:
+                - /url: https://t.me/bancocentraloficial
+            - listitem [ref=f5e97]:
+              - link "Flickr oficial do Banco Central do Brasil" [ref=f5e98] [cursor=pointer]:
+                - /url: http://www.flickr.com/photos/134175749@N03/
+            - listitem [ref=f5e103]:
+              - link "Assinar notícias" [ref=f5e104] [cursor=pointer]:
+                - /url: /assinar-noticias
+            - listitem [ref=f5e114]:
+              - link "RSS - Feeds do BC" [ref=f5e115] [cursor=pointer]:
+                - /url: /acessoinformacao/rss
+            - listitem [ref=f5e121]:
+              - link "Calendário do Banco Central do Brasil" [ref=f5e122] [cursor=pointer]:
+                - /url: /acessoinformacao/calendariobc_ics
+        - generic [ref=f5e133]:
+          - generic [ref=f5e134]: Garantir a estabilidade de preços, zelar por um sistema financeiro sólido e eficiente, e fomentar o bem-estar econômico da sociedade.
+          - generic [ref=f5e135]:
+            - generic [ref=f5e136]: "Atendimento: 145 (custo de ligação local)"
+            - list [ref=f5e137]:
+              - listitem [ref=f5e138]:
+                - link "Fale conosco" [ref=f5e139] [cursor=pointer]:
+                  - /url: /acessoinformacao/faleconosco
+                - text: "|"
+              - listitem [ref=f5e140]:
+                - link "Política de privacidade" [ref=f5e141] [cursor=pointer]:
+                  - /url: /acessoinformacao/politicaprivacidade
+                - text: "|"
+              - listitem [ref=f5e142]:
+                - link "Política de acessibilidade" [ref=f5e143] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+            - generic [ref=f5e144]:
+              - text: © Banco Central do Brasil -
+              - link "Todos os direitos reservados" [ref=f5e145] [cursor=pointer]:
+                - /url: /acessoinformacao/direitosautorais
+    - generic [ref=f5e147]:
+      - link "Ir para o conteúdo" [ref=f5e149] [cursor=pointer]:
+        - /url: "#conteudo"
+      - generic [ref=f5e150]:
+        - link "GovBR" [ref=f5e151] [cursor=pointer]:
+          - /url: https://gov.br/
+        - navigation [ref=f5e152]:
+          - list [ref=f5e153]:
+            - listitem [ref=f5e154]
+            - listitem [ref=f5e155]:
+              - link "Acesso à informação" [ref=f5e156] [cursor=pointer]:
+                - /url: http://www.gov.br/acessoainformacao/
+            - listitem [ref=f5e157]
+            - listitem [ref=f5e158]:
+              - link "Participe" [ref=f5e159] [cursor=pointer]:
+                - /url: https://www.gov.br/pt-br/participacao-social/
+            - listitem [ref=f5e160]
+            - listitem [ref=f5e161]:
+              - link "Legislação" [ref=f5e162] [cursor=pointer]:
+                - /url: http://www4.planalto.gov.br/legislacao/
+            - listitem [ref=f5e163]
+            - listitem [ref=f5e164]:
+              - link "Órgãos do Governo" [ref=f5e165] [cursor=pointer]:
+                - /url: http://www.gov.br/pt-br/orgaos-do-governo
+  - generic [ref=f5e167] [cursor=pointer]:
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f5e168]
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f5e169]
+  - generic [ref=f5e171] [cursor=pointer]

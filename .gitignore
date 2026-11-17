@@ -48,3 +48,10 @@ frontend/.env.local
 frontend/.env.*.local
 frontend/*.tsbuildinfo
 frontend/next-env.d.ts.bak
+
+# Segredos — nunca commitar (F0-prime saneamento 17/11/2026)
+*.pem
+*.key
+frontend/.env.pubkey
+backend/radiant.db*
+.env.pubkey

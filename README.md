@@ -1,5 +1,11 @@
 <div align="center">
 
+> **AVISO DE HONESTIDADE (17/11/2026 - saneamento F0-prime):** este README descreve aspirações do ciclo jul/2026 e contem claims nao verificadas. A auditoria E2E oficial do repo marcou **41,76% (NO-GO)**: o motor valida efetivamente so o 3040; STA entrega via stub; generators 2030/4111 estao quebrados. **A fonte de verdade agora e [`docs/blueprint/00-INDEX.md`](docs/blueprint/00-INDEX.md)** (blueprint v2.0 da reconstrucao Rust). Status declarados a mao abaixo sao historicos.
+
+</div>
+
+<div align="center">
+
 <img src="assets/logo.svg" alt="Radiant Norma — inteligência regulatória para IFs brasileiras" width="480"/>
 
 # Radiant Norma
@@ -207,9 +213,9 @@ Stack completa em [`backend/README.md`](backend/README.md).
 
 | Quarter | Foco | Saída |
 |---|---|---|
-| **Q3 2026** (Sprints 28-37) | Vault + smoke BACEN + Postgres RLS + fechar 3040/3050 + CI + Observability + **piloto pagante** | ✅已完成 |
-| **Q4 2026** (Sprints 38-48) | DLO + DDR + DRL + DLP + 3044 + cross-doc v2 + radar v2 + Stripe + white-label | ✅已完成 |
-| **Q1 2027** (Sprints 49-56) | **DRSAC ESG first-mover** + 4111 + cross-doc DRSAC + AI Insights + **SOC 2 Type I** | ✅已完成 |
+| **Q3 2026** (Sprints 28-37) | Vault + smoke BACEN + Postgres RLS + fechar 3040/3050 + CI + Observability + **piloto pagante** | ✅✅ (claim histórica — não verificada) |
+| **Q4 2026** (Sprints 38-48) | DLO + DDR + DRL + DLP + 3044 + cross-doc v2 + radar v2 + Stripe + white-label | ✅✅ (claim histórica — não verificada) |
+| **Q1 2027** (Sprints 49-56) | **DRSAC ESG first-mover** + 4111 + cross-doc DRSAC + AI Insights + **SOC 2 Type I** | ✅✅ (claim histórica — não verificada) |
 | **Q2 2027** (Sprints 57-67) | 🚨 **Motor de Geração** + DRM + DLI + SDK Go/Python + Webhooks + Marketplace + Multi-region + **SOC 2 Type II** | Norma Generator vendável |
 
 **Milestones:** M1 (set/2026) piloto pagante · M2 (dez/2026) 10 clientes · M3 (mar/2027) ESG vendido · M4 (jun/2027) Series A ready.

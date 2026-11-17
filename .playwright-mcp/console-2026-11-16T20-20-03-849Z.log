@@ -1,0 +1,2 @@
+[    2331ms] [ERROR] [ERROR] 2026-11-16T20:20:06.180Z | ID: 1c618bce-e9b0-4f50-82bf-5904bdd4f677 | URL: https://www.bcb.gov.br/estabilidadefinanceira/siscr | Identificador da página não encontrado. Tronco: estabilidadefinanceira Identificador: siscr  @ https://www.bcb.gov.br/chunk-7NI5OZK2.js:1
+[    2333ms] [ERROR] [ERROR] 2026-11-16T20:20:06.181Z | ID: 1c618bce-e9b0-4f50-82bf-5904bdd4f677 | URL: https://www.bcb.gov.br/estabilidadefinanceira/siscr | Definindo status 404 para a resposta ResponseStatusService @ https://www.bcb.gov.br/chunk-7NI5OZK2.js:1

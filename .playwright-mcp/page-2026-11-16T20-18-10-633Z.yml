@@ -1,0 +1,1287 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e4]:
+    - generic [ref=f2e5]:
+      - list [ref=f2e7]:
+        - listitem [ref=f2e8]:
+          - link "Ir para o conteúdo 1" [ref=f2e9] [cursor=pointer]:
+            - /url: "#inicioConteudo"
+        - listitem [ref=f2e10]:
+          - link "Ir para o menu 2" [ref=f2e11] [cursor=pointer]:
+            - /url: "#inicioMenu"
+        - listitem [ref=f2e12]:
+          - link "Ir para o rodapé 3" [ref=f2e13] [cursor=pointer]:
+            - /url: "#inicioRodape"
+      - generic [ref=f2e14]:
+        - banner [ref=f2e15]:
+          - generic [ref=f2e16]:
+            - list [ref=f2e19]:
+              - listitem [ref=f2e20]:
+                - link "Acessibilidade" [ref=f2e21] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+              - listitem [ref=f2e22]:
+                - link "Alto Contraste" [ref=f2e23] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f2e24]:
+                - link [ref=f2e25] [cursor=pointer]:
+                  - /url: /en
+                  - emphasis [ref=f2e26]: English
+            - link "Banco Central do Brasil":
+              - /url: /
+              - img "Banco Central do Brasil" [ref=f2e27] [cursor=pointer]
+        - navigation [ref=f2e28]:
+          - list [ref=f2e35]:
+            - listitem [ref=f2e36]:
+              - button "Acesso à<br> informação" [ref=f2e37] [cursor=pointer]:
+                - generic [ref=f2e38]: Acesso à informação
+            - listitem [ref=f2e39]:
+              - button "Política<br> monetária" [ref=f2e40] [cursor=pointer]:
+                - generic [ref=f2e41]: Política monetária
+            - listitem [ref=f2e42]:
+              - button "Estabilidade<br> financeira" [ref=f2e43] [cursor=pointer]:
+                - generic [ref=f2e44]: Estabilidade financeira
+            - listitem [ref=f2e45]:
+              - button "Estatísticas" [ref=f2e46] [cursor=pointer]
+            - listitem [ref=f2e48]:
+              - button "Cédulas e<br> moedas" [ref=f2e49] [cursor=pointer]:
+                - generic [ref=f2e50]: Cédulas e moedas
+            - listitem [ref=f2e51]:
+              - button "Publicações e<br> pesquisa" [ref=f2e52] [cursor=pointer]:
+                - generic [ref=f2e53]: Publicações e pesquisa
+            - listitem [ref=f2e54]:
+              - button "Buscar no site" [ref=f2e55] [cursor=pointer]:
+                - generic [ref=f2e56]: search
+        - navigation "breadcrumb" [ref=f2e330]:
+          - list [ref=f2e331]:
+            - listitem [ref=f2e332]:
+              - link "Home" [ref=f2e333] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f2e334]:
+              - text: ">"
+              - link "Estabilidade financeira" [ref=f2e335] [cursor=pointer]:
+                - /url: /estabilidadefinanceira
+            - listitem [ref=f2e336]:
+              - text: ">"
+              - link "Sistema Financeiro Nacional" [ref=f2e337] [cursor=pointer]:
+                - /url: /estabilidadefinanceira/sfn
+            - listitem [ref=f2e338]:
+              - text: ">"
+              - link "Sistemas e informações ao BC" [ref=f2e339] [cursor=pointer]:
+                - /url: /meubc/servicos%3Faba%3Dtodosservicosinstituicaosupervisionada
+            - listitem [ref=f2e340]: "> Leiaute de documentos e base normativa"
+      - main [ref=f2e57]:
+        - generic [ref=f2e342]:
+          - heading "Leiaute de arquivos e base normativa" [level=1] [ref=f2e343]
+          - generic [ref=f2e344]:
+            - paragraph [ref=f2e345]:
+              - text: Documentos que podem ser transferidos aos computadores do Banco Central através do
+              - link "Sistema de Transferência de Arquivos - STA" [ref=f2e346] [cursor=pointer]:
+                - /url: /acessoinformacao/sistematransferenciaarquivos
+              - text: "estão abaixo:"
+            - generic [ref=f2e347]:
+              - generic [ref=f2e348]:
+                - generic [ref=f2e349]:
+                  - generic [ref=f2e350]: "Filtrar por:"
+                  - textbox "Filtrar por:" [ref=f2e351]:
+                    - /placeholder: ""
+                - generic [ref=f2e352]: "Ordenar por:"
+                - generic [ref=f2e353]:
+                  - generic [ref=f2e354]:
+                    - generic [ref=f2e355]:
+                      - generic [ref=f2e356]: Selecione
+                      - combobox [ref=f2e358]
+                    - generic [ref=f2e359] [cursor=pointer]
+                  - status [ref=f2e360]
+                - generic [ref=f2e361]: "Selecionar a ordem:"
+                - generic [ref=f2e362]:
+                  - generic [ref=f2e363]:
+                    - generic [ref=f2e364]:
+                      - generic [ref=f2e365]: Crescente
+                      - generic [ref=f2e366]:
+                        - combobox
+                    - generic [ref=f2e367] [cursor=pointer]
+                  - status [ref=f2e368]
+              - table [ref=f2e372]:
+                - rowgroup [ref=f2e373]:
+                  - row [ref=f2e374]:
+                    - columnheader "Documento" [ref=f2e375]
+                    - columnheader "Conteúdo/Assunto" [ref=f2e376]
+                    - columnheader "Base Normativa" [ref=f2e377]
+                    - columnheader "Leiaute" [ref=f2e378]
+                - rowgroup [ref=f2e379]:
+                  - row [ref=f2e380]:
+                    - cell "C204" [ref=f2e381]
+                    - cell "Envio consolidado – Registro de operações – ACAM204" [ref=f2e383]
+                    - cell [ref=f2e386]:
+                      - generic [ref=f2e388]:
+                        - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e389] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                        - link "Instrução Normativa BCB n° 381, 15/5/2023" [ref=f2e390] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=381
+                    - cell [ref=f2e392]:
+                      - generic [ref=f2e395]:
+                        - link "Leiaute a partir de 30/08/2025" [ref=f2e396] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM204.xsd
+                        - link "Leiaute a partir de 31/12/2022" [ref=f2e397] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/Leiaute_de_documentos/ACAM204_ACAM205_versao_3.1.pdf
+                        - link "Leiaute a partir de jan/2017" [ref=f2e398] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/ACAM204_ACAM205_versao_1.0.pdf
+                        - link "Leiaute a partir de 20/11/2017" [ref=f2e399] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/Leiaute-do-ACAM204.pdf
+                        - link "Leiaute a partir de 05/11/2018" [ref=f2e400] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/ACAM204_ACAM205_versao_3.0.pdf
+                  - row [ref=f2e401]:
+                    - cell "C209" [ref=f2e402]
+                    - cell "Envio consolidado - Registro de transferências internacionais em reais - ACAM209" [ref=f2e404]
+                    - cell [ref=f2e408]:
+                      - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e413] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                    - cell [ref=f2e414]:
+                      - generic [ref=f2e416]:
+                        - link "Leiaute a partir de 30/08/2025" [ref=f2e417] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM209.xsd
+                        - link "Leiaute a partir de 01/11/2023" [ref=f2e418] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/TIR_Leiaute_Arquivos_versao_1.04.pdf
+                        - link "Leiaute a partir de 31/12/2022" [ref=f2e419] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/Leiaute_de_documentos/TIR_Leiaute_Arquivos_versao_1.03.pdf
+                        - link "Leiaute a partir de nov/2015" [ref=f2e420] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/TIR_Leiaute_Arquivos_versao_1.02.pdf
+                  - row [ref=f2e421]:
+                    - cell "C212" [ref=f2e422]
+                    - cell "Informações sobre a prestação de serviço de ativos virtuais no mercado de câmbio - ACAM212" [ref=f2e424]
+                    - cell [ref=f2e427]:
+                      - generic [ref=f2e429]:
+                        - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e430] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                        - link "Instrução Normativa n° 693, de 19/12/2025" [ref=f2e431] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=693
+                    - cell "Leiaute (Leiaute atualizado em 8/9/2026)" [ref=f2e432]:
+                      - generic [ref=f2e434]:
+                        - link "Leiaute" [ref=f2e435] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM212_08set26.xsd
+                        - text: (Leiaute atualizado em 8/9/2026)
+                  - row [ref=f2e438]:
+                    - cell "C214" [ref=f2e439]
+                    - cell "Contas de depósito em moeda estrangeira" [ref=f2e441]
+                    - cell [ref=f2e444]:
+                      - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e447] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                    - cell [ref=f2e448]:
+                      - generic [ref=f2e450]:
+                        - link "Leiaute (C214)" [ref=f2e451] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM214.xsd
+                        - link "Descrição dos campos (C214)" [ref=f2e452] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM214_Descrição_Campos.pdf
+                        - link "Exemplo (C214)" [ref=f2e453] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM214_EXEMPLO.xml
+                        - link "Leiaute arquivo de retorno (C215)" [ref=f2e454] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM215.xsd
+                  - row [ref=f2e455]:
+                    - cell "C220" [ref=f2e456]
+                    - cell "eFX - Demais aquisições e transferências – até 30 de setembro de 2026" [ref=f2e458]
+                    - cell [ref=f2e464]:
+                      - generic [ref=f2e466]:
+                        - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e467] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                        - link "Instrução Normativa nº 747, de 17/06/2026" [ref=f2e468] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=747
+                    - cell [ref=f2e469]:
+                      - link "Leiaute" [ref=f2e473] [cursor=pointer]:
+                        - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/LeiauteACAM220.xlsx
+                  - row [ref=f2e474]:
+                    - cell "C225" [ref=f2e475]
+                    - cell [ref=f2e477]:
+                      - paragraph [ref=f2e480]: eFX - Demais aquisições e transferências – a partir de 1º de outubro de 2026
+                    - cell [ref=f2e481]:
+                      - generic [ref=f2e483]:
+                        - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e484] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                        - link "Instrução Normativa nº 747, de 17/06/2026" [ref=f2e485] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=747
+                    - cell [ref=f2e486]:
+                      - generic [ref=f2e488]:
+                        - link "Leiaute (C225)" [ref=f2e489] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM225.xsd
+                        - link "Descrição dos campos (C225)" [ref=f2e490] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/LeiauteArquivoACAM225.pdf
+                        - link "Exemplo (C225)" [ref=f2e491] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM225_EXEMPLO_ComAnulacao.xml
+                        - link "Leiaute arquivo de retorno (C226)" [ref=f2e492] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM226.xsd
+                  - row [ref=f2e493]:
+                    - cell "C230" [ref=f2e494]
+                    - cell [ref=f2e496]:
+                      - paragraph [ref=f2e499]: eFX - Totais movimentados na conta em reais do prestador de eFX
+                    - cell [ref=f2e500]:
+                      - generic [ref=f2e502]:
+                        - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e503] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                        - link "Instrução Normativa nº 747, de 17/06/2026" [ref=f2e504] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=747
+                    - cell [ref=f2e505]:
+                      - generic [ref=f2e507]:
+                        - link "Leiaute (C230)" [ref=f2e508] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM230_v1.1.xsd
+                        - link "Descrição dos campos (C230)" [ref=f2e509] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM230_leiaute_v1.1.pdf
+                        - link "Exemplo (C230)" [ref=f2e510] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM230_exemplo_v1.1.xml
+                        - link "Leiaute arquivo de retorno (C231)" [ref=f2e511] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/cambiocapitais/sistemas_cambio/ACAM231.xsd
+                        - text: (Leiaute atualizado em 9/9/2026)
+                  - row [ref=f2e512]:
+                    - cell "0585" [ref=f2e513]
+                    - cell "Cédulas de financiamento agrícola - RECOR" [ref=f2e515]
+                    - cell [ref=f2e519]:
+                      - generic [ref=f2e522]:
+                        - link "Comunicado n° 7.474, de 25/4/2000" [ref=f2e523] [cursor=pointer]:
+                          - /url: https://www3.bcb.gov.br/normativo/detalharNormativo.do?N=100071724&method=detalharNormativo
+                        - link "Comunicado n° 5.885, de 4/11/1997" [ref=f2e524] [cursor=pointer]:
+                          - /url: https://www3.bcb.gov.br/normativo/detalharNormativo.do?N=097219526&method=detalharNormativo
+                        - link "Instrução Normativa BCB n° 146 de 30/8/2021" [ref=f2e525] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=146
+                    - cell [ref=f2e526]:
+                      - link "Leiaute" [ref=f2e530] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiaute0585
+                  - row [ref=f2e531]:
+                    - cell "1010" [ref=f2e532]
+                    - cell "CADIP - Dados Cadastrais" [ref=f2e534]
+                    - cell [ref=f2e537]:
+                      - link "Instrução Normativa n° 296, de 28/8/2022" [ref=f2e541] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=296
+                    - cell [ref=f2e542]:
+                      - generic [ref=f2e545]:
+                        - link "Leiaute 1010 válido até 28/2/2019" [ref=f2e546] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/cadip1010/LeiauteCadip_valido_ate-28022019.xlsx
+                        - link "Leiaute 1010 válido de 1/3/2019 a 31/8/2022" [ref=f2e547] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/cadip1010/LeiauteCadip_valido_apartir-01032019.xlsx
+                        - link "Leiaute 1010 válido a partir de 1/9/2022" [ref=f2e548] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/cadip1010/Leiaute_Cadip_1010_valido_apartir-01092022.xlsx
+                  - row [ref=f2e549]:
+                    - cell "1201" [ref=f2e550]
+                    - cell [ref=f2e552]:
+                      - paragraph [ref=f2e555]: Estabelece o formato, a periodicidade e as informações a serem prestadas pelos participantes do Pix
+                    - cell [ref=f2e556]:
+                      - paragraph [ref=f2e560]:
+                        - link "Instrução Normativa BCB n° 32, de 26/10/2020" [ref=f2e561] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=32
+                    - cell [ref=f2e562]:
+                      - generic [ref=f2e566]:
+                        - link "APIX001_2.6.xsd" [ref=f2e567] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001_2-6.xsd
+                        - link "APIX001_2.6.xlsx" [ref=f2e568] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001_2-6.xlsx
+                        - paragraph [ref=f2e569]:
+                          - link "APIX001_2.6-exemplos" [ref=f2e570] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/pix/Remessa_informacoes_Pix/APIX001-exemplos_2-6.zip
+                  - row [ref=f2e571]:
+                    - cell "1501" [ref=f2e572]
+                    - cell "Informações referentes às garantias constituídas sobre imóveis relativas a operações de crédito - ACNV1501" [ref=f2e574]
+                    - cell [ref=f2e578]:
+                      - generic [ref=f2e580]:
+                        - link "Resolução CMN n° 4.088, de 24/5/2012" [ref=f2e582] [cursor=pointer]:
+                          - /url: /pre/normativos/busca/normativo.asp?tipo=Resolu%C3%A7%C3%A3o&data=2012&numero=4088
+                        - link "Carta Circular n° 3.730, de 8/10/2015" [ref=f2e584] [cursor=pointer]:
+                          - /url: /pre/normativos/busca/normativo.asp?numero=3730&tipo=Carta%20Circular&data=08/10/2015
+                        - generic [ref=f2e585]:
+                          - link "Provimento n° 89, de 18/12/2019" [ref=f2e586] [cursor=pointer]:
+                            - /url: https://atos.cnj.jus.br/atos/detalhar/3131
+                          - link "Resolução BCB n° 217, de 30/3/2022" [ref=f2e587] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=217
+                    - cell [ref=f2e588]:
+                      - generic [ref=f2e591]:
+                        - link "Leiaute - arquivo XML e tabelas auxiliares" [ref=f2e592] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/ACNV1501/leiauteACNV1501.xlsx
+                        - link "Leiaute a partir de janeiro/2021" [ref=f2e593] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/ACNV1501/leiauteACNV1501_jan2021.xlsx
+                        - link "XSD até dezembro/2020" [ref=f2e594] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/ACNV1501/CNV1501_v9.xsd
+                        - link "XSD a partir de julho/2026" [ref=f2e595] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/ACNV1501/ACNV1501_v10.xsd
+                  - row [ref=f2e596]:
+                    - cell "2011" [ref=f2e597]
+                    - cell "Demonstrativo diário de acompanhamento das parcelas de requerimento de capital e dos limites operacionais" [ref=f2e599]
+                    - cell [ref=f2e603]:
+                      - generic [ref=f2e606]:
+                        - link "Circular n° 3.947, de 25/6/2019" [ref=f2e607] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/buscanormas?numero=3947&tipoDocumento=Circular
+                        - link "Circular n° 3.634, de 4/3/2013" [ref=f2e608] [cursor=pointer]:
+                          - /url: /pre/normativos/busca/normativo.asp?tipo=Circular&data=2013&numero=3634
+                        - link "Resoluçao BCB n° 100, de 2/6/2021" [ref=f2e609] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=100
+                        - link "Instrução Normativa BCB n° 118, de 24/6/2021" [ref=f2e610] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=118
+                        - link "Comunicado n° 33.837, de 9/7/2019" [ref=f2e611] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Comunicado&numero=33837
+                    - cell [ref=f2e612]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do DDR" [ref=f2e616] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautedocumentoDDR2011
+                  - row [ref=f2e617]:
+                    - cell "2030" [ref=f2e618]
+                    - cell [ref=f2e620]:
+                      - paragraph [ref=f2e623]: Documento de Risco Social, Ambiental e Climático - DRSAC
+                    - cell [ref=f2e624]:
+                      - paragraph [ref=f2e627]:
+                        - link "Ver normativos" [ref=f2e628] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/leiaute-documento-2030
+                    - cell [ref=f2e629]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do documento" [ref=f2e632] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiaute-documento-2030
+                  - row [ref=f2e633]:
+                    - cell "2060" [ref=f2e634]
+                    - cell "Demonstrativo de Risco de Mercado - DRM" [ref=f2e636]
+                    - cell [ref=f2e640]:
+                      - generic [ref=f2e643]:
+                        - link "Comunicado n° 34.116, de 2/9/2019" [ref=f2e644] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Comunicado&numero=34116
+                        - link "Comunicado n° 18.089, de 18/2/2009" [ref=f2e645] [cursor=pointer]:
+                          - /url: https://www3.bcb.gov.br/normativo/detalharNormativo.do?method=detalharNormativo&N=109013068
+                        - link "Comunicado n° 26.281, de 11/8/2014" [ref=f2e646] [cursor=pointer]:
+                          - /url: https://www3.bcb.gov.br/normativo/detalharNormativo.do?method=detalharNormativo&N=114048317
+                        - link "Resolução BCB n° 84, de 31/3/2021" [ref=f2e647] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=84
+                        - link "Instrução Normativa BCB n° 101, de 26/4/2021" [ref=f2e648] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=101
+                        - link "Comunicado n° 33.837, de 9/7/2019" [ref=f2e649] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Comunicado&numero=33837
+                    - cell [ref=f2e650]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do DRM" [ref=f2e654] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautedocumentoDRM
+                  - row [ref=f2e655]:
+                    - cell "2061" [ref=f2e656]
+                    - cell "Demonstrativo de Limites Operacionais - DLO" [ref=f2e658]
+                    - cell [ref=f2e662]:
+                      - generic [ref=f2e664]:
+                        - link "Resolução CMN n° 2.828, de 30/3/2001" [ref=f2e666] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=2828
+                        - link "Resolução CMN n° 4.606, de 19/10/2017" [ref=f2e668] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4606
+                        - link "Resolução CMN n° 4.615, de 30/11/2017" [ref=f2e670] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4615
+                        - link "Resolução CMN n° 4.955, de 21/10/2021" [ref=f2e672] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4955
+                        - link "Resolução CMN n° 4.957, de 21/10/2021" [ref=f2e674] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4957
+                        - link "Resolução CMN n° 4.958, de 21/10/2021" [ref=f2e676] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4958
+                        - link "Resolução CMN n° 4.995, de 24/3/2022" [ref=f2e678] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4995
+                        - generic [ref=f2e679]:
+                          - link "Resolução BCB n° 69, de 10/02/2021" [ref=f2e680] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=69
+                          - link "Instrução Normativa BCB n° 81, de 23/2/2021" [ref=f2e681] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=81
+                          - link "Comunicado nº 19.275, de 15/1/2010" [ref=f2e682] [cursor=pointer]:
+                            - /url: /pre/normativos/busca/normativo.asp?numero=19275&tipo=Comunicado&data=15/1/2010
+                    - cell [ref=f2e683]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do DLO" [ref=f2e687] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautedoc2061
+                  - row [ref=f2e688]:
+                    - cell "2062" [ref=f2e689]
+                    - cell "Demonstrativo de Limites Operacionais Individuais" [ref=f2e691]
+                    - cell [ref=f2e695]:
+                      - generic [ref=f2e697]:
+                        - generic [ref=f2e698]:
+                          - link "Instrução Normativa BCB n° 85, de 10/3/2021" [ref=f2e699] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=85
+                          - generic [ref=f2e700]:
+                            - link "Resolução BCB n° 69, de 10/2/2021" [ref=f2e701] [cursor=pointer]:
+                              - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=69
+                            - link "Resolução CMN n° 5.008 de 24/3/2022" [ref=f2e703] [cursor=pointer]:
+                              - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=5008
+                            - link "Resolução CMN n° 5.043 de 25/11/2022" [ref=f2e705] [cursor=pointer]:
+                              - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=5043
+                            - link "Resolução CMN n° 2.828, de 30/3/2001" [ref=f2e707] [cursor=pointer]:
+                              - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=2828
+                            - link "Resolução CMN n° 3.426, de 21/12/2006" [ref=f2e709] [cursor=pointer]:
+                              - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=3426
+                            - link "Resolução CMN n° 4.693, de 29/10/2018" [ref=f2e711] [cursor=pointer]:
+                              - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=4693
+                            - link "Resolução CMN n° 4.721, de 30/5/2019" [ref=f2e713] [cursor=pointer]:
+                              - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=4721
+                        - link "Resolução CMN n° 5.046, de 25/11/2022" [ref=f2e715] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=5046
+                        - link "Resolução CMN n° 5.047, de 25/11/2022" [ref=f2e717] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=5047
+                        - link "Resolução CMN n° 5.050, de 25/11/2022" [ref=f2e719] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=5050
+                          - text: Resolução CMN n°
+                          - generic [ref=f2e720]: 5.050, de 25/11/2022
+                        - link "Resolução CMN n° 5.051, de 25/11/2022" [ref=f2e722] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=5051
+                        - link "Resolução CMN n° 5.237, de 24/07/2025" [ref=f2e725] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=5237
+                    - cell [ref=f2e726]:
+                      - link "Leiaute e outras informações técnicas para elaboraçao do DLI" [ref=f2e730] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautedoc2062
+                  - row [ref=f2e731]:
+                    - cell "2080" [ref=f2e732]
+                    - cell "Posição de cotas e grupos das operações de consórcios - Bens imóveis e móveis" [ref=f2e734]
+                    - cell [ref=f2e737]:
+                      - generic [ref=f2e738]:
+                        - link "Resolução BCB n° 285, de 19/1/2023" [ref=f2e740] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=285
+                        - link "Instrução Normativa BCB nº 309, de 4/10/2022" [ref=f2e742] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=309
+                        - link "Instrução Normativa BCB n° 525, de 19/9/2024" [ref=f2e744] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=525
+                    - cell [ref=f2e745]:
+                      - paragraph [ref=f2e748]:
+                        - link "Leiaute" [ref=f2e749] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/documento2080
+                  - row [ref=f2e750]:
+                    - cell "2090" [ref=f2e751]
+                    - cell [ref=f2e753]:
+                      - paragraph [ref=f2e756]: Informações relativas ao Icaap, IcaapSimp e aos testes de estresse com cenários fornecidos pelo Banco Central do Brasil (TEBU)
+                    - cell [ref=f2e757]:
+                      - generic [ref=f2e759]:
+                        - paragraph [ref=f2e760]:
+                          - link "Instrução Normativa BCB n° 685 de 5/12/2025" [ref=f2e761] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=685
+                        - paragraph:
+                          - link:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=685
+                        - paragraph [ref=f2e762]
+                    - cell [ref=f2e763]:
+                      - generic [ref=f2e765]:
+                        - paragraph [ref=f2e766]:
+                          - link "Leiaute" [ref=f2e767] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/Leiaute_Instrucoes_2090_V2.pdf
+                        - paragraph [ref=f2e768]:
+                          - link "Esquema XSD" [ref=f2e769] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/XSD_2090_v0.xsd
+                        - paragraph [ref=f2e770]:
+                          - link "Cenários TEBU Data Base Dez/25" [ref=f2e771] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/Cen_TEBU_DataBase_Dez.25.xlsx
+                  - row [ref=f2e772]:
+                    - cell "2160" [ref=f2e773]
+                    - cell "Demonstrativo de Risco de Liquidez - DRL" [ref=f2e775]
+                    - cell [ref=f2e779]:
+                      - generic [ref=f2e781]:
+                        - link "Resolução CMN nº 4.401, de 27/2/2015" [ref=f2e783] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4401
+                        - link "Circular n° 3.749, de 5/3/2015" [ref=f2e785] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Circular&numero=3749
+                        - link "Circular n° 3.841, de 27/7/2017" [ref=f2e787] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Circular&numero=3841
+                        - link "Resolução BCB n° 207 de 22/3/2022" [ref=f2e789] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=207
+                        - link "Instrução Normativa BCB nº 399, de 29/6/2023" [ref=f2e791] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=399
+                        - link "Instrução Normativa BCB nº 755, de 1/7/2026" [ref=f2e793] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=755
+                    - cell [ref=f2e794]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do DRL" [ref=f2e798] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiaute_drl2160
+                  - row [ref=f2e799]:
+                    - cell "2170" [ref=f2e800]
+                    - cell "Demonstrativo do Indicador de Liquidez de Longo Prazo - DLP" [ref=f2e802]
+                    - cell [ref=f2e806]:
+                      - generic [ref=f2e809]:
+                        - link "Resolução CMN n° 4.616, de 30/11/2017" [ref=f2e810] [cursor=pointer]:
+                          - /url: /pre/normativos/busca/normativo.asp?numero=4616&tipo=Resolu%C3%A7%C3%A3o&data=30/11/2017
+                        - link "Circular n° 3.905, de 21/6/2018" [ref=f2e811] [cursor=pointer]:
+                          - /url: /pre/normativos/busca/normativo.asp?numero=3905&tipo=Circular&data=21/6/2018
+                        - link "Circular n° 3.869, de 19/12/2017" [ref=f2e812] [cursor=pointer]:
+                          - /url: /pre/normativos/busca/normativo.asp?numero=3869&tipo=Circular&data=19/12/2017
+                        - link "Instrução Normativa BCB nº 107, de 17/5/2021" [ref=f2e813] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=107
+                        - link "Comunicado n° 32.864, de 7/12/2018" [ref=f2e814] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/Comunicado32864.pdf
+                        - link "Carta Circular n° 3.919, de 5/12/2018" [ref=f2e815] [cursor=pointer]:
+                          - /url: /pre/normativos/busca/downloadNormativo.asp?arquivo=/Lists/Normativos/Attachments/50684/C_Circ_3919_v2_P.pdf
+                    - cell [ref=f2e816]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do DLP" [ref=f2e820] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautesDLP
+                  - row [ref=f2e821]:
+                    - cell "2300" [ref=f2e822]
+                    - cell "Captação de Recursos no Exterior" [ref=f2e824]
+                    - cell [ref=f2e828]:
+                      - generic [ref=f2e831]:
+                        - link "Resolução BCB n° 193, de 23/2/2022" [ref=f2e832] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=193
+                        - link "Instrução Normativa BCB n° 264, de 31/3/2022" [ref=f2e833] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=264
+                    - cell [ref=f2e834]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do documento" [ref=f2e838] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/captacaoexterior
+                  - row [ref=f2e839]:
+                    - cell "3026 3040 3042 3044" [ref=f2e840]
+                    - cell "Sistema de Informações de Créditos – SCR" [ref=f2e842]
+                    - cell [ref=f2e846]:
+                      - generic [ref=f2e849]:
+                        - link "Resolução CMN n° 5.037 de 29/9/2022" [ref=f2e850] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=5037
+                        - link "Circular n° 3.870, de 19/12/2017" [ref=f2e851] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Circular&numero=3870
+                        - link "Carta Circular n° 3.869, de 19/3/2018" [ref=f2e852] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Carta%20Circular&numero=3869
+                    - cell [ref=f2e853]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do documento" [ref=f2e857] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/scrdoc3040
+                  - row [ref=f2e858]:
+                    - cell "3050" [ref=f2e859]
+                    - cell [ref=f2e861]:
+                      - paragraph [ref=f2e864]: Estatísticas Agregadas de Crédito e Arrendamento Mercantil
+                    - cell [ref=f2e865]:
+                      - paragraph [ref=f2e868]:
+                        - link "Resolução CMN n° 5.037 de 29/9/2022" [ref=f2e869] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=5037
+                        - link "Circular n° 3.870, de 19/12/2017" [ref=f2e870] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Circular&numero=3870
+                        - link "Carta Circular n° 3.659, de 15/5/2014" [ref=f2e871] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Carta%20Circular&numero=3659
+                    - cell [ref=f2e872]:
+                      - paragraph [ref=f2e875]:
+                        - link "Leiaute e outras informações técnicas para elaboração do documento" [ref=f2e876] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/scrdoc3050
+                  - row [ref=f2e877]:
+                    - cell "3060" [ref=f2e878]
+                    - cell "Juros acumulados nas operações de cartão" [ref=f2e880]
+                    - cell [ref=f2e883]:
+                      - generic [ref=f2e885]:
+                        - link "Resolução BCB n° 468, de 30/04/2025" [ref=f2e886] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=468
+                        - link "Instrução Normativa BCB n° 621, de 13/5/2025" [ref=f2e887] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=621
+                    - cell [ref=f2e888]:
+                      - paragraph [ref=f2e891]:
+                        - link "Leiautes e outras informações técnicas para a elaboração do documento" [ref=f2e892] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/Leiaute-documento-3060
+                  - row [ref=f2e893]:
+                    - cell "4010 4016 4060 4066 4090 4096 4413 4423 4433 4500 4510" [ref=f2e894]
+                    - cell "Plano Contábil das Instituições do Sistema Financeiro Nacional - COSIF" [ref=f2e896]
+                    - cell [ref=f2e900]:
+                      - link "Ver normativos" [ref=f2e904] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautescosif
+                    - cell [ref=f2e905]:
+                      - link "Leiautes" [ref=f2e909] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautescosif
+                  - row [ref=f2e910]:
+                    - cell "4034 4035" [ref=f2e911]
+                    - cell [ref=f2e913]:
+                      - paragraph [ref=f2e916]: Estatísticas bancárias internacionais - EBI (a partir de 1/4/2022)
+                    - cell [ref=f2e917]:
+                      - generic [ref=f2e919]:
+                        - link "Resolução BCB n° 132, de 24/8/2021" [ref=f2e920] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=132
+                        - link "Instrução Normativa n° 147, de 2/9/2021" [ref=f2e921] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=147
+                        - link "Comunicado n° 37.621, de 2/9/2021" [ref=f2e922] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Comunicado&numero=37621
+                        - link "Comunicado n° 39.167, de 20/9/2022" [ref=f2e923] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Comunicado&numero=39167
+                        - link "Comunicado nº 40.711, de 25/9/2023" [ref=f2e924] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Comunicado&numero=40711
+                        - link "Comunicado nº 42.156, de 19/9/2024" [ref=f2e925] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Comunicado&numero=42156
+                        - link "Comunicado nº 43.881, de 17/09/2025" [ref=f2e926] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Comunicado&numero=43881
+                    - cell [ref=f2e927]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do documento" [ref=f2e930] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiaute-ebi
+                  - row [ref=f2e931]:
+                    - cell "4076" [ref=f2e932]
+                    - cell [ref=f2e934]:
+                      - paragraph [ref=f2e937]: Relatório do Conglomerado Prudencial
+                    - cell [ref=f2e938]:
+                      - generic [ref=f2e940]:
+                        - link "Resolução CMN n° 4.911 de 27/5/2021" [ref=f2e942] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4911
+                        - generic [ref=f2e943]:
+                          - link "Resolução BCB n° 146 de 28/9/2021" [ref=f2e944] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=146
+                          - link "Instrução Normativa BCB n° 311 de 19/10/2022" [ref=f2e945] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=311
+                          - paragraph [ref=f2e946]
+                    - cell [ref=f2e947]:
+                      - generic [ref=f2e949]:
+                        - paragraph [ref=f2e950]:
+                          - link "Leiaute e instruções de preenchimento" [ref=f2e951] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/RCP_Instruções.pdf
+                          - generic [ref=f2e952]: (até 12/2024)
+                        - paragraph [ref=f2e956]:
+                          - link "Leiaute e instruções de preenchimento (a partir de 01/2025)" [ref=f2e963] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/cosif_leiautes/RCP_InstruçõesV4.pdf
+                        - paragraph [ref=f2e964]:
+                          - generic [ref=f2e966]:
+                            - link "Esquema XSD" [ref=f2e967] [cursor=pointer]:
+                              - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/XSD_4076_v0.xsd
+                            - text: (até 12/2024)
+                        - paragraph [ref=f2e968]:
+                          - generic [ref=f2e970]:
+                            - link "Esquema XSD" [ref=f2e975] [cursor=pointer]:
+                              - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/XSD_4076.xsd
+                            - text: (a partir de 01/2025)
+                  - row [ref=f2e976]:
+                    - cell "4111" [ref=f2e977]
+                    - cell [ref=f2e979]:
+                      - paragraph [ref=f2e982]: Saldos Contábeis Diários
+                    - cell [ref=f2e983]:
+                      - generic [ref=f2e984]:
+                        - link "Resolução BCB n° 208, de 22/3/2022" [ref=f2e986] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=208
+                        - link "Instrução Normativa BCB n° 524 de 18/9/2024" [ref=f2e990] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=524
+                    - cell "Leiaute e instruções de preenchimento (até 31/12/24) Leiaute e instruções de preenchimento (Após 2/1/25) Esquema XSD (até 31/12/24) Esquema XSD (Após 2/1/25)" [ref=f2e991]:
+                      - generic [ref=f2e992]:
+                        - generic [ref=f2e993]:
+                          - link "Leiaute e instruções de preenchimento" [ref=f2e994] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/Documento%20de%20Saldos%20Contábeis%20Diários%20-%20Instruções%20de%20Preenchimento.pdf
+                          - generic [ref=f2e995]: (até 31/12/24)
+                        - generic [ref=f2e1001]:
+                          - link "Leiaute e instruções de preenchimento" [ref=f2e1002] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/saldosDiariosInstrucoesPreenchimentoV2.pdf
+                          - generic [ref=f2e1003]: (Após 2/1/25)
+                        - generic [ref=f2e1010]:
+                          - link "Esquema XSD" [ref=f2e1011] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/XSD_4111.xsd
+                          - generic [ref=f2e1012]: (até 31/12/24)
+                        - paragraph [ref=f2e1018]:
+                          - link "Esquema XSD" [ref=f2e1019] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/XSD_4111V1.xsd
+                          - generic [ref=f2e1020]: (Após 2/1/25)
+                  - row [ref=f2e1033]:
+                    - cell "5005" [ref=f2e1034]
+                    - cell [ref=f2e1036]:
+                      - paragraph [ref=f2e1039]: Depósitos Bancários - CDB
+                    - cell [ref=f2e1040]:
+                      - generic [ref=f2e1042]:
+                        - paragraph [ref=f2e1043]:
+                          - link "Resolução BCB n° 208, de 22/3/2022" [ref=f2e1044] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=208
+                          - link "Instrução Normativa n° 411, de 25/09/2023" [ref=f2e1045] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=411
+                        - paragraph
+                        - paragraph [ref=f2e1046]:
+                          - text: "Informações adicionais:"
+                          - link "Instruções de preenchimento" [ref=f2e1047] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/cdb/instrucoes-de-preenchimento-doc5005.pdf
+                    - cell [ref=f2e1048]:
+                      - link "Leiautes e outras informações técnicas para a elaboração do documento" [ref=f2e1051] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiaute-cdb
+                  - row [ref=f2e1052]:
+                    - cell "5011" [ref=f2e1053]
+                    - cell "Participações societárias das instituições" [ref=f2e1055]
+                    - cell [ref=f2e1059]:
+                      - generic [ref=f2e1062]:
+                        - link "Circular n° 2.981, de 28/4/2000" [ref=f2e1063] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Circular&numero=2981
+                        - link "Carta-Circular n° 2.915, de 7/6/2000" [ref=f2e1064] [cursor=pointer]:
+                          - /url: https://normativos.bcb.gov.br/Lists/Normativos/Attachments/47351/C_Circ_2915_v3_P.pdf
+                    - cell [ref=f2e1065]:
+                      - link "Leiaute" [ref=f2e1069] [cursor=pointer]:
+                        - /url: https://normativos.bcb.gov.br/Lists/Normativos/Attachments/47351/C_Circ_2915_v3_P.pdf
+                  - row [ref=f2e1070]:
+                    - cell "5021" [ref=f2e1071]
+                    - cell "UNICAD - Correspondentes bancários" [ref=f2e1073]
+                    - cell [ref=f2e1077]:
+                      - generic [ref=f2e1078]:
+                        - link "Carta Circular n° 3.118, de 17/2/2004" [ref=f2e1080] [cursor=pointer]:
+                          - /url: https://www3.bcb.gov.br/normativo/detalharNormativo.do?N=104025863&method=detalharNormativo
+                        - link "Resolução CMN n° 4.935, de 29/7/2021" [ref=f2e1082] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20CMN&numero=4935
+                    - cell [ref=f2e1083]:
+                      - generic [ref=f2e1086]:
+                        - link "Leiaute até abr/2011" [ref=f2e1087] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/PSTAW10
+                        - link "Leiaute a partir de mai/2011" [ref=f2e1088] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/leiautedoc5021mai
+                  - row [ref=f2e1089]:
+                    - cell "5031" [ref=f2e1090]
+                    - cell "UNICAD - Correspondente cambial" [ref=f2e1092]
+                    - cell [ref=f2e1096]:
+                      - paragraph [ref=f2e1099]:
+                        - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e1100] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                    - cell [ref=f2e1101]:
+                      - generic [ref=f2e1104]:
+                        - link "Leiaute até abr/2011" [ref=f2e1105] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/leiaute_5031_ate_abril11
+                        - link "Leiaute a partir de mai/2011" [ref=f2e1106] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/leiaute_5031_maio11
+                  - row [ref=f2e1107]:
+                    - cell "5032" [ref=f2e1108]
+                    - cell "UNICAD - Posto de câmbio" [ref=f2e1110]
+                    - cell [ref=f2e1114]:
+                      - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e1118] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                    - cell [ref=f2e1119]:
+                      - link "Leiaute" [ref=f2e1123] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/documento5032UNICAD
+                  - row [ref=f2e1124]:
+                    - cell "5050" [ref=f2e1125]
+                    - cell "Demonstrativo de Risco Operacional (DRO)" [ref=f2e1127]
+                    - cell [ref=f2e1131]:
+                      - generic [ref=f2e1135]:
+                        - link "Circular n° 3.979, de 30/1/2020" [ref=f2e1136] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Circular&numero=3979
+                        - link "Instrução Normativa BCB n° 33, de 29/10/2020" [ref=f2e1137] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=33
+                        - link "Instrução Normativa BCB n° 117, de 23/6/2021" [ref=f2e1138] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=117
+                    - cell [ref=f2e1139]:
+                      - link "Leiaute e Instruções de Preenchimento" [ref=f2e1144] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautedocumento5050
+                  - row [ref=f2e1145]:
+                    - cell "5300" [ref=f2e1146]
+                    - cell "Informações sobre Relacionamentos de Cooperativa" [ref=f2e1148]
+                    - cell [ref=f2e1152]:
+                      - generic [ref=f2e1155]:
+                        - link "Resolução BCB n° 221, de 30/3/2022" [ref=f2e1156] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=221
+                        - link "Instrução Normativa BCB n° 297, de 23/8/2022" [ref=f2e1157] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=297
+                    - cell [ref=f2e1158]:
+                      - generic [ref=f2e1161]:
+                        - link "Leiaute até 09/2018" [ref=f2e1162] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/Leiaute_5300_xml_versao_ate%20201809.xlsx
+                        - link "XSD até 09/2018" [ref=f2e1163] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5300_v1.xsd
+                        - link "Leiaute a partir de 10/2018" [ref=f2e1164] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/Leiaute_5300_xml.xlsx
+                        - link "XSD a partir de 10/2018" [ref=f2e1165] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5300_v2.xsd
+                  - row [ref=f2e1166]:
+                    - cell "5401 5402" [ref=f2e1167]
+                    - cell "Informações sobre Cotistas de Fundos" [ref=f2e1169]
+                    - cell [ref=f2e1173]:
+                      - generic [ref=f2e1176]:
+                        - link "Instrução Normativa BCB n° 94, de 8/4/2021" [ref=f2e1177] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=94
+                        - link "Resolução BCB n° 38, de 11/11/2020" [ref=f2e1178] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=38
+                    - cell "Leiaute (até set/2024) Leiaute (após out/2024) XSD - 5401 (até set/2024) XSD - 5402 (até set/2024) XSD - 5401 (após out/2024) XSD - 5402 (após out/2024)" [ref=f2e1179]:
+                      - generic [ref=f2e1181]:
+                        - generic [ref=f2e1182]:
+                          - link "Leiaute" [ref=f2e1183] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/Leiaute_Instrucoes_5400.xlsx
+                          - generic [ref=f2e1184]: (até set/2024)
+                        - generic [ref=f2e1185]:
+                          - link "Leiaute" [ref=f2e1186] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/Leiaute_Instrucoes_5400_out2024.xlsx
+                          - generic [ref=f2e1187]: (após out/2024)
+                        - generic [ref=f2e1190]:
+                          - link "XSD - 5401" [ref=f2e1191] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5401.xsd
+                          - text: (até set/2024)
+                          - link "XSD - 5402" [ref=f2e1192] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5402.xsd
+                          - generic [ref=f2e1193]: (até set/2024)
+                        - generic [ref=f2e1197]:
+                          - link "XSD - 5401" [ref=f2e1198] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/ACOF5401v2.xsd
+                          - text: (após out/2024)
+                        - generic [ref=f2e1205]:
+                          - link "XSD - 5402" [ref=f2e1206] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/ACOF5402v2.xsd
+                          - text: (após out/2024)
+                  - row [ref=f2e1207]:
+                    - cell "5500" [ref=f2e1208]
+                    - cell [ref=f2e1210]:
+                      - paragraph [ref=f2e1213]: Poupança - Informações Diárias
+                    - cell [ref=f2e1214]:
+                      - generic [ref=f2e1216]:
+                        - link "Resolução BCB n° 208, de 22/3/2022" [ref=f2e1217] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=208
+                        - link "Instrução Normativa BCB n° 355 de 17/2/2023" [ref=f2e1219] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=355
+                        - paragraph [ref=f2e1220]
+                    - cell [ref=f2e1221]:
+                      - generic [ref=f2e1223]:
+                        - paragraph [ref=f2e1224]:
+                          - link "Leiaute e instruções de preenchimento" [ref=f2e1225] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/Documento%20de%20Poupança%20-%20Instruções%20de%20Preenchimento.pdf
+                        - paragraph [ref=f2e1226]:
+                          - link "Esquema XSD" [ref=f2e1227] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5500.xsd
+                  - row [ref=f2e1228]:
+                    - cell "5710 5711" [ref=f2e1229]
+                    - cell [ref=f2e1231]:
+                      - paragraph [ref=f2e1234]: Prestação de Serviços de Ativos Virtuais
+                    - cell [ref=f2e1235]:
+                      - generic [ref=f2e1236]:
+                        - link "Resolução BCB n° 520 de 10/11/2025" [ref=f2e1238] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=520
+                        - generic [ref=f2e1239]:
+                          - link "Instrução Normativa BCB n° 713 de 27/2/2026" [ref=f2e1240] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=713
+                          - paragraph [ref=f2e1241]
+                    - cell [ref=f2e1242]:
+                      - generic [ref=f2e1244]:
+                        - paragraph [ref=f2e1245]:
+                          - link "5710 - Instruções de preenchimento" [ref=f2e1246] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5710_V0.pdf
+                          - link "5710 - XSD" [ref=f2e1247] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5710_XSDv0.xsd
+                        - paragraph [ref=f2e1248]:
+                          - link "5711 - Instruções de preenchimento" [ref=f2e1249] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5711_V0.pdf
+                          - link "5711 - XSD" [ref=f2e1250] [cursor=pointer]:
+                            - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/5711_XSDv0.xsd
+                  - row [ref=f2e1251]:
+                    - cell "5816" [ref=f2e1252]
+                    - cell "Cartão de crédito internacional - emitido no país" [ref=f2e1254]
+                    - cell [ref=f2e1258]:
+                      - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e1262] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                    - cell [ref=f2e1263]:
+                      - link "Leiaute" [ref=f2e1267] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautedocumento5816
+                  - row [ref=f2e1268]:
+                    - cell "5817" [ref=f2e1269]
+                    - cell "Cartão de crédito internacional - emitido no exterior" [ref=f2e1271]
+                    - cell [ref=f2e1275]:
+                      - link "Resolução BCB n° 277, de 31/12/2022" [ref=f2e1279] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=277
+                    - cell [ref=f2e1280]:
+                      - link "Leiaute" [ref=f2e1284] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautedocumento5817
+                  - row [ref=f2e1285]:
+                    - cell "6209" [ref=f2e1286]
+                    - cell "Informações Relativas a Pagamentos de Varejo e a Canais de Atendimento" [ref=f2e1288]
+                    - cell [ref=f2e1291]:
+                      - paragraph [ref=f2e1294]:
+                        - link "Instrução Normativa BCB n° 335, de 8/12/2022" [ref=f2e1295] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=335
+                    - cell [ref=f2e1296]:
+                      - link "Leiaute - V2.0.7" [ref=f2e1299] [cursor=pointer]:
+                        - /url: /content/estabilidadefinanceira/Documents/sistema_pagamentos_brasileiro/Estatisticas_SPB/Elaboracao_e_remessa_de_informacoes_relativas_a_pagamentos_de_varejo_canais_de_atendimento_6209.pdf
+                  - row [ref=f2e1300]:
+                    - cell "6308" [ref=f2e1301]
+                    - cell "Informações Relativas aos Cartões de Pagamento – Emissores" [ref=f2e1303]
+                    - cell [ref=f2e1306]:
+                      - link "Instrução Normativa BCB n° 247, de 24/3/2022" [ref=f2e1309] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=247
+                    - cell [ref=f2e1310]:
+                      - link "Leiaute - V2.1.2" [ref=f2e1313] [cursor=pointer]:
+                        - /url: /content/estabilidadefinanceira/Documents/sistema_pagamentos_brasileiro/Arranjos/Elaboracao_e_remessa_de_informacoes_relativas_aos_cartoes_de_pagamento_emissores_6308.pdf
+                  - row [ref=f2e1314]:
+                    - cell "6333" [ref=f2e1315]
+                    - cell "Informações Relativas aos Arranjos de Pagamento – Instituidores de Arranjo de Pagamento" [ref=f2e1317]
+                    - cell [ref=f2e1320]:
+                      - link "Instrução Normativa BCB n° 247, de 24/3/2022" [ref=f2e1323] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=247
+                    - cell [ref=f2e1324]:
+                      - generic [ref=f2e1326]:
+                        - link "Leiaute - V2.0." [ref=f2e1327] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/sistema_pagamentos_brasileiro/Arranjos/Elaboracao_e_remessa_de_informações_relativas_aos_arranjos_de_pagamento_IAPs_6333.pdf
+                        - text: "2"
+                  - row [ref=f2e1328]:
+                    - cell "6334" [ref=f2e1329]
+                    - cell "Informações Relativas aos Cartões de Pagamento – Credenciadores" [ref=f2e1331]
+                    - cell [ref=f2e1334]:
+                      - link "Instrução Normativa BCB n° 247, de 24/3/2022" [ref=f2e1337] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=247
+                    - cell [ref=f2e1338]:
+                      - link "Leiaute - V2.1.1" [ref=f2e1341] [cursor=pointer]:
+                        - /url: /content/estabilidadefinanceira/Documents/sistema_pagamentos_brasileiro/Arranjos/Elaboracao_e_remessa_de_informacoes_relativas_aos_cartoes_de_pagamento_credenciadores_Doc_6334.pdf
+                  - row [ref=f2e1342]:
+                    - cell "7110" [ref=f2e1343]
+                    - cell "Programação Anual das Atividades de Auditoria Cooperativa" [ref=f2e1345]
+                    - cell [ref=f2e1348]:
+                      - generic [ref=f2e1350]:
+                        - generic [ref=f2e1351]:
+                          - link "Resolução CMN n° n° 4.887 de 28/1/2021" [ref=f2e1352] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=4887
+                          - link "Resolução BCB n° 97 de 25/5/2021" [ref=f2e1353] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=97
+                        - link "Instrução Normativa BCB n° 249 de 29/3/2022" [ref=f2e1355] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=249
+                    - cell [ref=f2e1356]:
+                      - generic [ref=f2e1359]:
+                        - link "Leiaute, instruções de preenchimento e exemplos de arquivos XML" [ref=f2e1360] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/doc7110/Leiaute_V20180927.xlsx
+                        - link "XSD" [ref=f2e1361] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/doc7110/esquema_7110_v08.xsd
+                        - link "Programa Validador" [ref=f2e1362] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/validador_xml_info
+                  - row [ref=f2e1363]:
+                    - cell "7120" [ref=f2e1364]
+                    - cell "Relatório Geral das Atividades de Auditoria Cooperativa" [ref=f2e1366]
+                    - cell [ref=f2e1369]:
+                      - generic [ref=f2e1371]:
+                        - link "Resolução CMN n° 4.910, de 27/5/2021" [ref=f2e1372] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=4910
+                        - link "Resolução BCB n° 97, de 25/5/2021" [ref=f2e1373] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=97
+                        - link "Instrução Normativa BCB n° 249, de 29/3/2022" [ref=f2e1374] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=249
+                    - cell [ref=f2e1375]:
+                      - generic [ref=f2e1377]:
+                        - link "Leiaute, instruções de preenchimento e arquivos XML de exemplo" [ref=f2e1378] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/doc7120/Leiaute_7120.xlsx
+                        - link "XSD" [ref=f2e1379] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/doc7120/esquema_7120_v03.xsd
+                        - link "Programa Validador" [ref=f2e1380] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/validador_xml_info
+                  - row [ref=f2e1381]:
+                    - cell "8010 8011 8012 8013 8014 8015 8016 8017 8018 8019 8030 8032 8033 8034 8040 8043 8060 8061 8070" [ref=f2e1382]
+                    - cell "Estatísticas fiscais" [ref=f2e1384]
+                    - cell [ref=f2e1387]:
+                      - generic [ref=f2e1389]:
+                        - link "Resolução BCB n° 101, de 2/6/2021" [ref=f2e1390] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=101
+                        - link "Resolução BCB n° 74, de 23/2/2021" [ref=f2e1391] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=74
+                        - link "Instrução Normativa BCB n° 114 de 15/6/2021" [ref=f2e1392] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=114
+                    - cell [ref=f2e1393]:
+                      - link "Leiautes e outras informações técnicas para a elaboração dos documentos" [ref=f2e1396] [cursor=pointer]:
+                        - /url: /estabilidadefinanceira/leiautesestatisticasfiscais
+                  - row [ref=f2e1397]:
+                    - cell "9010 9011 9030 9031" [ref=f2e1398]
+                    - cell [ref=f2e1400]:
+                      - generic [ref=f2e1401]: Demonstrações financeiras individuais / Demonstrações financeiras consolidadas - legislação societária ou CVM;Demonstrações financeiras consolidadas em IFRS.
+                    - cell [ref=f2e1403]:
+                      - generic [ref=f2e1405]:
+                        - link "Resolução CMN n° 4.818, de 29/5/2020" [ref=f2e1407] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=4818
+                        - link "Resolução CMN n° 4.911, de 27/5/2021" [ref=f2e1409] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=4911
+                        - link "Resolução CMN n° 4.950, de 30/9/2021" [ref=f2e1411] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=4950
+                        - generic [ref=f2e1412]:
+                          - link "Resolução CMN n° 4.966, de 25/11/2021" [ref=f2e1413] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o&numero=4966
+                          - link "Resolução BCB n° 2, de 12/8/2020" [ref=f2e1414] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=2
+                        - link "Resolução BCB n° 146, de 28/9/2021" [ref=f2e1416] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=146
+                        - generic [ref=f2e1417]:
+                          - link "Resolução BCB n° 168, de 1/12/2021" [ref=f2e1418] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=168
+                          - link "Instrução Normativa BCB n° 601, de 27/3/2025" [ref=f2e1419] [cursor=pointer]:
+                            - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=601
+                    - cell [ref=f2e1420]:
+                      - generic [ref=f2e1422]:
+                        - link "Leiaute e informações técnicas (remessa em PDF)" [ref=f2e1423] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/CDSFN/Central_de_Demonstracoes_Financeiras-Leiautes_informacoes_tecnicas.pdf
+                        - link "Leiaute e informações técnicas (remessa em JSON)" [ref=f2e1424] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/CDSFN/Central_de_Demonstracoes_Financeiras-Leiautes_informacoes_tecnicasJSON.pdf
+                        - link "Json Schema (9011, 9031)" [ref=f2e1425] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/CDSFN/9xx1_schema.zip
+                  - row [ref=f2e1426]:
+                    - cell "9800 9805 9810" [ref=f2e1427]
+                    - cell [ref=f2e1429]:
+                      - paragraph [ref=f2e1432]: Sistema de Informações de Valores a Receber (SVR)
+                    - cell [ref=f2e1433]:
+                      - generic [ref=f2e1435]:
+                        - link "Resolução BCB n° 98, de 1/6/2021" [ref=f2e1436] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Resolu%C3%A7%C3%A3o%20BCB&numero=98
+                        - link "Instrução Normativa BCB n° 123, de 8/7/2021" [ref=f2e1437] [cursor=pointer]:
+                          - /url: /estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=123
+                        - link "Perguntas e Respostas – Entidades Supervisionadas" [ref=f2e1438] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/Faq%20valores%20a%20receber_instituições_v13.pdf
+                    - cell [ref=f2e1439]:
+                      - generic [ref=f2e1441]:
+                        - link "Leiaute CNPJ Alfanumérico" [ref=f2e1442] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/xsds_svr_novoCNPJ.zip
+                        - link "Termo de adesão" [ref=f2e1443] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/Termo%20de%20Adesão%20do%20Valores%20a%20Receber%202024-01-12%20v1.pdf
+                        - link "Registros no Unicad" [ref=f2e1444] [cursor=pointer]:
+                          - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/registros-no-unicad.pdf
+                  - row [ref=f2e1445]:
+                    - cell "9946" [ref=f2e1446]
+                    - cell [ref=f2e1448]:
+                      - paragraph [ref=f2e1451]: PROAGRO - Arquivo com informações referentes à cobrança de Adicional.
+                    - cell [ref=f2e1452]
+                    - cell [ref=f2e1453]:
+                      - link "Leiaute" [ref=f2e1456] [cursor=pointer]:
+                        - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/layout-agro056.pdf
+                  - row [ref=f2e1457]:
+                    - cell "9950" [ref=f2e1458]
+                    - cell [ref=f2e1460]:
+                      - paragraph [ref=f2e1463]: PROAGRO - Arquivo com informações referentes aos pagamentos de coberturas, serviço de comprovação de perdas e remuneração do agente
+                    - cell [ref=f2e1464]
+                    - cell [ref=f2e1465]:
+                      - link "Leiaute" [ref=f2e1468] [cursor=pointer]:
+                        - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/layout-agro058.pdf
+                  - row [ref=f2e1469]:
+                    - cell "9953" [ref=f2e1470]
+                    - cell [ref=f2e1472]:
+                      - paragraph [ref=f2e1475]: PROAGRO - Informações relativas a pedidos de cobertura (COP) e serviços de comprovação de perdas.
+                    - cell [ref=f2e1476]
+                    - cell [ref=f2e1477]:
+                      - link "Leiaute" [ref=f2e1480] [cursor=pointer]:
+                        - /url: /content/estabilidadefinanceira/Documents/Leiaute_de_documentos/layout-agro051.pdf
+            - button "Documentos descontinuados" [ref=f2e1483] [cursor=pointer]
+      - button "Vá para o topo" [ref=f2e63] [cursor=pointer]:
+        - generic [aria-hidden] [ref=f2e64]: expand_less
+      - contentinfo [ref=f2e65]:
+        - generic [ref=f2e69]:
+          - generic [ref=f2e70]: Siga o BC
+          - list [ref=f2e71]:
+            - listitem [ref=f2e72]:
+              - link "Instagram oficial do Banco Central do Brasil" [ref=f2e73] [cursor=pointer]:
+                - /url: http://www.instagram.com/bancocentraldobrasil/
+            - listitem [ref=f2e79]:
+              - link "Linkedin oficial do Banco Central do Brasil" [ref=f2e80] [cursor=pointer]:
+                - /url: http://br.linkedin.com/company/banco-central-do-brasil
+            - listitem [ref=f2e85]:
+              - link "X oficial do Banco Central do Brasil" [ref=f2e86] [cursor=pointer]:
+                - /url: http://twitter.com/bancocentralbr
+            - listitem [ref=f2e90]:
+              - link "Canal oficial do Banco Central do Brasil no WhatsApp" [ref=f2e91] [cursor=pointer]:
+                - /url: https://whatsapp.com/channel/0029VaB1KjR6BIEjJMs4HN1O
+            - listitem [ref=f2e96]:
+              - link "Canal oficial do Banco Central do Brasil no YouTube" [ref=f2e97] [cursor=pointer]:
+                - /url: http://www.youtube.com/user/BancoCentralBR
+            - listitem [ref=f2e101]:
+              - link "TikTok oficial do Banco Central do Brasil" [ref=f2e102] [cursor=pointer]:
+                - /url: https://www.tiktok.com/@bancocentraldobrasil
+            - listitem [ref=f2e106]:
+              - link "Facebook oficial do Banco Central do Brasil" [ref=f2e107] [cursor=pointer]:
+                - /url: http://pt-br.facebook.com/bancocentraldobrasil/
+            - listitem [ref=f2e111]:
+              - link "Threads oficial do Banco Central do Brasil" [ref=f2e112] [cursor=pointer]:
+                - /url: https://www.threads.net/@bancocentraldobrasil
+            - listitem [ref=f2e116]:
+              - link "Telegram oficial do Banco Central do Brasil" [ref=f2e117] [cursor=pointer]:
+                - /url: https://t.me/bancocentraloficial
+            - listitem [ref=f2e121]:
+              - link "Flickr oficial do Banco Central do Brasil" [ref=f2e122] [cursor=pointer]:
+                - /url: http://www.flickr.com/photos/134175749@N03/
+            - listitem [ref=f2e127]:
+              - link "Assinar notícias" [ref=f2e128] [cursor=pointer]:
+                - /url: /assinar-noticias
+            - listitem [ref=f2e138]:
+              - link "RSS - Feeds do BC" [ref=f2e139] [cursor=pointer]:
+                - /url: /acessoinformacao/rss
+            - listitem [ref=f2e145]:
+              - link "Calendário do Banco Central do Brasil" [ref=f2e146] [cursor=pointer]:
+                - /url: /acessoinformacao/calendariobc_ics
+        - generic [ref=f2e157]:
+          - generic [ref=f2e158]:
+            - paragraph [ref=f2e159]:
+              - strong [ref=f2e160]:
+                - link "Acesso à informação" [ref=f2e161] [cursor=pointer]:
+                  - /url: /acessoinformacao
+            - list [ref=f2e162]:
+              - listitem [ref=f2e163]:
+                - link "Institucional" [ref=f2e164] [cursor=pointer]:
+                  - /url: /acessoinformacao/institucional
+              - listitem [ref=f2e165]:
+                - link "Ações e programas" [ref=f2e166] [cursor=pointer]:
+                  - /url: /acessoinformacao/acoesprogramas
+              - listitem [ref=f2e167]:
+                - link "Participação social" [ref=f2e168] [cursor=pointer]:
+                  - /url: /acessoinformacao/participacaosocial
+              - listitem [ref=f2e169]:
+                - link "Auditorias" [ref=f2e170] [cursor=pointer]:
+                  - /url: /acessoinformacao/auditorias
+              - listitem [ref=f2e171]:
+                - link "Convênios e Transferências" [ref=f2e172] [cursor=pointer]:
+                  - /url: /acessoinformacao/convenios-e-transferencias
+              - listitem [ref=f2e173]:
+                - link "Receitas e despesas" [ref=f2e174] [cursor=pointer]:
+                  - /url: /acessoinformacao/receitas-e-despesas
+              - listitem [ref=f2e175]:
+                - link "Licitações e Contratos" [ref=f2e176] [cursor=pointer]:
+                  - /url: /acessoinformacao/licitacoes-e-contratos
+              - listitem [ref=f2e177]:
+                - link "Servidores" [ref=f2e178] [cursor=pointer]:
+                  - /url: /acessoinformacao/carreira
+              - listitem [ref=f2e179]:
+                - link "Informações classificadas" [ref=f2e180] [cursor=pointer]:
+                  - /url: /acessoinformacao/informacoesclassificadas
+              - listitem [ref=f2e181]:
+                - link "Serviço de Informações ao Cidadão (SIC)" [ref=f2e182] [cursor=pointer]:
+                  - /url: /acessoinformacao/sic
+              - listitem [ref=f2e183]:
+                - link "Perguntas frequentes" [ref=f2e184] [cursor=pointer]:
+                  - /url: /meubc/faqs
+              - listitem [ref=f2e185]:
+                - link "Dados Abertos" [ref=f2e186] [cursor=pointer]:
+                  - /url: /acessoinformacao/dadosabertos
+              - listitem [ref=f2e187]:
+                - link "Sanções Administrativas" [ref=f2e188] [cursor=pointer]:
+                  - /url: /acessoinformacao/sancoes-administrativas
+              - listitem [ref=f2e189]:
+                - link "Lei Geral de Proteção de Dados Pessoais (LGPD)" [ref=f2e190] [cursor=pointer]:
+                  - /url: /acessoinformacao/lgpd
+              - listitem [ref=f2e191]:
+                - link "Transparência e prestação de contas" [ref=f2e192] [cursor=pointer]:
+                  - /url: /acessoinformacao/transparencia-e-prestacao-de-contas
+          - generic [ref=f2e193]:
+            - paragraph [ref=f2e194]:
+              - strong [ref=f2e195]:
+                - link "Política monetária" [ref=f2e196] [cursor=pointer]:
+                  - /url: /controleinflacao
+            - list [ref=f2e197]:
+              - listitem [ref=f2e198]:
+                - link "Metas para a inflação" [ref=f2e199] [cursor=pointer]:
+                  - /url: /controleinflacao/metainflacao
+              - listitem [ref=f2e200]:
+                - link "O que é inflação" [ref=f2e201] [cursor=pointer]:
+                  - /url: /controleinflacao/oqueinflacao
+              - listitem [ref=f2e202]:
+                - link "Comitê de Política Monetária (Copom)" [ref=f2e203] [cursor=pointer]:
+                  - /url: /controleinflacao/copom
+              - listitem [ref=f2e204]:
+                - link "Comunicados do Copom" [ref=f2e205] [cursor=pointer]:
+                  - /url: /controleinflacao/comunicadoscopom
+              - listitem [ref=f2e206]:
+                - link "Atas do Copom" [ref=f2e207] [cursor=pointer]:
+                  - /url: /publicacoes/atascopom
+              - listitem [ref=f2e208]:
+                - link "Relatório de Política Monetária" [ref=f2e209] [cursor=pointer]:
+                  - /url: /publicacoes/rpm
+              - listitem [ref=f2e210]:
+                - link "Expectativas de mercado" [ref=f2e211] [cursor=pointer]:
+                  - /url: /controleinflacao/expectativasmercado
+          - generic [ref=f2e212]:
+            - paragraph [ref=f2e213]:
+              - strong [ref=f2e214]:
+                - link "Estabilidade financeira" [ref=f2e215] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira
+            - list [ref=f2e216]:
+              - listitem [ref=f2e217]:
+                - link "Normas" [ref=f2e218] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/regulacao
+              - listitem [ref=f2e219]:
+                - link "Supervisão" [ref=f2e220] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/supervisao
+              - listitem [ref=f2e221]:
+                - link "Sistema Financeiro Nacional" [ref=f2e222] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/sfn
+              - listitem [ref=f2e223]:
+                - link "Sistema de Pagamentos Brasileiro (SPB)" [ref=f2e224] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/spb
+              - listitem [ref=f2e225]:
+                - link "Câmbio e capitais internacionais" [ref=f2e226] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/cambioecapitais
+              - listitem [ref=f2e227]:
+                - link "Comitê de Estabilidade Financeira (Comef)" [ref=f2e228] [cursor=pointer]:
+                  - /url: /acessoinformacao/comef
+              - listitem [ref=f2e229]:
+                - link "Relatório de Estabilidade Financeira" [ref=f2e230] [cursor=pointer]:
+                  - /url: /publicacoes/ref
+          - generic [ref=f2e231]:
+            - paragraph [ref=f2e232]:
+              - strong [ref=f2e233]:
+                - link "Estatísticas" [ref=f2e234] [cursor=pointer]:
+                  - /url: /estatisticas
+            - list [ref=f2e235]:
+              - listitem [ref=f2e236]:
+                - link "Taxas de Juros" [ref=f2e237] [cursor=pointer]:
+                  - /url: /estatisticas/txjuros
+              - listitem [ref=f2e238]:
+                - link "Notas econômico-financeiras" [ref=f2e239] [cursor=pointer]:
+                  - /url: /estatisticas/notaseconomicofinanceiras
+              - listitem [ref=f2e240]:
+                - link "Séries temporais (SGS)" [ref=f2e241] [cursor=pointer]:
+                  - /url: https://www3.bcb.gov.br/sgspub/
+              - listitem [ref=f2e242]:
+                - link "Tabelas especiais" [ref=f2e243] [cursor=pointer]:
+                  - /url: /estatisticas/tabelasespeciais
+              - listitem [ref=f2e244]:
+                - link "Indicadores Econômicos Selecionados" [ref=f2e245] [cursor=pointer]:
+                  - /url: /estatisticas/indicadoresselecionados
+              - listitem [ref=f2e246]:
+                - link "Poupança" [ref=f2e247] [cursor=pointer]:
+                  - /url: /estatisticas/poupanca
+              - listitem [ref=f2e248]:
+                - link "Mais estatísticas" [ref=f2e249] [cursor=pointer]:
+                  - /url: /estatisticas/maisestatisticas
+              - listitem [ref=f2e250]:
+                - link "Calendário de divulgação" [ref=f2e251] [cursor=pointer]:
+                  - /url: /estatisticas/notas_calendario
+          - generic [ref=f2e252]:
+            - paragraph [ref=f2e253]:
+              - strong [ref=f2e254]:
+                - link "Cédulas e moedas" [ref=f2e255] [cursor=pointer]:
+                  - /url: /cedulasemoedas
+            - list [ref=f2e256]:
+              - listitem [ref=f2e257]:
+                - link "Cédulas" [ref=f2e258] [cursor=pointer]:
+                  - /url: /cedulasemoedas/cedulas
+              - listitem [ref=f2e259]:
+                - link "Moedas" [ref=f2e260] [cursor=pointer]:
+                  - /url: /cedulasemoedas/moedas
+              - listitem [ref=f2e261]:
+                - link "Serviços" [ref=f2e262] [cursor=pointer]:
+                  - /url: /cedulasemoedas/servicoscedulasmoedas
+              - listitem [ref=f2e263]:
+                - link "Dinheiro em circulação" [ref=f2e264] [cursor=pointer]:
+                  - /url: https://www3.bcb.gov.br/mec-circulante/
+              - listitem [ref=f2e265]:
+                - link "O caminho do dinheiro" [ref=f2e266] [cursor=pointer]:
+                  - /url: /cedulasemoedas/caminhododinheiro
+          - generic [ref=f2e267]:
+            - paragraph [ref=f2e268]:
+              - strong [ref=f2e269]:
+                - link "Publicações e pesquisa" [ref=f2e270] [cursor=pointer]:
+                  - /url: /publicacoes
+            - list [ref=f2e271]:
+              - listitem [ref=f2e272]:
+                - link "Atas do Copom" [ref=f2e273] [cursor=pointer]:
+                  - /url: /publicacoes/atascopom
+              - listitem [ref=f2e274]:
+                - link "Relatório de Política Monetária" [ref=f2e275] [cursor=pointer]:
+                  - /url: /publicacoes/rpm
+              - listitem [ref=f2e276]:
+                - link "Relatório de Estabilidade Financeira" [ref=f2e277] [cursor=pointer]:
+                  - /url: /publicacoes/ref
+              - listitem [ref=f2e278]:
+                - link "Relatório Integrado do BC" [ref=f2e279] [cursor=pointer]:
+                  - /url: /publicacoes/relatoriointegrado
+              - listitem [ref=f2e280]:
+                - link "Estudos especiais do Banco Central" [ref=f2e281] [cursor=pointer]:
+                  - /url: /publicacoes/estudosespeciais
+              - listitem [ref=f2e282]:
+                - link "Sondagens do BC" [ref=f2e283] [cursor=pointer]:
+                  - /url: /publicacoes/sondagens-do-bc
+              - listitem [ref=f2e284]:
+                - link "Pesquisa no BC" [ref=f2e285] [cursor=pointer]:
+                  - /url: /publicacoes/pesquisa
+              - listitem [ref=f2e286]:
+                - link "Mais publicações" [ref=f2e287] [cursor=pointer]:
+                  - /url: /publicacoes/maispublicacoes
+        - generic [ref=f2e290]:
+          - generic [ref=f2e291]: Garantir a estabilidade de preços, zelar por um sistema financeiro sólido e eficiente, e fomentar o bem-estar econômico da sociedade.
+          - generic [ref=f2e292]:
+            - generic [ref=f2e293]: "Atendimento: 145 (custo de ligação local)"
+            - list [ref=f2e294]:
+              - listitem [ref=f2e295]:
+                - link "Fale conosco" [ref=f2e296] [cursor=pointer]:
+                  - /url: /acessoinformacao/faleconosco
+                - text: "|"
+              - listitem [ref=f2e297]:
+                - link "Política de privacidade" [ref=f2e298] [cursor=pointer]:
+                  - /url: /acessoinformacao/politicaprivacidade
+                - text: "|"
+              - listitem [ref=f2e299]:
+                - link "Política de acessibilidade" [ref=f2e300] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+            - generic [ref=f2e301]:
+              - text: © Banco Central do Brasil -
+              - link "Todos os direitos reservados" [ref=f2e302] [cursor=pointer]:
+                - /url: /acessoinformacao/direitosautorais
+    - generic [ref=f2e304]:
+      - link "Ir para o conteúdo" [ref=f2e306] [cursor=pointer]:
+        - /url: "#conteudo"
+      - generic [ref=f2e307]:
+        - link "GovBR" [ref=f2e308] [cursor=pointer]:
+          - /url: https://gov.br/
+        - navigation [ref=f2e309]:
+          - list [ref=f2e310]:
+            - listitem [ref=f2e311]
+            - listitem [ref=f2e312]:
+              - link "Acesso à informação" [ref=f2e313] [cursor=pointer]:
+                - /url: http://www.gov.br/acessoainformacao/
+            - listitem [ref=f2e314]
+            - listitem [ref=f2e315]:
+              - link "Participe" [ref=f2e316] [cursor=pointer]:
+                - /url: https://www.gov.br/pt-br/participacao-social/
+            - listitem [ref=f2e317]
+            - listitem [ref=f2e318]:
+              - link "Legislação" [ref=f2e319] [cursor=pointer]:
+                - /url: http://www4.planalto.gov.br/legislacao/
+            - listitem [ref=f2e320]
+            - listitem [ref=f2e321]:
+              - link "Órgãos do Governo" [ref=f2e322] [cursor=pointer]:
+                - /url: http://www.gov.br/pt-br/orgaos-do-governo
+  - generic [ref=f2e324] [cursor=pointer]:
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f2e325]
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f2e326]
+  - generic [ref=f2e328] [cursor=pointer]

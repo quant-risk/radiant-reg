@@ -1,0 +1,379 @@
+- generic [active] [ref=f13e1]:
+  - generic [ref=f13e4]:
+    - generic [ref=f13e5]:
+      - list [ref=f13e7]:
+        - listitem [ref=f13e8]:
+          - link "Ir para o conteúdo 1" [ref=f13e9] [cursor=pointer]:
+            - /url: "#inicioConteudo"
+        - listitem [ref=f13e10]:
+          - link "Ir para o menu 2" [ref=f13e11] [cursor=pointer]:
+            - /url: "#inicioMenu"
+        - listitem [ref=f13e12]:
+          - link "Ir para o rodapé 3" [ref=f13e13] [cursor=pointer]:
+            - /url: "#inicioRodape"
+      - generic [ref=f13e14]:
+        - banner [ref=f13e15]:
+          - generic [ref=f13e16]:
+            - list [ref=f13e19]:
+              - listitem [ref=f13e20]:
+                - link "Acessibilidade" [ref=f13e21] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+              - listitem [ref=f13e22]:
+                - link "Alto Contraste" [ref=f13e23] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f13e24]:
+                - link [ref=f13e25] [cursor=pointer]:
+                  - /url: /en
+                  - emphasis [ref=f13e26]: English
+            - link "Banco Central do Brasil":
+              - /url: /
+              - img "Banco Central do Brasil" [ref=f13e27] [cursor=pointer]
+        - navigation [ref=f13e28]:
+          - list [ref=f13e35]:
+            - listitem [ref=f13e36]:
+              - button "Acesso à<br> informação" [ref=f13e37] [cursor=pointer]:
+                - generic [ref=f13e38]: Acesso à informação
+            - listitem [ref=f13e39]:
+              - button "Política<br> monetária" [ref=f13e40] [cursor=pointer]:
+                - generic [ref=f13e41]: Política monetária
+            - listitem [ref=f13e42]:
+              - button "Estabilidade<br> financeira" [ref=f13e43] [cursor=pointer]:
+                - generic [ref=f13e44]: Estabilidade financeira
+            - listitem [ref=f13e45]:
+              - button "Estatísticas" [ref=f13e46] [cursor=pointer]
+            - listitem [ref=f13e48]:
+              - button "Cédulas e<br> moedas" [ref=f13e49] [cursor=pointer]:
+                - generic [ref=f13e50]: Cédulas e moedas
+            - listitem [ref=f13e51]:
+              - button "Publicações e<br> pesquisa" [ref=f13e52] [cursor=pointer]:
+                - generic [ref=f13e53]: Publicações e pesquisa
+            - listitem [ref=f13e54]:
+              - button "Buscar no site" [ref=f13e55] [cursor=pointer]:
+                - generic [ref=f13e56]: search
+        - navigation "breadcrumb" [ref=f13e330]:
+          - list [ref=f13e331]:
+            - listitem [ref=f13e332]:
+              - link "Home" [ref=f13e333] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f13e334]:
+              - text: ">"
+              - link "Estabilidade financeira" [ref=f13e335] [cursor=pointer]:
+                - /url: /estabilidadefinanceira
+            - listitem [ref=f13e336]:
+              - text: ">"
+              - link "Sistema Financeiro Nacional" [ref=f13e337] [cursor=pointer]:
+                - /url: /estabilidadefinanceira/sfn
+            - listitem [ref=f13e338]:
+              - text: ">"
+              - link "Sistemas e informações ao BC" [ref=f13e339] [cursor=pointer]:
+                - /url: /meubc/servicos%3Faba%3Dtodosservicosinstituicaosupervisionada
+            - listitem [ref=f13e340]: "> Validador XML - Informações técnicas"
+      - main [ref=f13e57]:
+        - generic [ref=f13e342]:
+          - heading "Validador XML - Informações técnicas" [level=1] [ref=f13e343]
+          - generic [ref=f13e344]:
+            - paragraph [ref=f13e345]: O validador XML é um programa de computador que tem como objetivo validar os arquivos XML enviados ao Banco Central do Brasil pelas Instituições Financeiras, Convênios e demais instituições que necessitem prestar informações ao BC, de forma a minimizar a possibilidade de erros no processamento.
+            - paragraph [ref=f13e346]: Baixe o arquivo e leia o manual técnico para mais informações.
+            - strong [ref=f13e348]: Validador XML
+            - table [ref=f13e350]:
+              - rowgroup [ref=f13e351]:
+                - row [ref=f13e352]:
+                  - columnheader "Título" [ref=f13e353]
+                  - columnheader "Data do arquivo" [ref=f13e354]
+                  - columnheader "Arquivo" [ref=f13e355]
+                - row [ref=f13e356]:
+                  - cell "Programa validador" [ref=f13e357]
+                  - cell "22/07/2010" [ref=f13e358]
+                  - cell [ref=f13e360]:
+                    - link "cloud_download ZIP - 2.736KB" [ref=f13e362] [cursor=pointer]:
+                      - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/validador_xml/ValidadorMDR.zip
+                      - generic [ref=f13e363]: cloud_download
+                      - text: ZIP - 2.736KB
+                - row [ref=f13e364]:
+                  - cell "Manual técnico para utilização do programa Validador" [ref=f13e365]
+                  - cell "20/05/2013" [ref=f13e366]
+                  - cell [ref=f13e368]:
+                    - link "cloud_download PDF - 475KB" [ref=f13e370] [cursor=pointer]:
+                      - /url: /content/estabilidadefinanceira/Leiaute_de_documentos/validador_xml/bcValidador_docTecnico.pdf
+                      - generic [ref=f13e371]: cloud_download
+                      - text: PDF - 475KB
+      - button "Vá para o topo" [ref=f13e63] [cursor=pointer]:
+        - generic [aria-hidden] [ref=f13e64]: expand_less
+      - contentinfo [ref=f13e65]:
+        - generic [ref=f13e69]:
+          - generic [ref=f13e70]: Siga o BC
+          - list [ref=f13e71]:
+            - listitem [ref=f13e72]:
+              - link "Instagram oficial do Banco Central do Brasil" [ref=f13e73] [cursor=pointer]:
+                - /url: http://www.instagram.com/bancocentraldobrasil/
+            - listitem [ref=f13e79]:
+              - link "Linkedin oficial do Banco Central do Brasil" [ref=f13e80] [cursor=pointer]:
+                - /url: http://br.linkedin.com/company/banco-central-do-brasil
+            - listitem [ref=f13e85]:
+              - link "X oficial do Banco Central do Brasil" [ref=f13e86] [cursor=pointer]:
+                - /url: http://twitter.com/bancocentralbr
+            - listitem [ref=f13e90]:
+              - link "Canal oficial do Banco Central do Brasil no WhatsApp" [ref=f13e91] [cursor=pointer]:
+                - /url: https://whatsapp.com/channel/0029VaB1KjR6BIEjJMs4HN1O
+            - listitem [ref=f13e96]:
+              - link "Canal oficial do Banco Central do Brasil no YouTube" [ref=f13e97] [cursor=pointer]:
+                - /url: http://www.youtube.com/user/BancoCentralBR
+            - listitem [ref=f13e101]:
+              - link "TikTok oficial do Banco Central do Brasil" [ref=f13e102] [cursor=pointer]:
+                - /url: https://www.tiktok.com/@bancocentraldobrasil
+            - listitem [ref=f13e106]:
+              - link "Facebook oficial do Banco Central do Brasil" [ref=f13e107] [cursor=pointer]:
+                - /url: http://pt-br.facebook.com/bancocentraldobrasil/
+            - listitem [ref=f13e111]:
+              - link "Threads oficial do Banco Central do Brasil" [ref=f13e112] [cursor=pointer]:
+                - /url: https://www.threads.net/@bancocentraldobrasil
+            - listitem [ref=f13e116]:
+              - link "Telegram oficial do Banco Central do Brasil" [ref=f13e117] [cursor=pointer]:
+                - /url: https://t.me/bancocentraloficial
+            - listitem [ref=f13e121]:
+              - link "Flickr oficial do Banco Central do Brasil" [ref=f13e122] [cursor=pointer]:
+                - /url: http://www.flickr.com/photos/134175749@N03/
+            - listitem [ref=f13e127]:
+              - link "Assinar notícias" [ref=f13e128] [cursor=pointer]:
+                - /url: /assinar-noticias
+            - listitem [ref=f13e138]:
+              - link "RSS - Feeds do BC" [ref=f13e139] [cursor=pointer]:
+                - /url: /acessoinformacao/rss
+            - listitem [ref=f13e145]:
+              - link "Calendário do Banco Central do Brasil" [ref=f13e146] [cursor=pointer]:
+                - /url: /acessoinformacao/calendariobc_ics
+        - generic [ref=f13e157]:
+          - generic [ref=f13e158]:
+            - paragraph [ref=f13e159]:
+              - strong [ref=f13e160]:
+                - link "Acesso à informação" [ref=f13e161] [cursor=pointer]:
+                  - /url: /acessoinformacao
+            - list [ref=f13e162]:
+              - listitem [ref=f13e163]:
+                - link "Institucional" [ref=f13e164] [cursor=pointer]:
+                  - /url: /acessoinformacao/institucional
+              - listitem [ref=f13e165]:
+                - link "Ações e programas" [ref=f13e166] [cursor=pointer]:
+                  - /url: /acessoinformacao/acoesprogramas
+              - listitem [ref=f13e167]:
+                - link "Participação social" [ref=f13e168] [cursor=pointer]:
+                  - /url: /acessoinformacao/participacaosocial
+              - listitem [ref=f13e169]:
+                - link "Auditorias" [ref=f13e170] [cursor=pointer]:
+                  - /url: /acessoinformacao/auditorias
+              - listitem [ref=f13e171]:
+                - link "Convênios e Transferências" [ref=f13e172] [cursor=pointer]:
+                  - /url: /acessoinformacao/convenios-e-transferencias
+              - listitem [ref=f13e173]:
+                - link "Receitas e despesas" [ref=f13e174] [cursor=pointer]:
+                  - /url: /acessoinformacao/receitas-e-despesas
+              - listitem [ref=f13e175]:
+                - link "Licitações e Contratos" [ref=f13e176] [cursor=pointer]:
+                  - /url: /acessoinformacao/licitacoes-e-contratos
+              - listitem [ref=f13e177]:
+                - link "Servidores" [ref=f13e178] [cursor=pointer]:
+                  - /url: /acessoinformacao/carreira
+              - listitem [ref=f13e179]:
+                - link "Informações classificadas" [ref=f13e180] [cursor=pointer]:
+                  - /url: /acessoinformacao/informacoesclassificadas
+              - listitem [ref=f13e181]:
+                - link "Serviço de Informações ao Cidadão (SIC)" [ref=f13e182] [cursor=pointer]:
+                  - /url: /acessoinformacao/sic
+              - listitem [ref=f13e183]:
+                - link "Perguntas frequentes" [ref=f13e184] [cursor=pointer]:
+                  - /url: /meubc/faqs
+              - listitem [ref=f13e185]:
+                - link "Dados Abertos" [ref=f13e186] [cursor=pointer]:
+                  - /url: /acessoinformacao/dadosabertos
+              - listitem [ref=f13e187]:
+                - link "Sanções Administrativas" [ref=f13e188] [cursor=pointer]:
+                  - /url: /acessoinformacao/sancoes-administrativas
+              - listitem [ref=f13e189]:
+                - link "Lei Geral de Proteção de Dados Pessoais (LGPD)" [ref=f13e190] [cursor=pointer]:
+                  - /url: /acessoinformacao/lgpd
+              - listitem [ref=f13e191]:
+                - link "Transparência e prestação de contas" [ref=f13e192] [cursor=pointer]:
+                  - /url: /acessoinformacao/transparencia-e-prestacao-de-contas
+          - generic [ref=f13e193]:
+            - paragraph [ref=f13e194]:
+              - strong [ref=f13e195]:
+                - link "Política monetária" [ref=f13e196] [cursor=pointer]:
+                  - /url: /controleinflacao
+            - list [ref=f13e197]:
+              - listitem [ref=f13e198]:
+                - link "Metas para a inflação" [ref=f13e199] [cursor=pointer]:
+                  - /url: /controleinflacao/metainflacao
+              - listitem [ref=f13e200]:
+                - link "O que é inflação" [ref=f13e201] [cursor=pointer]:
+                  - /url: /controleinflacao/oqueinflacao
+              - listitem [ref=f13e202]:
+                - link "Comitê de Política Monetária (Copom)" [ref=f13e203] [cursor=pointer]:
+                  - /url: /controleinflacao/copom
+              - listitem [ref=f13e204]:
+                - link "Comunicados do Copom" [ref=f13e205] [cursor=pointer]:
+                  - /url: /controleinflacao/comunicadoscopom
+              - listitem [ref=f13e206]:
+                - link "Atas do Copom" [ref=f13e207] [cursor=pointer]:
+                  - /url: /publicacoes/atascopom
+              - listitem [ref=f13e208]:
+                - link "Relatório de Política Monetária" [ref=f13e209] [cursor=pointer]:
+                  - /url: /publicacoes/rpm
+              - listitem [ref=f13e210]:
+                - link "Expectativas de mercado" [ref=f13e211] [cursor=pointer]:
+                  - /url: /controleinflacao/expectativasmercado
+          - generic [ref=f13e212]:
+            - paragraph [ref=f13e213]:
+              - strong [ref=f13e214]:
+                - link "Estabilidade financeira" [ref=f13e215] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira
+            - list [ref=f13e216]:
+              - listitem [ref=f13e217]:
+                - link "Normas" [ref=f13e218] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/regulacao
+              - listitem [ref=f13e219]:
+                - link "Supervisão" [ref=f13e220] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/supervisao
+              - listitem [ref=f13e221]:
+                - link "Sistema Financeiro Nacional" [ref=f13e222] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/sfn
+              - listitem [ref=f13e223]:
+                - link "Sistema de Pagamentos Brasileiro (SPB)" [ref=f13e224] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/spb
+              - listitem [ref=f13e225]:
+                - link "Câmbio e capitais internacionais" [ref=f13e226] [cursor=pointer]:
+                  - /url: /estabilidadefinanceira/cambioecapitais
+              - listitem [ref=f13e227]:
+                - link "Comitê de Estabilidade Financeira (Comef)" [ref=f13e228] [cursor=pointer]:
+                  - /url: /acessoinformacao/comef
+              - listitem [ref=f13e229]:
+                - link "Relatório de Estabilidade Financeira" [ref=f13e230] [cursor=pointer]:
+                  - /url: /publicacoes/ref
+          - generic [ref=f13e231]:
+            - paragraph [ref=f13e232]:
+              - strong [ref=f13e233]:
+                - link "Estatísticas" [ref=f13e234] [cursor=pointer]:
+                  - /url: /estatisticas
+            - list [ref=f13e235]:
+              - listitem [ref=f13e236]:
+                - link "Taxas de Juros" [ref=f13e237] [cursor=pointer]:
+                  - /url: /estatisticas/txjuros
+              - listitem [ref=f13e238]:
+                - link "Notas econômico-financeiras" [ref=f13e239] [cursor=pointer]:
+                  - /url: /estatisticas/notaseconomicofinanceiras
+              - listitem [ref=f13e240]:
+                - link "Séries temporais (SGS)" [ref=f13e241] [cursor=pointer]:
+                  - /url: https://www3.bcb.gov.br/sgspub/
+              - listitem [ref=f13e242]:
+                - link "Tabelas especiais" [ref=f13e243] [cursor=pointer]:
+                  - /url: /estatisticas/tabelasespeciais
+              - listitem [ref=f13e244]:
+                - link "Indicadores Econômicos Selecionados" [ref=f13e245] [cursor=pointer]:
+                  - /url: /estatisticas/indicadoresselecionados
+              - listitem [ref=f13e246]:
+                - link "Poupança" [ref=f13e247] [cursor=pointer]:
+                  - /url: /estatisticas/poupanca
+              - listitem [ref=f13e248]:
+                - link "Mais estatísticas" [ref=f13e249] [cursor=pointer]:
+                  - /url: /estatisticas/maisestatisticas
+              - listitem [ref=f13e250]:
+                - link "Calendário de divulgação" [ref=f13e251] [cursor=pointer]:
+                  - /url: /estatisticas/notas_calendario
+          - generic [ref=f13e252]:
+            - paragraph [ref=f13e253]:
+              - strong [ref=f13e254]:
+                - link "Cédulas e moedas" [ref=f13e255] [cursor=pointer]:
+                  - /url: /cedulasemoedas
+            - list [ref=f13e256]:
+              - listitem [ref=f13e257]:
+                - link "Cédulas" [ref=f13e258] [cursor=pointer]:
+                  - /url: /cedulasemoedas/cedulas
+              - listitem [ref=f13e259]:
+                - link "Moedas" [ref=f13e260] [cursor=pointer]:
+                  - /url: /cedulasemoedas/moedas
+              - listitem [ref=f13e261]:
+                - link "Serviços" [ref=f13e262] [cursor=pointer]:
+                  - /url: /cedulasemoedas/servicoscedulasmoedas
+              - listitem [ref=f13e263]:
+                - link "Dinheiro em circulação" [ref=f13e264] [cursor=pointer]:
+                  - /url: https://www3.bcb.gov.br/mec-circulante/
+              - listitem [ref=f13e265]:
+                - link "O caminho do dinheiro" [ref=f13e266] [cursor=pointer]:
+                  - /url: /cedulasemoedas/caminhododinheiro
+          - generic [ref=f13e267]:
+            - paragraph [ref=f13e268]:
+              - strong [ref=f13e269]:
+                - link "Publicações e pesquisa" [ref=f13e270] [cursor=pointer]:
+                  - /url: /publicacoes
+            - list [ref=f13e271]:
+              - listitem [ref=f13e272]:
+                - link "Atas do Copom" [ref=f13e273] [cursor=pointer]:
+                  - /url: /publicacoes/atascopom
+              - listitem [ref=f13e274]:
+                - link "Relatório de Política Monetária" [ref=f13e275] [cursor=pointer]:
+                  - /url: /publicacoes/rpm
+              - listitem [ref=f13e276]:
+                - link "Relatório de Estabilidade Financeira" [ref=f13e277] [cursor=pointer]:
+                  - /url: /publicacoes/ref
+              - listitem [ref=f13e278]:
+                - link "Relatório Integrado do BC" [ref=f13e279] [cursor=pointer]:
+                  - /url: /publicacoes/relatoriointegrado
+              - listitem [ref=f13e280]:
+                - link "Estudos especiais do Banco Central" [ref=f13e281] [cursor=pointer]:
+                  - /url: /publicacoes/estudosespeciais
+              - listitem [ref=f13e282]:
+                - link "Sondagens do BC" [ref=f13e283] [cursor=pointer]:
+                  - /url: /publicacoes/sondagens-do-bc
+              - listitem [ref=f13e284]:
+                - link "Pesquisa no BC" [ref=f13e285] [cursor=pointer]:
+                  - /url: /publicacoes/pesquisa
+              - listitem [ref=f13e286]:
+                - link "Mais publicações" [ref=f13e287] [cursor=pointer]:
+                  - /url: /publicacoes/maispublicacoes
+        - generic [ref=f13e290]:
+          - generic [ref=f13e291]: Garantir a estabilidade de preços, zelar por um sistema financeiro sólido e eficiente, e fomentar o bem-estar econômico da sociedade.
+          - generic [ref=f13e292]:
+            - generic [ref=f13e293]: "Atendimento: 145 (custo de ligação local)"
+            - list [ref=f13e294]:
+              - listitem [ref=f13e295]:
+                - link "Fale conosco" [ref=f13e296] [cursor=pointer]:
+                  - /url: /acessoinformacao/faleconosco
+                - text: "|"
+              - listitem [ref=f13e297]:
+                - link "Política de privacidade" [ref=f13e298] [cursor=pointer]:
+                  - /url: /acessoinformacao/politicaprivacidade
+                - text: "|"
+              - listitem [ref=f13e299]:
+                - link "Política de acessibilidade" [ref=f13e300] [cursor=pointer]:
+                  - /url: /acessoinformacao/politica_acessibilidade
+            - generic [ref=f13e301]:
+              - text: © Banco Central do Brasil -
+              - link "Todos os direitos reservados" [ref=f13e302] [cursor=pointer]:
+                - /url: /acessoinformacao/direitosautorais
+    - generic [ref=f13e304]:
+      - link "Ir para o conteúdo" [ref=f13e306] [cursor=pointer]:
+        - /url: "#conteudo"
+      - generic [ref=f13e307]:
+        - link "GovBR" [ref=f13e308] [cursor=pointer]:
+          - /url: https://gov.br/
+        - navigation [ref=f13e309]:
+          - list [ref=f13e310]:
+            - listitem [ref=f13e311]
+            - listitem [ref=f13e312]:
+              - link "Acesso à informação" [ref=f13e313] [cursor=pointer]:
+                - /url: http://www.gov.br/acessoainformacao/
+            - listitem [ref=f13e314]
+            - listitem [ref=f13e315]:
+              - link "Participe" [ref=f13e316] [cursor=pointer]:
+                - /url: https://www.gov.br/pt-br/participacao-social/
+            - listitem [ref=f13e317]
+            - listitem [ref=f13e318]:
+              - link "Legislação" [ref=f13e319] [cursor=pointer]:
+                - /url: http://www4.planalto.gov.br/legislacao/
+            - listitem [ref=f13e320]
+            - listitem [ref=f13e321]:
+              - link "Órgãos do Governo" [ref=f13e322] [cursor=pointer]:
+                - /url: http://www.gov.br/pt-br/orgaos-do-governo
+  - generic [ref=f13e324] [cursor=pointer]:
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f13e325]
+    - img "Conteúdo acessível em Libras usando o VLibras Widget com opções dos Avatares Ícaro, Hosana ou Guga." [ref=f13e326]
+  - generic [ref=f13e328] [cursor=pointer]

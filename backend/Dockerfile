@@ -1,18 +1,18 @@
-// Multi-stage Dockerfile for Radiant Norma backend.
-//
-// Validação 21 (F21.7): docker-compose.yml referencia este arquivo
-// para os perfis `api` e `worker`. Sem isso, build falha.
-//
-// Build:
-//
-//	docker build -t radiant-norma -f backend/Dockerfile .
-//
-// Run (Postgres primeiro, ver docker-compose.yml):
-//
-//	docker run --rm -p 8080:8080 \
-//	  -e DATABASE_URL="postgres://radiant:radiant@postgres:5432/radiant?sslmode=disable" \
-//	  -e RADIANT_NORMA_ADMIN_TOKEN="..." \
-//	  radiant-norma /app/api
+# Multi-stage Dockerfile for Radiant Norma backend.
+#
+# Validação 21 (F21.7): docker-compose.yml referencia este arquivo
+# para os perfis `api` e `worker`. Sem isso, build falha.
+#
+# Build:
+#
+#	docker build -t radiant-norma -f backend/Dockerfile .
+#
+# Run (Postgres primeiro, ver docker-compose.yml):
+#
+#	docker run --rm -p 8080:8080 \
+#	  -e DATABASE_URL="postgres://radiant:radiant@postgres:5432/radiant?sslmode=disable" \
+#	  -e RADIANT_NORMA_ADMIN_TOKEN="..." \
+#	  radiant-norma /app/api
 
 # ============ Stage 1: build ============
 FROM golang:1.25-alpine AS build
