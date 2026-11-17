@@ -1,0 +1,66 @@
+# Radiant Reg — wedge V1 (Fase 1 da reconstrução Rust)
+# Blueprint: docs/blueprint/20-ARQUITETURA-RUST.md (§3.1 nota "Duas fases")
+# Doutrina: docs/blueprint/00-INDEX.md
+#
+# 4 crates autossuficientes, zero deps do monorepo Go:
+#   reg-core   — Camada 0: Centavos(i128), TaxaDecimal, CnpjIdentifier (IN 729/2026), Ipoc, DataBase, Vigencia
+#   reg-cadoc  — Camada 1: ingestão calamine, generators 3040/2030, BacenValidatorAdapter (ADR-0018)
+#   reg-ledger — Camada 2: SQLite WAL portável, hash-chain, JCS RFC 8785 + Ed25519, mapping_locks (4-olhos)
+#   reg-cli    — Camada 3: CLI determinística, dossiê RC 18, STA-WS (Basic/PSTA300), senhaws
+#
+# Gates (CI + local):
+#   cargo clippy --workspace --all-targets -- -D warnings
+#   cargo test  --workspace
+[workspace]
+resolver = "2"
+members = ["crates/reg-core", "crates/reg-cadoc", "crates/reg-ledger", "crates/reg-cli"]
+
+[workspace.package]
+edition = "2024"
+version = "0.1.0"
+license = "Proprietary"
+authors = ["Fortvna Risk Solutions"]
+
+[workspace.dependencies]
+# --- reg-core (mínimo absoluto) ---
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+
+# --- reg-cadoc ---
+calamine = "0.28"
+quick-xml = "0.37"
+rust_decimal = { version = "1", features = ["serde-with-str"] }
+
+# --- reg-ledger ---
+rusqlite = { version = "0.32", features = ["bundled"] }
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+sha2 = "0.10"
+hex = "0.4"
+
+# --- reg-cli ---
+clap = { version = "4", features = ["derive"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "blocking", "json"] }
+zeroize = "1"
+
+# --- dev ---
+tempfile = "3"
+
+[workspace.lints.rust]
+# Doutrina zero-float (docs/blueprint/20-ARQUITETURA-RUST.md §4.5):
+# gen2030 do v1 calculava concentração em float64 — classe de bug banida.
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+float_arithmetic = "deny"
+float_cmp = "deny"
+cast_precision_loss = "deny"
+unwrap_used = "deny"
+expect_used = "deny"
+# Dispatch exaustivo — o skip silencioso do v1 (applyRegra com 3 rotas + nil)
+# é a classe de bug que este workspace existe para matar.
+wildcard_enum_match_arm = "deny"
+
+[profile.release]
+lto = "thin"
+strip = "symbols"

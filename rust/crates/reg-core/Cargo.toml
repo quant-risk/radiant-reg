@@ -1,0 +1,17 @@
+[package]
+name = "reg-core"
+description = "Camada 0: tipos de domínio regulatório — Centavos(i128), CnpjIdentifier (IN BCB 729/2026), Ipoc, DataBase, Vigencia"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+
+[lints]
+workspace = true

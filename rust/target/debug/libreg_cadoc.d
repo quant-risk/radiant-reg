@@ -1,0 +1,1 @@
+/Users/henrique/Documents/radiant-reg/rust/target/debug/libreg_cadoc.rlib: /Users/henrique/Documents/radiant-reg/rust/crates/reg-cadoc/src/lib.rs /Users/henrique/Documents/radiant-reg/rust/crates/reg-core/src/error.rs /Users/henrique/Documents/radiant-reg/rust/crates/reg-core/src/lib.rs

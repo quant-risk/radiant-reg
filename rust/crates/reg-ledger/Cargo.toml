@@ -1,0 +1,24 @@
+[package]
+name = "reg-ledger"
+description = "Camada 2: ledger SQLite WAL (portável p/ Postgres na Fase 2), hash-chain tamper-evident, JCS RFC 8785 + Ed25519, mapping_locks 4-olhos"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+reg-core = { path = "../reg-core" }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+rusqlite.workspace = true
+ed25519-dalek.workspace = true
+sha2.workspace = true
+hex.workspace = true
+zeroize.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

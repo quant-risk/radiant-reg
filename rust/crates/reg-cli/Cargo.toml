@@ -1,0 +1,30 @@
+[package]
+name = "reg-cli"
+description = "Camada 3: CLI determinística (exit codes 0/1/2/3), dossiê A4 RC 18/2025, STA-WS (Basic preemptivo/PSTA300), senhaws rotation"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "reg-cli"
+path = "src/main.rs"
+
+[dependencies]
+reg-core = { path = "../reg-core" }
+reg-cadoc = { path = "../reg-cadoc" }
+reg-ledger = { path = "../reg-ledger" }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+clap.workspace = true
+reqwest.workspace = true
+zeroize.workspace = true
+sha2.workspace = true
+hex.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

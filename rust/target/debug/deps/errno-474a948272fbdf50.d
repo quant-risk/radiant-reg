@@ -1,0 +1,6 @@
+/Users/henrique/Documents/radiant-reg/rust/target/debug/deps/errno-474a948272fbdf50.d: /Users/henrique/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/errno-0.3.15/src/lib.rs /Users/henrique/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/errno-0.3.15/src/unix.rs
+
+/Users/henrique/Documents/radiant-reg/rust/target/debug/deps/liberrno-474a948272fbdf50.rmeta: /Users/henrique/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/errno-0.3.15/src/lib.rs /Users/henrique/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/errno-0.3.15/src/unix.rs
+
+/Users/henrique/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/errno-0.3.15/src/lib.rs:
+/Users/henrique/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/errno-0.3.15/src/unix.rs:

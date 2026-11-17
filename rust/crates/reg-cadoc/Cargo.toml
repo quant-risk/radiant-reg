@@ -1,0 +1,19 @@
+[package]
+name = "reg-cadoc"
+description = "Camada 1: ingestão estrita (calamine), generators 3040/2030, BacenValidatorAdapter (ADR-0018), dedup blake3"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+reg-core = { path = "../reg-core" }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true
