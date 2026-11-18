@@ -33,9 +33,16 @@ impl DataBase {
     }
 
     /// Parse estrito de "AAAA-MM" — o formato canônico dos atributos `dataBase`.
+    /// Zero-padding obrigatório: "2026-1" é rejeitado (parse e Display são
+    /// simétricos).
     pub fn parse(s: &str) -> Result<Self, RegError> {
         let parts: Vec<&str> = s.split('-').collect();
-        if parts.len() != 2 {
+        if parts.len() != 2
+            || parts[0].len() != 4
+            || parts[1].len() != 2
+            || !parts[0].chars().all(|c| c.is_ascii_digit())
+            || !parts[1].chars().all(|c| c.is_ascii_digit())
+        {
             return Err(RegError::InvalidValue {
                 field: "data-base".into(),
                 reason: format!("esperado AAAA-MM, recebido {s:?}"),
@@ -74,8 +81,17 @@ impl Vigencia {
         Vigencia { from, to: None }
     }
 
-    pub fn entre(from: DataBase, to: DataBase) -> Self {
-        Vigencia { from, to: Some(to) }
+    /// Vigência fechada `[from, to)` — rejeita intervalo invertido/vazio
+    /// (configuração errada nunca cria uma vigência que rejeita tudo
+    /// silenciosamente).
+    pub fn entre(from: DataBase, to: DataBase) -> Result<Self, RegError> {
+        if from >= to {
+            return Err(RegError::InvalidValue {
+                field: "vigência".into(),
+                reason: format!("intervalo invertido ou vazio: [{from}, {to})"),
+            });
+        }
+        Ok(Vigencia { from, to: Some(to) })
     }
 
     /// A data-base está dentro da vigência?
@@ -109,11 +125,28 @@ mod tests {
 
     #[test]
     fn vigencia_intervalo_semiaberto() {
-        let v = Vigencia::entre(db("2026-07"), db("2026-12"));
+        let v = Vigencia::entre(db("2026-07"), db("2026-12")).unwrap();
         assert!(!v.contem(db("2026-06")));
         assert!(v.contem(db("2026-07"))); // from incluso
         assert!(v.contem(db("2026-11")));
         assert!(!v.contem(db("2026-12"))); // to exclusivo
+    }
+
+    /// Achado do revisor: intervalo invertido é erro, não vigência que
+    /// rejeita tudo silenciosamente.
+    #[test]
+    fn vigencia_invertida_eh_erro() {
+        assert!(Vigencia::entre(db("2026-12"), db("2026-07")).is_err());
+        assert!(Vigencia::entre(db("2026-07"), db("2026-07")).is_err());
+    }
+
+    /// Achado do revisor: parse exige zero-padding (simétrico com Display).
+    #[test]
+    fn parse_exige_zero_padding() {
+        assert!(DataBase::parse("2026-1").is_err());
+        assert!(DataBase::parse("26-01").is_err());
+        assert!(DataBase::parse("2026-+1").is_err());
+        assert!(DataBase::parse("2026-01").is_ok());
     }
 
     #[test]

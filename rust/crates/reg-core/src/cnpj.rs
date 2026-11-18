@@ -47,7 +47,23 @@ impl CnpjIdentifier {
                 reason: format!("caractere inválido para formato {formato:?} (IN BCB 729/2026) em {raw:?}"),
             });
         }
+        // DV módulo-11 verificado para o formato numérico completo. O DV do
+        // formato ALFANUMÉRICO (base 36) depende do algoritmo oficial da
+        // IN BCB 729/2026 — pendência DECLARADA via `dv_pendente()`, nunca
+        // skip silencioso.
+        if formato == CnpjFormat::Numerico && len == 14 && !dv_numerico_valido(&s) {
+            return Err(RegError::InvalidValue {
+                field: "cnpj".into(),
+                reason: format!("dígito verificador inválido para {raw:?} (módulo 11)"),
+            });
+        }
         Ok(CnpjIdentifier(s))
+    }
+
+    /// O DV deste identificador ainda não é verificável? (formato alfanumérico
+    /// completo — algoritmo oficial da IN 729/2026 pendente de confirmação).
+    pub fn dv_pendente(&self, data_base: DataBase) -> bool {
+        formato_para(data_base) == CnpjFormat::Alfanumerico && self.is_completo()
     }
 
     /// Raiz (8 primeiros caracteres).
@@ -68,6 +84,47 @@ impl std::fmt::Display for CnpjIdentifier {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(&self.0)
     }
+}
+
+/// DV módulo-11 do CNPJ numérico completo (14 dígitos): pesos 5..2 na 1ª
+/// rodada e 6..2 na 2ª (algoritmo clássico da Receita Federal).
+fn dv_numerico_valido(s: &str) -> bool {
+    let digits: Vec<u8> = s
+        .chars()
+        .filter_map(|c| c.to_digit(10).map(|d| d as u8))
+        .collect();
+    if digits.len() != 14 {
+        return false;
+    }
+    let (body, dv) = digits.split_at(12);
+    let calc = |weights: &[u8; 12]| -> u8 {
+        let sum: usize = body
+            .iter()
+            .zip(weights.iter())
+            .map(|(d, w)| usize::from(*d) * usize::from(*w))
+            .sum();
+        let rest = sum % 11;
+        if rest < 2 {
+            0
+        } else {
+            (11 - rest) as u8
+        }
+    };
+    let d1 = calc(&[5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+    if dv[0] != d1 {
+        return false;
+    }
+    let mut with_d1: Vec<u8> = body.to_vec();
+    with_d1.push(d1);
+    let weights2 = [6usize, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+    let sum: usize = with_d1
+        .iter()
+        .zip(weights2.iter())
+        .map(|(d, w)| usize::from(*d) * *w)
+        .sum();
+    let rest = sum % 11;
+    let d2 = if rest < 2 { 0 } else { (11 - rest) as u8 };
+    dv[1] == d2
 }
 
 /// Corte temporal oficial: a RFB começou a emitir alfanuméricos em jul/2026;
@@ -94,14 +151,40 @@ mod tests {
     fn competencia_antiga_exige_numerico() {
         assert!(CnpjIdentifier::new("12345678", db(2026, 6)).is_ok());
         assert!(CnpjIdentifier::new("123456780001AB", db(2026, 6)).is_err()); // alfa ainda não existe
-        assert!(CnpjIdentifier::new("12345678000190", db(2026, 6)).is_ok());
+        assert!(CnpjIdentifier::new("11222333000181", db(2026, 6)).is_ok()); // DV válido
     }
 
     #[test]
     fn competencia_julho_2026_aceita_alfanumerico() {
         assert!(CnpjIdentifier::new("12ABC34501DE56", db(2026, 7)).is_ok());
-        assert!(CnpjIdentifier::new("12345678000190", db(2026, 7)).is_ok()); // numérico segue válido
+        assert!(CnpjIdentifier::new("11222333000181", db(2026, 7)).is_ok()); // numérico segue válido
         assert!(CnpjIdentifier::new("12aBC345", db(2026, 7)).is_err()); // lowercase rejeitado
+    }
+
+    #[test]
+    fn dv_modulo11_verificado_no_numerico() {
+        // 11.222.333/0001-81 — par clássico válido da RFB
+        assert!(CnpjIdentifier::new("11222333000181", db(2025, 1)).is_ok());
+        // mesmos 12 dígitos com DV trocado → erro com "dígito verificador"
+        let e = CnpjIdentifier::new("11222333000182", db(2025, 1)).unwrap_err();
+        assert!(e.to_string().contains("dígito verificador"), "{e}");
+    }
+
+    #[test]
+    fn dv_alfanumerico_eh_pendencia_declarada() {
+        let c = CnpjIdentifier::new("12ABC34501DE56", db(2026, 7)).unwrap();
+        assert!(c.dv_pendente(db(2026, 7)));
+        let n = CnpjIdentifier::new("11222333000181", db(2025, 1)).unwrap();
+        assert!(!n.dv_pendente(db(2025, 1)));
+    }
+
+    /// Bordas do corte temporal (achado do revisor: só testado indiretamente).
+    #[test]
+    fn formato_para_bordas() {
+        assert_eq!(formato_para(db(2026, 6)), CnpjFormat::Numerico);
+        assert_eq!(formato_para(db(2026, 7)), CnpjFormat::Alfanumerico);
+        assert_eq!(formato_para(db(2025, 12)), CnpjFormat::Numerico);
+        assert_eq!(formato_para(db(2027, 1)), CnpjFormat::Alfanumerico);
     }
 
     #[test]
@@ -112,8 +195,8 @@ mod tests {
 
     #[test]
     fn raiz_eh_os_oito_primeiros() {
-        let c = CnpjIdentifier::new("12345678000190", db(2026, 7)).unwrap();
-        assert_eq!(c.raiz(), "12345678");
+        let c = CnpjIdentifier::new("11222333000181", db(2026, 7)).unwrap();
+        assert_eq!(c.raiz(), "11222333");
         assert!(c.is_completo());
     }
 }

@@ -15,7 +15,9 @@ use clap::Parser;
 )]
 struct Cli {
     /// Rodar sem qualquer acesso de rede (padrão de produção on-perimeter).
-    #[arg(long, default_value_t = true)]
+    /// Desligue com `--offline=false` — a saída da rede é sempre opt-out
+    /// explícito, nunca o contrário.
+    #[arg(long, default_value = "true", action = clap::ArgAction::Set)]
     offline: bool,
     /// Saída em JSON estruturado (para Airflow/Dagster).
     #[arg(long)]
