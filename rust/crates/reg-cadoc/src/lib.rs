@@ -10,3 +10,9 @@
 /// Versão do leiaute alvo, marcada explicitamente — data-base é cidadão de 1ª classe.
 pub const TARGET_LEIAUTE_3040: &str = "doc3040 (IN BCB 729/733/735 de 2026 — re-download S1 pendente)";
 pub const TARGET_LEIAUTE_2030: &str = "documentoDRSAC (IN BCB 694/2025, data-base dez/2026)";
+
+/// Ingestão estrita: calamine → `CanonicalInput` (docs/blueprint/20-ARQUITETURA-RUST.md §3.2).
+pub mod ingest;
+
+/// Golden corpus: loader + runner de paridade (§6 — skip declarado, nunca silêncio).
+pub mod golden;

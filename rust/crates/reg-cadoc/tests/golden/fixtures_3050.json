@@ -1,0 +1,92 @@
+{
+  "cases": [
+    {
+      "id": "3050-TestParseDoc3050_DetectaEncoding-01",
+      "test_name": "TestParseDoc3050_DetectaEncoding",
+      "rule_code": "",
+      "xml": "\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\"\u003e\u003creferencia\u003e\u003c/referencia\u003e\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3050-TestParseDoc3050_DetectaEncoding-02",
+      "test_name": "TestParseDoc3050_DetectaEncoding",
+      "rule_code": "",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\"\u003e\u003creferencia\u003e\u003c/referencia\u003e\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3050-TestParseDoc3050_DetectaBOM-01",
+      "test_name": "TestParseDoc3050_DetectaBOM",
+      "rule_code": "",
+      "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\"\u003e\u003creferencia\u003e\u003c/referencia\u003e\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3050-TestH19_ApenasUmaReferencia_RealImplementation-01",
+      "test_name": "TestH19_ApenasUmaReferencia_RealImplementation",
+      "rule_code": "3050-H19",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\"\u003e\u003creferencia\u003e\u003c/referencia\u003e\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3050-TestH19_ApenasUmaReferencia_RealImplementation-02",
+      "test_name": "TestH19_ApenasUmaReferencia_RealImplementation",
+      "rule_code": "3050-H19",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\"\u003e\u003creferencia/\u003e\u003creferencia/\u003e\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3050-TestH20_ApenasUmDiarioUmMensal_RealImplementation-01",
+      "test_name": "TestH20_ApenasUmDiarioUmMensal_RealImplementation",
+      "rule_code": "3050-H20",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\"\u003e\u003creferencia\u003e\u003cdiario/\u003e\u003cmensal/\u003e\u003c/referencia\u003e\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3050-TestH20_ApenasUmDiarioUmMensal_RealImplementation-02",
+      "test_name": "TestH20_ApenasUmDiarioUmMensal_RealImplementation",
+      "rule_code": "3050-H20",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\"\u003e\u003creferencia\u003e\u003cdiario/\u003e\u003cdiario/\u003e\u003c/referencia\u003e\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3050-TestH20_ApenasUmDiarioUmMensal_RealImplementation-03",
+      "test_name": "TestH20_ApenasUmDiarioUmMensal_RealImplementation",
+      "rule_code": "3050-H20",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\"\u003e\u003creferencia\u003e\u003cdiario/\u003e\u003cmensal/\u003e\u003cmensal/\u003e\u003c/referencia\u003e\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3050-TestParseDoc3050_Smoke-01",
+      "test_name": "TestParseDoc3050_Smoke",
+      "rule_code": "",
+      "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\n\u003cDocTXB cnpjInstituicao=\"12345678\" dataBase=\"2024-12-31\" indRemessa=\"I\" nmContato=\"João\" telContato=\"11999998888\"\u003e\n  \u003creferencia\u003e\n    \u003cdiario\u003e\n      \u003ccrdLivre\u003e\n        \u003cpesJuridica\u003e\n          \u003cpre\u003e\n            \u003ccapGirPrzAte365 txMedJuros=\"15.5\" txMedEncFiscais=\"0.5\" txMedEncOperacionais=\"1.0\" txMinima=\"10.0\" txMaxima=\"25.0\" vlrConcessoes=\"1000000.00\" przDecMedConcessoes=\"180\" qtdNovContratos=\"50\" sldCarAtiva=\"5000000.00\" sldCedido=\"100000.00\" sldAdquirido=\"50000.00\"/\u003e\n          \u003c/pre\u003e\n        \u003c/pesJuridica\u003e\n      \u003c/crdLivre\u003e\n    \u003c/diario\u003e\n    \u003cmensal\u003e\n      \u003ccrdLivre\u003e\n        \u003cpesJuridica\u003e\n          \u003cpre\u003e\n            \u003ccapGirPrzAte365 sldCarAtiva=\"5000000.00\" sldCedido=\"100000.00\" sldAdquirido=\"50000.00\" sldBaiPrejuizo=\"200000.00\" sldCarAte14=\"3000000.00\" sldCarAte60=\"1500000.00\" sldCarAte90=\"400000.00\" sldCarMaior90=\"100000.00\" qtdConAte14=\"30\" qtdConAte60=\"15\" qtdConAte90=\"4\" qtdConMaior90=\"1\" przMedCarteira=\"120\"/\u003e\n          \u003c/pre\u003e\n        \u003c/pesJuridica\u003e\n      \u003c/crdLivre\u003e\n    \u003c/mensal\u003e\n  \u003c/referencia\u003e\n\u003c/DocTXB\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    }
+  ],
+  "counts": {
+    "cases": 9,
+    "tests": 5
+  },
+  "extraction_coverage": "5 de 308 funções Test cobertas",
+  "generated_at": "2026-11-18T01:29:20Z",
+  "source_commit": "b0f4bb178ca56bd4bfd6751d484675ae2dba1163"
+}

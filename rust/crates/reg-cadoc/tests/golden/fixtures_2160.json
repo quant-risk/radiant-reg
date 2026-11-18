@@ -1,0 +1,20 @@
+{
+  "cases": [
+    {
+      "id": "2160-TestSprint51_ParseDocDRL-01",
+      "test_name": "TestSprint51_ParseDocDRL",
+      "rule_code": "",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDocDRL cnpj=\"12345678\" dataBase=\"2024-12-31\"\u003e\n  \u003cHQLA valor=\"1000.00\"/\u003e\n  \u003cOutflows valor=\"500.00\"/\u003e\n  \u003cInflows valor=\"200.00\"/\u003e\n  \u003cLCRRatio valor=\"333.33\"/\u003e\n  \u003cConta codigoConta=\"10.1\" valor=\"100.00\"/\u003e\n  \u003cConta codigoConta=\"10.3.1\" valor=\"500.00\"/\u003e\n  \u003cConta codigoConta=\"20.1\" valor=\"200.00\"/\u003e\n  \u003cCenario id=\"1\"\u003e\n    \u003cHQLA valor=\"900.00\"/\u003e\n    \u003cOutflows valor=\"550.00\"/\u003e\n    \u003cInflows valor=\"180.00\"/\u003e\n    \u003cLCRRatio valor=\"243.24\"/\u003e\n  \u003c/Cenario\u003e\n  \u003cCenario id=\"2\"\u003e\n    \u003cHQLA valor=\"800.00\"/\u003e\n    \u003cOutflows valor=\"600.00\"/\u003e\n    \u003cInflows valor=\"150.00\"/\u003e\n    \u003cLCRRatio valor=\"177.78\"/\u003e\n  \u003c/Cenario\u003e\n\u003c/DocDRL\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    }
+  ],
+  "counts": {
+    "cases": 1,
+    "tests": 1
+  },
+  "extraction_coverage": "1 de 308 funções Test cobertas",
+  "generated_at": "2026-11-18T01:29:20Z",
+  "source_commit": "b0f4bb178ca56bd4bfd6751d484675ae2dba1163"
+}

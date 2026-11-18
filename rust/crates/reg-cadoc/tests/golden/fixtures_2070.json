@@ -1,0 +1,38 @@
+{
+  "cases": [
+    {
+      "id": "2070-TestSprint39_ParseDocDRM-01",
+      "test_name": "TestSprint39_ParseDocDRM",
+      "rule_code": "",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDocDRM cnpj=\"12345678\" dataBase=\"2024-12-31\"\u003e\n  \u003cRWAJUR1 valor=\"100.00\"/\u003e\n  \u003cRWAJUR2 valor=\"50.00\"/\u003e\n  \u003cRWAJUR3 valor=\"30.00\"/\u003e\n  \u003cRWAJUR4 valor=\"20.00\"/\u003e\n  \u003cVaR valor=\"40.00\"/\u003e\n  \u003csVaR valor=\"60.00\"/\u003e\n  \u003cRWACOM valor=\"80.00\"/\u003e\n  \u003cPosicao codigo=\"161000\" moeda=\"USD\" valor=\"100.00\"/\u003e\n  \u003cPosicao codigo=\"181000\" moeda=\"USD\" valor=\"50.00\"/\u003e\n\u003c/DocDRM\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "2070-TestSprint39_ParseDocDLO-01",
+      "test_name": "TestSprint39_ParseDocDLO",
+      "rule_code": "",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDocDLO cnpj=\"12345678\" dataBase=\"2024-12-31\"\u003e\n  \u003cConta770 valor=\"1000.00\"/\u003e\n  \u003cLimiteTotal valor=\"5000.00\"/\u003e\n  \u003cPatrimonio valor=\"3000.00\"/\u003e\n\u003c/DocDLO\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "2070-TestParseDoc2070_Smoke-01",
+      "test_name": "TestParseDoc2070_Smoke",
+      "rule_code": "",
+      "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\n\u003cDocDDR cnpj=\"12345678\" dataBase=\"2024-12-31\" indRemessa=\"I\" nmContato=\"João\" telContato=\"11999998888\"\u003e\n  \u003cDDR codigo=\"161000\" moeda=\"USD\" valor=\"1000.00\"/\u003e\n  \u003cDDR codigo=\"181000\" moeda=\"USD\" valor=\"500.00\"/\u003e\n\u003c/DocDDR\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    }
+  ],
+  "counts": {
+    "cases": 3,
+    "tests": 3
+  },
+  "extraction_coverage": "3 de 308 funções Test cobertas",
+  "generated_at": "2026-11-18T01:29:20Z",
+  "source_commit": "b0f4bb178ca56bd4bfd6751d484675ae2dba1163"
+}

@@ -1,0 +1,241 @@
+{
+  "cases": [
+    {
+      "id": "3040-TestS04_CreditoALiberar_Zero-01",
+      "test_name": "TestS04_CreditoALiberar_Zero",
+      "rule_code": "S04",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestS04_CreditoALiberar_Preenchido-01",
+      "test_name": "TestS04_CreditoALiberar_Preenchido",
+      "rule_code": "S04",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"1\" QtdCli=\"1\"\u003e\n    \u003cVenc v110=\"100\" v120=\"0\" v150=\"500\" v160=\"0\" v165=\"0\"/\u003e\n  \u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "substring",
+      "substring": "0213"
+    },
+    {
+      "id": "3040-TestS04_CreditoALiberar_OutrasModalidades-01",
+      "test_name": "TestS04_CreditoALiberar_OutrasModalidades",
+      "rule_code": "S04",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestS04_ParseNumVariations-01",
+      "test_name": "TestS04_ParseNumVariations",
+      "rule_code": "S04",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"1\" QtdCli=\"1\"\u003e\n    \u003cVenc v110=\"100\" v120=\"0\" v150=\"",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3040-TestF02_Datas_Validas-01",
+      "test_name": "TestF02_Datas_Validas",
+      "rule_code": "F02",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestF02_Datas_Invalidas-01",
+      "test_name": "TestF02_Datas_Invalidas",
+      "rule_code": "F02",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB06_Remessa_Valida-01",
+      "test_name": "TestB06_Remessa_Valida",
+      "rule_code": "B06",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"0\"\u003e\u003c/Doc3040\u003e",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB06_Remessa_Invalida-01",
+      "test_name": "TestB06_Remessa_Invalida",
+      "rule_code": "B06",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"0\" Parte=\"1\" TpArq=\"F\" TotalCli=\"0\"\u003e\u003c/Doc3040\u003e",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB06_Remessa_MalFormada-01",
+      "test_name": "TestB06_Remessa_MalFormada",
+      "rule_code": "B06",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"abc\" Parte=\"1\" TpArq=\"F\" TotalCli=\"0\"\u003e\u003c/Doc3040\u003e",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestC01_PJ_QtdCliZero-01",
+      "test_name": "TestC01_PJ_QtdCliZero",
+      "rule_code": "C01",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"0\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"2\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"5\" QtdCli=\"0\"\u003e\u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestC01_PJ_QtdCliValido-01",
+      "test_name": "TestC01_PJ_QtdCliValido",
+      "rule_code": "C01",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"5\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"2\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"5\" QtdCli=\"5\"\u003e\u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestC01_PF_Skip-01",
+      "test_name": "TestC01_PF_Skip",
+      "rule_code": "C01",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"0\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"5\" QtdCli=\"0\"\u003e\u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3040-TestS01_QtdCli1_QtdOp10-01",
+      "test_name": "TestS01_QtdCli1_QtdOp10",
+      "rule_code": "S01",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"10\" QtdCli=\"1\"\u003e\u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestS01_QtdCli1_QtdOp1-01",
+      "test_name": "TestS01_QtdCli1_QtdOp1",
+      "rule_code": "S01",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"1\" QtdCli=\"1\"\u003e\u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestS01_QtdCliMalFormado-01",
+      "test_name": "TestS01_QtdCliMalFormado",
+      "rule_code": "S01",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"5\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"10\" QtdCli=\"abc\"\u003e\u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3040-TestS05_Mod19_VencimentosLimite-01",
+      "test_name": "TestS05_Mod19_VencimentosLimite",
+      "rule_code": "S05",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"19\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"1\" QtdCli=\"1\"\u003e\n    \u003cVenc v110=\"100\" v120=\"0\" v150=\"0\" v160=\"0\" v165=\"0\"/\u003e\n  \u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestS05_Mod19_VencimentoIndevido-01",
+      "test_name": "TestS05_Mod19_VencimentoIndevido",
+      "rule_code": "S05",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"19\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"1\" QtdCli=\"1\"\u003e\n    \u003cVenc v110=\"100\" v120=\"0\" v150=\"500\" v160=\"0\" v165=\"0\"/\u003e\n  \u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestS05_Mod19_DecimalInteiro-01",
+      "test_name": "TestS05_Mod19_DecimalInteiro",
+      "rule_code": "S05",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"19\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"1\" QtdCli=\"1\"\u003e\n    \u003cVenc v110=\"100\" v120=\"0\" v150=\"500.50\" v160=\"0\" v165=\"0\"/\u003e\n  \u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestS05_ModDiferente19_Skip-01",
+      "test_name": "TestS05_ModDiferente19_Skip",
+      "rule_code": "S05",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e\n\u003cDoc3040 DtBase=\"2020-08\" CNPJ=\"12345678\" Remessa=\"1\" Parte=\"1\" TpArq=\"F\" TotalCli=\"1\"\u003e\n  \u003cAgreg NatuOp=\"01\" Mod=\"0213\" OrigemRec=\"0100\" VincME=\"N\" ClassOp=\"A\" FaixaVlr=\"2\" PrzProvm=\"N\" Localiz=\"10058\" TpCli=\"1\" DesempOp=\"01\" ProvConsttd=\"0\" QtdOp=\"1\" QtdCli=\"1\"\u003e\n    \u003cVenc v110=\"100\" v120=\"0\" v150=\"500\" v160=\"0\" v165=\"0\"/\u003e\n  \u003c/Agreg\u003e\n\u003c/Doc3040\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3040-TestB01_ArquivoXMLValido-01",
+      "test_name": "TestB01_ArquivoXMLValido",
+      "rule_code": "B01",
+      "xml": "\u003c?xml version='1.0'?\u003e\u003croot/\u003e",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB04_CodificacaoDeclarada_Aprovado-01",
+      "test_name": "TestB04_CodificacaoDeclarada_Aprovado",
+      "rule_code": "B04",
+      "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003croot/\u003e",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB04_CodificacaoDeclarada_Aprovado-02",
+      "test_name": "TestB04_CodificacaoDeclarada_Aprovado",
+      "rule_code": "B04",
+      "xml": "\u003c?xml version='1.0'?\u003e\u003croot/\u003e",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB04_CodificacaoDeclarada_Aprovado-03",
+      "test_name": "TestB04_CodificacaoDeclarada_Aprovado",
+      "rule_code": "B04",
+      "xml": "\n\u003c?xml version=\"1.0\"?\u003e\n\u003croot/\u003e",
+      "expect": "nil",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB04_CodificacaoDeclarada_Reprovado-01",
+      "test_name": "TestB04_CodificacaoDeclarada_Reprovado",
+      "rule_code": "B04",
+      "xml": "\u003croot/\u003e",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB05_ArquivoNaoVazio_Aprovado-01",
+      "test_name": "TestB05_ArquivoNaoVazio_Aprovado",
+      "rule_code": "B05",
+      "xml": "\u003c?xml version=\"1.0\"?\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3040-TestB05_ArquivoNaoVazio_Aprovado-02",
+      "test_name": "TestB05_ArquivoNaoVazio_Aprovado",
+      "rule_code": "B05",
+      "xml": "\u003c?xml?\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "3040-TestB05_ArquivoNaoVazio_Reprovado-01",
+      "test_name": "TestB05_ArquivoNaoVazio_Reprovado",
+      "rule_code": "B05",
+      "xml": "\u003ca/\u003e",
+      "expect": "substring",
+      "substring": ""
+    },
+    {
+      "id": "3040-TestB05_ArquivoNaoVazio_Reprovado-02",
+      "test_name": "TestB05_ArquivoNaoVazio_Reprovado",
+      "rule_code": "B05",
+      "xml": "\u003c?xml?\u003e\u003ca/\u003e",
+      "expect": "substring",
+      "substring": ""
+    }
+  ],
+  "counts": {
+    "cases": 28,
+    "tests": 24
+  },
+  "extraction_coverage": "24 de 308 funções Test cobertas",
+  "generated_at": "2026-11-18T01:29:20Z",
+  "source_commit": "b0f4bb178ca56bd4bfd6751d484675ae2dba1163"
+}

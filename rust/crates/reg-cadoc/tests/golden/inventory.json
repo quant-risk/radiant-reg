@@ -1,0 +1,3792 @@
+{
+  "rules": [
+    {
+      "code": "DRM-01",
+      "cadoc": "2060",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "DRM-02",
+      "cadoc": "2060",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "DRM-03",
+      "cadoc": "2060",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "DRM-04",
+      "cadoc": "2060",
+      "sheet": "Consistência",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "DRM-05",
+      "cadoc": "2060",
+      "sheet": "Consistência",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "DRM-06",
+      "cadoc": "2060",
+      "sheet": "Consistência",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "DRM-07",
+      "cadoc": "2060",
+      "sheet": "Consistência",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0001",
+      "cadoc": "2061",
+      "sheet": "EstruturaDLO",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0002",
+      "cadoc": "2061",
+      "sheet": "EstruturaDLO",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0003",
+      "cadoc": "2061",
+      "sheet": "EstruturaDLO",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0004",
+      "cadoc": "2061",
+      "sheet": "EstruturaDLO",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0005",
+      "cadoc": "2061",
+      "sheet": "EstruturaDLO",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "2061-ELIM0006",
+      "cadoc": "2061",
+      "sheet": "EstruturaDLO",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "2061-ELIM0007",
+      "cadoc": "2061",
+      "sheet": "ParametrosDLO",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "2061-ELIM0008",
+      "cadoc": "2061",
+      "sheet": "ParametrosDLO",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "2061-ELIM0009",
+      "cadoc": "2061",
+      "sheet": "ContasCOSIF",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0010",
+      "cadoc": "2061",
+      "sheet": "ElementosCOSIF",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0013",
+      "cadoc": "2061",
+      "sheet": "ContasCOSIF",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0015",
+      "cadoc": "2061",
+      "sheet": "ContasCOSIF",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0055",
+      "cadoc": "2061",
+      "sheet": "ContasCOSIF",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0063",
+      "cadoc": "2061",
+      "sheet": "ContasCOSIF",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "2061-ELIM0208",
+      "cadoc": "2061",
+      "sheet": "RWAOPAD",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0346",
+      "cadoc": "2061",
+      "sheet": "RWACPAD",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0405",
+      "cadoc": "2061",
+      "sheet": "RWACAM",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0406",
+      "cadoc": "2061",
+      "sheet": "RWACAM",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0407",
+      "cadoc": "2061",
+      "sheet": "RWACAM",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0408",
+      "cadoc": "2061",
+      "sheet": "RWACAM",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0451",
+      "cadoc": "2061",
+      "sheet": "RWACPAD",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0522",
+      "cadoc": "2061",
+      "sheet": "ContasCOSIF",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0538",
+      "cadoc": "2061",
+      "sheet": "RWAOPAD",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2061-ELIM0585",
+      "cadoc": "2061",
+      "sheet": "RWAOPAD",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "DLI-01",
+      "cadoc": "2062",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-02",
+      "cadoc": "2062",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-03",
+      "cadoc": "2062",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-04",
+      "cadoc": "2062",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-05",
+      "cadoc": "2062",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-06",
+      "cadoc": "2062",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-07",
+      "cadoc": "2062",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "DLI-08",
+      "cadoc": "2062",
+      "sheet": "Estrutura",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-09",
+      "cadoc": "2062",
+      "sheet": "ConsistênciaPLA",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-10",
+      "cadoc": "2062",
+      "sheet": "ConsistênciaPLA",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-11",
+      "cadoc": "2062",
+      "sheet": "ConsistênciaCapital",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-12",
+      "cadoc": "2062",
+      "sheet": "ConsistênciaCapital",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-13",
+      "cadoc": "2062",
+      "sheet": "LimitesPartesRelacionadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-14",
+      "cadoc": "2062",
+      "sheet": "LimitesPartesRelacionadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-15",
+      "cadoc": "2062",
+      "sheet": "LimitesPartesRelacionadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-16",
+      "cadoc": "2062",
+      "sheet": "LimitesTVM",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-17",
+      "cadoc": "2062",
+      "sheet": "LimitesSCM",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "DLI-18",
+      "cadoc": "2062",
+      "sheet": "LimitesCooperativas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "2070-4678",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2070-4679",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2070-4680",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2070-4681",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2070-4682",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2070-4684",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2070-4685",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2070-4686",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2070-4693",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2070-4751",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "orphan"
+    },
+    {
+      "code": "2070-4763",
+      "cadoc": "2070",
+      "sheet": "RequerimentoCapital",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "2160-LCR01",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR02",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR03",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR04",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR05",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR06",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR07",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR08",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR09",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR10",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2160-LCR11",
+      "cadoc": "2160",
+      "sheet": "LCR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR01",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR02",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR03",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR04",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR05",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR06",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR07",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR08",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR09",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "2170-NSFR10",
+      "cadoc": "2170",
+      "sheet": "NSFR",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "A01",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A02",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A03",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A04",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A05",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A06",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A07",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A09",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A10",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A11",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A12",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A13",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A14",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A15",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A16",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A17",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A18",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A19",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A20",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A21",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A22",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A23",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A24",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A25",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A26",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A27",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "A28",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A29",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "A30",
+      "cadoc": "3040",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "B01",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "B02",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "B03",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "B04",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B05",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B06",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B07",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B08",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "B09",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "B10",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "B11",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "B12",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "B13",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "B14",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "B15",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "B16",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "B17",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B18",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B19",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B20",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "B21",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B22",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B23",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B24",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "B25",
+      "cadoc": "3040",
+      "sheet": "Básicas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C01",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C02",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C03",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C04",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "C05",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C06",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C07",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C08",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C09",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C10",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C11",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C13",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C14",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C16",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C17",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C18",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C19",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C20",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C21",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C22",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C23",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C24",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C25",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C26",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C27",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C28",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C29",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C30",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C31",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C32",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C33",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C34",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C35",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C36",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C37",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C38",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C39",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C40",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C41",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C42",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C43",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C44",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C45",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C46",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C47",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C48",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C49",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C50",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C51",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C52",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C54",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C55",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C56",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C57",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C58",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C59",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C60",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C61",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C62",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C63",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C64",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C65",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C66",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C67",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C68",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C69",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C70",
+      "cadoc": "3040",
+      "sheet": "Campos Obrigatórios",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C71",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C72",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C73",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C74",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C75",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C76",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C77",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C78",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C79",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "C80",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C81",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C82",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C83",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C84",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "C85",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C86",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "C87",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C88",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C89",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "C90",
+      "cadoc": "3040",
+      "sheet": "Campos Opcionais",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F01",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "F02",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F03",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "F04",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F05",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "F06",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F07",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F08",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F09",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F10",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F11",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F12",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "F13",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "F14",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "F15",
+      "cadoc": "3040",
+      "sheet": "Formato",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "H01",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "H02",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "H03",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "H04",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "H05",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "H06",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "H07",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "H08",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "H09",
+      "cadoc": "3040",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "I01",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I02",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I03",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I04",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I05",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I06",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I07",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I08",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I09",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "I10",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I11",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "I12",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "I13",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "I14",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "I15",
+      "cadoc": "3040",
+      "sheet": "Individualizadas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "N01",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "N02",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "N03",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "N04",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "N05",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "N06",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "N07",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "N08",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "N09",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "N10",
+      "cadoc": "3040",
+      "sheet": "Negócio",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S01",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S02",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S03",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S04",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S05",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S06",
+      "cadoc": "3040",
+      "sheet": "Semânticas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S07",
+      "cadoc": "3040",
+      "sheet": "Semânticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S08",
+      "cadoc": "3040",
+      "sheet": "Semânticas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S09",
+      "cadoc": "3040",
+      "sheet": "Semânticas",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "S10",
+      "cadoc": "3040",
+      "sheet": "Semânticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S12",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "S13",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S14",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S15",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S17",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S19",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S20",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S21",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S22",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S25",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S26",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "S33",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "S34",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "S41",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S42",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S43",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S44",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "S45",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S46",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S69",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S70",
+      "cadoc": "3040",
+      "sheet": "Sistemáticas",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "S71",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S72",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S73",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S74",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S75",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S76",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S77",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S78",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S79",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "I",
+      "class": "wired"
+    },
+    {
+      "code": "S80",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S81",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S82",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S83",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S84",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S85",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S86",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "S87",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "S88",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S89",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "S90",
+      "cadoc": "3040",
+      "sheet": "Semântica",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "SUB01",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "SUB02",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "SUB03",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "SUB04",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "SUB05",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "SUB06",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "SUB07",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "SUB08",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "SUB09",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "SUB10",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "SUB11",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "SUB12",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "SUB13",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "SUB14",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "SUB15",
+      "cadoc": "3040",
+      "sheet": "Substituição Parcial",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X01",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X02",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "X03",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X04",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X05",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X06",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X07",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X08",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X09",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "X10",
+      "cadoc": "3040",
+      "sheet": "Cross-doc",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "XD-DLI-01",
+      "cadoc": "3040",
+      "sheet": "Cross-doc-DLI",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "XD-DLI-02",
+      "cadoc": "3040",
+      "sheet": "Cross-doc-DLI",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "XD-DLI-03",
+      "cadoc": "3040",
+      "sheet": "Cross-doc-DLI",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "XD-DLI-04",
+      "cadoc": "3040",
+      "sheet": "Cross-doc-DLI",
+      "severity": "E",
+      "class": "wired"
+    },
+    {
+      "code": "XD-DLI-05",
+      "cadoc": "3040",
+      "sheet": "Cross-doc-DLI",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "XD-DLI-06",
+      "cadoc": "3040",
+      "sheet": "Cross-doc-DLI",
+      "severity": "A",
+      "class": "wired"
+    },
+    {
+      "code": "T01",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T02",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T03",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T04",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T05",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T06",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T07",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T08",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "T11",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T12",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T13",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T14",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T15",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T16",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T17",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "T18",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "T19",
+      "cadoc": "3044",
+      "sheet": "",
+      "severity": "E",
+      "class": "stub"
+    },
+    {
+      "code": "3050-A01",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A02",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A03",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A04",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A05",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A06",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A07",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A08",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A09",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A10",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A11",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A12",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A13",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-A14",
+      "cadoc": "3050",
+      "sheet": "Agregadas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H10",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H11",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H12",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H13",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H14",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H15",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H16",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H17",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H18",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H19",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H20",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H21",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H22",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H23",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "3050-H24",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "3050-H25",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-H26",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "3050-H27",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-H28",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-H29",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "3050-H30",
+      "cadoc": "3050",
+      "sheet": "Header",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I01",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I02",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I03",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I04",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I05",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I06",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I07",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I08",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I09",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I10",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I11",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I12",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I13",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I14",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I15",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I16",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I17",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I18",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I19",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I20",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I21",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I22",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I23",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I24",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I25",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I26",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I27",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I28",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I29",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I30",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I31",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I32",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I33",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I34",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I35",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I36",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I37",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I38",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I39",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I40",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I41",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I42",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I43",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I44",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I45",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I46",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I47",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I48",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I49",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-I50",
+      "cadoc": "3050",
+      "sheet": "Individuais",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S01",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S02",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S03",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S04",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S05",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S06",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S07",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S08",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S09",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S10",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S11",
+      "cadoc": "3050",
+      "sheet": "Stubs",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S12",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S13",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S14",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S15",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S16",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S17",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S18",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S19",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S20",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S21",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S22",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S23",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S24",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S25",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S26",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S27",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S28",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S29",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "E",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S30",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S31",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S32",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S33",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S34",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "orphan"
+    },
+    {
+      "code": "3050-S36",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S38",
+      "cadoc": "3050",
+      "sheet": "Sistemáticas",
+      "severity": "A",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S39",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S40",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S41",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S42",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S43",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S44",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S45",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S46",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S47",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S48",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S49",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S50",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S51",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S52",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S53",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S54",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S55",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S56",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S57",
+      "cadoc": "3050",
+      "sheet": "Periodicidade",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S58",
+      "cadoc": "3050",
+      "sheet": "Periodicidade",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S59",
+      "cadoc": "3050",
+      "sheet": "Periodicidade",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S60",
+      "cadoc": "3050",
+      "sheet": "Periodicidade",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S61",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S62",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S63",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S64",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S65",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S66",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S67",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S68",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S69",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S70",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S71",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S72",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S73",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S74",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S75",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S76",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S77",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S78",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S79",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S80",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S81",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S82",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S83",
+      "cadoc": "3050",
+      "sheet": "Periodicidade",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S84",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S85",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S86",
+      "cadoc": "3050",
+      "sheet": "Periodicidade",
+      "severity": "I",
+      "class": "stub"
+    },
+    {
+      "code": "3050-S87",
+      "cadoc": "3050",
+      "sheet": "Matriz",
+      "severity": "I",
+      "class": "stub"
+    }
+  ],
+  "counts": {
+    "wired": 240,
+    "orphan": 165,
+    "stub": 135,
+    "total": 540
+  },
+  "generated_at": "2026-11-18T01:29:20Z",
+  "source_commit": "b0f4bb178ca56bd4bfd6751d484675ae2dba1163"
+}

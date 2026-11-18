@@ -272,6 +272,15 @@ func (r *Registry) GetRaw(code string) RawRule {
 	return r.rawRules[code]
 }
 
+// AllRaw retorna todas as regras raw (útil para inventário).
+func (r *Registry) AllRaw() []RawRule {
+	out := make([]RawRule, 0, len(r.rawRules))
+	for _, rule := range r.rawRules {
+		out = append(out, rule)
+	}
+	return out
+}
+
 // Register2070 adiciona uma regra tipada para CADOC 2070 (DDR).
 //
 // Sprint 35 Fase 1 — DT-36: interface paralela Rule2070.

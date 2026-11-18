@@ -1,0 +1,38 @@
+{
+  "cases": [
+    {
+      "id": "2060-TestParseDocDRMLeiaute-01",
+      "test_name": "TestParseDocDRMLeiaute",
+      "rule_code": "",
+      "xml": "\u003cDRM\u003e\n\t\t\u003cIdDocto\u003e2060\u003c/IdDocto\u003e\n\t\t\u003cIdDoctoVersao\u003ev01\u003c/IdDoctoVersao\u003e\n\t\t\u003cDataBase\u003e2024-03\u003c/DataBase\u003e\n\t\t\u003cIdInstFinanc\u003e12345678\u003c/IdInstFinanc\u003e\n\t\t\u003cTipoArq\u003eI\u003c/TipoArq\u003e\n\t\t\u003cNomeContato\u003eJoão Silva\u003c/NomeContato\u003e\n\t\t\u003cFoneContato\u003e1199999999\u003c/FoneContato\u003e\n\t\t\u003cAtivo\u003e\n\t\t\t\u003cItemCarteira Item=\"001\" FatorRisco=\"JM1\" LocalRegistro=\"01\" CarteiraNegoc=\"01\"\u003e\n\t\t\t\t\u003cFluxoVertice CodVertice=\"01\" ValorAlocado=\"1000.00\" ValorMaM=\"950.00\"/\u003e\n\t\t\t\u003c/ItemCarteira\u003e\n\t\t\u003c/Ativo\u003e\n\t\u003c/DRM\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "2060-TestParseDocDRMLeiauteDerivativos-01",
+      "test_name": "TestParseDocDRMLeiauteDerivativos",
+      "rule_code": "",
+      "xml": "\u003cDRM\u003e\n\t\t\u003cIdDocto\u003e2060\u003c/IdDocto\u003e\n\t\t\u003cDataBase\u003e2024-03\u003c/DataBase\u003e\n\t\t\u003cIdInstFinanc\u003e12345678\u003c/IdInstFinanc\u003e\n\t\t\u003cTipoArq\u003eI\u003c/TipoArq\u003e\n\t\t\u003cDerivativo\u003e\n\t\t\t\u003cItemCarteira Item=\"001\" IdPosicao=\"C\" FatorRisco=\"JT1\" LocalRegistro=\"01\" CarteiraNegoc=\"01\"\u003e\n\t\t\t\t\u003cFluxoVertice CodVertice=\"03\" ValorAlocado=\"500.00\" ValorMaM=\"490.00\"/\u003e\n\t\t\t\u003c/ItemCarteira\u003e\n\t\t\u003c/Derivativo\u003e\n\t\u003c/DRM\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    },
+    {
+      "id": "2060-TestParseDocDRMLeiauteAtividadeFinanceira-01",
+      "test_name": "TestParseDocDRMLeiauteAtividadeFinanceira",
+      "rule_code": "",
+      "xml": "\u003cDRM\u003e\n\t\t\u003cIdDocto\u003e2060\u003c/IdDocto\u003e\n\t\t\u003cDataBase\u003e2024-03\u003c/DataBase\u003e\n\t\t\u003cIdInstFinanc\u003e12345678\u003c/IdInstFinanc\u003e\n\t\t\u003cTipoArq\u003eI\u003c/TipoArq\u003e\n\t\t\u003cAtividadeFinanceira\u003e\n\t\t\t\u003cItemCarteira Item=\"AEC\" IdPosicao=\"C\" FatorRisco=\"JM1\"\u003e\n\t\t\t\t\u003cFluxoVertice CodVertice=\"05\" ValorAlocado=\"200.00\"/\u003e\n\t\t\t\u003c/ItemCarteira\u003e\n\t\t\u003c/AtividadeFinanceira\u003e\n\t\u003c/DRM\u003e",
+      "expect": "nil",
+      "substring": "",
+      "note": "sem assert de erro detectado estaticamente"
+    }
+  ],
+  "counts": {
+    "cases": 3,
+    "tests": 3
+  },
+  "extraction_coverage": "3 de 308 funções Test cobertas",
+  "generated_at": "2026-11-18T01:29:20Z",
+  "source_commit": "b0f4bb178ca56bd4bfd6751d484675ae2dba1163"
+}

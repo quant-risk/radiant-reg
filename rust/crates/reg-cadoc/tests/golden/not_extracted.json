@@ -1,0 +1,1357 @@
+{
+  "not_extracted": [
+    {
+      "test_name": "TestSprint39_ValidarBasicos",
+      "file": "2070_crossdoc_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint39_CrossDocRegras",
+      "file": "2070_crossdoc_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint39_V70_CrossDocReais",
+      "file": "2070_crossdoc_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestC4693_PatrimonioLiquidoExterior_Real",
+      "file": "2070_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC4751_ChavesDuplicadas_Real",
+      "file": "2070_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC4678_C4763_CrossDocStubs",
+      "file": "2070_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestParseDoc2070_DocumentoVazio",
+      "file": "2070_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestBuiltin2070_TotalRulesIs11",
+      "file": "2070_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestA01_ClassOpProvisao",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA02_ClassOpVencSemPrazo",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA03_ClassOpVencComPrazo",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA04_MinimoVencimento",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA05_NatuOpLocaliz",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA06_DesempOpVenc",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA07_AgregadoDuplicado",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA09_FaixaVlrMedia",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA10_QtdOpMaiorQtdCli",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA11A12_FaixaAltVencMedio",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA13_RiscoMedioMin",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA14_LocalizExterior",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA15_AgregadoDuplicadoCompleto",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestRegistry_Agregadas",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestClassOpInA01Range",
+      "file": "3040_agregadas_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestF06_ReusaClassOpInA01Range",
+      "file": "3040_agregadas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestB16_TotalizadoresCoerentes_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestB16_TotalizadoresCoerentes_Fail",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestB17_DtBaseValido_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestB17_DtBaseValido_BadMonth",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestB17_DtBaseValido_BadFormat",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestB19_EmailValido_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestB19_EmailValido_Invalid",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestF06_ClassOpValido_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestF06_ClassOpValido_Invalid",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestF07_Modalidade_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestF07_Modalidade_Invalid",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestF09_UFLocaliz_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestF09_UFLocaliz_Invalid",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC06_ProvConsttdObrigatorio_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC06_ProvConsttdObrigatorio_Fail",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS07_Mod0213_AltoRisco_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS07_Mod0213_AltoRisco_Fail",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS09_SomaVencimentos_Happy",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS09_SomaVencimentos_Diverge",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestRegrasEmChain_NoPanic",
+      "file": "3040_expanded_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC31_FaturamentoObrigatorio",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC32_PercIndexador",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC33_StubPassThrough",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC34_C37_C39_C40_PorInf",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC35_Inf1201Obrigatorio",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC36_IdentCedente",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC38_StubPassThrough",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC51_C52_C54_C55_PorInf",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS21_Mod15SemVenc310",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS22_Mod1511NaoPF",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS25_CNPJCabecalhoDiferente",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS26_S33_S34_S44_S70_Stubs",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS41_IdentCNPJ8Digitos",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS42_CedenteIgualCabecalho",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS43_CedenteIgualCliente",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS45_IdentCPFouCNPJ",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS46_CdFormatoData",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS69_ClassOpHHProvZero",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestRegistry_Fase4",
+      "file": "3040_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC11_DtVencObrigatoria",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestC13_C14_C16_C17_C18_C19_C20_PorInf",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS13_GarantidorNaoCliente",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS14_DtVencMaiorDtContr",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI01_ClassOpProvisaoIndividual",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI02_ClassOpVencIndividual",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI03_CliTpCliUnico",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI04_ContratoModalidadeUnico",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI05_VencimentosUnicos",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI11_StubPassThrough",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH01_TpArqValido",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH02_CNPJRaiz",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH03_TotalCliPositivo",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestRegistry_Fase3",
+      "file": "3040_individuais_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS12_StubPassThrough",
+      "file": "3040_sistematicas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS15_DtContrNaoFutura",
+      "file": "3040_sistematicas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS17_CdTamanhoPorTpCli",
+      "file": "3040_sistematicas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS19_DtBaseMinima",
+      "file": "3040_sistematicas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS20_VencimentosHH",
+      "file": "3040_sistematicas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestRegistry_Fase2Sistematicas",
+      "file": "3040_sistematicas_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestParseDtBaseYM",
+      "file": "3040_sistematicas_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint36_StubsReturnNil",
+      "file": "3040_sprint36_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint36_ReaisDetectamViolacoes",
+      "file": "3040_sprint36_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint36_SeverityCorrectness",
+      "file": "3040_sprint36_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint36_SheetAtribuida",
+      "file": "3040_sprint36_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint37_ReaisDetectamViolacoes",
+      "file": "3040_sprint37_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint37_StubsReturnNil",
+      "file": "3040_sprint37_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint37_Helpers",
+      "file": "3040_sprint37_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint38_ReaisDetectamViolacoes",
+      "file": "3040_sprint38_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint38_StubsReturnNil",
+      "file": "3040_sprint38_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestBuiltin3040_RegistryCompleto",
+      "file": "3040_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestBuiltin3040_Severity",
+      "file": "3040_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestS15_DataBaseValida",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS16_NmContatoLength",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS17_TelContatoFormato",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS18_VlrConcessoesZeroTxJurosZero",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS19_TxJurosZeroVlrConcessoesPos",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS20_TxEncOperZeroVlrConcessoesPos",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS21_PrzDecZeroVlrConcessoesPos",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS22_PrzDecPosVlrConcessoesPos",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS23_PrzMedCondicional",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS25_CNPJNaoZero",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS26_CodigoEncargoTipoCliUnico",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS27_SldBaiPrejuizoNaoNeg",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS28_QtdNovContratosNaoNeg",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI01_CapGirAte365",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI02_CapGirSup365",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI03_CredPesNaoConsignadoSldCar",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI04_CredPesNaoConsignadoVlrConcessoes",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI05_CredPesNaoConsignadoSldAdquirido",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI06_CredPesNaoConsignadoSldCedido",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI07_PrzMedCarteiraBaixo",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI08_PrzMedCarteiraAlto",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI09_PrzDecMedConcessoesBaixo",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI10_PrzDecMedConcessoesAlto",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI11_SldCarAtivaMuitoBaixo",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI12_SldCarAtivaMuitoAlto",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI13_VlrConcessoesMuitoBaixo",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI14_VlrConcessoesMuitoAlto",
+      "file": "3050_fase2_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS24_StubReturnsNil",
+      "file": "3050_fase2_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestBuiltin3050_Fase2TotalRulesIs",
+      "file": "3050_fase2_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestH10_CNPJLength",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH11_CNPJAllDigits",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH12_DataBaseFormatoRigoroso",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH13_IndRemessaCaseSensitive",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH14_NmContatoSemEspacosDuplicados",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH15_TelContatoSemCaracteresResiduais",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI15_DesDuplicatasSldCarNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI16_DesChequesVlrConcessoesNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI17_VendorTxMedJurosNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI18_ComprorPrzDecNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI19_CarCrdSldCarNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI20_CarCrdVlrConcessoesNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI21_TxMedJurosMax100",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI22_TxMedEncOperMax50",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI23_CapGirPrzDecMax5000",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI24_QtdNovContratosNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI25_SldCedidoNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI26_SldAdquiridoNaoNeg",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI27_SldCarAtivaImpoeTxMaxGtMin",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI28_IndRemessaIExigeNovContratos",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS29_DataBaseRangePlausivel",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS30_DiarioPresenteSeModelo1a4",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS31_SubstituicaoSemAnteriorRef_StubReturnsNil",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS32_DocNaoVazio",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS09_DiasUteis_RealImplementation",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS13_UltimoDiaUtil_RealImplementation",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS24_TxJurosAjustadaLeTxJuros_RealImplementation",
+      "file": "3050_fase3_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestIsDiaUtilBACEN",
+      "file": "3050_fase3_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestIsUltimoDiaUtilMes",
+      "file": "3050_fase3_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestBuiltin3050_Fase3TotalRulesIs80",
+      "file": "3050_fase3_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestH16_EncodingUTF8",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH17_SemBOMUTF8",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH18_RaizDocTXB",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH19_ApenasUmaReferencia",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH20_ApenasUmDiarioUmMensal",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS33_DataBaseMax1YearOld",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS34_DataBaseConsistente",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS36_IndRemessaIApenasPrimeiraVez_StubReturnsNil",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS38_DocUnicoPorCNPJDataBase_StubReturnsNil",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI29_AquVeiculosVlrConcNaoNeg",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI30_ArrMerVeiculosVlrConcNaoNeg",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI31_ArrMerOutrosVlrConcNaoNeg",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI32_CapGirTetoRotSldCarNaoNeg",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI33_ChqEspSldCarNaoNeg",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI34_CtgGtaSldCarNaoNeg",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI35_FinancBensVlrConcNaoNeg",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI36_CcbPrzDecNaoNeg",
+      "file": "3050_fase4_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestBuiltin3050_Fase4TotalRulesIs97",
+      "file": "3050_fase4_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestI37_CredLivreVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI38_CredConsignadoVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI39_CredDirecionadoVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI40_ImobResidVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI41_ImobComercVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI42_FinancMicroCredVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI43_FinancInfraVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI44_FinancRuralCusteioVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI45_FinancRuralInvestVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI46_FinancRuralComercVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI47_CoopCentraisVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI48_CoopSingularesVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI49_DescTitulosAdquiridosVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestI50_AntecipacaoFaturasVlrConcNaoNeg",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS39_S70_MatrizStubs",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH25_NmContatoSemControle",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH30_CNPJSemZerosEsquerda",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH21_TxMedJurosMax4Decimals",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH22_VlrConcessoesMax2Decimals",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestH23_H29_StubsReasonable",
+      "file": "3050_fase5_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestBuiltin3050_Fase5TotalRulesIs153",
+      "file": "3050_fase5_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestS12_PrzMedSeSld_RealImplementation",
+      "file": "3050_fase6_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS14_Cruzadas_TxMaxGtTxMin_RealImplementation",
+      "file": "3050_fase6_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS71_S87_MatrizStubsAdicionais",
+      "file": "3050_fase6_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestBuiltin3050_Fase6TotalRulesIs170",
+      "file": "3050_fase6_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestA01_SldCarSomaFaixas",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA02_SldCedidoMenosAdquirido",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA03_SldBaiPrejuizoLeSldCar",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA04_SldCarMaisCedidoVsAdquirido",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA05_CNPJRaiz",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA06_DataBaseFormato",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA07_IndRemessaValido",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA08_NmContatoObrigatorio",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA09_TxMedJurosLimite",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA10_TxMedEncFiscaisLimite",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA11_TxMedEncOperacionaisLimite",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA12_TxMinimaLeMaxima",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA13_PrzDecMedConcessoesNaoNeg",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestA14_PrzMedCarteiraNaoNeg",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestS01_S14_StubsReturnNil",
+      "file": "3050_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestBuiltin3050_TotalRulesIs",
+      "file": "3050_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint43_XD01_CNPJMismatch",
+      "file": "crossdoc_liquidity_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint43_XD02_DataMismatch",
+      "file": "crossdoc_liquidity_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint43_XD03_SaldoDevedorMaiorHQLA",
+      "file": "crossdoc_liquidity_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint43_XD04_InconsistenciaLCRNSFR",
+      "file": "crossdoc_liquidity_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint43_XD05_PagamentosMaiorOutflows",
+      "file": "crossdoc_liquidity_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint43_XD06_ValidIPOC",
+      "file": "crossdoc_liquidity_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint43_XD07_AtrasoConsistente",
+      "file": "crossdoc_liquidity_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint43_XD08_ConcessoesLongoPrazo",
+      "file": "crossdoc_liquidity_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestDLI01CNPJValido",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI02DataBaseValido",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI03TipoEnvioValido",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI04CodigoDocumentoValido",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI05TemConteudo",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI06LimiteCodigoValido",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI08ContaCOSIFValida",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI09PLAContabil",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI10MargemPLA",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDLI13LimitePartesRelacionadas",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSomaPLA",
+      "file": "dli_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSomaCapitalRealizado",
+      "file": "dli_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestXDDLI01CNPJConsistente",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestXDDLI06NSFRxLCRConsistente",
+      "file": "dli_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint51_SomaASF",
+      "file": "dlp_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint51_SomaRSF",
+      "file": "dlp_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint51_CalcularNSFRRatio",
+      "file": "dlp_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint51_NSFRRegras",
+      "file": "dlp_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint51_SomaHQLA",
+      "file": "drl_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint51_SomaOutflows",
+      "file": "drl_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint51_CalcularLCRRatio",
+      "file": "drl_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint51_LCRRegras",
+      "file": "drl_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDRM01HeaderValido",
+      "file": "drm_leiaute_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDRM02ItensObrigatorios",
+      "file": "drm_leiaute_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDRM04ValorMaMRequerido",
+      "file": "drm_leiaute_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDRM05ValorAlocadoPositivo",
+      "file": "drm_leiaute_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDRM07FatorRiscoValido",
+      "file": "drm_leiaute_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDRM06AtividadeFinanceiraSemMaM",
+      "file": "drm_leiaute_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestDocDRMLeiauteComputeAggregates",
+      "file": "drm_leiaute_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestRegistry_RegisterRawAndGetRaw",
+      "file": "raw_rules_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestRegistry_RawIsSeparateFromTyped",
+      "file": "raw_rules_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestRegistry_CodesIncludesBoth",
+      "file": "raw_rules_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestBuiltin3040_HasB01toB05AsRaw",
+      "file": "raw_rules_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestBuiltin3040_HasB06toB15AsTyped",
+      "file": "raw_rules_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestBuiltin3040_TotalRulesIs",
+      "file": "raw_rules_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint42_ParseDoc3044",
+      "file": "rule3044_test.go",
+      "reason": "teste de infraestrutura (registry/parser/leiaute) sem caso isolado de regra com XML literal"
+    },
+    {
+      "test_name": "TestSprint42_T01_DataHoraRemessaAntesSaldo",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T01_Ok",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T02_PagamentoFuturo",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T03_ConcessaoFutura",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T04_Futura",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T05_Duplicado",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T06_DuplicadoConcessao",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T07_Envia3050N",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T08_FormatoInvalido",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T15_ValorNegativo",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T16_SaldoNegativo",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T17_IPOCDuplicado",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    },
+    {
+      "test_name": "TestSprint42_T17_Ok",
+      "file": "rule3044_test.go",
+      "reason": "inputs construidos programaticamente (structs/helpers tipo docValidoBaseOp), sem XML literal no corpo do teste"
+    }
+  ],
+  "extraction_coverage": "38 de 308 funções Test cobertas",
+  "generated_at": "2026-11-18T01:29:20Z",
+  "source_commit": "b0f4bb178ca56bd4bfd6751d484675ae2dba1163"
+}
