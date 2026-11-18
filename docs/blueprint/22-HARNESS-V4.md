@@ -3,6 +3,7 @@
 - **Data:** 2026-11-16
 - **Status:** Blueprint de reconstrução — consolidado a partir de `research/09-harness.md` (spec principal), `research/07-engine-ia.md` (corpus sintético, judge) e `research/01-backend-audit.md` (paridade golden tests, classe de bug "dispatch silencioso")
 - **Arquitetura-alvo:** motor Rust (crates `harness-core`, `harness-gate`, `harness-miner`, `harness-synth`, `harness-cluster`) + Postgres + 1 pessoa operando com agentes IA (ZCode) + CI GitHub Actions
+- **Mapeamento pós-fusão (16/11/2026):** `harness-core/gate/miner/synth/cluster` são **módulos internos do crate `norma-harness`** (FASE 2 — 20-ARQUITETURA §3.1). No wedge da FASE 1, o M6 (mutation gate) vive em `reg-cli/tests/mutations.rs`.
 - **Domínio:** CADOCs SCR/COSIF do BACEN (2030, 3040, 3044, 4010, 3026...), STA, catálogo de 1.099 regras de validação
 
 ---
@@ -256,7 +257,7 @@ Todo `eval_run` registra `engine_version + ruleset_version + judge_version + cor
 
 ### 5.1 Catalog completeness gate — a ponte build ↔ harness
 
-O build do `radiant-rules` (catálogo compilado) carrega um **gate de completeza**: para **cada uma das 1.099 regras** do catálogo BACEN, o código deve declarar **exatamente um** dos três estados:
+O build do `norma-rules` (catálogo compilado) carrega um **gate de completeza**: para **cada uma das 1.099 regras** do catálogo BACEN, o código deve declarar **exatamente um** dos três estados:
 
 1. `IMPLEMENTED` — existe `rule_version` executável no motor (código Rust tipado);
 2. `DATA_ENTRY` — regra data-driven aplicada via tabela de críticas (sem código próprio);

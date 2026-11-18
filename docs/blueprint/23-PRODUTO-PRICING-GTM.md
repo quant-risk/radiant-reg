@@ -173,7 +173,7 @@ Antes do ladder SaaS (§2.1–2.5, que vige no launch Rust da FASE 2), a receita
 
 ### 4.1 Premissas comuns
 
-Launch Rust Q1/2027 com Free + pricing público; **beta DRSAC desde dez/2026** (janela: 1ª remessa vence ~fev/2027, 2ª ~ago/2027); receita de implantação contabilizada fora do MRR; churn aplicado mês a mês; preços de lista anual (desconto de lista já embutido nos ARPU).
+**M0 = mar/2027 (L1: Free + Starter only)**; ladder completo no L2 jun–jul/2027; **beta DRSAC desde dez/2026** (janela: 1ª remessa vence ~fev/2027, 2ª ~ago/2027); churn aplicado mês a mês; preços de lista anual (desconto de lista já embutido nos ARPU). **A receita do wedge 2026 (licenças on-prem — PoC/Sprint/Licença, §2.0) fica fora do MRR SaaS, em linha própria** — o MRR abaixo mede apenas a plataforma (FASE 2).
 
 ### 4.2 Premissas por linha (drivers)
 
@@ -213,7 +213,9 @@ Launch Rust Q1/2027 com Free + pricing público; **beta DRSAC desde dez/2026** (
 
 ### 4.5 Rampa de MRR por trimestre
 
-| | M0 (jan/27) | M3 (abr/27) | M6 (jul/27) | M9 (out/27) | M12 (dez/27) |
+M0 = mar/2027 (L1 abre Free+Starter; ladder completo no L2 jun–jul/2027). A receita do wedge 2026 (licenças — §2.0) não entra nesta rampa.
+
+| | M0 (mar/27) | M3 (jun/27) | M6 (set/27) | M9 (dez/27) | M12 (fev/28) |
 |---|---:|---:|---:|---:|---:|
 | Conservador | 5k | 18k | 38k | 60k | **76k** |
 | Base | 9k | 42k | 95k | 160k | **210k** |
@@ -259,7 +261,7 @@ Benchmark de controle: mediana global de CAC é US$2,00 de S&M por US$1 de nova 
 
 ### 5.4 Calendário GTM 12 meses (síntese)
 
-1. **Dez/2026:** beta fechado DRSAC com 5–10 IFs S1–S4 (movimento 1 da seção 8).
+1. **Dez/2026:** beta fechado DRSAC com 5–8 IFs S1–S4 (movimento 1 da seção 8).
 2. **Q1/2027:** launch Rust — Free Validador, pricing público, marca nova, 2 parceiros consultoria.
 3. **Q2/2027:** conteúdo SEO/LinkedIn + webinar ABBC/ABFintechs; 2–3 parceiros ativos; primeiro white-label em negociação.
 4. **Q3/2027:** benchmark como tier premium (após ~30 contribuintes); caso "zero autuação" documentado.
@@ -303,6 +305,8 @@ Celcoin vende BaaS **e** Regulatório Mais no mesmo grupo: é competidor potenci
 
 ### 7.1 A decisão
 
+> **Nota da fusão (16/11/2026):** "Radiant Reg" é o **nome de trabalho do wedge da FASE 1** (25 §0). A busca de marca BR-nativa descrita abaixo aplica-se ao **produto da FASE 2**.
+
 **"Radiant Norma" não vai a mercado como marca de produto.** "Norma" é o nome do produto do cadoc.ai (Norma, NormaChat, NormaCast, Norma App) — uso comercial público anterior, confusão de search imediata (buscar "Norma CADOC" traz o concorrente) e risco de marca em uso. "Radiant" não significa nada em PT-BR e é intraduzível em procurement. Decisão: **"Radiant" permanece como entidade legal/investimento**; o produto lança com marca BR-nativa própria. Custo do rebrand hoje é baixo (pré-launch); depois do primeiro ciclo de vendas, é caro.
 
 ### 7.2 Critérios do nome
@@ -338,15 +342,15 @@ Celcoin vende BaaS **e** Regulatório Mais no mesmo grupo: é competidor potenci
 
 ### Movimento 1 — Beta fechado (dez/2026–fev/2027)
 
-Motor Go v1 (gen2030 existe) serve o piloto enquanto o Rust nasce com os leiautes nov/dez/2026 como primeiro dataset. Captação via FBM/consultorias + lista nominal S1–S4.
+**reg-cadoc 2030 em Rust (S4 da FASE 1 — leiaute oficial IN 694/2025 re-baixado) + chancela do BacenValidatorAdapter (ADR-0018)** serve o piloto; o wiring do gen2030 em Go foi revogado pela fusão (retrabalho). Captação via FBM/consultorias + lista nominal S1–S4.
 
 | Meta | Número |
 |---|---|
-| IFs no beta fechado | **8** (de 5–10 alvo) |
+| IFs no beta fechado | **8** (de 5–8 alvo) |
 | Remessas beta aceitas no CRD | **100%** (documento zerado e/ou com exposição) |
 | Casos documentados (com anuência) | 3 |
-| Contratos convertidos até a 1ª remessa | **5** (add-on DRSAC R$990 ou Pro) |
-| MRR incremental do movimento | ~R$10–20k |
+| Contratos convertidos até a 1ª remessa | **2–4 contratos na régua do wedge** (Sprint R$35–60k / Licença R$6–12k/mês — §2.0) |
+| Receita do movimento | Sprints (R$35–60k) + licenças (R$6–12k/mês) na régua do wedge — **linha própria, fora do MRR SaaS** (§4.1) |
 
 ### Movimento 2 — Conversão da janela (fev–ago/2027)
 

@@ -1,8 +1,9 @@
 # 11 — TESE v2.0: Radiant Norma (Blueprint de Reconstrução Rust)
 
 > **Data:** 16/nov/2026 · **Versão:** 2.0 — substitui `PRODUTO_TESE_ROADMAP.md` e o Plano Ouro (jul/2026) como referência de produto.
+> **Escopo pós-fusão (16/11/2026):** a execução desta tese agora é **duas fases** — FASE 1 = wedge V1 "Radiant Reg" (4 crates reg-*, on-prem, receita 2026) e FASE 2 = plataforma multi-tenant. Este documento descreve a tese inteira; ver `25-ROADMAP-EXECUCAO.md` §0 e `00-INDEX.md` §2.1.
 > **Fontes:** `research/02-tese-vs-realidade.md`, `research/05-concorrentes-mercado.md`, `research/06-normativos-realidade.md`, `research/08-produto-pricing.md` (todas de 16/nov/2026).
-> **Contexto do repo v1:** construído em 10 dias (03–13/jul/2026, 263 commits), congelado há 4 meses, 83 sprints "fechadas" no papel, 0 clientes, 0 receita. A tese de jul/2026 era ~80% correta sobre o mercado e ~100% falsificada sobre a execução. Esta versão mantém o que a evidência confirma, mata o que ela desmente e reancora o plano em normativos verificados na página oficial do BCB em 16/11/2026.
+> **Contexto do repo v1:** construído em 263 commits em 11 dias (pico de 53 tags num dia) (03–13/jul/2026), congelado há 4 meses, 83 sprints "fechadas" no papel, 0 clientes, 0 receita. A tese de jul/2026 era ~80% correta sobre o mercado e ~100% falsificada sobre a execução. Esta versão mantém o que a evidência confirma, mata o que ela desmente e reancora o plano em normativos verificados na página oficial do BCB em 16/11/2026.
 
 ---
 
@@ -31,7 +32,7 @@
 | **Mid-market** (T3) | **REAFIRMADO, refinado** | 1.722 entidades autorizadas (API Olinda BCB, 16/11/2026). SAM ≈ 1.100 remetentes SCR: 138 SCDs, 194 IPs, 80 SCFIs, 21 SCMs, 11 SEPs, 101 DTVMs, 57 CTVMs, 47 SCCs, 736 cooperativas, 374 no segmento S4. Consolidação (ABFintechs de 724→588 associadas; autorizações endurecidas) deixa sobreviventes maiores e mais regulados — favorece ferramenta profissional sobre planilha. |
 | **Cross-doc L3 como moat** | **REAFIRMADO** | XD01–XD12 implementados e testados no v1 (código real). Res BCB 154/2022 (BCBS 239 BR) torna rastreabilidade exigência, não diferencial. O próprio BCB ganhou IA na supervisão (ChatBCB; R$3,6 mi/ano em IA — pesquisa/05 §E.1): divergência intra-IF será flagrada pelo regulador antes de virar multa. O valor de "2040 OK + 3050 OK mas consolidado diverge" só cresce. |
 | **Humano no loop** ("copiloto, não autopilot") | **REAFIRMADO, elevado a princípio** | Agentic Gap (Regnology, set/2026, 276 praticantes/22 países): **89% das IFs ainda não embarcaram IA em produção**; 49% dos Tier 1 têm piloto, ~8% em produção. Suade+PwC e Regnology convergem para "auditable execution fabric". Em compliance, vence quem entrega IA confiável com evidência — autopilot é incomprável. |
-| **Pricing acessível** | **CORRIGIDO** (princípio sobrevive, números morrem) | Preço público contra o gated dos 4 concorrentes sobrevive. Os números morreram: Lite R$1,5k/mês está **2–8x abaixo do WTP** e abaixo do custo de consultoria manual (R$3–15k/mês); banda de WTP: SCD R$60–120k/ano, IP R$80–200k/ano, banco S3-S4 R$250k–1 mi/ano. Novo ladder (pesquisa/08 §6.1): **R$2.490 / R$6.900 / R$16.900 / R$29.900+** + usage e add-ons. |
+| **Pricing acessível** | **CORRIGIDO** (princípio sobrevive, números morrem) | Preço público contra o gated dos 4 concorrentes sobrevive. Os números morreram: Lite R$1,5k/mês está **2–8x abaixo do WTP** e abaixo do custo de consultoria manual (R$3–15k/mês); banda de WTP: SCD R$60–120k/ano, IP R$80–200k/ano, banco S3-S4 R$250k–1 mi/ano. **FASE 1 (wedge)** usa a régua própria **Sprint R$35–60k / Licença R$6–12k/mês** (23-PRODUTO §2.0); o ladder abaixo (pesquisa/08 §6.1): **R$2.490 / R$6.900 / R$16.900 / R$29.900+** + usage e add-ons — **vale a partir da FASE 2**. |
 
 ---
 
@@ -40,7 +41,7 @@
 | Elemento morto | Evidência da morte | Substituto v2 |
 |---|---|---|
 | **Roadmap-as-code** (83 sprints fechadas em 36h) | v3.34.0→v3.34.53 datadas 06–07/jul/2026; sprints 49–65 de **2027** marcadas "✅ fechada" em doc de 08/jul/2026; quarters futuros marcados "已完成"; numeração de sprints reutilizada 3x com significados diferentes | Milestones só fecham com **evidência externa**: protocolo CRD/STA, contrato assinado, relatório de auditor, eval versionado. Status de números (cobertura, regras, testes) emitido por script a partir do código — nunca escrito à mão. |
-| **Pricing antigo** (Lite R$1.5k) | 2–8x abaixo do WTP observado; abaixo da consultoria manual que substitui; sinaliza "brinquedo" em procurement | Ladder R$2.490/6.900/16.900/29.900+ com 4 alavancas de NRR: entidades (CNPJ), volume SCR, DRSAC completo, white-label/benchmark. Preço público como âncora; contrato enterprise quando procurement exigir. |
+| **Pricing antigo** (Lite R$1.5k) | 2–8x abaixo do WTP observado; abaixo da consultoria manual que substitui; sinaliza "brinquedo" em procurement | **FASE 1 (wedge):** régua Sprint R$35–60k / Licença R$6–12k/mês (23-PRODUTO §2.0). **FASE 2:** ladder R$2.490/6.900/16.900/29.900+ com 4 alavancas de NRR: entidades (CNPJ), volume SCR, DRSAC completo, white-label/benchmark. Preço público como âncora; contrato enterprise quando procurement exigir. |
 | **SOC 2 como sprint** | Sprints 56/65 "fechadas" como `internal/soc2` (evidence collector em Go); nenhuma auditoria contratada, nenhum auditor | Compliance vira propriedade nativa do motor (audit hash-chain tamper-evident, provenance em toda verdict — portadas para Rust) e a auditoria de terceiro é **evento externo comprado** (ISO 27001/SOC 2 Type II quando procurement bancário pedir), não linha de roadmap. |
 | **SQLite em produção** | ADR-0001 declarava Postgres 16 "definitiva"; o código usa SQLite como driver default (`db.go:71`) | v2 escolhe **uma** stack de dados: Postgres + sqlx (16 crates, axum), sem driver alternativo em produção. SQLite só como estratégia de teste explícita e documentada. |
 | **Marca "Norma"** | Colisão direta com Norma / NormaChat / NormaCast / Norma App do cadoc.ai (uso comercial público anterior; confusão de search e risco de marca) | Entidade legal mantém "Radiant"; marca de produto nova, curta, PT-pronunciável, domínio .com.br livre, checagem INPI **antes de Q1/2027**. Custo de rebrand hoje é baixo (pré-launch). |
@@ -76,7 +77,7 @@
 |---|---|---|---|---|---|
 | O que é | Legacy: core bancário + RegTech (250+ IFs, 90M+ contas) | Inteligência regulatória (pivô nov/2026) | Regulatório em bundle BaaS | GRC + agenda regulatória | Engine AI-native de geração+validação+remessa |
 | IA | Não posiciona | NormaChat, MCP (normas) | Conteúdo técnico | Alertas | Determinismo no core + IA na fronteira com verificação |
-| Preço | R$30k+/ano (gated) | R$5–15k/ano (gated) | R$3–8k/ano (bundle) | gated | Público: R$2.490→R$29.900+ |
+| Preço | R$30k+/ano (gated) | R$5–15k/ano (gated) | R$3–8k/ano (bundle) | gated | Público: wedge R$35–60k Sprint / R$6–12k/mês Licença (23 §2.0) → ladder R$2.490→R$29.900+ na FASE 2 |
 | Conflito | Amarra core | — | **Vende BaaS e compete com clientes SCD/IP** | Consolidação de ecossistema | Neutro e auditável |
 
 ### 5.2 vs Matera — o incumbent legacy
@@ -153,10 +154,12 @@ Gerar → validar (compatível com BCValidador + regras próprias) → remeter (
 
 ## 8. Calendário GTM 2026–2028 (ancorado em normativos verificados)
 
+> **Normas pós-fusão (16/11/2026):** o calendário abaixo não inclui as 6 normas incorporadas pela fusão — IN 729/2026 (CNPJ alfanumérico), IN BCB 735/2026 (Desenrola 2.0), Res. CVM 247/2026 (FIDC, 9 dias úteis), RC Conjunta 18/2025 (conformidade 31/12/2026), RC Conjunta 16/2025 (BaaS) e Comunicados BCB 45.206/45.339/2026 (MFA Autran). **`00-INDEX.md` §8 é a fonte canônica** da tabela normativa completa.
+
 | Período | Evento regulatório (verificado 16/11/2026) | Movimento de produto/GTM |
 |---|---|---|
 | **nov/2026 (agora)** | Onda 3 da IN BCB 733 (NR3: "Limite sujeito à provisão", Anexo 8) vigente na data-base nov/2026 | Congelar repo Go como arquivo v1 + fonte de dados; capturar leiaute 3040 nov/2026 como primeiro dataset do port Rust; iniciar obtenção de credenciais PSTA300; pesquisa de marca/INPI |
-| **dez/2026** | **Data-base DRSAC dez/2026** sob leiaute IN 694 (primeira remessa vence ~fev/2027); GRSAC e LCR/LCRS a 30 dias | **Ponte Go→Rust:** motor Go v1 (gen2030 existe) serve o **piloto DRSAC com 5–10 IFs S1–S4** (beta fechado via FBM/consultorias) — gera, valida XSD, remessa com revisão humana obrigatória (críticas semânticas do 2030 não são públicas); Rust constrói em paralelo |
+| **dez/2026** | **Data-base DRSAC dez/2026** sob leiaute IN 694 (primeira remessa vence ~fev/2027); GRSAC e LCR/LCRS a 30 dias | **Piloto DRSAC via FASE 1:** o piloto com **5–8 IFs S1–S4** (beta fechado via FBM/consultorias) roda o **reg-cadoc 2030 em Rust** (S4 do wedge — leiaute oficial IN 694/2025 re-baixado), com chancela do BacenValidatorAdapter (B02 — ADR-0018) e revisão humana obrigatória (críticas semânticas do 2030 não são públicas); o wiring do gen2030 em Go foi **revogado** (retrabalho — gen2030 era fictício); a plataforma Rust da FASE 2 constrói em paralelo |
 | **31/12/2026** | Prazo RC CMN/BCB 14/2025 (capital social mínimo — ~679 IFs se adequando) | Conteúdo/comunidade: urgência de compliance além de CADOC |
 | **1º/1/2027** | **GRSAC novo** (Res BCB 586 + IN 772, revogam Res 139/2021 e IN 153/2021) e **LCR/LCRS 90%** (CMN 5.296 + BCB 560; S2 passa a calcular LCR; S3/S4 LCRS) | Webinar ABBC/ABFintechs "as 4 dores de jan/2027"; conteúdo SEO de GRSAC/LCRS (keywords sem dono) |
 | **Q1/2027** | — | **Launch Rust**: Free Validador (PLG) + pricing público + marca nova; DRSAC completo no Pro; add-on DRSAC no Starter (R$990) para S1–S4 pequenas na janela |
@@ -170,7 +173,7 @@ Gerar → validar (compatível com BCValidador + regras próprias) → remeter (
 
 ### Leitura do calendário
 
-1. **A ponte Go→Rust é o que protege a janela.** A primeira remessa DRSAC sob o leiaute novo vence ~fev/2027; o Rust não estará pronto para produção antes disso. O motor Go v1 (gen2030 implementado, wizard, adapters) serve o piloto; o Rust nasce com os leiautes nov/dez/2026 como primeiro dataset e assume em Q1/2027. Repo v1 não é legado descartável: é arquivo + fonte de dados do port.
+1. **O reg-cadoc em Rust (FASE 1) é o que protege a janela.** A primeira remessa DRSAC sob o leiaute novo vence ~fev/2027; a plataforma da FASE 2 não estará pronta antes disso. O piloto dez/2026 roda o **reg-cadoc 2030 em Rust** (S4 do wedge, contra o leiaute oficial re-baixado) com chancela do BacenValidatorAdapter (ADR-0018); o wiring do gen2030 em Go foi revogado por retrabalho (gen2030 era fictício). Repo v1 não é legado descartável: é arquivo + fonte de dados do port.
 2. **A janela DRSAC é urgência com prazo fixo** — a única urgência que procurement não adia. O piloto de dez/2026 não precisa de produto completo; precisa de geração+XSD+humano no loop.
 3. **2027 é o ano da dor** (GRSAC, LCR/LCRS 90%→100%, FRTB, compulsório +1,5 p.p., transição 2030): o GTM vende alívio de quatro dores simultâneas para o mesmo comprador — Head de Compliance/CTO de S2–S4 e fintechs.
 4. **2028 muda o argumento de venda:** de "mude rápido quando a norma muda" para "mude rápido sempre" — DLO 100%, pisos = 0, output floor em fase final; o harness com histórico de 2 anos de eventos é a prova.

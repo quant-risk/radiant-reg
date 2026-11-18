@@ -224,7 +224,7 @@ em ~8–10 crates de domínio + wiring**: consolidar o que não tem requisito re
 | 3044 | gen3044 — **novo** | F3 | XML **por evento** (IN 682/2025): N eventos por remessa em envelope/zip; DocSet endereça por evento (§5.1) |
 | 3050 | gen3050 (herda spec) | F2 | estatísticas agregadas |
 | 4111 | gen4111 (herda spec) | F3 | saldos COSIF diários |
-| 2030 | gen2030 (herda spec) | F3 | DRSAC — piloto dez/2026 via ponte Go (§16) |
+| 2030 | gen2030 (herda spec) | F3 | DRSAC — piloto dez/2026 via reg-cadoc Rust (S4) + B02 (ADR-0018) |
 | 2060 | gen2060 (herda spec) | F3 | DRM |
 | 2061/2062 | gen2061/gen2062 (herdam spec) | F3 | DLO/DLI |
 | 2070 | gen2070 (herda spec) | F3 | DDR diário |
@@ -824,12 +824,12 @@ alfanumérico nos leiautes, abr/2026; novas inscrições RFB alfanuméricas desd
 crítico, o pior caso (F0-F5 ~36 semanas) fica declarado em vez de implicitamente
 estourado.
 
-**Ponte DRSAC dez/2026:** o motor Go v1 (gen2030 existe) serve o piloto da janela
-dez/2026-fev/2027 enquanto o Rust constrói. **O plano A exige wiring mínimo:** o engine
-drsac do v1 é **órfão** (`drsac.ValidateDocument` sem chamadores; `IntegrateWithAudit`
-é no-op) — ou se integra o engine drsac ao fluxo v1, ou o piloto usa **validação externa
-via BCValidador** para o 2030. **Critério de bloqueio:** nenhum envio 2030 no piloto sem
-um dos dois caminhos operando. Critérios de switch para plano B em
+**Ponte DRSAC dez/2026 (nova redação pós-fusão 16/11/2026):** o piloto da janela
+dez/2026-fev/2027 roda o **reg-cadoc 2030 em Rust (S4 da FASE 1)** contra o **leiaute
+oficial IN 694/2025 re-baixado**, com chancela do **BacenValidatorAdapter (B02 —
+ADR-0018)** e validação externa obrigatória (BCValidador oficial + CRD). O wiring do
+gen2030 em Go foi **revogado** (retrabalho — gen2030 era fictício); o Go só sobrevive
+como ponte STA-h para smoke. Critérios de bloqueio e switch para plano B em
 `25-ROADMAP-EXECUCAO.md` §3.
 
 ---

@@ -74,7 +74,7 @@ O crítico de arquitetura apontou corretamente: a F3 original alocava 6 semanas 
 | Alavanca | Decisão concreta |
 |---|---|
 | **Extensão** | F3 passa de 6 → **7 semanas** (sem 13–19). F4 passa de 6 → **7 semanas** (sem 20–26). Nominal F0–F5: 30 → **32 semanas**. |
-| **Corte de escopo** | Saiem da F3: fix do wizard frontend (→ F4; é TypeScript, não bloqueia o motor) e 4 dos 6 generators restantes (2060/2070/2160/2170 → F4, via macro `cadoc_generator!` que já compartilha ~70% da mecânica). F3 core: API + auth + worker + STA(A1) + 2 generators (2061/2062). |
+| **Corte de escopo** | Saiem da F3: fix do wizard frontend (→ F4; é TypeScript, não bloqueia o motor) e 4 dos 6 generators restantes (2060/2070/2160/2170 → F4, via macro `cadoc_generator!` que já compartilha ~70% da mecânica). F3 core: API + auth + worker + STA (Basic preemptivo + PSTA300) + 2 generators (2061/2062). |
 | **Spike fora do caminho crítico** | O spike de **A3/PKCS#11** (`cryptoki` + SoftHSM, 1–2 sem — research/04 §R1) roda em paralelo via agente ZCode em background durante a F3. A F3 fecha com **A1** (PEM, trivial). A3 entra por feature flag na F4, somente se o spike provar o caminho com SoftHSM antes do token real. Nunca no caminho crítico. |
 
 **Compromisso de datas:** o calendário público de marcos (§4) usa o cenário com buffer: 32 semanas nominais + **4 semanas de buffer explícito (sem 33–36)** = **até 36 semanas** para F0–F5. Se o buffer for consumido, corta-se escopo da F4 nesta ordem fixa: (1) Radar em modo leitor-only sem auto-PR; (2) RAG híbrido reduzido a BM25-only (sem pgvector); (3) conectores DB/MCP para pós-launch. O que nunca se corta: paridade (N1), BCValidador (N2), envio real (N3) — são os três marcos que provam que o produto existe.
@@ -83,7 +83,7 @@ O crítico de arquitetura apontou corretamente: a F3 original alocava 6 semanas 
 
 **Entregáveis:**
 
-- Repo novo com cargo workspace: 16 crates stub com bordas do Apêndice A do doc 20 (`domain` não importa nada interno; `api/worker/cli` importam tudo; ninguém importa `api`).
+- Repo novo com cargo workspace: **esqueleto da FASE 2 (~8–10 crates de domínio**, consolidando o desenho de 17 crates — que permanece teto de referência, 20-ARQUITETURA §3.1 **)** com bordas do Apêndice A do doc 20 (`domain` não importa nada interno; `api/worker/cli` importam tudo; ninguém importa `api`).
 - CI GitHub Actions desde o commit 1: fmt + clippy `-D warnings` + linter anti-wildcard (bloqueia `_ =>` no dispatch de CADOC) + test + **catalog gate** + drift check de leiautes.
 - **Catálogo normalizado:** ETL de `criticas.json` para schema único — dedup dos 11 códigos duplicados, chaves sufixadas (`2061-DLO`, `2060-DRM`, `2070-DDR`) normalizadas para código de 4 dígitos + categoria explícita, vigência por regra, `status` declarado por regra.
 - **Golden corpus:** script `xtask` extrai os 1.178 testes Go para fixtures input/expected versionadas com provenance `golden`. Testes dependentes de globals/ordem viram `flaky-spec` e são derivados manualmente.
@@ -153,11 +153,11 @@ O crítico de arquitetura apontou corretamente: a F3 original alocava 6 semanas 
 - `norma-api` em axum: OpenAPI 3.1 via `utoipa` **gerada do código** (fim do drift spec vs rotas do v1: 46 paths vs ~70 rotas); envelope de erro único `{"error": {code, message, provenance?, trace_id}}` (padrão `SafeError` mantido); SSE com shutdown-aware timeout (gotcha hyper#2787); Idempotency-Key obrigatória em POST de geração/envio.
 - Auth: JWT com keyring/kid + CSRF + rate-limit per-tenant via `governor` (o rate limit do tower é global — multi-tenant exige quota keyed).
 - `norma-worker`: apalis 1.2 com storage Postgres; claim atômico (`FOR UPDATE SKIP LOCKED` — melhora sobre o v1); backoff exponencial + DLQ; cron de fechamento de período.
-- **STA client port** (o tesouro do v1): WSClient 1.357 LoC → `reqwest` + `rustls`; fluxo oficial BACEN (POST /arquivos → PUT conteúdo, posicaoupload, verificação `X-Content-Hash`, chunked range, Basic auth preemptivo); cert **A1**; senhaws rotation com lock distribuído Redis.
+- **STA client port** (o tesouro do v1): WSClient 1.357 LoC → `reqwest` + `rustls`; fluxo oficial BACEN (POST /arquivos → PUT conteúdo, posicaoupload, verificação `X-Content-Hash`, chunked range, Basic auth preemptivo); **STA-WS Basic preemptivo (UUUUUDDDD.operador) + usuário especial PSTA300** (certificado A1/A3 não se aplica ao STA-WS); senhaws rotation com lock distribuído Redis.
 - Generators **2061 (DLO) e 2062 (DLI)** — os dois seguintes na ordem de valor (limites são dor recorrente de IP/SCD).
 - **Fora do caminho crítico:** spike A3/PKCS#11 com SoftHSM (agente em background). **Cortado da F3:** wizard fix e generators 2060/2070/2160/2170 (→ F4).
 
-**Riscos da fase:** sem credencial Sisbacen não há envio — o pedido abre na semana 1 (§8) e o follow-up é semanal; o fluxo de homologação pode exigir documentação não-prevista → janela de slip absorvida pelo buffer; TLS client com cert A1 é a parte "pronta" do stack, mas o ambiente STA-h pode ter idiossincrasias de handshake → smoke com `StubClient` primeiro, ambiente real depois.
+**Riscos da fase:** sem credencial Sisbacen não há envio — o pedido abre na semana 1 (§8) e o follow-up é semanal; o fluxo de homologação pode exigir documentação não-prevista → janela de slip absorvida pelo buffer; TLS client é a parte "pronta" do stack (o STA-WS usa Basic preemptivo — certificado A1/A3 não se aplica), mas o ambiente STA-h pode ter idiossincrasias de handshake → smoke com `StubClient` primeiro, ambiente real depois.
 
 **Alocação semanal:**
 
@@ -168,7 +168,7 @@ O crítico de arquitetura apontou corretamente: a F3 original alocava 6 semanas 
 | 15 | STA port: WSClient (fluxo de arquivo); smoke contra StubClient; spike A3 roda em background |
 | 16 | STA port: senhaws rotation + retry/circuit breaker; generators 2061 |
 | 17 | Generator 2062 (DLI); integração api↔worker↔sta ponta-a-ponta em staging |
-| 18 | Smoke com cert A1 no ambiente STA-h de homologação (se credencial ok); correções de handshake |
+| 18 | Smoke com **STA-WS Basic preemptivo (UUUUUDDDD.operador) + senhaws + usuário especial PSTA300 (Res BCB 366)** no ambiente STA-h de homologação (se credencial ok); correções de handshake *(certificado A1/A3 não se aplica ao STA-WS)* |
 | 19 | **N3**: primeiro envio homolog real capturado; generators 2070/2160 se sobrou folga; review de fase + launch L1 (Free + Starter) |
 
 **Done (evidência externa):** **N3** — primeiro envio **STA-h homolog real** com protocolo de transmissão/aceite capturado como artefato (hash pré-envio, payload, resposta, timestamps — que já alimenta `norma-audit` e cria o rastro do flywheel M1). Sem credencial: N3 não fecha; o marco degradado **N3'** (remessa aceita no CRD de uma IF real, envio manual) substitui temporariamente com data renegociada explicitamente.
@@ -248,7 +248,7 @@ Não é fase: é contingência nomeada. Só se "gasta" o buffer com regra regist
 | F0 fundação | 1–2 | 16/nov–29/nov/2026 | CI + gates rodando; catálogo e goldens contados por script |
 | F1 domínio/leiautes | 3–6 | 30/nov–27/dez/2026 | Tipos nov/2026 compilam; RLS provado; catalog gate quebra build |
 | F2 pipeline+paridade | 7–12 | 28/dez/2026–07/fev/2027 | **N1** paridade green + **N2** BCValidador oficial |
-| F3 API/STA/envio | 13–19 | 08/fev–28/mar/2027 | **N3** envio STA-h homolog real (A1) |
+| F3 API/STA/envio | 13–19 | 08/fev–28/mar/2027 | **N3** envio STA-h homolog real (STA-WS Basic preemptivo + PSTA300) |
 | F4 radar/IA/harness | 20–26 | 29/mar–16/mai/2027 | Gate bloqueia PR; Radar auto-PR; copiloto com citação |
 | F5 launch comercial | 27–32 | 17/mai–27/jun/2027 | **N4** contrato pagante + dinheiro |
 | Buffer | 33–36 | 28/jun–25/jul/2027 | contingência nomeada (cortes em ordem fixa) |
@@ -283,12 +283,12 @@ Herança direta da lição "multi-tenancy completo antes do 1º cliente" (resear
 
 O `gen2030` existe no v1 — mas a auditoria provou (research/01 §2.2 e §3.2) que **`drsac.ValidateDocument` é órfão**: zero chamadores em produção; `IntegrateWithAudit()` (`drsac.go:169`) é um no-op que ninguém chama; as 35 regras D01–D35 nunca rodaram contra críticas oficiais — que não são públicas. Portanto o plano A **só é honesto com estas duas salvaguardas obrigatórias**:
 
-1. **Wiring mínimo no v1 (1–2 dias, semana 1):** endpoint `POST /v1/validate/2030` expondo `drsac.ValidateDocument`, com resultado gravado no audit log hash-chain. Sem isso, o "validador DRSAC" do piloto seria exatamente a classe de milestone-virando-código que a auditoria condenou (Pilot2/3/4, SOC2-as-code).
-2. **Validação externa obrigatória:** todo XML do piloto passa no **BCValidador oficial** (validador Windows do BCB) e no CRD antes de qualquer envio. O oráculo externo é a fonte de verdade do piloto; o engine interno do v1 é assistente de rascunho, nunca autoridade — porque ninguém pode provar que as D01–D35 do v1 correspondem às críticas reais do BCB (que não são públicas).
+1. **Plano A (pós-fusão): reg-cadoc 2030 em Rust (S4)** — o piloto roda o gen2030 do wedge em **Rust (S4 da FASE 1, §0)** contra o **leiaute oficial IN 694/2025 re-baixado** (com SHA-256), com **chancela do BacenValidatorAdapter (B02 — ADR-0018)**. Sem isso, o "validador DRSAC" do piloto seria exatamente a classe de milestone-virando-código que a auditoria condenou (Pilot2/3/4, SOC2-as-code). *(O antigo "wiring mínimo do gen2030 em Go no v1" foi revogado pela fusão — retrabalho.)*
+2. **Validação externa obrigatória:** todo XML do piloto passa no **BCValidador oficial** (validador Windows do BCB) e no CRD antes de qualquer envio — o XML do reg-cadoc Rust é validado via **BCValidador oficial externo**. O oráculo externo é a fonte de verdade do piloto; o engine interno é assistente de rascunho, nunca autoridade — porque ninguém pode provar que as D01–D35 do v1 correspondem às críticas reais do BCB (que não são públicas).
 
-**Escopo do piloto:** documento zerado 2030 via CRD (baixa barreira, dor real, caso de abertura definido no research/23 — movimento 1), 5–10 IFs S1–S4 beta fechado, captado via FBM/consultorias + lista nominal S1–S4 (pública no site do BCB). Limitação **declarada por escrito** ao piloto: o produto do piloto é geração + validação BCValidador + envio assistido; sem Accuracy SLA, sem regras semânticas auditadas. Vender mais que isso seria forward-padding.
+**Escopo do piloto:** documento zerado 2030 via CRD (baixa barreira, dor real, caso de abertura definido no research/23 — movimento 1), **5–8 IFs S1–S4 beta fechado** (unificado com 23 §8), captado via FBM/consultorias + lista nominal S1–S4 (pública no site do BCB). Limitação **declarada por escrito** ao piloto: o produto do piloto é geração + validação BCValidador + envio assistido; sem Accuracy SLA, sem regras semânticas auditadas. Vender mais que isso seria forward-padding.
 
-**Meta do movimento 1 (research/23 §8):** 3–5 IFs no beta, ≥1 remessa zerada aceita no CRD até ~fev/2027, 5 contratos convertidos até a 1ª remessa.
+**Meta do movimento 1 (unificada com 23 §8 e com a régua do wedge — 23 §2.0):** **5–8 IFs no beta**, ≥1 remessa zerada aceita no CRD até ~fev/2027, **2–4 contratos** na régua do wedge (Sprint R$35–60k / Licença R$6–12k/mês).
 
 ### 3.2 Critérios de bloqueio e switch
 
@@ -297,11 +297,11 @@ O `gen2030` existe no v1 — mas a auditoria provou (research/01 §2.2 e §3.2) 
 | **Bloqueio A.1** | Credencial Sisbacen não obtida até **30/nov/2026** | Piloto recai para "gera XML + valida no BCValidador + IF submete via CRD web por conta própria" — o documento zerado aceita isso. Envio via STA WS não é pré-requisito do zerado; o que trava tudo é acesso ao CRD, que depende da mesma credencial. |
 | **Bloqueio A.2** | Até **30/nov/2026** não houver: **saneamento completo em `main`** + **re-download oficial do 2030 versionado** (com SHA-256) + **pedido PSTA300 protocolado** + **`reg-cadoc` 2030 em Rust gerando XML canônico contra o leiaute oficial** | **Nova redação (fusão 16/11/2026)** — substitui o wiring do gen2030 em Go, retirado do escopo por retrabalho. Não fechado → congelar investimento no legado e ativar plano B imediatamente. |
 | **Bloqueio A.3** | Nenhuma IF sinalizada para o beta até **05/dez/2026** | Sem beta não há piloto — plano B; o relógio comercial passa a mirar a 2ª data-base (jun/2027). |
-| **Switch A→B** | Defeito estrutural no `gen2030` do v1 custando >1 semana de correção | Não vale investir em legado morto: plano B. |
+| **Switch A→B** | Defeito estrutural no `reg-cadoc` 2030 em Rust (S4) custando >1 semana de correção *(pós-fusão: o gatilho migrou do gen2030 em Go, revogado)* | Não vale investir no caminho que falhou: plano B. |
 | **Plano B (detalhe)** | Piloto deslocado para o Rust pós-F3 (~mar/2027) | Perde a 1ª data-base (K5 dispara: 0 IFs pagantes da janela até 28/fev/2027 → matar GTM de janela); mira a 2ª data-base (jun/2027) usando a **transição dos códigos 01–04 dos Anexos 08/09** (deixam de ser aceitos em registros novos em jun/2027) como gatilho de dor novo. O leiaute dez/2026 continua sendo capturado como dataset da F1 — o trabalho não se perde. |
 | **Kill da jogada DRSAC** | 2ª data-base (jun/2027) chegar sem 2030 em produção (Rust **ou** v1) | K1/K5 consolidados: jogada DRSAC morta para o ano 1; GTM volta para varredura de consultorias; o 2030 vira case de estudo, não aposta. |
 
-**Decisão:** plano A com wiring mínimo + validação externa obrigatória. O plano B é automático se qualquer bloqueio disparar — sem negociação no calor do momento (mesma lógica dos thresholds do harness: afrouxar exige decisão explícita documentada).
+**Decisão:** plano A — reg-cadoc 2030 em Rust (S4) + validação externa obrigatória (BCValidador/CRD + chancela B02). O plano B é automático se qualquer bloqueio disparar — sem negociação no calor do momento (mesma lógica dos thresholds do harness: afrouxar exige decisão explícita documentada).
 
 ---
 
@@ -458,9 +458,9 @@ Derivações operacionais:
 |---|---|---|---|---|
 | 1 | **XSD 1.0 sem validador Rust maduro** (crate `xmlschema` é 0.0.x; único risco real do stack — research/04 §R3) | Alta | Arquitetura em 3 camadas (ADR-0012): codegen `xsd-parser` + validação estrutural inline + **`xmllint`/libxml2 como autoridade** via pool de subprocessos com erro explícito `L1AuthorityUnavailable`; fuzz `cargo-fuzz` obrigatório; plano B extremo: sidecar Xerces-J. Nota: Go também não tem validador nativo — o risco é de engenharia, não de impossibilidade | Spike da semana 3 (F1) não converte os XSD oficiais sem trabalho manual pesado |
 | 2 | **Credencial Sisbacen não obtida** (em 4 meses de projeto, nunca foi) | Alta | Pedido aberto nas 72h com checklist completo + follow-up semanal agendado; fallback desenhado: validação BCValidador + envio manual via CRD (aceitável para documento zerado); sem ela, N3 não fecha e remessa automática sai do pitch | Follow-up #2 sem resposta; 31/jan/2027 é a data de degradação para N3' |
-| 3 | **DRSAC: críticas restritas** (não públicas; v1 tem engine órfão) | Média-alta | Piloto vende geração + BCValidador + envio assistido do zerado (sem promessa de regras semânticas); wiring mínimo no v1 obrigatório (§3.1); validador semântico próprio vira diferencial *depois*, alimentado por discrepâncias M1 do harness | IF do piloto pedir cobertura de regras que não existe; wiring não green até 30/nov |
+| 3 | **DRSAC: críticas restritas** (não públicas; v1 tem engine órfão) | Média-alta | Piloto vende geração + BCValidador + envio assistido do zerado (sem promessa de regras semânticas); mitigação/sinal atrelados aos **4 itens do Bloqueio A.2** (§3.2): saneamento completo em `main` + re-download oficial do 2030 versionado (SHA-256) + PSTA300 protocolado + `reg-cadoc` 2030 em Rust canônico (S4); validador semântico próprio vira diferencial *depois*, alimentado por discrepâncias M1 do harness | IF do piloto pedir cobertura de regras que não existe; qualquer dos 4 itens do Bloqueio A.2 não fechado até 30/nov |
 | 4 | **Revisão de código Rust por 1 pessoa** é o gargalo do throughput (research/04 §R15/R16) | Média-alta | Revisores automáticos em série (clippy `-D warnings` + linter anti-wildcard + catalog gate + harness-gate + cargo-mutants); humano só em decisão de domínio; cap de ~40% do tempo do dev em revisão; IA revisa IA antes do humano; PRs pequenos | Fila de revisão >2 dias por PR; clippy warnings acumulando |
-| 5 | **Burnout do único dev** | Média-alta | Buffer de 20% nomeado; semanas de 5 dias; 1 semana off após N3 e após launch; kill criteria existem para permitir **parar** sem culpa; spikes delegados a agentes em background; nada de commit burst tipo 66 commits/dia | 2 fins de semana consecutivos trabalhando; slots de auditoria amostral pulados |
+| 5 | **Burnout do único dev** | Média-alta | Buffer de 20% nomeado; semanas de 5 dias; 1 semana off após N3 e após launch; kill criteria existem para permitir **parar** sem culpa; spikes delegados a agentes em background; nada de commit burst tipo **263 commits em 11 dias (pico de 53 tags num dia)** | 2 fins de semana consecutivos trabalhando; slots de auditoria amostral pulados |
 | 6 | **BACEN muda leiaute no meio do port** (IN 733 onda 3 é nov/2026 — agora) | Média | Leiautes nov/dez/2026 são o primeiro dataset da F1 (não jul/2026); codegen via xtask = regenerar é barato; goldens versionados por vigência; Radar na F4 com T2U como métrica de produto; suites de regressão por vigência (M3 do harness) | Radar 404 em fonte BACEN sem fallback; diff manual encontrando mudança não coberta |
 | 7 | **Concorrente copia** (Matera/cadoc.ai re-entram em geração; novo entrante RegTech com IA) | Média | Moat não é segredo de código: é flywheel (cada submissão melhora a rede — pitch Stripe Radar) + T2U ≤10 dias úteis + pricing público + velocidade de resposta ao leiaute. Monitorar trimestralmente (research/05); integração com cadoc.ai (Norma Skills como fonte normativa) em vez de guerra de keyword | 2 movimentos de concorrente em geração AI-driven na mesma onda normativa |
 | 8 | **Migração de catálogo** (11 códigos duplicados, chaves `2061-DLO` quebradas, 1.099 críticas de proveniência incerta) | Média | ETL de normalização na F0 com schema único + testes de dedup; completeness gate impede regressão *para sempre* (regra sem estado quebra o build); paridade contada por regra pelo harness, nunca por número de README | Gate passando com regra sem golden; contagem divergindo entre script e docs |
@@ -471,7 +471,7 @@ Derivações operacionais:
 
 ## 8. Primeiras 72 horas (16–18/nov/2026) — 10 ações imediatas
 
-1. **Criar o repo novo** (nome da marca nova — decisão pendente do research/23 §7, com busca INPI em paralelo) com cargo workspace das 16 crates stub, `[workspace.dependencies]` pinado, e CI (fmt + clippy `-D warnings` + test + catalog gate + drift check). Commit 1 já contém os ADRs 0009–0014 assinadas.
+1. **Criar o repo novo** com cargo workspace do wedge FASE 1 — os 4 crates stub (`reg-core`, `reg-cadoc`, `reg-ledger`, `reg-cli` — §0; o esqueleto de ~8–10 crates da FASE 2 vem depois, §2.1), `[workspace.dependencies]` pinado, e CI (fmt + clippy `-D warnings` + test + catalog gate + drift check). Commit 1 já contém os ADRs assinadas. **Nome "Radiant Reg" já decidido como nome de trabalho do wedge** (busca/registro INPI em paralelo; a busca BR-nativa vale para a marca do produto da FASE 2 — 23 §7).
 2. **Abrir o pedido de credencial Sisbacen** (homologação) — o item de maior lead-time do projeto inteiro e o bloqueio histórico do v1 desde jul/2026. Checklist dos formulários, documentação da IF/CNPJ, protocolo registrado, follow-up semanal recorrente no calendário. Se a credencial depender de IF parceira, mover para o topo da conversa com o piloto (ação 10).
 3. **Extrair o golden corpus**: script `xtask` converte os 1.178 testes Go em fixtures input/expected versionadas; marcar `flaky-spec` os dependentes de globals/ordem e derivá-los manualmente; etiquetar cada golden com o status de produção do código que o originou (wired vs órfão — o mapa honesto da F2).
 4. **Normalizar o catálogo**: ETL `criticas.json` → schema único; dedup dos 11 códigos duplicados; chaves sufixadas (`2061-DLO`) → código de 4 dígitos + categoria; contagem publicada pelo script; `STATUS.md` machine-generated no ar desde o primeiro dia.
@@ -480,7 +480,7 @@ Derivações operacionais:
 7. **Criar o tracker dos 6 fios desligados** como gates de não-regressão arquitetural: um gate por fio (dispatch silencioso, chaves sufixadas, XSD relativo, parse repetido, defaults silenciosos, motores duplos) — cada um vira um teste/CI que falha se o padrão renascer no código novo.
 8. **Provisionar infra dev**: Postgres gerenciado + Redis + bucket + Sentry + domínio; budget cap mensal configurado no cloud (o orçamento do §5.4 só é honesto se houver teto de gasto automático); ambiente roda as migrations 001–026 limpas.
 9. **Abrir as issues dos marcos N1–N6** com o campo "artefato externo que prova este marco" preenchido de antemão (protocolo STA, log do BCValidador, contrato, recibo) — o board inteiro nasce já amarrado à doutrina de evidência; kill criteria com data de avaliação agendada como reminder.
-10. **Prospectar o piloto DRSAC**: contato com 3–5 IFs S1–S4 da lista nominal (via FBM/ABBC/consultorias — canais verificados no research/23 §4) para validar demanda do beta dez/2026. O relógio comercial começa antes do código: sem sinalização até 05/dez/2026, o §3.2 manda para o plano B automaticamente.
+10. **Prospectar o piloto DRSAC**: contato com 5–8 IFs S1–S4 da lista nominal (via FBM/ABBC/consultorias — canais verificados no research/23 §4) para validar demanda do beta dez/2026. O relógio comercial começa antes do código: sem sinalização até 05/dez/2026, o §3.2 manda para o plano B automaticamente.
 
 ---
 

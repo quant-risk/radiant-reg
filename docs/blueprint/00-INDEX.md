@@ -93,7 +93,7 @@ Tempo por documento (leitura densa): 00-INDEX ~12 min · 11-TESE ~20 min · 20-A
 | **F0** fundação e verdade inicial | 1–2 | 16–29/nov/2026 | Workspace 17 crates, CI com 4 gates, catálogo normalizado, golden corpus dos 1.178 testes Go, STATUS.md machine-generated, ADRs assinadas | CI green em PR real; contagens publicadas pelo build; ≥1 PR bloqueado pelo catalog gate (prova de que funciona, não de que existe) |
 | **F1** domínio, leiautes nov/2026, storage | 3–6 | 30/nov–27/dez/2026 | `norma-domain` (enum exaustivo, newtypes, Vigencia, arredondamento por leiaute), codegen XSD nov/2026, sqlx + RLS + catalog gate | Tipos compilam para todos os CADOCs vigentes; RLS provado com testcontainers (tenant A não lê tenant B); gate demonstradamente quebra build |
 | **F2** pipeline unificada + 3040/3050 | 7–12 | 28/dez/2026–07/fev/2027 | Pipeline única L1-L4, generators 3040/3050, paridade golden, fuzz do parser em CI | **N1** paridade 100% green (contada pelo harness) + **N2** XML Rust aceito no BCValidador oficial |
-| **F3** API, worker, STA, primeiro envio | 13–19 | 08/fev–28/mar/2027 | axum + utoipa, worker apalis (claim atômico), STA client port (A1), generators 2061/2062; spike A3 fora do caminho crítico | **N3** envio STA-h homolog real com protocolo capturado; degrada para N3' (CRD manual) se credencial não chegar |
+| **F3** API, worker, STA, primeiro envio | 13–19 | 08/fev–28/mar/2027 | axum + utoipa, worker apalis (claim atômico), STA client port (Basic preemptivo + PSTA300), generators 2061/2062; spike A3 fora do caminho crítico | **N3** envio STA-h homolog real com protocolo capturado; degrada para N3' (CRD manual) se credencial não chegar |
 | **F4** Radar, IA estágio 1, harness, conectores | 20–26 | 29/mar–16/mai/2027 | Radar com diff semântico + auto-PR, copiloto com citação, gates M6 nos 3 tiers, conectores File/API | Gate bloqueia um PR real com regressão de precisão (log do gate vermelho anexado); Radar gera PR de diff simulado; copiloto cita fonte clicável |
 | **F5** launch comercial | 27–32 | 17/mai–27/jun/2027 | Pricing público, SDKs 1 por linguagem, MCP server rmcp, conectores DB/MCP, SOC 2 readiness real com auditora contratada | **N4** contrato pagante assinado **e dinheiro recebido**; pentest executado com findings triados |
 | **Buffer** | 33–36 | 28/jun–25/jul/2027 | Contingência nomeada — cortes da F4 em ordem fixa (Radar leitor-only → RAG BM25-only → conectores DB/MCP); nunca se corta paridade (N1), BCValidador (N2), envio real (N3) | Buffer não consumido = F6 começa antes; buffer consumido sem corte = próxima re-ancoragem puxa mais buffer |
@@ -127,7 +127,7 @@ Tempo por documento (leitura densa): 00-INDEX ~12 min · 11-TESE ~20 min · 20-A
 
 ---
 
-## 7. Pricing recomendado (vige no launch, Q1–Q2/2027)
+## 7. Pricing FASE 2 (ladder completo no L2 jun-jul/2027; L1 mar/2027 abre Free+Starter; a FASE 1 usa a régua do wedge — 23 §2.0)
 
 | | **Free** | **Starter** | **Pro** | **Scale** | **Enterprise** |
 |---|---|---|---|---|---|
@@ -203,7 +203,7 @@ Tempo por documento (leitura densa): 00-INDEX ~12 min · 11-TESE ~20 min · 20-A
 7. **Tracker dos 6 fios desligados** como gates de não-regressão arquitetural — um teste/CI por fio (dispatch silencioso, chaves sufixadas, XSD relativo, parse repetido, defaults silenciosos, motores duplos) que falha se o padrão renascer no código novo.
 8. **Provisionar infra dev** (Postgres gerenciado, Redis, bucket, Sentry, domínio) com budget cap mensal automático no cloud e migrations 001–026 limpas rodando.
 9. **Abrir as issues dos marcos N1–N6** com o campo "artefato externo que prova este marco" preenchido de antemão (protocolo STA, log do BCValidador, contrato, recibo) e kill criteria agendados como reminder.
-10. **Prospectar o piloto DRSAC**: contato com 3–5 IFs S1–S4 da lista nominal (FBM/ABBC/consultorias — canais verificados) para validar demanda do beta dez/2026; sem sinalização até 05/dez/2026, o §3.2 do roadmap manda para o plano B automaticamente.
+10. **Prospectar o piloto DRSAC**: contato com 5–8 IFs S1–S4 da lista nominal (FBM/ABBC/consultorias — canais verificados) para validar demanda do beta dez/2026; sem sinalização até 05/dez/2026, o §3.2 do roadmap manda para o plano B automaticamente.
 
 ---
 
@@ -213,7 +213,7 @@ Tempo por documento (leitura densa): 00-INDEX ~12 min · 11-TESE ~20 min · 20-A
 |---|---|---|---|
 | 1 | **XSD 1.0 sem validador Rust maduro** (`xmlschema` 0.0.x; único risco real do stack) | 3 camadas (ADR-0012): codegen + inline + xmllint autoridade; fuzz obrigatório; plano B extremo: sidecar Xerces-J | Spike da semana 3 não converte os XSD oficiais sem trabalho manual pesado |
 | 2 | **Credencial Sisbacen não obtida** (em 4 meses, nunca foi) | Pedido aberto nas 72h + follow-up semanal; fallback: BCValidador + envio manual via CRD (aceitável para o zerado) | Follow-up #2 sem resposta; 31/jan/2027 degrada para N3' |
-| 3 | **DRSAC: críticas restritas** (não públicas; engine do v1 órfão) | Piloto vende geração + BCValidador + envio assistido do zerado, sem promessa de regras semânticas; wiring mínimo obrigatório | IF do piloto pedir cobertura que não existe; wiring não green até 30/nov |
+| 3 | **DRSAC: críticas restritas** (não públicas; engine do v1 órfão) | Piloto vende geração + BCValidador + envio assistido do zerado, sem promessa de regras semânticas; mitigação/sinal atrelados aos **4 itens do Bloqueio A.2** (saneamento + re-download oficial + PSTA300 protocolado + reg-cadoc 2030 Rust canônico — 25 §3.2) | IF do piloto pedir cobertura que não existe; qualquer dos 4 itens do Bloqueio A.2 não fechado até 30/nov |
 | 4 | **Revisão de Rust por 1 pessoa** é o gargalo | Revisores automáticos em série (clippy → anti-wildcard → catalog gate → harness-gate → cargo-mutants); humano só em decisão de domínio | Fila de revisão >2 dias por PR |
 | 5 | **Burnout do único dev** | Buffer de 20% nomeado; semanas de 5 dias; 1 semana off após N3 e após launch; spikes em background | 2 fins de semana consecutivos trabalhando |
 
@@ -254,11 +254,11 @@ Os outros 5 (mudança de leiaute no meio do port, cópia por concorrente, migra�
 | `08-produto-pricing.md` | TAM/SAM/SOM via API Olinda, WTP por segmento, unit economics (churn, NRR, GM, payback), PLG vs sales-led, projeção MRR 12m. |
 | `09-harness.md` | Spec do harness v4: estado da arte (Stripe Radar, SWE-bench, Duco, OpenAI Cookbook), DDLs Postgres, Honesty Engine, 6 fases de implementação. |
 
-**Volumes anexos da fusão (5, `docs/blueprint/volumes/`):**
+**Volumes anexos da fusão (5, `docs/blueprint/volumes/`) — pendente de entrada:**
 
 | Volume | Conteúdo |
 |---|---|
-| `docs/blueprint/volumes/` (Vols. 1–5) | Blueprint Gemini — anexos da fusão de 16/11/2026 (em entrada no repo). |
+| `docs/blueprint/volumes/` (Vols. 1–5) | Blueprint Gemini — anexos da fusão de 16/11/2026. **Pendente de entrada: o diretório `docs/blueprint/volumes/` ainda não existe no repo.** |
 
 **Workflow persistente:** `.zcode/workflows/blueprint-fecho.dwf.ts` — fecha o blueprint de forma idempotente (só reescreve o que falta ou está stub <150 linhas): escreve seções faltantes, roda os 3 críticos em loop adversarial com editor + verificador independente, valida cobertura com gate determinístico (`wc`/glob) e consolida este índice com leitura independente.
 
