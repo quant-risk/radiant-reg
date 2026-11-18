@@ -610,6 +610,12 @@ impl StaClient {
         let http = reqwest::blocking::Client::builder()
             .timeout(timeout)
             .http1_only()
+            // Redirects NUNCA são seguidos: o default do reqwest 0.12 é
+            // `Policy::limited(10)` e seguiria 3xx para host ARBITRÁRIO —
+            // burlando a allowlist (o payload do CADOC viajaria no corpo).
+            // A URL seguida é SEMPRE a validada aqui/por `seguir_pagina`;
+            // um 3xx do BACEN/proxy vira resposta crua, tratada como erro.
+            .redirect(reqwest::redirect::Policy::none())
             .build()
             .map_err(|e| RegError::InvalidValue {
                 field: "http_client".to_string(),
@@ -638,6 +644,9 @@ impl StaClient {
         let http = reqwest::blocking::Client::builder()
             .timeout(timeout)
             .http1_only()
+            // Mesma política do construtor de produção (nenhum redirect) —
+            // os testes exercitam o comportamento REAL do cliente.
+            .redirect(reqwest::redirect::Policy::none())
             .build()
             .unwrap_or_else(|e| panic!("cliente HTTP de teste: {e}"));
         Self {
@@ -2123,6 +2132,40 @@ pub(crate) mod tests {
             "{}",
             capturas[0].caminho
         );
+    }
+
+    /// Allowlist não é burlável por redirect: um 3xx do host de origem
+    /// apontando para OUTRO host NÃO é seguido (`Policy::none` — o default
+    /// `limited(10)` do reqwest seguiria para host arbitrário e o payload
+    /// viajaria). O destino NUNCA recebe requisição; o 3xx vira erro tipado.
+    #[test]
+    fn redirect_para_outro_host_nao_e_seguido() {
+        let destino = ServidorHttp::iniciar(Arc::new(|_captura| {
+            resposta_http(
+                200,
+                "OK",
+                &[("Content-Type", "application/xml")],
+                b"<Resultado>interceptado</Resultado>",
+            )
+        }));
+        let url_destino = destino.url.clone();
+        let origem = ServidorHttp::iniciar(Arc::new(move |_captura| {
+            resposta_http(307, "Temporary Redirect", &[("Location", &url_destino.clone())], b"")
+        }));
+        let cliente = cliente_para(&origem.url);
+        let opcoes = OpcoesDisponiveis {
+            data_hora_inicio: "2025-11-18T00:00:00.000".to_string(),
+            identificador_documento: None,
+            sistemas: None,
+            dependencia: None,
+        };
+        let resultado = cliente.listar_disponiveis(&opcoes);
+        assert!(resultado.is_err(), "3xx não seguido não pode parecer sucesso");
+        // O host de destino NUNCA recebeu nada — o corpo não vazou.
+        assert_eq!(destino.total_capturas(), 0, "redirect cross-host não é seguido");
+        // A origem recebeu UMA tentativa: o 3xx vira erro de status do BACEN
+        // (não-retriável), então o RetryPolicy não re-tenta.
+        assert_eq!(origem.total_capturas(), 1);
     }
 
     #[test]

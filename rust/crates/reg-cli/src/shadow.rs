@@ -618,11 +618,12 @@ pub(crate) fn diff(legado: &[u8], rust: &[u8]) -> Result<RelatorioShadow, RegErr
         chave_rust = it_rust.next();
     }
 
-    let total = equivalentes
-        + cont.cosmetic
-        + cont.data_drift
-        + cont.legacy_bug
-        + cont.radiant_gap;
+    // Total = união de chaves dos dois mapas: equivalentes (que JÁ inclui as
+    // linhas cosmetically-divergentes — semântica igual) + legacy_bug +
+    // data_drift + radiant_gap. Somar cont.cosmetic de novo contava a linha
+    // cosmetic 2× e inflava o total (o % do relatório mentia quando COSMETIC
+    // coexiste com DATA_DRIFT/RADIANT_GAP).
+    let total = equivalentes + cont.legacy_bug + cont.data_drift + cont.radiant_gap;
     let equivalentes_semanticos = total - cont.data_drift - cont.radiant_gap;
     // SMER em pontos-básicos — aritmética inteira (zero-float). O
     // intermediário u128 elimina overflow; o quociente ≤ 10_000 cabe em u64.
@@ -678,6 +679,32 @@ mod tests {
         for l in &rel.linhas {
             assert_eq!(l.categoria, Categoria::Cosmetica);
         }
+        // total_linhas = união de chaves (3 caminhos: Doc3040, Cli, Saldo) —
+        // NUNCA equivalentes + cont.cosmetic (a linha cosmetic já está em
+        // equivalentes; somar de novo infla o total).
+        assert_eq!(rel.total_linhas, 3);
+        assert_eq!(rel.equivalentes, 3);
+    }
+
+    /// COSMETIC coexistindo com DATA_DRIFT: o total é a união de chaves e o
+    /// SMER é o honesto — a linha cosmetic não é contada 2× (bug do total
+    /// inflado: união 4 → relatório antigo dizia 5 e 80% em vez de 75%).
+    #[test]
+    fn total_eh_a_uniao_quando_cosmetic_coexiste_com_drift() {
+        let legado = r#"<Doc3040><Cli><Saldo>100</Saldo><Sufixo>A</Sufixo><Obs>v1</Obs></Cli></Doc3040>"#;
+        let rust = r#"<Doc3040><Cli><Saldo>110</Saldo><Sufixo> A </Sufixo><Novo>r4</Novo></Cli></Doc3040>"#;
+        let rel = diff(legado.as_bytes(), rust.as_bytes()).unwrap();
+        // União: Doc3040, Cli, Saldo (drift), Sufixo (cosmetic), Obs (legacy_bug), Novo (radiant_gap).
+        assert_eq!(rel.categorias.data_drift, 1);
+        assert_eq!(rel.categorias.cosmetic, 1);
+        assert_eq!(rel.categorias.legacy_bug, 1);
+        assert_eq!(rel.categorias.radiant_gap, 1);
+        // equivalentes = Doc3040 + Cli + Sufixo (cosmetic incluído) = 3.
+        assert_eq!(rel.equivalentes, 3);
+        assert_eq!(rel.total_linhas, 6, "total = união (não 7 = equivalentes + cosmetic + drift + bug + gap)");
+        // Honestos: (6 - 1 drift - 1 gap) / 6 = 4/6 → 6666 bps (66.66%).
+        assert_eq!(rel.smer_bps, 6_666);
+        assert!(!rel.gate_passa());
     }
 
     /// DATA_DRIFT: mesmo caminho, valor diferente — SMER < 100% e gate reprova.

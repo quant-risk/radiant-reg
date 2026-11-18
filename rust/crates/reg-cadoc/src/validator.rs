@@ -42,9 +42,18 @@
 //!   contra path traversal) e (c) o literal `no_warn`. Nenhum input cru do
 //!   usuário entra no argv; os bytes do XML nunca trafegam por argv/env.
 //! - **Working dir isolado** em `tempfile::TempDir` (removido no drop).
-//! - **Timeout HARD**: poll + `kill` — o processo é morto; no timeout, as
-//!   threads de drenagem de pipe NÃO são esperadas (netos órfãos podem segurar
-//!   o fd do pipe; o output é irrelevante no timeout).
+//! - **Timeout HARD**: poll + `kill` — o processo direto (o wrapper
+//!   `.sh`/`.bat`) é morto. LIMITAÇÃO DECLARADA E ACEITA: o `kill` do std
+//!   alcança APENAS o filho direto — o `java` neto (quando o wrapper não
+//!   usa `exec`) continua rodando sem limite após o timeout. Não há
+//!   process-group kill (`killpg` é `unsafe` e o workspace proíbe
+//!   `unsafe_code`, Rust/Cargo.toml `[workspace.lints]`) nem Job Object no
+//!   Windows. Além do vazamento de CPU/processo, netos órfãos podem segurar
+//!   o fd do pipe (as threads de drenagem NÃO são esperadas no timeout; o
+//!   output é irrelevante nesse caminho). Mitigações operacionais: o wrapper
+//!   provisionado em produção DEVE usar `exec java ...` (substitui o shell,
+//!   então o kill alcança o java) — requisito do provisionamento on-prem,
+//!   não inferência do adapter.
 
 use std::io::Read;
 use std::path::{Path, PathBuf};

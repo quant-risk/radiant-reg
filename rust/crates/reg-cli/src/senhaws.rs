@@ -113,6 +113,10 @@ impl SenhawsClient {
         let http = reqwest::blocking::Client::builder()
             .timeout(timeout)
             .http1_only()
+            // Redirects NUNCA são seguidos (default do reqwest seguiria 3xx
+            // para host arbitrário — burlaria a allowlist e a nova senha
+            // trafegaria para o destino do redirect). Mesma política do STA.
+            .redirect(reqwest::redirect::Policy::none())
             .build()
             .map_err(|e| RegError::InvalidValue {
                 field: "http_client".to_string(),
@@ -138,6 +142,7 @@ impl SenhawsClient {
         let http = reqwest::blocking::Client::builder()
             .timeout(timeout)
             .http1_only()
+            .redirect(reqwest::redirect::Policy::none())
             .build()
             .unwrap_or_else(|e| panic!("cliente HTTP de teste: {e}"));
         Self {
@@ -261,8 +266,8 @@ pub fn gerar_senha_hex() -> Result<Zeroizing<String>, RegError> {
 
 /// Corpo do PUT /senha — port de `senhaParams` (senhaws.go:267-272).
 fn xml_parametros_senha(senha_atual: &str, nova_senha: &str) -> String {
-    // Escape via quick-xml — senha pode conter & e < (senhas hex não, mas a
-    // via manual do --nova-senha sim).
+    // Escape via quick-xml — a nova senha pode conter & e < (a via `--gerar`
+    // produz hex, mas o helper é genérico e o escape é defensivo).
     let esc = |v: &str| quick_xml::escape::escape(v).into_owned();
     format!(
         "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<Parametros><Senha>{}\

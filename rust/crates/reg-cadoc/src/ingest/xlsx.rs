@@ -18,7 +18,11 @@ use super::{CanonicalInput, ColumnMapping, MappingDocument, Transform};
 
 /// Palavras-chave de header — mesma lista de comportamento do extract.py v1,
 /// adaptada aos leiautes (Doc3040 usa "Campo"/"Formato"; críticas usam "Cód").
-const HEADER_KEYWORDS: &[&str] = &["cód", "codigo", "código", "campo", "tag", "chave"];
+/// As keywords são comparadas contra células NORMALIZADAS com o MESMO
+/// pipeline do matcher (`StripAccents` + lowercase): "Cód." vira "cod." —
+/// por isso a lista contém a forma SEM acento ("cod"); a forma acentuada
+/// nunca casaria.
+const HEADER_KEYWORDS: &[&str] = &["cod", "codigo", "campo", "tag", "chave"];
 
 /// Número máximo de linhas inspecionadas para achar o header (extract.py: 10).
 const MAX_HEADER_SEARCH: usize = 10;
@@ -78,19 +82,33 @@ fn cell_to_string(cell: &Data) -> String {
 
 /// Detecta a linha de header procurando keywords nas primeiras N linhas,
 /// célula a célula (não na linha concatenada — mais preciso que o v1).
-/// Retorna `None` se nada for achado — o chamador decide o erro
-/// (nunca "assumir linha 0" como o v1 fazia por baixo).
+/// O match é por PALAVRA INTEIRA (a célula é tokenizada em runs
+/// alfanuméricos): "Cód." casa "cod"; "Código do cliente" casa "codigo";
+/// uma célula "Valor do campo X" não casa por substring parcial de outra
+/// palavra (ex. "CampoExtra" não casa "campo"). Retorna `None` se nada for
+/// achado — o chamador decide o erro (nunca "assumir linha 0" como o v1
+/// fazia por baixo).
 pub fn detect_header_row(rows: &[Vec<String>]) -> Option<usize> {
     for (i, row) in rows.iter().take(MAX_HEADER_SEARCH).enumerate() {
         for cell in row {
             let normalized: String = Transform::StripAccents.apply(cell);
             let lower = normalized.to_lowercase();
-            if HEADER_KEYWORDS.iter().any(|k| lower.contains(k)) {
+            if tokenizar(&lower).any(|token| HEADER_KEYWORDS.contains(&token.as_str())) {
                 return Some(i);
             }
         }
     }
     None
+}
+
+/// Tokeniza em runs alfanuméricos — "cód." → ["cod"], "Código do cliente"
+/// → ["codigo","do","cliente"]. Comparação por palavra inteira, não
+/// `contains` (evita mis-detecção de títulos com a keyword embutida).
+fn tokenizar(lower: &str) -> impl Iterator<Item = String> {
+    lower
+        .split(|c: char| !c.is_ascii_alphanumeric())
+        .filter(|t| !t.is_empty())
+        .map(String::from)
 }
 
 /// Localiza o índice da coluna cujo header (normalizado trim/lower/acentos)
@@ -198,6 +216,24 @@ mod tests {
         assert_eq!(detect_header_row(&rows), Some(1));
         let none: Vec<Vec<String>> = vec![vec!["x".into()]];
         assert_eq!(detect_header_row(&none), None);
+    }
+
+    /// Headers de críticas usam "Cód"/"Cód." — keywords são comparadas
+    /// contra células normalizadas (strip accents), então a lista tem "cod":
+    /// 'cód' acentuado NUNCA casaria contra texto normalizado.
+    #[test]
+    fn detecta_header_cod_acentado_forma_curta_e_longa() {
+        let cod = vec![vec!["".into()], vec!["Cód".into(), "Descrição".into()]];
+        assert_eq!(detect_header_row(&cod), Some(1), "header 'Cód' deve ser detectado");
+        let cod_ponto = vec![vec!["Cód.".into(), "Descrição".into()]];
+        assert_eq!(detect_header_row(&cod_ponto), Some(0), "header 'Cód.' deve ser detectado");
+        let codigo = vec![vec!["Código".into(), "Descrição".into()]];
+        assert_eq!(detect_header_row(&codigo), Some(0), "header 'Código' deve ser detectado");
+        let codigo_longo = vec![vec!["Código do evento".into(), "Valor".into()]];
+        assert_eq!(detect_header_row(&codigo_longo), Some(0), "keyword em palavra inteira");
+        // Match é por palavra inteira: "CampoExtra" não casa "campo".
+        let embutido = vec![vec!["CampoExtra".into(), "Valor".into()]];
+        assert_eq!(detect_header_row(&embutido), None, "substring embutida não é header");
     }
 
     #[test]

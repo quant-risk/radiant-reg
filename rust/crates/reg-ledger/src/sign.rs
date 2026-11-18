@@ -199,8 +199,15 @@ impl DualApproval {
     }
 
     /// Re-verifica as DUAS assinaturas sobre os bytes informados com
-    /// `verify_strict`. Falha-certa para qualquer divergência.
+    /// `verify_strict`. Falha-certa para qualquer divergência — inclusive
+    /// chaves idênticas: o 4-olhos é re-imposto AQUI (a struct é pública e
+    /// Deserialize; o construtor `nova` nega, mas um consumidor que
+    /// construa/desserialize a struct diretamente burlaria a dupla alçada
+    /// se `verificar` não re-cheasse `chave_primeira == chave_segunda`).
     pub fn verificar(&self, bytes: &[u8]) -> Result<(), SignError> {
+        if self.chave_primeira == self.chave_segunda {
+            return Err(SignError::ChavesIdenticas);
+        }
         let k1 = chave_publica_de_hex(&self.chave_primeira)?;
         let k2 = chave_publica_de_hex(&self.chave_segunda)?;
         let s1 = assinatura_de_hex(&self.primeira)?;
@@ -249,6 +256,12 @@ mod tests {
 
     fn seed_hex(s: &str) -> SeedAssinatura {
         SeedAssinatura::de_hex(s).unwrap()
+    }
+
+    /// Assina os bytes com a seed e devolve o hex r||s — auxiliar dos
+    /// testes de forgery (o 4-olhos burlado usa assinaturas VÁLIDAS).
+    fn assinatura_de_hex_de_seed(seed: &SeedAssinatura, bytes: &[u8]) -> [u8; 64] {
+        SigningKey::from_bytes(&seed.0).sign(bytes).to_bytes()
     }
 
     fn payload_simples() -> DossierPayload {
@@ -361,6 +374,49 @@ mod tests {
         let json = serde_json::to_string(&aprov).unwrap();
         let de: DualApproval = serde_json::from_str(&json).unwrap();
         de.verificar(bytes).unwrap();
+    }
+
+    /// 4-OLHOS re-imposto em `verificar`, não só em `nova`: um DualApproval
+    /// FORJADO diretamente (struct pública + Deserialize — sem passar por
+    /// `nova`) com a mesma chave e a mesma assinatura nos dois campos é
+    /// REJEITADO com ChavesIdenticas, mesmo com a assinatura sendo válida.
+    /// Bypass disso = dupla alçada com 1 assinante.
+    #[test]
+    fn dual_approval_forjado_mesma_pk_2x_eh_rejeitado_em_verificar() {
+        let bytes = b"amostra do mapping: doc3040, data-base 2026-11";
+        let seed_a = seed_hex(SEED_A);
+        let sig_a = hex::encode(assinatura_de_hex_de_seed(&seed_a, bytes));
+        let pk_a = seed_a.chave_publica_hex();
+
+        let forjado = DualApproval {
+            primeira: sig_a.clone(),
+            segunda: sig_a,
+            chave_primeira: pk_a.clone(),
+            chave_segunda: pk_a,
+        };
+        let err = forjado.verificar(bytes).unwrap_err();
+        assert!(matches!(err, SignError::ChavesIdenticas), "{err}");
+    }
+
+    /// Variante do forgery: assinaturas DIFFERENTES mas MESMA chave — a
+    /// dupla alçada exige DUAS chaves distintas, não duas assinaturas.
+    #[test]
+    fn dual_approval_mesma_pk_assinaturas_distintas_eh_rejeitado() {
+        let bytes = b"amostra 2";
+        let seed_a = seed_hex(SEED_A);
+        let seed_b = seed_hex(SEED_B);
+        let pk_a = seed_a.chave_publica_hex();
+        // Assinatura A no campo "primeira", assinatura B no campo "segunda",
+        // MAS ambas verificáveis contra a MESMA chave pública A → a segunda
+        // não verifica, e a checagem de chaves idênticas nega antes.
+        let forjado = DualApproval {
+            primeira: hex::encode(assinatura_de_hex_de_seed(&seed_a, bytes)),
+            segunda: hex::encode(assinatura_de_hex_de_seed(&seed_b, bytes)),
+            chave_primeira: pk_a.clone(),
+            chave_segunda: pk_a,
+        };
+        let err = forjado.verificar(bytes).unwrap_err();
+        assert!(matches!(err, SignError::ChavesIdenticas), "{err}");
     }
 
     /// Seed inválida (hex ímpar / tamanho errado) → erro tipado.

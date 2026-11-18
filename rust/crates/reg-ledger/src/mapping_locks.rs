@@ -270,7 +270,10 @@ impl MappingLock<UnidadesContratadas> {
 impl MappingLock<DryRunLimpo> {
     /// **Trava 3 — 4-olhos sobre a amostra**: exige [`DualApproval`] que
     /// verifique (verify_strict) sobre EXATAMENTE os bytes da amostra
-    /// informados. Chaves idênticas já são negadas dentro de `DualApproval::nova`.
+    /// informados. Chaves idênticas são negadas dentro de `DualApproval` —
+    /// tanto no construtor `nova` quanto em `verificar` (um DualApproval
+    /// construído/desserializado fora do construtor com a mesma chave 2× é
+    /// rejeitado aqui, com 1 assinante não se fecha 4-olhos).
     pub fn assinar_amostra(
         self,
         aprovacao: &DualApproval,

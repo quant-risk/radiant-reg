@@ -144,8 +144,12 @@ fn strip_accents(input: &str) -> String {
     out
 }
 
-/// "dd/mm/aaaa" (ou "dd/mm/aa") → "AAAA-MM". Caso contrário, devolve o
-/// input aparado — a validação dura fica em `DataBase::parse` (reg-core).
+/// "dd/mm/aaaa" (ou "dd/mm/aa") → "AAAA-MM" (o DIA é descartado — o
+/// transform produz data-base de competência mensal, formato que
+/// `DataBase::parse` de reg-core aceita). Caso contrário, devolve o input
+/// aparado — a validação dura fica em `DataBase::parse` (reg-core).
+/// Para campos A10 com dia (DtContr etc.) use um transform próprio de data
+/// ISO — NÃO reutilize este transform: ele nunca emite "AAAA-MM-DD".
 fn date_to_data_base(input: &str) -> String {
     let trimmed = input.trim();
     let parts: Vec<&str> = trimmed.split('/').collect();
@@ -155,7 +159,7 @@ fn date_to_data_base(input: &str) -> String {
         if (d.len() == 1 || d.len() == 2) && (m.len() == 1 || m.len() == 2) {
             let year = if y.len() == 2 { format!("20{y}") } else { y.to_string() };
             if is_digits(d) && is_digits(m) && (year.len() == 4 && is_digits(&year)) {
-                return format!("{year}-{:0>2}-{:0>2}", m, d);
+                return format!("{year}-{:0>2}", m);
             }
         }
     }
@@ -177,8 +181,15 @@ mod tests {
 
     #[test]
     fn date_to_data_base_converte_e_preserva_invalido() {
-        assert_eq!(Transform::DateToDataBase.apply("30/06/2026"), "2026-06-30");
-        assert_eq!(Transform::DateToDataBase.apply("01/07/26"), "2026-07-01");
+        // Contrato do transform (doc): "dd/mm/aaaa" → AAAA-MM — o DIA é
+        // descartado; a saída é aceitável por DataBase::parse (AAAA-MM).
+        assert_eq!(Transform::DateToDataBase.apply("30/06/2026"), "2026-06");
+        assert_eq!(Transform::DateToDataBase.apply("01/07/26"), "2026-07");
+        // A saída FECHA o contrato com DataBase::parse (nada de "AAAA-MM-DD"):
+        assert_eq!(
+            reg_core::period::DataBase::parse(&Transform::DateToDataBase.apply("30/06/2026")),
+            Ok(reg_core::period::DataBase::new(2026, 6).unwrap())
+        );
         // Não é data: devolve aparado — DataBase::parse decide depois.
         assert_eq!(Transform::DateToDataBase.apply("junho"), "junho");
     }

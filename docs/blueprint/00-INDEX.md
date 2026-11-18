@@ -197,13 +197,32 @@ Tempo por documento (leitura densa): 00-INDEX ~12 min · 11-TESE ~20 min · 20-A
 1. **Saneamento F0′ do repo legado + criar o repo novo** (FASE 1 — 25-ROADMAP §0): **chave rotacionada/revogada hoje** (`backend/dev-private.pem`, commitada, casa com `frontend/.env.pubkey`); **binários removidos** (`git rm` dos 6 Mach-O ~110 MB); **PDFs regenerados** (3 PDFs-404 de 6.245 bytes, `Carta_Circular_3588_STA.pdf` de 725 B, 5 shells Angular de 2.871 B) **com verificação de magic bytes**; **re-download oficial 2030/3040** (pós-IN 694/2025 + IN 729/2026) **com SHA-256**; em paralelo, cargo workspace do wedge com os 4 crates stub (`reg-core`, `reg-cadoc`, `reg-ledger`, `reg-cli`), `[workspace.dependencies]` pinado e CI completo (fmt, clippy `-D warnings`, linter anti-wildcard, test, catalog gate, drift check) — commit 1 já contém as ADRs assinadas.
 2. **Abrir o pedido de credencial Sisbacen / PSTA300** (homologação) — o maior lead-time do projeto e o bloqueio histórico do v1 desde jul/2026; checklist dos formulários, **pedido formal PSTA300 protocolado** (operador como "usuário especial" — Res. BCB 366/2024, art. 7º IV), follow-up semanal recorrente; degradação para N3' se não chegar até 31/jan/2027.
 3. **Extrair o golden corpus**: script `xtask` converte os 1.178 testes Go em fixtures input/expected versionadas, etiquetadas por status de produção do código que as originou (wired vs órfão — o mapa honesto da F2); dependentes de globals/ordem viram `flaky-spec`.
-4. **Normalizar o catálogo**: ETL de `criticas.json` → schema único, dedup dos 11 códigos duplicados, chaves sufixadas (`2061-DLO`) → código de 4 dígitos + categoria; STATUS.md machine-generated no ar desde o dia 1.
+4. **Normalizar o catálogo**: ETL de `criticas.json` → schema único, dedup dos 11 códigos duplicados, chaves sufixadas (`2061-DLO`) → código de 4 dígitos + categoria; STATUS.md machine-generated no ar desde o dia 1. **CORREÇÃO 18/11/2026:** o STATUS.md machine-generated NÃO foi criado na FASE 1 — **adiado para a FASE 2** (25-ROADMAP §FASE 2 registra o adiamento); o registro de bloqueios/pendências é manual na §10.1 abaixo.
 5. **Baixar e versionar os leiautes nov/2026** (IN 733 onda 3), XSDs oficiais, FAQ DRSAC dez/2026 e planilhas de Regras de Validação — git-tag por data-base; a primeira correção real da base normativa parada em jul/2026.
 6. **Wiring mínimo do drsac no v1** (plano A da ponte) — **revogado pela fusão (16/11/2026)**: o gen2030 em Go saiu do escopo (retrabalho); o critério de 30/nov passa a ser a nova redação do Bloqueio A.2 (25-ROADMAP §3.2) e o 2030 do piloto passa a ser o `reg-cadoc` em Rust (S4 da FASE 1 — 25-ROADMAP §0).
 7. **Tracker dos 6 fios desligados** como gates de não-regressão arquitetural — um teste/CI por fio (dispatch silencioso, chaves sufixadas, XSD relativo, parse repetido, defaults silenciosos, motores duplos) que falha se o padrão renascer no código novo.
 8. **Provisionar infra dev** (Postgres gerenciado, Redis, bucket, Sentry, domínio) com budget cap mensal automático no cloud e migrations 001–026 limpas rodando.
 9. **Abrir as issues dos marcos N1–N6** com o campo "artefato externo que prova este marco" preenchido de antemão (protocolo STA, log do BCValidador, contrato, recibo) e kill criteria agendados como reminder.
 10. **Prospectar o piloto DRSAC**: contato com 5–8 IFs S1–S4 da lista nominal (FBM/ABBC/consultorias — canais verificados) para validar demanda do beta dez/2026; sem sinalização até 05/dez/2026, o §3.2 do roadmap manda para o plano B automaticamente.
+
+### 10.1 Bloqueios e pendências DECLARADAS da FASE 1 (registro manual — 18/11/2026)
+
+Estado honesto da FASE 1: **S1–S5 técnica; S6 bloqueado em N0** ("Fase 1 técnica completa" do commit d25dc5f não qualifica o gate §0 — nenhuma fase fecha por declaração). Pendências que vivem em comentário de código ganham aqui superfície de documento:
+
+**Bloqueios de evidência N0 (commit d25dc5f):**
+- **gen2030** — não implementado (S4 virou gen3040 CMN 4.966, commit 8124fcb); depende do re-download do leiaute 2030 IN 694/2025 (`reg-cadoc/src/lib.rs` `TARGET_LEIAUTE_2030`) — a janela DRSAC dez/2026 depende dele;
+- **smoke STA-h real (PSTA300)** — bloqueado na credencial Sisbacen (pedido em andamento; degradação N3' documentada);
+- **musl cross (CI Linux)** — não feito: sem pacote air-gapped instalável;
+- **re-download oficial 2030/3040 com SHA-256** — NÃO executado: `docs/normativos/MANIFESTO.md` segue 100% `[ ]` e "Registro de capturas" vazio; o gen3040 roda sobre o XLS de jul/2026 enquanto a IN 733 onda 3 é a vigente (00-INDEX §8).
+
+**Pendências declaradas em código (fonte única: os módulos; aqui só o mapa):**
+- gen3040 (`rust/crates/reg-cadoc/src/gen3040.rs` — doc "PENDÊNCIAS DECLARADAS"): campos N11,7 `TaxEft`/`PercIndx`/`TJE` não modelados (reg-core não expõe `TaxaDecimal`); blocos `Gar`/`Inf`/`Sicor`/`Perda`/`ConIpocs`/`Agreg` não emitidos; `@EstInstFin` ausente → `RuleNotImplemented` (domínio Anexo 41 = {1,2,3}; derivação dias→estágio é modelagem institucional);
+- CNPJ alfanumérico (`rust/crates/reg-core/src/cnpj.rs:52,65`): DV base-36 da IN 729/2026 pendente de confirmação oficial — `dv_pendente()`;
+- BacenValidatorAdapter (`rust/crates/reg-cadoc/src/validator.rs`): timeout `kill` mata só o wrapper (o `java` neto pode sobreviver — killpg é `unsafe`, proibido no workspace); mitigação operacional: wrapper com `exec`;
+- paridade golden (`rust/crates/reg-cadoc/tests/golden_smoke.rs`): runner executado com registry vazio — 46 casos, 0 regras portadas (skip DECLARADO por regra; paridade executiva = 0);
+- mapping.lock: máquina de 4 travas implementada e testada em `reg-ledger`, mas nunca exercitada com `mapping.toml` real (arquivo não existe no repo); dedup blake3 P=256 não implementado (sem dependência).
+
+**Workflows:** definição de workflow commitada só do blueprint-fecho; `fase-s3-corpus.dwf.ts` adicionada ao índice em 18/11/2026; runs S4/S6 (`dwfrun-904ae740`, `dwfrun-aba003aa`) ficam gitignored por política, mas os IDs são citados aqui para rastreabilidade.
 
 ---
 

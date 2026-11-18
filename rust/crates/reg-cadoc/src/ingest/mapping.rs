@@ -23,10 +23,33 @@ use serde::{Deserialize, Serialize};
 
 use super::{ColumnMapping, FieldPath, MonetaryInput};
 
-/// Campos monetários do domínio SCR — leaf do `FieldPath`. A 1ª trava:
-/// declarar uma coluna cujo leaf está aqui sem `unit` é erro de parse.
+/// Campos monetários do domínio SCR (formato N19,2 do leiaute) — leaf do
+/// `FieldPath`. A 1ª trava: declarar uma coluna cujo leaf está aqui sem
+/// `unit` é erro de parse. Lista derivada da aba `Doc3040` de
+/// `3040/SCR3040_Leiaute.xls` (L24 FatAnual, L54 VlrContr, L60 ProvConsttd,
+/// L64 VlrProxParcela, L69 Venc/v*, L81-82 garantias, L95 Valor, L105-109
+/// agregado, L118-119 ContAquisição, L137-141 ContInstFinRes4966, L161
+/// Perda) + os substantivos genéricos do domínio; o teste
+/// `monetarios_do_leiaute_doc3040_cobertos_pela_trava` percorre o leiaute
+/// REAL e prova a cobertura (drift do leiaute quebra o teste).
 pub const MONETARY_FIELDS: &[&str] = &[
+    // Substantivos genéricos do domínio (herdados da versão anterior).
     "saldo", "valor", "limite", "parcela", "encargo", "principal", "garantia",
+    // Cli (L24) e Op (L54/L60/L64) da aba Doc3040.
+    "fat_anual", "vlr_contr", "prov_consttd", "vlr_prox_parcela",
+    // Venc — todos os códigos do Anexo 1 (vCOD, L69).
+    "v20", "v40", "v60", "v80", "v110", "v120", "v130", "v140", "v150", "v160", "v165",
+    "v170", "v175", "v180", "v190", "v199",
+    "v205", "v210", "v220", "v230", "v240", "v245", "v250", "v255", "v260", "v270", "v280", "v290",
+    "v310", "v320", "v330",
+    // Gar (L81/L82) e Inf (L95).
+    "vlr_orig", "vlr_data",
+    // Agregado (L105/L106/L109).
+    "vlr_saldo_tot", "vlr_saldo_vinc", "vlr_bonus_rebate",
+    // ContAquisicao (L118/L119) e ContInstFinRes4966 (L137-141).
+    "cst_amort", "vlr_mercado", "vlr_cont_br", "vlr_perda_acum", "vlr_justo", "rend_mes",
+    // Perda (L161).
+    "vlr_perda",
 ];
 
 /// Cabeçalho do mapping.toml.
@@ -140,7 +163,7 @@ pub(crate) fn monetary_input(col: &ColumnMapping, cell: &str) -> Result<Monetary
 }
 
 #[cfg(test)]
-#[allow(clippy::unwrap_used)]
+#[allow(clippy::unwrap_used, clippy::expect_used)]
 mod tests {
     use super::*;
     use reg_core::money::MonetaryUnit;
@@ -197,5 +220,72 @@ mod tests {
         let mi = monetary_input(&doc.columns[0], " 1.234,56 ").unwrap();
         assert_eq!(mi.raw, "1.234,56");
         assert_eq!(mi.unit, MonetaryUnit::Reais);
+    }
+
+    /// A trava 1 cobre os leaves monetários REAIS do leiaute: o fixture
+    /// oficial `3040/SCR3040_Leiaute.xls` é percorrido e TODO campo com
+    /// Formato N19,2 (monetário) tem o atributo (camelCase → snake_case)
+    /// em `MONETARY_FIELDS`. Drift do leiaute (re-download S1) quebra o
+    /// teste — sinal de que a trava precisa ser atualizada, nunca burlada.
+    #[test]
+    fn monetarios_do_leiaute_doc3040_cobertos_pela_trava() {
+        use crate::ingest::read_sheet_rows;
+        use std::path::Path;
+
+        let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../3040/SCR3040_Leiaute.xls");
+        if !path.exists() {
+            panic!("fixture real ausente: {}", path.display());
+        }
+        let rows = read_sheet_rows(&path, "Doc3040").unwrap();
+        let header_idx = crate::ingest::detect_header_row(&rows).unwrap();
+        let header = &rows[header_idx];
+        let col_idx = |nome: &str| {
+            header.iter().position(|h| {
+                let mut s = h.to_lowercase();
+                s = s.trim().to_string();
+                s == nome
+            })
+        };
+        let col_formato = col_idx("formato").expect("coluna Formato no header Doc3040");
+        let col_attr = header
+            .iter()
+            .position(|h| h.to_lowercase().trim() == "atributo")
+            .expect("coluna Atributo no header Doc3040");
+
+        let snake = |attr: &str| -> String {
+            let mut out = String::new();
+            for (i, c) in attr.chars().enumerate() {
+                if c.is_ascii_uppercase() {
+                    if i > 0 {
+                        out.push('_');
+                    }
+                    out.push(c.to_ascii_lowercase());
+                } else {
+                    out.push(c);
+                }
+            }
+            out
+        };
+
+        let mut cobertos = 0usize;
+        for row in &rows[header_idx + 1..] {
+            let formato = row.get(col_formato).map(String::as_str).unwrap_or("").trim().to_string();
+            let attr = row.get(col_attr).map(String::as_str).unwrap_or("").trim().to_string();
+            if formato != "N19,2" || attr.is_empty() {
+                continue; // Venc (L69) tem Atributo vazio — códigos v* cobertos pela lista estática
+            }
+            let leaf = snake(&attr);
+            assert!(
+                MONETARY_FIELDS.contains(&leaf.as_str()),
+                "campo N19,2 do leiaute ({attr} → {leaf}) fora da trava 1 — MONETARY_FIELDS incompleta"
+            );
+            cobertos += 1;
+        }
+        // Guarda mínima: o leiaute REAL tem campos N19,2 com atributo nomeado.
+        assert!(cobertos >= 10, "leiaute inesperado: só {cobertos} N19,2 com atributo");
+        // E os códigos de Venc (Anexo 1) estão todos na trava:
+        for cod in ["v110", "v130", "v205", "v330"] {
+            assert!(MONETARY_FIELDS.contains(&cod), "código de Venc {cod} fora da trava");
+        }
     }
 }

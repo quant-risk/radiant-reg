@@ -18,16 +18,39 @@
 //!   final via BacenValidatorAdapter, ADR-0018).
 //!
 //! PENDÊNCIAS DECLARADAS (nunca inventadas — §6 do blueprint):
-//! - Campos do leiaute N11,7 (`TaxEft`, `PercIndx`, `TJE`) não são monetários
-//!   (N19,2) e não têm tipo dedicado em reg-core (`TaxaDecimal` não exposta);
-//!   não modelados aqui — pendência do ingest (CanonicalInput não os carrega).
-//! - Elementos `Gar` (garantias), `Inf` (informações adicionais), `Sicor`,
-//!   `Perda`, `ConIpocs` declarados no leiaute mas ausentes do CanonicalInput
-//!   atual — não emitidos; a exceção `RuleNotImplemented` do reg-core é o
-//!   estado correto quando uma regra exigir esses blocos.
-//! - Mapa dias-de-atraso → Estágio (0-5): domínios oficiais dos Anexos 41/42
-//!   aguardam confirmação pós re-download do leiaute (ADR-0018) — o mapeamento
-//!   `estagio_por_dias_atraso` é declarado e testado, sem skip silencioso.
+//! - Campos do leiaute N11,7 (`TaxEft`, `PercIndx`, `TJE` — aba Doc3040 L48/
+//!   L52/L140 do `3040/SCR3040_Leiaute.xls`) não são monetários (N19,2) e não
+//!   têm tipo dedicado em reg-core (`TaxaDecimal` não exposta); não modelados
+//!   aqui — pendência do ingest (CanonicalInput não os carrega).
+//! - Elementos `Gar` (garantias — incl. `VlrOrig`/`VlrData`), `Inf` (info-
+//!   mações adicionais), `Sicor`, `Perda`, `ConIpocs`, `DtaProxParcela`,
+//!   `VlrProxParcela`, `QtdParcelas`, `Agreg` declarados no leiaute mas
+//!   ausentes do CanonicalInput atual — não emitidos; a exceção
+//!   `RuleNotImplemented` do reg-core é o estado correto quando uma regra
+//!   exigir esses blocos.
+//! - `@EstInstFin` NÃO é derivado de dias-de-atraso: o mapeamento 0-5 de
+//!   versões anteriores emitia valores fora do domínio oficial (Anexo 41 =
+//!   {1.0, 2.0, 3.0} — Estágios 1-3, Arts. 37-39 CMN 4.966). Quando ausente,
+//!   a emissão falha com `RuleNotImplemented` (a derivação dias→estágio é
+//!   modelagem institucional além do piso regulamentar); quando informado,
+//!   o valor é validado contra o domínio do Anexo 41.
+//! - Antes da primeira chancela real (BacenValidatorAdapter + re-download S1
+//!   do leiaute), este gerador NÃO pode ser apresentado como "formato CMN
+//!   4.966 vigente completo" — pendências acima são o mapa honesto do que
+//!   falta.
+//!
+//! CAMPOS CONDICIONAIS emitidos conforme a aba `Doc3040` do leiaute (a
+//! exceção por modalidade/perfil — PJ/PF, FIDC — é da camada de validação,
+//! não do gerador):
+//! - `@Cosif` (A255, L44 — "Sim"; FIDC informa "1");
+//! - `@DetCli` (A14, L40 — PJ);
+//! - `@TpCtrl` (A1, L21 — PJ, Anexo 10);
+//! - `@FatAnual` (N19,2, L24 — PJ/PF, condicional);
+//! - `@DiaAtraso` (N6, L61 — obrigatório APENAS quando há valores nos
+//!   fluxos v205..v330 inclusive, Anexo 1).
+//! - `@VlrContr` (L54) isento para as modalidades 0201, 0204, 0210 (saldo
+//!   remanescente de crédito rotativo é condição do validator), 0406, 1304
+//!   e 1901.
 
 use quick_xml::events::{BytesDecl, BytesEnd, BytesStart, Event};
 use quick_xml::Writer;
@@ -65,9 +88,18 @@ pub struct GeneratedDoc {
 }
 
 /// Fluxo de vencimentos COMPLETO do Anexo 1 (CMN 4.966) — o v1 emitia só
-/// v110/v120/v150/v160/v165 e nunca auditava v130/v140 (bug §1.8).
+/// v110/v120/v150/v160/v165 e nunca auditava v130/v140 (bug §1.8). Domínio
+/// integral do Anexo 1 do leiaute: limites (v20/v40), a liberar (v60/v80),
+/// a vencer (v110..v199), VENCIDOS (v205..v290) e baixados como prejuízo
+/// (v310..v330) — os vencidos/prejuízo alimentam a obrigatoriedade de
+/// `@DiaAtraso` (Doc3040 L61: "Sim, apenas nos casos de operações com
+/// valores nos fluxos de vencimento entre 205 inclusive e 330 inclusive").
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct Venc4966 {
+    pub v20: Option<Centavos>,
+    pub v40: Option<Centavos>,
+    pub v60: Option<Centavos>,
+    pub v80: Option<Centavos>,
     pub v110: Option<Centavos>,
     pub v120: Option<Centavos>,
     pub v130: Option<Centavos>,
@@ -75,6 +107,54 @@ pub struct Venc4966 {
     pub v150: Option<Centavos>,
     pub v160: Option<Centavos>,
     pub v165: Option<Centavos>,
+    pub v170: Option<Centavos>,
+    pub v175: Option<Centavos>,
+    pub v180: Option<Centavos>,
+    pub v190: Option<Centavos>,
+    pub v199: Option<Centavos>,
+    /// Créditos vencidos de 1 a 14 dias (Anexo 1).
+    pub v205: Option<Centavos>,
+    pub v210: Option<Centavos>,
+    pub v220: Option<Centavos>,
+    pub v230: Option<Centavos>,
+    pub v240: Option<Centavos>,
+    pub v245: Option<Centavos>,
+    pub v250: Option<Centavos>,
+    pub v255: Option<Centavos>,
+    pub v260: Option<Centavos>,
+    pub v270: Option<Centavos>,
+    pub v280: Option<Centavos>,
+    pub v290: Option<Centavos>,
+    /// Créditos baixados como prejuízo até 12 meses (Anexo 1).
+    pub v310: Option<Centavos>,
+    pub v320: Option<Centavos>,
+    pub v330: Option<Centavos>,
+}
+
+impl Venc4966 {
+    /// Há valores em fluxos de vencimento vencidos/baixados (v205..v330
+    /// inclusive, Anexo 1)? — dispara a obrigatoriedade de `@DiaAtraso`
+    /// (Doc3040 L61). Novo código de vencido no Anexo 1 = novo campo aqui
+    /// E nesta lista E na tabela de emissão de `emit_venc` (o teste de
+    /// completude quebra se qualquer um dos três divergir).
+    #[must_use]
+    pub fn tem_fluxos_vencidos(&self) -> bool {
+        self.v205.is_some()
+            || self.v210.is_some()
+            || self.v220.is_some()
+            || self.v230.is_some()
+            || self.v240.is_some()
+            || self.v245.is_some()
+            || self.v250.is_some()
+            || self.v255.is_some()
+            || self.v260.is_some()
+            || self.v270.is_some()
+            || self.v280.is_some()
+            || self.v290.is_some()
+            || self.v310.is_some()
+            || self.v320.is_some()
+            || self.v330.is_some()
+    }
 }
 
 /// ContInstFinRes4966 — contabilização de instrumentos financeiros
@@ -113,6 +193,12 @@ pub struct OpInput {
     pub contrt: String,
     pub natu_op: String,
     pub mod_: String,
+    /// Conta Cosif (A255, Doc3040 L44 — "Sim"; FIDC informa "1"). Vazio =
+    /// `MissingField`.
+    pub cosif: String,
+    /// Detalhamento do cliente (A14, L40 — PJ): CNPJ completo de 14 dígitos.
+    /// `None` = atributo não emitido (condicional é do validator).
+    pub det_cli: Option<String>,
     pub origem_rec: String,
     pub indx: String,
     pub var_camb: String,
@@ -122,16 +208,27 @@ pub struct OpInput {
     pub class_op: String,
     /// Provisão constituída — obrigatória (informar zero quando for o caso).
     pub prov_consttd: Centavos,
-    /// Valor contratado — `None` é `MissingField` na emissão (a obrigatoriedade
-    /// por modalidade, ex. 0201/0204 isentas, é do validator, não do gerador).
+    /// Valor contratado (N19,2, L54). `None` é aceito SOMENTE para as
+    /// modalidades isentas do leiaute (`MODALIDADES_ISENTAS_VLR_CONTR`) —
+    /// para as demais é `MissingField`. A condição de negócio de 0210
+    /// ("contanto que não provenha de saldo remanescente do crédito
+    /// rotativo") é do validator, não do gerador.
     pub vlr_contr: Option<Centavos>,
     pub caract_especial: Option<String>,
     pub venc: Venc4966,
     pub cont_inst_fin: Option<ContInstFinRes4966>,
-    /// Dias de atraso da parcela mais atrasada (`DiaAtraso`, N6) — alimenta
-    /// o Estágio quando `cont_inst_fin` está presente.
+    /// Dias de atraso da parcela mais atrasada (`DiaAtraso`, N6, L61).
+    /// Emitido como `@DiaAtraso` SOMENTE quando `venc.tem_fluxos_vencidos()`
+    /// (obrigatório entre v205 e v330 inclusive); com fluxos vencidos e
+    /// zero dias, a emissão é `InvalidValue` (operação vencida tem ≥1 dia).
     pub dias_atraso: u32,
 }
+
+/// Modalidades isentas de `@VlrContr` (Doc3040 L54, col7): "Valor obrigatório
+/// para todas as modalidades menos 0201, 0204, 0210 (contanto que não
+/// provenha de saldo remanescente do crédito rotativo), 0406, 1304, 1901".
+/// A condição de 0210 é validada pela camada de validação.
+pub const MODALIDADES_ISENTAS_VLR_CONTR: &[&str] = &["0201", "0204", "0210", "0406", "1304", "1901"];
 
 /// Cliente individualizado (`<Cli>`).
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -143,6 +240,12 @@ pub struct CliInput {
     /// Autorização de consulta (Anexo 20).
     pub autorzc: String,
     pub porte_cli: String,
+    /// Tipo de controle (A1, Doc3040 L21 — PJ, Anexo 10): `None` = não
+    /// emitido (condicional PJ/FIDC é do validator).
+    pub tp_ctrl: Option<String>,
+    /// Faturamento anual PJ ou renda mensal PF (N19,2, L24 — condicional):
+    /// `None` = não emitido.
+    pub fat_anual: Option<Centavos>,
     /// Início do relacionamento — AAAA-MM-DD.
     pub ini_relact_cli: String,
     /// Nome do cliente no exterior — exigido quando `TpIdentExt` informado.
@@ -198,22 +301,26 @@ fn valida_cd_cliente(cd: &str) -> Result<String, RegError> {
     Ok(s.to_string())
 }
 
-/// Estágio de atraso (0-5 por grau de atraso, CMN 4.966 Arts. 37-39).
-/// Mapeamento DECLARADO — domínios oficiais dos Anexos 41/42 pendentes de
-/// re-download do leiaute (ADR-0018); nenhum estágio é skipado silenciosamente.
-#[must_use]
-pub const fn estagio_por_dias_atraso(dias: u32) -> u8 {
-    if dias == 0 {
-        1
-    } else if dias <= 15 {
-        2
-    } else if dias <= 30 {
-        3
-    } else if dias <= 60 {
-        4
-    } else {
-        5
+/// Domínio oficial de `@EstInstFin` — Anexo 41 do leiaute (aba `Anexo`,
+/// L864-868): "Estágio do Instrumento Financeiro" = {1.0 Estágio 1,
+/// 2.0 Estágio 2, 3.0 Estágio 3} (Arts. 37-39, CMN 4.966).
+pub const DOMINIO_EST_INST_FIN: &[&str] = &["1", "2", "3"];
+
+/// Valida `@EstInstFin` contra o domínio do Anexo 41. A derivação
+/// dias-de-atraso → estágio NÃO é feita aqui: além do piso regulamentar
+/// (atraso > 90 dias ⇒ Estágio 3 — e mesmo esse exige confirmação pós
+/// re-download), a faixa 1..=90 é modelagem institucional, e inventar
+/// valores 4/5 (versões anteriores) emitia XML fora do domínio oficial.
+pub fn valida_est_inst_fin(valor: &str) -> Result<(), RegError> {
+    if DOMINIO_EST_INST_FIN.contains(&valor.trim()) {
+        return Ok(());
     }
+    Err(RegError::InvalidValue {
+        field: "Doc3040/Cli/Op/ContInstFinRes4966/@EstInstFin".to_string(),
+        reason: format!(
+            "fora do domínio do Anexo 41 ({{1,2,3}} — Estágios 1-3, CMN 4.966 Art. 37): {valor:?}"
+        ),
+    })
 }
 
 /// Valor monetário no formato BACEN N19,2: inteiro em centavos, 2 casas
@@ -308,6 +415,15 @@ fn emit_cli(writer: &mut Writer<Cursor<Vec<u8>>>, cli: &CliInput) -> Result<(), 
     push_attr(&mut tag, "Tp", &require("Doc3040/Cli/@Tp", &cli.tp)?)?;
     push_attr(&mut tag, "Autorzc", &require("Doc3040/Cli/@Autorzc", &cli.autorzc)?)?;
     push_attr(&mut tag, "PorteCli", &require("Doc3040/Cli/@PorteCli", &cli.porte_cli)?)?;
+    // TpCtrl (A1, L21 — PJ, Anexo 10) e FatAnual (N19,2, L24 — PJ/PF):
+    // condicionais emitidas quando informadas; a exigência por perfil
+    // (PJ/PF/FIDC) é da camada de validação.
+    if let Some(tc) = &cli.tp_ctrl {
+        push_attr(&mut tag, "TpCtrl", &require("Doc3040/Cli/@TpCtrl", tc)?)?;
+    }
+    if let Some(fa) = cli.fat_anual {
+        push_attr(&mut tag, "FatAnual", &n192(fa))?;
+    }
     push_attr(&mut tag, "IniRelactCli", &require("Doc3040/Cli/@IniRelactCli", &cli.ini_relact_cli)?)?;
     if let Some(nome) = &cli.nome_cli {
         push_attr(&mut tag, "NomeCli", nome)?;
@@ -332,6 +448,13 @@ fn emit_op(writer: &mut Writer<Cursor<Vec<u8>>>, op: &OpInput) -> Result<(), Reg
     push_attr(&mut tag, "Contrt", &require("Doc3040/Cli/Op/@Contrt", &op.contrt)?)?;
     push_attr(&mut tag, "NatuOp", &require("Doc3040/Cli/Op/@NatuOp", &op.natu_op)?)?;
     push_attr(&mut tag, "Mod", &require("Doc3040/Cli/Op/@Mod", &op.mod_)?)?;
+    // Cosif (A255, L44 — "Sim"): obrigatório na emissão (a exceção FIDC
+    // informa "1"; o valor é do input, nunca default silencioso).
+    push_attr(&mut tag, "Cosif", &require("Doc3040/Cli/Op/@Cosif", &op.cosif)?)?;
+    // DetCli (A14, L40 — PJ): condicional, emitido quando informado.
+    if let Some(dc) = &op.det_cli {
+        push_attr(&mut tag, "DetCli", &require("Doc3040/Cli/Op/@DetCli", dc)?)?;
+    }
     push_attr(&mut tag, "OrigemRec", &require("Doc3040/Cli/Op/@OrigemRec", &op.origem_rec)?)?;
     push_attr(&mut tag, "Indx", &require("Doc3040/Cli/Op/@Indx", &op.indx)?)?;
     push_attr(&mut tag, "VarCamb", &require("Doc3040/Cli/Op/@VarCamb", &op.var_camb)?)?;
@@ -342,13 +465,36 @@ fn emit_op(writer: &mut Writer<Cursor<Vec<u8>>>, op: &OpInput) -> Result<(), Reg
     push_attr(&mut tag, "ProvConsttd", &n192(op.prov_consttd))?;
     match op.vlr_contr {
         Some(v) => push_attr(&mut tag, "VlrContr", &n192(v))?,
-        None => return Err(RegError::MissingField { field: "Doc3040/Cli/Op/@VlrContr".to_string() }),
+        None => {
+            // Isenção por modalidade (Doc3040 L54, col7): 0201/0204/0210/
+            // 0406/1304/1901 dispensam VlrContr — a condição de negócio
+            // (0210 sem saldo remanescente de crédito rotativo) é do
+            // validator, não do gerador.
+            if !MODALIDADES_ISENTAS_VLR_CONTR.contains(&op.mod_.as_str()) {
+                return Err(RegError::MissingField { field: "Doc3040/Cli/Op/@VlrContr".to_string() });
+            }
+        }
     }
     if let Some(ce) = &op.caract_especial {
         push_attr(&mut tag, "CaracEspecial", ce)?;
     }
 
-    // <Venc> completo v110..v165 — o v1 nunca emitia/auditava v130/v140 (bug §1.8).
+    // DiaAtraso (N6, L61): obrigatório APENAS com valores nos fluxos
+    // v205..v330 inclusive — emitido nesse caso; zero dias com fluxo vencido
+    // é inconsistência dura (operação vencida tem ≥1 dia de atraso). Push
+    // ANTES do Start — atributo pós-escrita seria perdido pelo quick-xml.
+    if op.venc.tem_fluxos_vencidos() {
+        if op.dias_atraso == 0 {
+            return Err(RegError::InvalidValue {
+                field: "Doc3040/Cli/Op/@DiaAtraso".to_string(),
+                reason: "operação com valores em fluxos vencidos (v205..v330) exige dias de atraso ≥ 1".to_string(),
+            });
+        }
+        push_attr(&mut tag, "DiaAtraso", &op.dias_atraso.to_string())?;
+    }
+
+    // <Venc> com o domínio COMPLETO do Anexo 1 — o v1 nunca emitia/auditava
+    // v130/v140 (bug §1.8).
     writer.write_event(Event::Start(tag)).map_err(xml_err)?;
     emit_venc(writer, &op.venc)?;
 
@@ -363,7 +509,14 @@ fn emit_op(writer: &mut Writer<Cursor<Vec<u8>>>, op: &OpInput) -> Result<(), Reg
 
 fn emit_venc(writer: &mut Writer<Cursor<Vec<u8>>>, venc: &Venc4966) -> Result<(), RegError> {
     let mut tag = start_tag("Venc");
+    // Domínio COMPLETO do Anexo 1, na ordem do leiaute. Completude é testada
+    // (`venc_completo_incl_todos_os_codigos_do_anexo_1`): campo novo do
+    // Anexo 1 sem entrada aqui quebra o teste.
     for (name, val) in [
+        ("v20", venc.v20),
+        ("v40", venc.v40),
+        ("v60", venc.v60),
+        ("v80", venc.v80),
         ("v110", venc.v110),
         ("v120", venc.v120),
         ("v130", venc.v130),
@@ -371,6 +524,26 @@ fn emit_venc(writer: &mut Writer<Cursor<Vec<u8>>>, venc: &Venc4966) -> Result<()
         ("v150", venc.v150),
         ("v160", venc.v160),
         ("v165", venc.v165),
+        ("v170", venc.v170),
+        ("v175", venc.v175),
+        ("v180", venc.v180),
+        ("v190", venc.v190),
+        ("v199", venc.v199),
+        ("v205", venc.v205),
+        ("v210", venc.v210),
+        ("v220", venc.v220),
+        ("v230", venc.v230),
+        ("v240", venc.v240),
+        ("v245", venc.v245),
+        ("v250", venc.v250),
+        ("v255", venc.v255),
+        ("v260", venc.v260),
+        ("v270", venc.v270),
+        ("v280", venc.v280),
+        ("v290", venc.v290),
+        ("v310", venc.v310),
+        ("v320", venc.v320),
+        ("v330", venc.v330),
     ] {
         if let Some(c) = val {
             push_attr(&mut tag, name, &n192(c))?;
@@ -389,13 +562,19 @@ fn emit_cont_inst_fin(
     if let Some(v) = &cif.clas_at_fin {
         push_attr(&mut tag, "ClasAtFin", v)?;
     }
-    // Estágio do instrumento: derivado dos dias de atraso (0-5) quando não
-    // informado explicitamente — derivação DECLARADA, nunca default mudo.
-    let est = cif
-        .est_inst_fin
-        .clone()
-        .unwrap_or_else(|| estagio_por_dias_atraso(dias_atraso).to_string());
-    push_attr(&mut tag, "EstInstFin", &est)?;
+    // EstInstFin (Anexo 41 = {1,2,3}): quando ausente, a derivação
+    // dias-de-atraso → estágio NÃO é inventada — falha com
+    // `RuleNotImplemented` (estado DECLARADO; o mapeamento 0-5 de versões
+    // anteriores emitia valores fora do domínio oficial). `dias_atraso`
+    // permanece no input para `@DiaAtraso` e para regras futuras.
+    let est = cif.est_inst_fin.as_ref().ok_or_else(|| RegError::RuleNotImplemented {
+        rule: "Doc3040/Cli/Op/ContInstFinRes4966/@EstInstFin".to_string(),
+        state: format!(
+            "EstInstFin ausente e a derivação dias-de-atraso → Estágio é modelagem institucional (domínio oficial Anexo 41 = {{1,2,3}}); informe o estágio explicitamente (dias_atraso={dias_atraso})"
+        ),
+    })?;
+    valida_est_inst_fin(est)?;
+    push_attr(&mut tag, "EstInstFin", est)?;
     if let Some(q) = cif.qtd_inst {
         push_attr(&mut tag, "QtdInst", &q.to_string())?;
     }
@@ -456,6 +635,8 @@ mod tests {
             tp: "J".into(),
             autorzc: "S".into(),
             porte_cli: "1".into(),
+            tp_ctrl: None,
+            fat_anual: None,
             ini_relact_cli: "2020-01-01".into(),
             nome_cli: None,
             ops: vec![op_min(ipoc)],
@@ -468,6 +649,8 @@ mod tests {
             contrt: "C1".into(),
             natu_op: "01".into(),
             mod_: "0213".into(),
+            cosif: "12512345".into(),
+            det_cli: None,
             origem_rec: "0100".into(),
             indx: "01".into(),
             var_camb: "BRL".into(),
@@ -534,6 +717,7 @@ mod tests {
             v150: Some(cents(150)),
             v160: Some(cents(160)),
             v165: Some(cents(165)),
+            ..Venc4966::default()
         };
         let xml = gerar_xml(&input(vec![cli]));
         for (name, v) in [
@@ -542,6 +726,112 @@ mod tests {
         ] {
             assert!(xml.contains(&format!("{name}=\"{v}\"")), "{name} ausente: {xml}");
         }
+    }
+
+    /// Completude: TODO campo de `Venc4966` tem entrada na tabela de emissão
+    /// de `emit_venc` — os 31 códigos do Anexo 1 aparecem no XML quando
+    /// preenchidos. Um código novo do Anexo 1 sem campo + entrada quebra aqui.
+    #[test]
+    fn venc_completo_incl_todos_os_codigos_do_anexo_1() {
+        const CODIGOS: [&str; 31] = [
+            "v20", "v40", "v60", "v80", "v110", "v120", "v130", "v140", "v150", "v160", "v165",
+            "v170", "v175", "v180", "v190", "v199",
+            "v205", "v210", "v220", "v230", "v240", "v245", "v250", "v255", "v260", "v270", "v280", "v290",
+            "v310", "v320", "v330",
+        ];
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.ops[0].venc = Venc4966 {
+            v20: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v40: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v60: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v80: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v110: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v120: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v130: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v140: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v150: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v160: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v165: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v170: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v175: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v180: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v190: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v199: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v205: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v210: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v220: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v230: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v240: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v245: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v250: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v255: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v260: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v270: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v280: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v290: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v310: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v320: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            v330: Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+        };
+        cli.ops[0].dias_atraso = 45;
+        let xml = gerar_xml(&input(vec![cli]));
+        for cod in CODIGOS {
+            assert!(xml.contains(&format!("{cod}=\"1\"")), "código {cod} do Anexo 1 ausente do <Venc>: {xml}");
+        }
+        // 31 códigos + DiaAtraso obrigatório por haver fluxos v205..v330.
+        assert!(xml.contains("DiaAtraso=\"45\""), "{xml}");
+        assert!(Venc4966 {
+            v205: Some(Centavos::ZERO),
+            ..Venc4966::default()
+        }
+        .tem_fluxos_vencidos());
+    }
+
+    /// DiaAtraso (N6, L61): obrigatório APENAS quando há valores em fluxos
+    /// v205..v330 — sem fluxos vencidos, NÃO é emitido; com fluxos vencidos
+    /// e 0 dias, é inconsistência dura (InvalidValue).
+    #[test]
+    fn dia_atraso_emitido_somente_com_fluxos_vencidos() {
+        // Sem fluxos vencidos: sem @DiaAtraso, mesmo com dias_atraso preenchido.
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.ops[0].dias_atraso = 45;
+        let xml = gerar_xml(&input(vec![cli]));
+        assert!(!xml.contains("DiaAtraso="), "{xml}");
+
+        // Com fluxo vencido: @DiaAtraso presente.
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.ops[0].dias_atraso = 45;
+        cli.ops[0].venc.v220 = Some(Centavos::parse("500", reg_core::money::MonetaryUnit::Reais).unwrap());
+        let xml = gerar_xml(&input(vec![cli]));
+        assert!(xml.contains("DiaAtraso=\"45\""), "{xml}");
+
+        // Fluxo vencido + 0 dias → erro tipado, nunca XML inválido.
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.ops[0].venc.v205 = Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap());
+        cli.ops[0].dias_atraso = 0;
+        let e = gerar(&input(vec![cli])).unwrap_err();
+        assert!(matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("DiaAtraso")), "{e}");
+    }
+
+    /// Campos condicionais do leiaute emitidos quando informados (Cosif L44,
+    /// DetCli L40, TpCtrl L21, FatAnual L24) e Cosif ausente é erro.
+    #[test]
+    fn cosif_detcli_tpctrl_fatanual_emitidos_conforme_leiaute() {
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.tp_ctrl = Some("1".into());
+        cli.fat_anual = Some(Centavos::parse("5000000,00", reg_core::money::MonetaryUnit::Reais).unwrap());
+        cli.ops[0].det_cli = Some("12345678000195".into());
+        let xml = gerar_xml(&input(vec![cli]));
+        assert!(xml.contains("TpCtrl=\"1\""), "{xml}");
+        assert!(xml.contains("FatAnual=\"500000000\""), "{xml}");
+        assert!(xml.contains("DetCli=\"12345678000195\""), "{xml}");
+        assert!(xml.contains("Cosif=\"12512345\""), "{xml}");
+
+        // Cosif (L44 — "Sim") ausente = MissingField, nunca default.
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.ops[0].cosif = String::new();
+        let e = gerar(&input(vec![cli])).unwrap_err();
+        assert!(matches!(e, RegError::MissingField { ref field } if field.contains("Cosif")), "{e}");
     }
 
     #[test]
@@ -580,7 +870,7 @@ mod tests {
         // IPOC ausente (vazio):
         let e = gerar(&input(vec![cli_min("CLI00001", "")])).unwrap_err();
         assert_eq!(e, RegError::MissingField { field: "Doc3040/Cli/Op/@IPOC".to_string() });
-        // Valor contratado ausente:
+        // Valor contratado ausente em modalidade NÃO isenta (0213):
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
         cli.ops[0].vlr_contr = None;
         let e = gerar(&input(vec![cli])).unwrap_err();
@@ -650,7 +940,8 @@ mod tests {
         cli.ops[0].dias_atraso = 45;
         cli.ops[0].cont_inst_fin = Some(ContInstFinRes4966 {
             clas_at_fin: Some("1".into()),
-            est_inst_fin: None, // derivado dos dias de atraso → 4
+            // Informado explicitamente — validado contra o domínio do Anexo 41.
+            est_inst_fin: Some("2".into()),
             qtd_inst: Some(10),
             vlr_cont_br: Some(Centavos::parse("1000", reg_core::money::MonetaryUnit::Reais).unwrap()),
             vlr_perda_acum: None,
@@ -662,22 +953,89 @@ mod tests {
             estagios: vec![EstagioAloc { motivo: Some("01".into()), dt_alocacao: db() }],
         });
         let xml = gerar_xml(&input(vec![cli]));
-        assert!(xml.contains("<ContInstFinRes4966 ClasAtFin=\"1\" EstInstFin=\"4\" QtdInst=\"10\""), "{xml}");
+        assert!(xml.contains("<ContInstFinRes4966 ClasAtFin=\"1\" EstInstFin=\"2\" QtdInst=\"10\""), "{xml}");
         assert!(xml.contains("VlrContBr=\"100000\""), "{xml}");
         assert!(xml.contains("RendMes=\"1234\""), "{xml}");
         assert!(xml.contains("<Estagio Motivo=\"01\" DtAlocacao=\"2026-08\"/>"), "{xml}");
     }
 
+    /// EstInstFinanceiro fora do domínio do Anexo 41 ({1,2,3}) é rejeitado —
+    /// os "4"/"5" do mapeamento antigo 0-5 eram XML inválido.
     #[test]
-    fn estagio_por_dias_atraso_faixas() {
-        assert_eq!(estagio_por_dias_atraso(0), 1);
-        assert_eq!(estagio_por_dias_atraso(1), 2);
-        assert_eq!(estagio_por_dias_atraso(15), 2);
-        assert_eq!(estagio_por_dias_atraso(16), 3);
-        assert_eq!(estagio_por_dias_atraso(30), 3);
-        assert_eq!(estagio_por_dias_atraso(31), 4);
-        assert_eq!(estagio_por_dias_atraso(60), 4);
-        assert_eq!(estagio_por_dias_atraso(61), 5);
+    fn est_inst_fin_fora_do_dominio_anexo_41_erra() {
+        for invalido in ["4", "5", "0", "x"] {
+            let e = valida_est_inst_fin(invalido).unwrap_err();
+            assert!(matches!(e, RegError::InvalidValue { .. }), "{invalido}: {e}");
+        }
+        for valido in ["1", "2", "3"] {
+            assert!(valida_est_inst_fin(valido).is_ok());
+        }
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.ops[0].cont_inst_fin = Some(ContInstFinRes4966 {
+            clas_at_fin: None,
+            est_inst_fin: Some("4".into()), // inválido — fora do Anexo 41
+            qtd_inst: None,
+            vlr_cont_br: None,
+            vlr_perda_acum: None,
+            vlr_justo: None,
+            rend_mes: None,
+            pd_est1: None,
+            cart_prov_min: None,
+            trat_risc: None,
+            estagios: vec![],
+        });
+        let e = gerar(&input(vec![cli])).unwrap_err();
+        assert!(matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("EstInstFin")), "{e}");
+    }
+
+    /// EstInstFin ausente NÃO é mais derivado de dias-de-atraso (mapeamento
+    /// 0-5 emitia valores fora do domínio oficial) — falha com
+    /// `RuleNotImplemented` (estado DECLARADO).
+    #[test]
+    fn est_inst_fin_ausente_e_rule_not_implemented() {
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.ops[0].dias_atraso = 45;
+        cli.ops[0].cont_inst_fin = Some(ContInstFinRes4966 {
+            clas_at_fin: Some("1".into()),
+            est_inst_fin: None,
+            qtd_inst: Some(10),
+            vlr_cont_br: None,
+            vlr_perda_acum: None,
+            vlr_justo: None,
+            rend_mes: None,
+            pd_est1: None,
+            cart_prov_min: None,
+            trat_risc: None,
+            estagios: vec![],
+        });
+        let e = gerar(&input(vec![cli])).unwrap_err();
+        assert!(
+            matches!(e, RegError::RuleNotImplemented { ref rule, .. } if rule.contains("EstInstFin")),
+            "{e}"
+        );
+    }
+
+    /// Isenção de @VlrContr por modalidade (Doc3040 L54, col7): 0201/0204/
+    /// 0210/0406/1304/1901 sem VlrContr são emitidas sem o atributo; 0213
+    /// sem VlrContr é MissingField.
+    #[test]
+    fn vlr_contr_isento_por_modalidade() {
+        for mod_ in MODALIDADES_ISENTAS_VLR_CONTR {
+            let mut cli = cli_min("CLI00001", &"A".repeat(20));
+            cli.ops[0].mod_ = (*mod_).into();
+            cli.ops[0].vlr_contr = None;
+            let xml = gerar_xml(&input(vec![cli]));
+            assert!(!xml.contains("VlrContr="), "mod {mod_}: {xml}");
+        }
+        // Isenta COM valor também emite o atributo (informável).
+        let mut cli = cli_min("CLI00001", &"A".repeat(20));
+        cli.ops[0].mod_ = "0201".into();
+        cli.ops[0].vlr_contr = Some(Centavos::parse("100", reg_core::money::MonetaryUnit::Reais).unwrap());
+        let xml = gerar_xml(&input(vec![cli]));
+        assert!(xml.contains("VlrContr=\"10000\""), "{xml}");
+        // Não-isenta sem valor → erro (caminho principal já coberto em
+        // missing_field_nunca_default com 0213).
+        assert!(!MODALIDADES_ISENTAS_VLR_CONTR.contains(&"0213"));
     }
 
     #[test]

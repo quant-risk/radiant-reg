@@ -33,6 +33,8 @@ mod fixtures {
             contrt: "CT-001".into(),
             natu_op: "01".into(),
             mod_: "0213".into(),
+            cosif: "12512345".into(),
+            det_cli: None,
             origem_rec: "0100".into(),
             indx: "01".into(),
             var_camb: "BRL".into(),
@@ -51,6 +53,7 @@ mod fixtures {
                 v150: Some(centavos("500")),
                 v160: Some(centavos("0")),
                 v165: Some(centavos("0")),
+                ..Venc4966::default()
             },
             cont_inst_fin: None,
             dias_atraso: 0,
@@ -63,6 +66,8 @@ mod fixtures {
             tp: "J".into(),
             autorzc: "S".into(),
             porte_cli: "1".into(),
+            tp_ctrl: Some("1".into()),
+            fat_anual: Some(centavos("1200000")),
             ini_relact_cli: "2020-01-01".into(),
             nome_cli: None,
             ops: vec![op(&format!("20260812ABC{cd}0001"))],
@@ -143,11 +148,16 @@ fn roundtrip_attrs_case_sensitive() {
     let cli = first_start(&xml, b"Cli");
     assert_eq!(get(&cli, "Cd"), "CLI00001");
     assert_eq!(get(&cli, "Tp"), "J");
+    // Campos condicionais do leiaute (TpCtrl L21 — PJ; FatAnual L24):
+    assert_eq!(get(&cli, "TpCtrl"), "1");
+    assert_eq!(get(&cli, "FatAnual"), "120000000");
 
     let op = first_start(&xml, b"Op");
     assert_eq!(get(&op, "IPOC"), "20260812ABCCLI000010001");
     assert_eq!(get(&op, "Mod"), "0213");
     assert_eq!(get(&op, "NatuOp"), "01");
+    // Cosif (A255, L44 — "Sim"):
+    assert_eq!(get(&op, "Cosif"), "12512345");
     assert_eq!(get(&op, "VlrContr"), "150000");
 
     let venc = first_start(&xml, b"Venc");
@@ -244,10 +254,13 @@ fn cnpj_alfanumerico_janela_in729() {
 #[test]
 fn cont_inst_fin_res4966_e_estagio() {
     let mut i = fixtures::input();
-    i.clientes[0].ops[0].dias_atraso = 45; // estágio 4 (mapeamento declarado)
+    i.clientes[0].ops[0].dias_atraso = 45;
     i.clientes[0].ops[0].cont_inst_fin = Some(ContInstFinRes4966 {
         clas_at_fin: Some("1".into()),
-        est_inst_fin: None,
+        // Informado explicitamente — validado contra o domínio do Anexo 41
+        // ({1,2,3}). A derivação por dias-de-atraso não é inventada (o
+        // mapeamento 0-5 anterior emitia valores fora do domínio oficial).
+        est_inst_fin: Some("3".into()),
         qtd_inst: Some(10),
         vlr_cont_br: Some(fixtures::centavos("1000")),
         vlr_perda_acum: None,
@@ -260,10 +273,63 @@ fn cont_inst_fin_res4966_e_estagio() {
     });
     let doc = gerar(&i).unwrap();
     let xml = String::from_utf8(doc.xml).unwrap();
-    assert!(xml.contains("<ContInstFinRes4966 ClasAtFin=\"1\" EstInstFin=\"4\" QtdInst=\"10\""), "{xml}");
+    assert!(xml.contains("<ContInstFinRes4966 ClasAtFin=\"1\" EstInstFin=\"3\" QtdInst=\"10\""), "{xml}");
     assert!(xml.contains("VlrContBr=\"100000\""), "{xml}");
     assert!(xml.contains("RendMes=\"1234\""), "{xml}");
     assert!(xml.contains("<Estagio Motivo=\"01\" DtAlocacao=\"2026-08\"/>"), "{xml}");
+}
+
+/// EstInstFin ausente → RuleNotImplemented (estado DECLARADO — nunca o
+/// mapeamento 0-5 que emitia valores fora do domínio do Anexo 41).
+#[test]
+fn est_inst_fin_ausente_e_declarado_como_nao_implementado() {
+    let mut i = fixtures::input();
+    i.clientes[0].ops[0].dias_atraso = 45;
+    i.clientes[0].ops[0].cont_inst_fin = Some(ContInstFinRes4966 {
+        clas_at_fin: Some("1".into()),
+        est_inst_fin: None,
+        qtd_inst: Some(10),
+        vlr_cont_br: Some(fixtures::centavos("1000")),
+        vlr_perda_acum: None,
+        vlr_justo: None,
+        rend_mes: None,
+        pd_est1: None,
+        cart_prov_min: None,
+        trat_risc: None,
+        estagios: vec![],
+    });
+    let e = gerar(&i).unwrap_err();
+    assert!(
+        matches!(e, RegError::RuleNotImplemented { ref rule, .. } if rule.contains("EstInstFin")),
+        "{e}"
+    );
+}
+
+/// DiaAtraso (N6, L61): emitido SOMENTE com valores em fluxos v205..v330
+/// (Anexo 1); zero dias com fluxo vencido é InvalidValue.
+#[test]
+fn dia_atraso_regra_leiaute_l61() {
+    // Fluxo vencido v220 → DiaAtraso obrigatório e emitido.
+    let mut i = fixtures::input();
+    i.clientes[0].ops[0].dias_atraso = 45;
+    i.clientes[0].ops[0].venc.v220 = Some(fixtures::centavos("700"));
+    let doc = gerar(&i).unwrap();
+    let xml = String::from_utf8(doc.xml).unwrap();
+    assert!(xml.contains("DiaAtraso=\"45\""), "{xml}");
+
+    // Sem fluxos vencidos → DiaAtraso não emitido (mesmo com dias preenchidos).
+    let mut i = fixtures::input();
+    i.clientes[0].ops[0].dias_atraso = 45;
+    let doc = gerar(&i).unwrap();
+    let xml = String::from_utf8(doc.xml).unwrap();
+    assert!(!xml.contains("DiaAtraso="), "{xml}");
+
+    // Fluxo vencido + 0 dias → erro, nunca XML inválido.
+    let mut i = fixtures::input();
+    i.clientes[0].ops[0].venc.v205 = Some(Centavos::parse("1", MonetaryUnit::Centavos).unwrap());
+    i.clientes[0].ops[0].dias_atraso = 0;
+    let e = gerar(&i).unwrap_err();
+    assert!(matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("DiaAtraso")), "{e}");
 }
 
 /// GeneratedDoc carrega cadoc e data_base corretos; sha256 é hex de 64 chars.

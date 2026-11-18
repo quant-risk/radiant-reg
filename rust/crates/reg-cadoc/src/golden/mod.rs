@@ -32,11 +32,14 @@ pub struct GoldenCase {
     pub rule_code: String,
     /// XML canônico de entrada.
     pub xml: String,
-    /// Expectativa (`"nil"`, `"ok"`, substring…): schema é propriedade do
-    /// gerador do corpus; a classificação de paridade só precisa de
-    /// `rule_code` + `xml`.
+    /// Expectativa do caso: `"nil"` (apply deve ser Ok) ou `"substring"`
+    /// (apply Ok E o XML contém `substring`) — interpretadas pelo runner
+    /// (`parity.rs`, classificação honesta). Qualquer outro valor não é
+    /// interpretável pelo runner e é contado como `expect_nao_interpretadas`
+    /// (estado DECLARADO — nunca contado como passed).
     pub expect: serde_json::Value,
-    /// Substring opcional que o XML deve conter na expectativa positiva.
+    /// Substring que o XML deve conter na expectativa `"substring"`. Vazia =
+    /// verificação só superficial (contada como `superficiais` no relatório).
     #[serde(default)]
     pub substring: String,
 }

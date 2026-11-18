@@ -279,18 +279,17 @@ enum StaOperacao {
 /// Operações do senhaws (port de senhaws.go; ver doc de módulo de `senhaws`).
 #[derive(Subcommand, Debug)]
 enum SenhawsOperacao {
-    /// PUT /senha (manual §9.1) — rotaciona a senha Sisbacen. Informe
-    /// --nova-senha OU --gerar (gera 16 bytes hex = 32 chars). A senha
-    /// atual vem de RADIANT_SECRET_BACEN_SENHA_<USUARIO>.
+    /// PUT /senha (manual §9.1) — rotaciona a senha Sisbacen com `--gerar`
+    /// (16 bytes hex = 32 chars, exibida UMA vez). A senha atual vem de
+    /// RADIANT_SECRET_BACEN_SENHA_<USUARIO>. NÃO existe --nova-senha: a nova
+    /// credencial NUNCA é parâmetro de CLI (apareceria no `ps` e no histórico
+    /// do shell — doutrina de secrets.rs); se a senha precisa ser escolhida
+    /// manualmente, use o canal do BACEN (portal) e registre na env var.
     AlterarSenha {
         #[arg(long)]
         usuario: String,
         #[arg(long)]
         ambiente: Ambiente,
-        /// Nova senha explícita (8-128 chars, ≠ atual). Mutuamente exclusiva
-        /// com --gerar.
-        #[arg(long)]
-        nova_senha: Option<String>,
         /// Gera nova senha aleatória de 16 bytes hex e a exibe UMA vez.
         #[arg(long)]
         gerar: bool,
@@ -895,8 +894,8 @@ fn cliente_senhaws(usuario: &str, ambiente: Ambiente) -> Result<senhaws::Senhaws
 
 fn run_senhaws(json: bool, operacao: SenhawsOperacao) -> ExitCode {
     match operacao {
-        SenhawsOperacao::AlterarSenha { usuario, ambiente, nova_senha, gerar } => {
-            senhaws_alterar_senha(json, &usuario, ambiente, nova_senha, gerar)
+        SenhawsOperacao::AlterarSenha { usuario, ambiente, gerar } => {
+            senhaws_alterar_senha(json, &usuario, ambiente, gerar)
         }
         SenhawsOperacao::Vencimento { usuario, ambiente } => {
             senhaws_vencimento(json, &usuario, ambiente)
@@ -908,30 +907,27 @@ fn senhaws_alterar_senha(
     json: bool,
     usuario: &str,
     ambiente: Ambiente,
-    nova_senha: Option<String>,
     gerar: bool,
 ) -> ExitCode {
-    let nova: Zeroizing<String> = match (nova_senha, gerar) {
-        (Some(s), false) => Zeroizing::new(s),
-        (None, true) => match senhaws::gerar_senha_hex() {
+    // A nova senha NUNCA vem de argv (doutrina de secrets.rs: apareceria no
+    // `ps` e no histórico do shell) — só da geração interna (--gerar).
+    let nova: Zeroizing<String> = if gerar {
+        match senhaws::gerar_senha_hex() {
             Ok(s) => s,
             Err(e) => {
                 erro(json, 2, format!("{e}"));
                 return ExitCode::from(2);
             }
-        },
-        (Some(_), true) => {
-            erro(json, 2, "--nova-senha e --gerar são mutuamente exclusivos".to_string());
-            return ExitCode::from(2);
         }
-        (None, false) => {
-            erro(
-                json,
-                2,
-                "informe --nova-senha <senha> (8-128 chars, ≠ atual) ou --gerar (16 bytes hex)".to_string(),
-            );
-            return ExitCode::from(2);
-        }
+    } else {
+        erro(
+            json,
+            2,
+            "use --gerar (16 bytes hex, exibida uma única vez). A nova senha NUNCA é passada \
+             por --nova-senha: credencial em argv aparece no `ps` e no histórico do shell"
+                .to_string(),
+        );
+        return ExitCode::from(2);
     };
     let cliente = match cliente_senhaws(usuario, ambiente) {
         Ok(c) => c,

@@ -1,6 +1,6 @@
 [package]
 name = "reg-cadoc"
-description = "Camada 1: ingestão estrita (calamine), generators 3040/2030, BacenValidatorAdapter (ADR-0018), dedup blake3"
+description = "Camada 1: ingestão estrita (calamine), generator 3040 CMN 4.966, golden corpus/paridade, BacenValidatorAdapter (ADR-0018); gen2030 e dedup são pendências declaradas"
 edition.workspace = true
 version.workspace = true
 license.workspace = true

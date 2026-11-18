@@ -4,7 +4,7 @@
 #
 # 4 crates autossuficientes, zero deps do monorepo Go:
 #   reg-core   — Camada 0: Centavos(i128), TaxaDecimal, CnpjIdentifier (IN 729/2026), Ipoc, DataBase, Vigencia
-#   reg-cadoc  — Camada 1: ingestão calamine, generators 3040/2030, BacenValidatorAdapter (ADR-0018)
+#   reg-cadoc  — Camada 1: ingestão calamine, generator 3040 CMN 4.966 (gen2030 = pendência declarada), BacenValidatorAdapter (ADR-0018)
 #   reg-ledger — Camada 2: SQLite WAL portável, hash-chain, JCS RFC 8785 + Ed25519, mapping_locks (4-olhos)
 #   reg-cli    — Camada 3: CLI determinística, dossiê RC 18, STA-WS (Basic/PSTA300), senhaws
 #

@@ -2,9 +2,21 @@
 //!
 //! Classificação exaustiva de cada `GoldenCase` (docs/blueprint/
 //! 20-ARQUITETURA-RUST.md §6 — "skip DECLARADO, nunca silêncio"):
-//! `passed` = regra no registry e caso passou; `failed` = regra no registry
-//! e caso FALHOU (REGRESSÃO — gate vermelho); `skipped_not_implemented` =
-//! regra fora do registry, estado DECLARADO no relatório por regra.
+//! `passed` = regra no registry E o resultado casou com a expectativa do
+//! caso; `failed` = regra no registry e o caso FALHOU (REGRESSÃO — gate
+//! vermelho); `skipped_not_implemented` = regra fora do registry, estado
+//! DECLARADO no relatório por regra; `expect_nao_interpretadas` = casos
+//! cujo `expect` não é interpretável pelo runner (estado DECLARADO — o
+//! gate NÃO fecha por cima deles).
+//!
+//! A expectativa é HONESTAMENTE interpretada (não é "a regra aceitou, fim"):
+//! - `expect = "nil"`: `apply` deve ser `Ok`;
+//! - `expect = "substring"`: `apply` deve ser `Ok` E o XML deve conter a
+//!   substring — quando a substring vem vazia no corpus, o caso é contado
+//!   como `superficiais` (passou só pela checagem de aceitação; o relatório
+//!   declara quantos casos foram verificados só superficialmente);
+//! - caso negativo futuro (`expect` de rejeição): a classificação de regra
+//!   implementada que DEVE rejeitar entra como `failed` se `apply` aceitar.
 //!
 //! O registry é um `&[&dyn Rule]` do próprio crate/CLI: uma regra só é
 //! "implementada" se estiver lá — ausência é declarada, nunca inferida.
@@ -28,12 +40,19 @@ pub struct ParityReport {
     pub total: usize,
     /// Casos cuja regra está implementada (passed + failed).
     pub implemented: usize,
-    /// Casos implementados que passaram.
+    /// Casos implementados cujo resultado CASOU com a expectativa.
     pub passed: usize,
-    /// Casos implementados que FALHARAM = regressão (gate vermelho).
+    /// Casos implementados que NÃO casaram = regressão (gate vermelho).
     pub failed: usize,
     /// Casos cuja regra não está no registry — skip DECLARADO.
     pub skipped_not_implemented: usize,
+    /// Casos passados sem verificação plena da expectativa (expect
+    /// `"substring"` com substring vazia no corpus) — DECLARADO, não
+    /// misturado com passed pleno.
+    pub superficiais: usize,
+    /// Casos cujo `expect` não é interpretável pelo runner (nem `"nil"` nem
+    /// `"substring"`) — estado DECLARADO; o gate não fecha por cima deles.
+    pub expect_nao_interpretadas: usize,
     /// Ids dos casos com falha (para o dossiê de regressão).
     pub failed_ids: Vec<String>,
     /// Counts por regra de casos não implementados (skip declarado por regra).
@@ -41,14 +60,46 @@ pub struct ParityReport {
 }
 
 impl ParityReport {
-    /// O gate de paridade é verde só quando: total accounted + zero falhas.
+    /// O gate de paridade é verde só quando: contabilidade fecha (a soma de
+    /// `implemented`, `skipped_not_implemented` e `expect_nao_interpretadas`
+    /// é o `total`), zero falhas E zero expect não interpretável.
     pub fn is_green(&self) -> bool {
-        self.total == self.implemented + self.skipped_not_implemented
+        self.total
+            == self.implemented + self.skipped_not_implemented + self.expect_nao_interpretadas
             && self.failed == 0
+            && self.expect_nao_interpretadas == 0
     }
 }
 
-/// Executa todos os casos contra o registry de regras implementadas.
+/// Classifica um caso implementado contra a expectativa do corpus.
+/// `Ok(())` = resultado casou; `Err(())` = regressão.
+fn classifica_com_expectativa(case: &GoldenCase, resultado: Result<(), RegError>) -> Result<(), ()> {
+    match case.expect.as_str() {
+        Some("nil") => match resultado {
+            Ok(()) => Ok(()),
+            Err(_) => Err(()),
+        },
+        Some("substring") => {
+            let aplicar_ok = resultado.is_ok();
+            let substring = case.substring.trim();
+            if substring.is_empty() {
+                // Corpus sem substring preenchida: só a checagem de aceitação
+                // é possível — superfície DECLARADA no relatório.
+                return if aplicar_ok { Ok(()) } else { Err(()) };
+            }
+            match resultado {
+                Ok(()) if case.xml.contains(substring) => Ok(()),
+                _ => Err(()),
+            }
+        }
+        // Expectativa não interpretável — nunca contada como pass/fail.
+        _ => Err(()),
+    }
+}
+
+/// Executa todos os casos contra o registry de regras implementadas,
+/// interpretando `expect`/`substring` de cada caso (não apenas "a regra
+/// aceitou").
 pub fn run_parity(cases: &[GoldenCase], registry: &[&dyn Rule]) -> ParityReport {
     let mut report = ParityReport::default();
     for case in cases {
@@ -56,11 +107,26 @@ pub fn run_parity(cases: &[GoldenCase], registry: &[&dyn Rule]) -> ParityReport 
         match registry.iter().find(|r| r.code() == case.rule_code) {
             Some(rule) => {
                 report.implemented += 1;
-                if rule.apply(&case.xml).is_ok() {
-                    report.passed += 1;
-                } else {
-                    report.failed += 1;
-                    report.failed_ids.push(case.id.clone());
+                let resultado = rule.apply(&case.xml);
+                let eh_substring_vazia =
+                    case.expect.as_str() == Some("substring") && case.substring.trim().is_empty();
+                match classifica_com_expectativa(case, resultado) {
+                    Ok(()) => {
+                        report.passed += 1;
+                        if eh_substring_vazia {
+                            report.superficiais += 1;
+                        }
+                    }
+                    Err(()) => {
+                        if case.expect.as_str().is_none()
+                            || case.expect.as_str().is_some_and(|e| e != "nil" && e != "substring")
+                        {
+                            report.expect_nao_interpretadas += 1;
+                        } else {
+                            report.failed += 1;
+                            report.failed_ids.push(case.id.clone());
+                        }
+                    }
                 }
             }
             None => {
@@ -100,10 +166,35 @@ mod tests {
     }
 
     fn case(id: &str, rule: &str) -> GoldenCase {
+        case_com_expect(id, rule, "nil", "")
+    }
+
+    fn case_com_expect(id: &str, rule: &str, expect: &str, substring: &str) -> GoldenCase {
         serde_json::from_str(&format!(
-            r#"{{"id":"{id}","testName":"t","ruleCode":"{rule}","xml":"<x/>","expect":null}}"#
+            r#"{{"id":"{id}","testName":"t","ruleCode":"{rule}","xml":"<x/>","expect":"{expect}","substring":"{substring}"}}"#
         ))
         .unwrap()
+    }
+
+    fn case_xml(id: &str, rule: &str, expect: &str, substring: &str, xml: &str) -> GoldenCase {
+        let mut c = case_com_expect(id, rule, expect, substring);
+        c.xml = xml.to_string();
+        c
+    }
+
+    /// Regra que só aceita XML contendo "ok".
+    struct PassaSeContemOk;
+    impl Rule for PassaSeContemOk {
+        fn code(&self) -> &str {
+            "DUM-COND"
+        }
+        fn apply(&self, xml: &str) -> Result<(), RegError> {
+            if xml.contains("ok") {
+                Ok(())
+            } else {
+                Err(RegError::InvalidValue { field: "xml".into(), reason: "sem ok".into() })
+            }
+        }
     }
 
     #[test]
@@ -126,6 +217,47 @@ mod tests {
         assert_eq!(report.failed_ids, vec!["f1".to_string()]);
         assert_eq!(report.skipped_by_rule.get("DUM-NAO-IMPLEMENTADA"), Some(&2));
         // Regressão → vermelho, mesmo com skip declarado.
+        assert!(!report.is_green());
+    }
+
+    /// expect="substring" é verificado DE VERDADE: Ok + substring presente.
+    /// Substring vazia no corpus = verificação superficial, contada à parte.
+    #[test]
+    fn substring_e_honestamente_verificada() {
+        let cases = vec![
+            // Ok + contém "ok" → passed pleno.
+            case_xml("s1", "DUM-COND", "substring", "ok", "<x ok/>"),
+            // Ok + NÃO contém "ok" → REGRESSÃO (não é "passed" por aceitar).
+            case_xml("s2", "DUM-COND", "substring", "ok", "<x/>"),
+            // Err → regressão.
+            case_xml("s3", "DUM-COND", "substring", "ok", "<y/>"),
+            // Ok + substring vazia no corpus → superficial (declarado).
+            case_xml("s4", "DUM-COND", "substring", "", "<x ok/>"),
+        ];
+        let registry: [&dyn Rule; 1] = [&PassaSeContemOk];
+        let report = run_parity(&cases, &registry);
+        assert_eq!(report.total, 4);
+        assert_eq!(report.implemented, 4);
+        assert_eq!(report.passed, 2);
+        assert_eq!(report.failed, 2);
+        assert_eq!(report.superficiais, 1);
+        assert_eq!(report.failed_ids, vec!["s2".to_string(), "s3".to_string()]);
+        assert!(!report.is_green());
+    }
+
+    /// expect não interpretável (null/objeto/schema futuro) NUNCA é contado
+    /// como passed — o estado é declarado e o gate fica vermelho.
+    #[test]
+    fn expect_nao_interpretavel_e_declarado_nao_passado() {
+        let mut c = case("u1", "DUM-PASS");
+        c.expect = serde_json::json!({"outcome": "ok"}); // schema desconhecido
+        let registry: [&dyn Rule; 1] = [&AlwaysPass];
+        let report = run_parity(&[c], &registry);
+        assert_eq!(report.total, 1);
+        assert_eq!(report.implemented, 1);
+        assert_eq!(report.passed, 0);
+        assert_eq!(report.failed, 0);
+        assert_eq!(report.expect_nao_interpretadas, 1);
         assert!(!report.is_green());
     }
 
