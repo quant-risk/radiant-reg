@@ -16,3 +16,9 @@ pub mod ingest;
 
 /// Golden corpus: loader + runner de paridade (§6 — skip declarado, nunca silêncio).
 pub mod golden;
+
+/// Generator 3040 no formato CMN 4.966 VIGENTE (Cli/Op individualizado, §6).
+pub mod gen3040;
+
+/// BacenValidatorAdapter — oráculo oficial de submissão B02 (ADR-0018, §17).
+pub mod validator;

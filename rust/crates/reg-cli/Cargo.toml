@@ -22,6 +22,7 @@ reqwest.workspace = true
 zeroize.workspace = true
 sha2.workspace = true
 hex.workspace = true
+quick-xml.workspace = true
 
 [dev-dependencies]
 tempfile.workspace = true

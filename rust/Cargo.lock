@@ -1073,9 +1073,12 @@ name = "reg-cadoc"
 version = "0.1.0"
 dependencies = [
  "calamine",
+ "hex",
+ "quick-xml",
  "reg-core",
  "serde",
  "serde_json",
+ "sha2",
  "tempfile",
  "thiserror",
  "toml",
@@ -1087,6 +1090,7 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "hex",
+ "quick-xml",
  "reg-cadoc",
  "reg-core",
  "reg-ledger",
