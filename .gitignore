@@ -54,5 +54,8 @@ frontend/next-env.d.ts.bak
 *.key
 frontend/.env.pubkey
 backend/radiant.db*
-.env.pubkey
 .playwright-mcp/
+rust/target/
+backend/bin/
+backend/generator-server
+*.db.backup
