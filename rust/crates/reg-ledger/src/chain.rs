@@ -72,7 +72,7 @@ use std::path::Path;
 use std::sync::Mutex;
 use std::time::Duration;
 
-use rusqlite::{params, Connection, OptionalExtension, TransactionBehavior};
+use rusqlite::{Connection, OptionalExtension, TransactionBehavior, params};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use thiserror::Error;
@@ -188,8 +188,9 @@ pub fn compute_entry_hash(
     if_id: &str,
     timestamp: &str,
 ) -> String {
-    let concat =
-        format!("{prev_hash}{payload_hash_hex}{metadata_json}{actor}{action}{target}{if_id}{timestamp}");
+    let concat = format!(
+        "{prev_hash}{payload_hash_hex}{metadata_json}{actor}{action}{target}{if_id}{timestamp}"
+    );
     sha256_hex(concat.as_bytes())
 }
 
@@ -253,11 +254,7 @@ fn civil_from_days(z: i64) -> (i64, i64, i64) {
 /// O hash SEMPRE usa a string normalizada `""` (log.go:119 usa o parâmetro
 /// cru, que é `""`; a leitura normaliza NULL → `""` em log.go:201-204).
 fn nullable(s: &str) -> Option<&str> {
-    if s.is_empty() {
-        None
-    } else {
-        Some(s)
-    }
+    if s.is_empty() { None } else { Some(s) }
 }
 
 fn sha256_hex(data: &[u8]) -> String {
@@ -292,7 +289,9 @@ impl Chain {
         conn.query_row("PRAGMA journal_mode=WAL", [], |_| Ok(()))?;
         conn.busy_timeout(BUSY_TIMEOUT)?;
         conn.execute_batch(SCHEMA_AUDIT_LOG)?;
-        Ok(Self { conn: Mutex::new(conn) })
+        Ok(Self {
+            conn: Mutex::new(conn),
+        })
     }
 
     /// Registra uma nova entrada (port de `Logger.Log`, log.go:62-157).
@@ -529,7 +528,16 @@ mod tests {
                 "SELECT payload_hash, prev_hash, entry_hash, metadata, created_at, if_id
                  FROM audit_log WHERE id = ?1",
                 params![entry.id],
-                |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?, r.get(3)?, r.get(4)?, r.get(5)?)),
+                |r| {
+                    Ok((
+                        r.get(0)?,
+                        r.get(1)?,
+                        r.get(2)?,
+                        r.get(3)?,
+                        r.get(4)?,
+                        r.get(5)?,
+                    ))
+                },
             )
             .unwrap();
 
@@ -605,7 +613,10 @@ mod tests {
             .conn
             .lock()
             .unwrap()
-            .execute("UPDATE audit_log SET actor = 'invasor' WHERE id = ?1", params![primeira])
+            .execute(
+                "UPDATE audit_log SET actor = 'invasor' WHERE id = ?1",
+                params![primeira],
+            )
             .unwrap();
         let rep = chain.verify().unwrap();
         assert!(!rep.ok);
@@ -658,7 +669,9 @@ mod tests {
     #[test]
     fn delete_no_meio_quebra_encadeamento_no_id_seguinte() {
         let chain = chain_tmp(&tempfile::tempdir().unwrap(), "t4.sqlite3");
-        let ids: Vec<i64> = (0..4).map(|i| chain.append(req(&format!("p{i}"))).unwrap().id).collect();
+        let ids: Vec<i64> = (0..4)
+            .map(|i| chain.append(req(&format!("p{i}"))).unwrap().id)
+            .collect();
         chain
             .conn
             .lock()
@@ -667,7 +680,11 @@ mod tests {
             .unwrap();
         let rep = chain.verify().unwrap();
         assert!(!rep.ok);
-        assert_eq!(rep.first_broken_id, Some(ids[2]), "a quebra é na entrada seguinte ao buraco");
+        assert_eq!(
+            rep.first_broken_id,
+            Some(ids[2]),
+            "a quebra é na entrada seguinte ao buraco"
+        );
         assert_eq!(rep.entries, 1, "só a gênese foi validada antes da quebra");
     }
 

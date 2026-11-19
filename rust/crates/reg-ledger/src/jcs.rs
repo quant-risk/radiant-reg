@@ -42,7 +42,9 @@ pub enum JcsError {
     /// Doutrina zero-float (20-ARQUITETURA-RUST.md §4.5): um `f64` chegou ao
     /// ledger. O RFC 8785 pleno formata float via ES6 number-to-string; aqui
     /// float nem entra — o chamador corrigiu o tipo a montante.
-    #[error("JcsFloatProibido: número de ponto flutuante em {path} — o ledger só aceita inteiros exatos (Centavos/i128)")]
+    #[error(
+        "JcsFloatProibido: número de ponto flutuante em {path} — o ledger só aceita inteiros exatos (Centavos/i128)"
+    )]
     JcsFloatProibido {
         /// Caminho do valor no documento, ex. `$.metadata.total` ou `$.itens[2]`.
         path: String,
@@ -50,7 +52,9 @@ pub enum JcsError {
     /// Inteiro fora da faixa de `serde_json::Number` (i64::MIN..=u64::MAX
     /// sem `arbitrary_precision`). Carregue como string decimal se precisar
     /// do valor completo.
-    #[error("inteiro {valor} fora da faixa de serde_json::Number (i64/u64); carregue como string decimal")]
+    #[error(
+        "inteiro {valor} fora da faixa de serde_json::Number (i64/u64); carregue como string decimal"
+    )]
     InteiroForaDeFaixa {
         /// O valor recusado, para o erro ser auditável.
         valor: i128,
@@ -101,8 +105,7 @@ fn escrever(out: &mut String, value: &Value, path: &str) -> Result<(), JcsError>
         Value::Object(map) => {
             // RFC 8785 §3.2.3: ordem por unidades de código UTF-16 — NÃO a
             // ordem de pontos de código do BTreeMap (&str). Ver doc do módulo.
-            let mut pares: Vec<(&str, &Value)> =
-                map.iter().map(|(k, v)| (k.as_str(), v)).collect();
+            let mut pares: Vec<(&str, &Value)> = map.iter().map(|(k, v)| (k.as_str(), v)).collect();
             pares.sort_by(|a, b| a.0.encode_utf16().cmp(b.0.encode_utf16()));
             out.push('{');
             for (i, (k, v)) in pares.iter().enumerate() {
@@ -215,7 +218,8 @@ mod tests {
             "b": [-1, 0, 1],
             "a": [-9223372036854775808i64, 18446744073709551615u64, 333333333]
         });
-        let esperado = "{\"a\":[-9223372036854775808,18446744073709551615,333333333],\"b\":[-1,0,1]}";
+        let esperado =
+            "{\"a\":[-9223372036854775808,18446744073709551615,333333333],\"b\":[-1,0,1]}";
         assert_eq!(canonicalizar(&v).unwrap(), esperado);
     }
 
@@ -258,10 +262,7 @@ mod tests {
     /// `numero_inteiro`: i128 na faixa vira Number; além dela é erro tipado.
     #[test]
     fn numero_inteiro_i128_faixa() {
-        assert_eq!(
-            numero_inteiro(123_456).unwrap().to_string(),
-            "123456"
-        );
+        assert_eq!(numero_inteiro(123_456).unwrap().to_string(), "123456");
         assert_eq!(
             numero_inteiro(u64::MAX as i128).unwrap().as_i128(),
             Some(u64::MAX as i128)

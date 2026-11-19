@@ -69,7 +69,15 @@ fn floats_banidos_do_workspace() {
     let root = base.join("..").join("..").join("Cargo.toml");
     let toml =
         std::fs::read_to_string(&root).unwrap_or_else(|e| panic!("ler {}: {e}", root.display()));
-    for lint in ["float_arithmetic", "float_cmp", "cast_precision_loss", "wildcard_enum_match_arm"] {
-        assert!(toml.contains(lint), "workspace Cargo.toml perdeu o lint {lint}");
+    for lint in [
+        "float_arithmetic",
+        "float_cmp",
+        "cast_precision_loss",
+        "wildcard_enum_match_arm",
+    ] {
+        assert!(
+            toml.contains(lint),
+            "workspace Cargo.toml perdeu o lint {lint}"
+        );
     }
 }

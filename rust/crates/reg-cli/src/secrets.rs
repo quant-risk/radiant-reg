@@ -63,9 +63,7 @@ impl ProvedorSegredos for ProvedorEnv {
             Ok(valor) if !valor.is_empty() => Ok(Zeroizing::new(valor)),
             // Valor vazio = não encontrado, como o v1 (env.go:70-72).
             Ok(_) => Err(RegError::MissingField { field: nome_var }),
-            Err(std::env::VarError::NotPresent) => {
-                Err(RegError::MissingField { field: nome_var })
-            }
+            Err(std::env::VarError::NotPresent) => Err(RegError::MissingField { field: nome_var }),
             Err(std::env::VarError::NotUnicode(_)) => Err(RegError::InvalidValue {
                 field: nome_var,
                 reason: "valor da env var não é UTF-8 válido".to_string(),

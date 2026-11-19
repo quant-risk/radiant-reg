@@ -184,7 +184,11 @@ pub struct DualApproval {
 impl DualApproval {
     /// Produz a dupla assinatura. **Mesma chave 2× = [`SignError::ChavesIdenticas`]**
     /// — a comparação é pela chave PÚBLICA (identidade), não pelos bytes da seed.
-    pub fn nova(bytes: &[u8], primeira: &SeedAssinatura, segunda: &SeedAssinatura) -> Result<Self, SignError> {
+    pub fn nova(
+        bytes: &[u8],
+        primeira: &SeedAssinatura,
+        segunda: &SeedAssinatura,
+    ) -> Result<Self, SignError> {
         let ka = SigningKey::from_bytes(&primeira.0);
         let kb = SigningKey::from_bytes(&segunda.0);
         if ka.verifying_key().as_bytes() == kb.verifying_key().as_bytes() {
@@ -212,8 +216,10 @@ impl DualApproval {
         let k2 = chave_publica_de_hex(&self.chave_segunda)?;
         let s1 = assinatura_de_hex(&self.primeira)?;
         let s2 = assinatura_de_hex(&self.segunda)?;
-        k1.verify_strict(bytes, &s1).map_err(|_| SignError::AssinaturaInvalida)?;
-        k2.verify_strict(bytes, &s2).map_err(|_| SignError::AssinaturaInvalida)?;
+        k1.verify_strict(bytes, &s1)
+            .map_err(|_| SignError::AssinaturaInvalida)?;
+        k2.verify_strict(bytes, &s2)
+            .map_err(|_| SignError::AssinaturaInvalida)?;
         Ok(())
     }
 }
@@ -222,7 +228,9 @@ fn chave_publica_de_hex(hex_str: &str) -> Result<VerifyingKey, SignError> {
     let bytes: [u8; 32] = hex::decode(hex_str)
         .map_err(|_| SignError::ChavePublicaInvalida("hex inválido".into()))?
         .try_into()
-        .map_err(|_| SignError::ChavePublicaInvalida(format!("esperados 32 bytes em {}", hex_str.len())))?;
+        .map_err(|_| {
+            SignError::ChavePublicaInvalida(format!("esperados 32 bytes em {}", hex_str.len()))
+        })?;
     VerifyingKey::from_bytes(&bytes).map_err(|e| SignError::ChavePublicaInvalida(e.to_string()))
 }
 
@@ -246,10 +254,8 @@ mod tests {
 
     /// Seeds FIXAS e distintas — determinismo é doutrina (reprodução de
     /// auditoria não pode depender de RNG).
-    const SEED_A: &str =
-        "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60";
-    const SEED_B: &str =
-        "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb";
+    const SEED_A: &str = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60";
+    const SEED_B: &str = "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb";
     // (RFC 8032 §7.2 TEST 1/TEST 3 — vetores públicos de Ed25519.)
     const SEED_A_REPETIDA: &str =
         "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60";
@@ -360,8 +366,8 @@ mod tests {
     #[test]
     fn dual_approval_mesma_chave_eh_rejeitada() {
         let bytes = b"qualquer bytes";
-        let err = DualApproval::nova(bytes, &seed_hex(SEED_A), &seed_hex(SEED_A_REPETIDA))
-            .unwrap_err();
+        let err =
+            DualApproval::nova(bytes, &seed_hex(SEED_A), &seed_hex(SEED_A_REPETIDA)).unwrap_err();
         assert!(matches!(err, SignError::ChavesIdenticas));
         assert!(err.to_string().contains("distintas"), "{err}");
     }

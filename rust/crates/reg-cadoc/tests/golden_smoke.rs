@@ -23,7 +23,10 @@ fn golden_corpus_smoke() {
     if !inv_path.exists() {
         // Corpus ainda não gerado — ignorável por design (o consumidor vem
         // pronto, o conteúdo vem depois). Nunca falhar aqui.
-        println!("golden corpus ausente ({}), smoke ignorable", inv_path.display());
+        println!(
+            "golden corpus ausente ({}), smoke ignorable",
+            inv_path.display()
+        );
         return;
     }
 
@@ -31,7 +34,11 @@ fn golden_corpus_smoke() {
     let cases = load_cases(&dir).unwrap();
     let honest = honest_counts(&cases);
 
-    println!("golden corpus: {} casos, {} regras", cases.len(), inv.rules.len());
+    println!(
+        "golden corpus: {} casos, {} regras",
+        cases.len(),
+        inv.rules.len()
+    );
     for (rule, n) in &honest {
         println!("  {rule}: {n}");
     }
@@ -54,7 +61,11 @@ fn golden_corpus_smoke() {
     if sem_regra > 0 {
         println!("AVISO: {sem_regra} casos com rule_code vazio (derivação pendente no gerador)");
     }
-    println!("casos materializados: {} ({} regras exercidas)", cases.len(), honest.len() - usize::from(sem_regra > 0));
+    println!(
+        "casos materializados: {} ({} regras exercidas)",
+        cases.len(),
+        honest.len() - usize::from(sem_regra > 0)
+    );
 
     // Gate de paridade §6 EXECUTADO sobre o corpus real (não só prometido):
     // o registry abaixo é o lugar onde as regras portadas em Rust se
@@ -96,5 +107,8 @@ fn golden_corpus_smoke() {
     }
     // Sem regras portadas, o gate VERDE de hoje é o de skip DECLARADO —
     // honesto, não uma promessa de paridade executiva.
-    assert!(report.is_green(), "skip declarado fecha o gate, regressão não");
+    assert!(
+        report.is_green(),
+        "skip declarado fecha o gate, regressão não"
+    );
 }

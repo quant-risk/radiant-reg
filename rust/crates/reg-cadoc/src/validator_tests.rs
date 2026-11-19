@@ -93,8 +93,12 @@ fn adapter(dir: &TempDir, body: &str, timeout: Duration) -> BacenValidatorAdapte
 #[test]
 fn builder_rejeita_jar_ausente() {
     let dir = TempDir::new().unwrap();
-    let err = BacenValidatorAdapter::builder(dir.path().join("nao-existe"), fake_jre(&dir)).unwrap_err();
-    assert!(matches!(err, ValidationError::JarAusente { .. }), "obtido: {err:?}");
+    let err =
+        BacenValidatorAdapter::builder(dir.path().join("nao-existe"), fake_jre(&dir)).unwrap_err();
+    assert!(
+        matches!(err, ValidationError::JarAusente { .. }),
+        "obtido: {err:?}"
+    );
     let ValidationError::JarAusente { path } = err else {
         panic!("inacessível — matches! acima garante a variante")
     };
@@ -108,7 +112,10 @@ fn builder_rejeita_wrapper_sem_permissao_de_execucao() {
     std::fs::write(&wrapper, format!("#!/bin/sh\n{FAKE_OK}\n")).unwrap();
     // sem chmod — não executável
     let err = BacenValidatorAdapter::builder(dir.path().to_path_buf(), fake_jre(&dir)).unwrap_err();
-    assert!(matches!(err, ValidationError::JarAusente { .. }), "obtido: {err:?}");
+    assert!(
+        matches!(err, ValidationError::JarAusente { .. }),
+        "obtido: {err:?}"
+    );
     let ValidationError::JarAusente { path } = err else {
         panic!("inacessível — matches! acima garante a variante")
     };
@@ -118,9 +125,15 @@ fn builder_rejeita_wrapper_sem_permissao_de_execucao() {
 #[test]
 fn builder_rejeita_jre_ausente() {
     let dir = TempDir::new().unwrap();
-    let err = BacenValidatorAdapter::builder(fake_jar_dir(&dir, FAKE_OK), JrePath::new(dir.path().join("sem-java")))
-        .unwrap_err();
-    assert!(matches!(err, ValidationError::JreAusente { .. }), "obtido: {err:?}");
+    let err = BacenValidatorAdapter::builder(
+        fake_jar_dir(&dir, FAKE_OK),
+        JrePath::new(dir.path().join("sem-java")),
+    )
+    .unwrap_err();
+    assert!(
+        matches!(err, ValidationError::JreAusente { .. }),
+        "obtido: {err:?}"
+    );
     let ValidationError::JreAusente { path } = err else {
         panic!("inacessível — matches! acima garante a variante")
     };
@@ -134,7 +147,10 @@ fn max_part_mb_default_512_e_range_conservador_adr_0018() {
         .unwrap()
         .max_part_mb(2048)
         .unwrap_err();
-    assert!(matches!(err, ValidationError::ConfigInvalida { .. }), "obtido: {err:?}");
+    assert!(
+        matches!(err, ValidationError::ConfigInvalida { .. }),
+        "obtido: {err:?}"
+    );
     let ValidationError::ConfigInvalida { motivo } = err else {
         panic!("inacessível — matches! acima garante a variante")
     };
@@ -176,11 +192,12 @@ fn sucesso_gera_zip_chancelado_com_sha256_correto() {
 #[test]
 fn allowlist_no_warn_ativa_envia_o_literal_como_segundo_arg() {
     let dir = TempDir::new().unwrap();
-    let adapter = BacenValidatorAdapter::builder(fake_jar_dir(&dir, FAKE_OK_NO_WARN), fake_jre(&dir))
-        .unwrap()
-        .no_warn(true)
-        .timeout(Duration::from_secs(30))
-        .build();
+    let adapter =
+        BacenValidatorAdapter::builder(fake_jar_dir(&dir, FAKE_OK_NO_WARN), fake_jre(&dir))
+            .unwrap()
+            .no_warn(true)
+            .timeout(Duration::from_secs(30))
+            .build();
     // Fake exige argc == 2 e "$2" == "no_warn" — sucesso prova os dois.
     assert!(adapter.validate(XML_DOC.as_bytes(), STEM).is_ok());
 }
@@ -215,7 +232,10 @@ fn rejeicao_vira_validador_rejeitou_com_codigo_e_mensagem() {
         panic!("inacessível — matches! acima garante a variante")
     };
     assert_eq!(codigo, 3);
-    assert!(mensagem.contains("3040-campo-saldo"), "mensagem: {mensagem}");
+    assert!(
+        mensagem.contains("3040-campo-saldo"),
+        "mensagem: {mensagem}"
+    );
 }
 
 #[test]
@@ -253,7 +273,9 @@ fn stem_eh_sanitizado_contra_path_traversal() {
     assert!(!super::sanitize_stem("..\\..\\windows").contains('\\'));
     assert_eq!(super::sanitize_stem(""), "documento");
     // E o caminho completo funciona: validação Ok com stem malicioso.
-    let validated = adapter.validate(XML_DOC.as_bytes(), "../../etc/passwd").unwrap();
+    let validated = adapter
+        .validate(XML_DOC.as_bytes(), "../../etc/passwd")
+        .unwrap();
     assert_eq!(validated.zip_bytes, XML_DOC.as_bytes());
     // Stem vazio cai no fallback sanitizado e valida igualmente.
     assert!(adapter.validate(XML_DOC.as_bytes(), "").is_ok());
@@ -265,7 +287,10 @@ fn validation_error_vira_reg_error_da_camada_0() {
         timeout: Duration::from_secs(900),
     };
     let reg = RegError::from(e);
-    assert!(matches!(reg, RegError::InvalidValue { .. }), "obtido: {reg:?}");
+    assert!(
+        matches!(reg, RegError::InvalidValue { .. }),
+        "obtido: {reg:?}"
+    );
     let RegError::InvalidValue { field, reason } = reg else {
         panic!("inacessível — matches! acima garante a variante")
     };

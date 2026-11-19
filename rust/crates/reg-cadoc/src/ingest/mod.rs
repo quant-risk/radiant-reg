@@ -121,18 +121,48 @@ pub struct CanonicalInput {
 /// dos caracteres que aparecem em headers/valores BACEN (pt-BR).
 fn strip_accents(input: &str) -> String {
     const MAP: &[(char, char)] = &[
-        ('á', 'a'), ('à', 'a'), ('â', 'a'), ('ã', 'a'), ('ä', 'a'),
-        ('é', 'e'), ('ê', 'e'), ('è', 'e'), ('ë', 'e'),
-        ('í', 'i'), ('î', 'i'), ('ï', 'i'),
-        ('ó', 'o'), ('ô', 'o'), ('õ', 'o'), ('ö', 'o'),
-        ('ú', 'u'), ('û', 'u'), ('ü', 'u'),
-        ('ç', 'c'), ('ñ', 'n'),
-        ('Á', 'A'), ('À', 'A'), ('Â', 'A'), ('Ã', 'A'), ('Ä', 'A'),
-        ('É', 'E'), ('Ê', 'E'), ('È', 'E'), ('Ë', 'E'),
-        ('Í', 'I'), ('Î', 'I'), ('Ï', 'I'),
-        ('Ó', 'O'), ('Ô', 'O'), ('Õ', 'O'), ('Ö', 'O'),
-        ('Ú', 'U'), ('Û', 'U'), ('Ü', 'U'),
-        ('Ç', 'C'), ('Ñ', 'N'),
+        ('á', 'a'),
+        ('à', 'a'),
+        ('â', 'a'),
+        ('ã', 'a'),
+        ('ä', 'a'),
+        ('é', 'e'),
+        ('ê', 'e'),
+        ('è', 'e'),
+        ('ë', 'e'),
+        ('í', 'i'),
+        ('î', 'i'),
+        ('ï', 'i'),
+        ('ó', 'o'),
+        ('ô', 'o'),
+        ('õ', 'o'),
+        ('ö', 'o'),
+        ('ú', 'u'),
+        ('û', 'u'),
+        ('ü', 'u'),
+        ('ç', 'c'),
+        ('ñ', 'n'),
+        ('Á', 'A'),
+        ('À', 'A'),
+        ('Â', 'A'),
+        ('Ã', 'A'),
+        ('Ä', 'A'),
+        ('É', 'E'),
+        ('Ê', 'E'),
+        ('È', 'E'),
+        ('Ë', 'E'),
+        ('Í', 'I'),
+        ('Î', 'I'),
+        ('Ï', 'I'),
+        ('Ó', 'O'),
+        ('Ô', 'O'),
+        ('Õ', 'O'),
+        ('Ö', 'O'),
+        ('Ú', 'U'),
+        ('Û', 'U'),
+        ('Ü', 'U'),
+        ('Ç', 'C'),
+        ('Ñ', 'N'),
     ];
     let mut out = String::with_capacity(input.len());
     for c in input.chars() {
@@ -157,7 +187,11 @@ fn date_to_data_base(input: &str) -> String {
         let (d, m, y) = (parts[0], parts[1], parts[2]);
         let is_digits = |s: &str| !s.is_empty() && s.chars().all(|c| c.is_ascii_digit());
         if (d.len() == 1 || d.len() == 2) && (m.len() == 1 || m.len() == 2) {
-            let year = if y.len() == 2 { format!("20{y}") } else { y.to_string() };
+            let year = if y.len() == 2 {
+                format!("20{y}")
+            } else {
+                y.to_string()
+            };
             if is_digits(d) && is_digits(m) && (year.len() == 4 && is_digits(&year)) {
                 return format!("{year}-{:0>2}", m);
             }
@@ -196,9 +230,15 @@ mod tests {
 
     #[test]
     fn monetary_input_delega_ao_reg_core() {
-        let m = MonetaryInput { raw: "1.234,56".into(), unit: MonetaryUnit::Reais };
+        let m = MonetaryInput {
+            raw: "1.234,56".into(),
+            unit: MonetaryUnit::Reais,
+        };
         assert_eq!(m.to_centavos().unwrap().as_i128(), 123_456);
-        let bad = MonetaryInput { raw: "abc".into(), unit: MonetaryUnit::Reais };
+        let bad = MonetaryInput {
+            raw: "abc".into(),
+            unit: MonetaryUnit::Reais,
+        };
         assert!(bad.to_centavos().is_err());
     }
 

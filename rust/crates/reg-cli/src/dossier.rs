@@ -76,17 +76,47 @@ pub(crate) const ENV_SEED_2: &str = "RADIANT_SECRET_DOSSIER_SEED_2";
 /// nome literal + definição editorial. Proveniência no doc de módulo.
 pub(crate) const DIMENSOES_RC18: [(&str, &str); 12] = [
     ("acurácia", "o dado corresponde à realidade que descreve"),
-    ("integridade", "o dado não sofre alteração indevida em trânsito ou em repouso"),
-    ("completude", "todos os campos exigidos estão presentes, sem lacuna"),
-    ("consistência", "o mesmo dado é coerente entre sistemas, períodos e documentos"),
-    ("tempestividade", "o dado é disponibilizado dentro do prazo regulatório"),
-    ("rastreabilidade", "a linhagem do dado é conhecida da origem ao relato"),
-    ("acessibilidade", "o dado é recuperável pelos processos autorizados"),
-    ("comparabilidade", "o dado é comparável entre períodos, documentos e instituições"),
-    ("confiabilidade", "a fonte e o processo de geração são auditáveis e estáveis"),
+    (
+        "integridade",
+        "o dado não sofre alteração indevida em trânsito ou em repouso",
+    ),
+    (
+        "completude",
+        "todos os campos exigidos estão presentes, sem lacuna",
+    ),
+    (
+        "consistência",
+        "o mesmo dado é coerente entre sistemas, períodos e documentos",
+    ),
+    (
+        "tempestividade",
+        "o dado é disponibilizado dentro do prazo regulatório",
+    ),
+    (
+        "rastreabilidade",
+        "a linhagem do dado é conhecida da origem ao relato",
+    ),
+    (
+        "acessibilidade",
+        "o dado é recuperável pelos processos autorizados",
+    ),
+    (
+        "comparabilidade",
+        "o dado é comparável entre períodos, documentos e instituições",
+    ),
+    (
+        "confiabilidade",
+        "a fonte e o processo de geração são auditáveis e estáveis",
+    ),
     ("relevância", "o dado é pertinente à finalidade do relato"),
-    ("clareza", "o dado é legível e sem ambiguidade de interpretação"),
-    ("adaptabilidade", "o dado é apto a evoluir com as mudanças normativas"),
+    (
+        "clareza",
+        "o dado é legível e sem ambiguidade de interpretação",
+    ),
+    (
+        "adaptabilidade",
+        "o dado é apto a evoluir com as mudanças normativas",
+    ),
 ];
 
 /// Agregação de erros do dossiê — mesma forma de `LockError` do reg-ledger:
@@ -135,8 +165,9 @@ pub(crate) struct ArtefatoDossie {
 /// (é `unsafe` na edição 2024 e o workspace proíbe `unsafe_code`) — a
 /// validação de VALOR é feita por [`seed_de_valor`], que é testável.
 pub(crate) fn seed_do_ambiente(nome: &str) -> Result<SeedAssinatura, RegError> {
-    let valor =
-        std::env::var(nome).map_err(|_| RegError::MissingField { field: nome.to_string() })?;
+    let valor = std::env::var(nome).map_err(|_| RegError::MissingField {
+        field: nome.to_string(),
+    })?;
     seed_de_valor(&valor, nome)
 }
 
@@ -233,7 +264,14 @@ pub(crate) fn construir(
         },
     });
     let json = jcs::canonicalizar(&documento)?;
-    let html = render_html(&doc, &payload, &aprovacao, &payload_sha256, &payload_canonico, &entry);
+    let html = render_html(
+        &doc,
+        &payload,
+        &aprovacao,
+        &payload_sha256,
+        &payload_canonico,
+        &entry,
+    );
 
     Ok(ArtefatoDossie {
         json,
@@ -246,7 +284,10 @@ pub(crate) fn construir(
 
 /// Grava os dois artefatos em `out` (separado de [`construir`] para que os
 /// testes exerçam a geração sem I/O de diretório).
-pub(crate) fn gravar(out: &Path, artefato: &ArtefatoDossie) -> Result<(std::path::PathBuf, std::path::PathBuf), DossieErro> {
+pub(crate) fn gravar(
+    out: &Path,
+    artefato: &ArtefatoDossie,
+) -> Result<(std::path::PathBuf, std::path::PathBuf), DossieErro> {
     let caminho_json = out.join("dossie.json");
     let caminho_html = out.join("dossie.html");
     std::fs::write(&caminho_json, artefato.json.as_bytes())?;
@@ -397,7 +438,11 @@ fn render_html(
         false,
     ));
     h.push_str(&linha_dados("Data-base", &doc.data_base.to_string(), false));
-    h.push_str(&linha_dados("IF remetente (CNPJ)", &doc.meta.if_cnpj, false));
+    h.push_str(&linha_dados(
+        "IF remetente (CNPJ)",
+        &doc.meta.if_cnpj,
+        false,
+    ));
     h.push_str(&linha_dados(
         "SHA-256 do mapping.toml custodiado",
         &payload.mapping_sha256,
@@ -414,7 +459,9 @@ fn render_html(
     h.push_str("</section>\n");
 
     // ---------------------------------- Seção II — Dimensões de Qualidade
-    h.push_str("<section id=\"dimensoes\">\n<p class=\"rotulo\">Seção II — Dimensões de Qualidade</p>\n");
+    h.push_str(
+        "<section id=\"dimensoes\">\n<p class=\"rotulo\">Seção II — Dimensões de Qualidade</p>\n",
+    );
     h.push_str("<h2>Dimensões de Qualidade da Informação</h2>\n");
     h.push_str(
         "<p class=\"nota\">As 12 dimensões definidas pela Resolução Conjunta nº 18/2025. Este \
@@ -488,25 +535,65 @@ fn render_html(
     h.push_str("</pre>\n");
 
     h.push_str("<h3>Identificação do payload assinado</h3>\n<table>\n");
-    h.push_str(&linha_dados("SHA-256 do payload JCS (assinado)", payload_sha256, true));
-    h.push_str(&linha_dados("SHA-256 do mapping.toml", &payload.mapping_sha256, true));
+    h.push_str(&linha_dados(
+        "SHA-256 do payload JCS (assinado)",
+        payload_sha256,
+        true,
+    ));
+    h.push_str(&linha_dados(
+        "SHA-256 do mapping.toml",
+        &payload.mapping_sha256,
+        true,
+    ));
     h.push_str(&linha_dados("Documento", &payload.doc_cod, false));
     h.push_str(&linha_dados("Data-base", &payload.data_base, false));
     h.push_str("</table>\n");
 
     h.push_str("<h3>Dupla alçada (Ed25519 — 4-olhos)</h3>\n<table>\n");
-    h.push_str(&linha_dados("Chave pública — assinatura 1", &aprovacao.chave_primeira, true));
-    h.push_str(&linha_dados("Assinatura 1 (r‖s, hex)", &aprovacao.primeira, true));
-    h.push_str(&linha_dados("Chave pública — assinatura 2", &aprovacao.chave_segunda, true));
-    h.push_str(&linha_dados("Assinatura 2 (r‖s, hex)", &aprovacao.segunda, true));
+    h.push_str(&linha_dados(
+        "Chave pública — assinatura 1",
+        &aprovacao.chave_primeira,
+        true,
+    ));
+    h.push_str(&linha_dados(
+        "Assinatura 1 (r‖s, hex)",
+        &aprovacao.primeira,
+        true,
+    ));
+    h.push_str(&linha_dados(
+        "Chave pública — assinatura 2",
+        &aprovacao.chave_segunda,
+        true,
+    ));
+    h.push_str(&linha_dados(
+        "Assinatura 2 (r‖s, hex)",
+        &aprovacao.segunda,
+        true,
+    ));
     h.push_str("</table>\n");
 
     h.push_str("<h3>Custódia no ledger tamper-evident</h3>\n<table>\n");
     h.push_str(&linha_dados("Entrada #", &entry.id.to_string(), false));
-    h.push_str(&linha_dados("Ator / ação", &format!("{} / {}", entry.actor, entry.action), false));
-    h.push_str(&linha_dados("payload_hash (SHA-256 do mapping.toml)", &entry.payload_hash, true));
-    h.push_str(&linha_dados("entry_hash (posição na hash-chain)", &entry.entry_hash, true));
-    h.push_str(&linha_dados("Carimbo de tempo (RFC 3339, hashado junto)", &entry.created_at, false));
+    h.push_str(&linha_dados(
+        "Ator / ação",
+        &format!("{} / {}", entry.actor, entry.action),
+        false,
+    ));
+    h.push_str(&linha_dados(
+        "payload_hash (SHA-256 do mapping.toml)",
+        &entry.payload_hash,
+        true,
+    ));
+    h.push_str(&linha_dados(
+        "entry_hash (posição na hash-chain)",
+        &entry.entry_hash,
+        true,
+    ));
+    h.push_str(&linha_dados(
+        "Carimbo de tempo (RFC 3339, hashado junto)",
+        &entry.created_at,
+        false,
+    ));
     h.push_str("</table>\n");
     h.push_str(
         "<p class=\"nota\">A custódia usa a mesma semântica da trava \
@@ -529,10 +616,8 @@ mod tests {
 
     // Seeds FIXAS do RFC 8032 §7 (mesmas dos testes de reg-ledger::sign) —
     // determinismo é doutrina; a auditoria não depende de RNG.
-    const SEED_A: &str =
-        "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60";
-    const SEED_B: &str =
-        "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb";
+    const SEED_A: &str = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60";
+    const SEED_B: &str = "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb";
 
     const MAPPING_TESTE: &str = r#"
 [meta]
@@ -577,7 +662,8 @@ transform = ["trim", "to_lower"]
         let payload: DossierPayload = serde_json::from_value(doc["payload"].clone()).unwrap();
         let aprovacao: DualApproval = serde_json::from_value(doc["dual_approval"].clone()).unwrap();
 
-        let bytes = jcs::canonicalizar_para_bytes(&serde_json::to_value(&payload).unwrap()).unwrap();
+        let bytes =
+            jcs::canonicalizar_para_bytes(&serde_json::to_value(&payload).unwrap()).unwrap();
         aprovacao.verificar(&bytes).unwrap();
         assert_eq!(artefato.payload_sha256, sha256_hex(&bytes));
         assert_eq!(doc["payload_sha256"], artefato.payload_sha256);
@@ -620,7 +706,8 @@ transform = ["trim", "to_lower"]
         let payload: DossierPayload = serde_json::from_value(doc["payload"].clone()).unwrap();
         let aprovacao: DualApproval = serde_json::from_value(doc["dual_approval"].clone()).unwrap();
 
-        let bytes = jcs::canonicalizar_para_bytes(&serde_json::to_value(&payload).unwrap()).unwrap();
+        let bytes =
+            jcs::canonicalizar_para_bytes(&serde_json::to_value(&payload).unwrap()).unwrap();
         assert!(aprovacao.verificar(&bytes).is_err());
         assert_ne!(artefato.payload_sha256, sha256_hex(&bytes));
     }
@@ -695,7 +782,15 @@ transform = ["trim", "to_lower"]
         ] {
             assert!(artefato.html.contains(css), "falta o CSS {css}");
         }
-        for banido in ["shadow", "@font-face", "@import", "url(", "<script", "http://", "https://"] {
+        for banido in [
+            "shadow",
+            "@font-face",
+            "@import",
+            "url(",
+            "<script",
+            "http://",
+            "https://",
+        ] {
             assert!(
                 !artefato.html.contains(banido),
                 "CSS auto-contido não pode ter {banido}"

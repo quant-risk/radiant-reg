@@ -10,7 +10,7 @@
 //! `String` determinística; a semântica numérica fica em `Centavos::parse`
 //! e a temporal em `DataBase::parse` — nunca no leitor.
 
-use calamine::{Data, open_workbook_auto, Reader};
+use calamine::{Data, Reader, open_workbook_auto};
 use reg_core::error::RegError;
 
 use super::mapping::monetary_input;
@@ -34,12 +34,17 @@ pub fn read_sheet_rows(
 ) -> Result<Vec<Vec<String>>, RegError> {
     const FIELD: &str = "ingest.xlsx";
     let path_str = path.display().to_string();
-    let mut wb = open_workbook_auto(path)
-        .map_err(|e| RegError::InvalidValue { field: FIELD.into(), reason: format!("abrir {path_str}: {e}") })?;
+    let mut wb = open_workbook_auto(path).map_err(|e| RegError::InvalidValue {
+        field: FIELD.into(),
+        reason: format!("abrir {path_str}: {e}"),
+    })?;
 
     let range = wb
         .worksheet_range(sheet_name)
-        .map_err(|e| RegError::InvalidValue { field: FIELD.into(), reason: format!("sheet {sheet_name:?} de {path_str}: {e}") })?;
+        .map_err(|e| RegError::InvalidValue {
+            field: FIELD.into(),
+            reason: format!("sheet {sheet_name:?} de {path_str}: {e}"),
+        })?;
 
     let mut rows = Vec::with_capacity(range.height());
     for row in range.rows() {
@@ -145,21 +150,32 @@ pub fn canonical_rows(
     let header = &rows[header_idx];
 
     let data_base = mapping.data_base;
-    let if_cnpj = reg_core::cnpj::CnpjIdentifier::new(&mapping.if_cnpj_raw, data_base)
-        .map_err(|e| RegError::InvalidValue { field: "mapping.meta.if_cnpj".into(), reason: e.to_string() })?;
+    let if_cnpj =
+        reg_core::cnpj::CnpjIdentifier::new(&mapping.if_cnpj_raw, data_base).map_err(|e| {
+            RegError::InvalidValue {
+                field: "mapping.meta.if_cnpj".into(),
+                reason: e.to_string(),
+            }
+        })?;
 
-    let participante_col = find_column(header, &ColumnMapping {
-        source_header: mapping.participante_header.clone(),
-        target_field: super::FieldPath("participante".into()),
-        unit: None,
-        transform: Vec::new(),
-    })?;
-    let operacao_col = find_column(header, &ColumnMapping {
-        source_header: mapping.operacao_header.clone(),
-        target_field: super::FieldPath("operacao".into()),
-        unit: None,
-        transform: Vec::new(),
-    })?;
+    let participante_col = find_column(
+        header,
+        &ColumnMapping {
+            source_header: mapping.participante_header.clone(),
+            target_field: super::FieldPath("participante".into()),
+            unit: None,
+            transform: Vec::new(),
+        },
+    )?;
+    let operacao_col = find_column(
+        header,
+        &ColumnMapping {
+            source_header: mapping.operacao_header.clone(),
+            target_field: super::FieldPath("operacao".into()),
+            unit: None,
+            transform: Vec::new(),
+        },
+    )?;
 
     // Colunas do [[columns]] resolvidas uma vez; monotetárias com unit=None
     // são transform-textuais (ex. vencimento) e não entram no wedge mínimo.
@@ -181,7 +197,10 @@ pub fn canonical_rows(
         }
         if participante.is_empty() || operacao.is_empty() {
             return Err(RegError::MissingField {
-                field: format!("linha {}: participante/operacao parcial", out.len() + header_idx + 2),
+                field: format!(
+                    "linha {}: participante/operacao parcial",
+                    out.len() + header_idx + 2
+                ),
             });
         }
         // Valida os campos monetários contratados — trava 1 re-checada aqui:
@@ -189,7 +208,12 @@ pub fn canonical_rows(
         for (idx, col) in &resolved {
             monetary_input(col, cell(*idx))?.to_centavos()?;
         }
-        out.push(CanonicalInput { data_base, if_cnpj: if_cnpj.clone(), participante, operacao });
+        out.push(CanonicalInput {
+            data_base,
+            if_cnpj: if_cnpj.clone(),
+            participante,
+            operacao,
+        });
     }
     Ok(out)
 }
@@ -224,16 +248,36 @@ mod tests {
     #[test]
     fn detecta_header_cod_acentado_forma_curta_e_longa() {
         let cod = vec![vec!["".into()], vec!["Cód".into(), "Descrição".into()]];
-        assert_eq!(detect_header_row(&cod), Some(1), "header 'Cód' deve ser detectado");
+        assert_eq!(
+            detect_header_row(&cod),
+            Some(1),
+            "header 'Cód' deve ser detectado"
+        );
         let cod_ponto = vec![vec!["Cód.".into(), "Descrição".into()]];
-        assert_eq!(detect_header_row(&cod_ponto), Some(0), "header 'Cód.' deve ser detectado");
+        assert_eq!(
+            detect_header_row(&cod_ponto),
+            Some(0),
+            "header 'Cód.' deve ser detectado"
+        );
         let codigo = vec![vec!["Código".into(), "Descrição".into()]];
-        assert_eq!(detect_header_row(&codigo), Some(0), "header 'Código' deve ser detectado");
+        assert_eq!(
+            detect_header_row(&codigo),
+            Some(0),
+            "header 'Código' deve ser detectado"
+        );
         let codigo_longo = vec![vec!["Código do evento".into(), "Valor".into()]];
-        assert_eq!(detect_header_row(&codigo_longo), Some(0), "keyword em palavra inteira");
+        assert_eq!(
+            detect_header_row(&codigo_longo),
+            Some(0),
+            "keyword em palavra inteira"
+        );
         // Match é por palavra inteira: "CampoExtra" não casa "campo".
         let embutido = vec![vec!["CampoExtra".into(), "Valor".into()]];
-        assert_eq!(detect_header_row(&embutido), None, "substring embutida não é header");
+        assert_eq!(
+            detect_header_row(&embutido),
+            None,
+            "substring embutida não é header"
+        );
     }
 
     #[test]
@@ -243,15 +287,25 @@ mod tests {
             panic!("fixture real ausente: {}", path.display());
         }
         let rows = read_sheet_rows(&path, "Doc3040").expect("sheet Doc3040 deve abrir");
-        assert!(rows.len() > 10, "Doc3040 deve ter linhas suficientes, teve {}", rows.len());
+        assert!(
+            rows.len() > 10,
+            "Doc3040 deve ter linhas suficientes, teve {}",
+            rows.len()
+        );
         let h = detect_header_row(&rows).expect("header de Doc3040 deve ser detectado");
         let header_join: String = rows[h].join("|");
         assert!(
-            ["campo", "formato"].iter().all(|k| header_join.to_lowercase().contains(k)),
+            ["campo", "formato"]
+                .iter()
+                .all(|k| header_join.to_lowercase().contains(k)),
             "header inesperado: {header_join}"
         );
         // 2 células conhecidas: "Campo" e "Formato" presentes no header.
-        assert!(rows[h].iter().any(|c| c.trim().eq_ignore_ascii_case("campo")));
+        assert!(
+            rows[h]
+                .iter()
+                .any(|c| c.trim().eq_ignore_ascii_case("campo"))
+        );
         assert!(rows[h].iter().any(|c| normalize_header(c) == "formato"));
     }
 
@@ -280,17 +334,35 @@ mod tests {
         let doc = parse_mapping_toml(mapping_toml).unwrap();
         let rows = vec![
             vec!["Layout".into(), "".into()],
-            vec!["Campo".into(), "Participante".into(), "Operação".into(), "Saldo".into()],
-            vec!["cnpj".into(), "ACME SA".into(), "OP-1".into(), "1.234,56".into()],
+            vec![
+                "Campo".into(),
+                "Participante".into(),
+                "Operação".into(),
+                "Saldo".into(),
+            ],
+            vec![
+                "cnpj".into(),
+                "ACME SA".into(),
+                "OP-1".into(),
+                "1.234,56".into(),
+            ],
             vec!["".into(), "".into(), "".into(), "".into()],
-            vec!["cnpj".into(), "BETA LTDA".into(), "OP-2".into(), "42,00".into()],
+            vec![
+                "cnpj".into(),
+                "BETA LTDA".into(),
+                "OP-2".into(),
+                "42,00".into(),
+            ],
         ];
         let out = canonical_rows(&rows, &doc).unwrap();
         assert_eq!(out.len(), 2);
         assert_eq!(out[0].participante, "ACME SA");
         assert_eq!(out[0].operacao, "OP-1");
         assert_eq!(out[1].participante, "BETA LTDA");
-        assert_eq!(out[0].data_base, reg_core::period::DataBase::new(2026, 6).unwrap());
+        assert_eq!(
+            out[0].data_base,
+            reg_core::period::DataBase::new(2026, 6).unwrap()
+        );
         assert_eq!(out[0].if_cnpj.as_str(), "11222333000181");
 
         // Valor não numérico em campo monetário → erro da trava 1.
@@ -316,7 +388,8 @@ mod tests {
         let doc = parse_mapping_toml(&mapping_toml.replace(
             "columns = []",
             "[[columns]]\nsource_header = \"ZZZ\"\ntarget_field = \"outro\"",
-        )).unwrap();
+        ))
+        .unwrap();
         let rows = vec![vec!["Campo".into(), "Operação".into()]];
         let err = canonical_rows(&rows, &doc).unwrap_err();
         assert!(matches!(err, RegError::MissingField { ref field } if field.contains("ZZZ")));

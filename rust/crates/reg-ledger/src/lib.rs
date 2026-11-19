@@ -60,15 +60,15 @@ pub mod mapping_locks;
 
 // Re-exports de conveniência — os caminhos completos continuam disponíveis.
 pub use chain::{
-    agora_rfc3339_nano, compute_entry_hash, AppendRequest, Chain, ChainError, Entry, VerifyReport,
-    BUSY_TIMEOUT, GENESIS_PREV, TAM_HASH,
+    AppendRequest, BUSY_TIMEOUT, Chain, ChainError, Entry, GENESIS_PREV, TAM_HASH, VerifyReport,
+    agora_rfc3339_nano, compute_entry_hash,
 };
-pub use jcs::{canonicalizar, canonicalizar_para_bytes, numero_inteiro, JcsError};
+pub use jcs::{JcsError, canonicalizar, canonicalizar_para_bytes, numero_inteiro};
 pub use mapping_locks::{
     ConservationCheck, ContratoUnidades, LockError, MappingFechado, MappingLock, Trava,
     TravaAplicada,
 };
 pub use sign::{
-    assinar_dossie, verificar_dossie, ArtefatoRef, DossierAssinado, DossierPayload, DualApproval,
-    SeedAssinatura, SignError,
+    ArtefatoRef, DossierAssinado, DossierPayload, DualApproval, SeedAssinatura, SignError,
+    assinar_dossie, verificar_dossie,
 };

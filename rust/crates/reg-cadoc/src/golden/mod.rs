@@ -91,7 +91,10 @@ impl GoldenInventory {
             Some(total) if total != self.rules.len() => {
                 return Err(RegError::InvalidValue {
                     field: FIELD.into(),
-                    reason: format!("counts.total {total} ≠ {0} regras listadas", self.rules.len()),
+                    reason: format!(
+                        "counts.total {total} ≠ {0} regras listadas",
+                        self.rules.len()
+                    ),
                 });
             }
             None => {
@@ -133,7 +136,10 @@ pub fn load_inventory(dir: &Path) -> Result<GoldenInventory, RegError> {
 pub fn load_cases(dir: &Path) -> Result<Vec<GoldenCase>, RegError> {
     const FIELD: &str = "golden.cases";
     let mut files: Vec<std::path::PathBuf> = std::fs::read_dir(dir)
-        .map_err(|e| RegError::InvalidValue { field: FIELD.into(), reason: format!("dir {}: {e}", dir.display()) })?
+        .map_err(|e| RegError::InvalidValue {
+            field: FIELD.into(),
+            reason: format!("dir {}: {e}", dir.display()),
+        })?
         .filter_map(|e| e.ok().map(|e| e.path()))
         .filter(|p| p.extension().is_some_and(|e| e == "json"))
         .filter(|p| p.file_name().is_some_and(|n| n != "inventory.json"))
@@ -146,16 +152,20 @@ pub fn load_cases(dir: &Path) -> Result<Vec<GoldenCase>, RegError> {
             field: FIELD.into(),
             reason: format!("ler {}: {e}", f.display()),
         })?;
-        let value: serde_json::Value = serde_json::from_str(&raw).map_err(|e| {
-            RegError::InvalidValue { field: FIELD.into(), reason: format!("JSON inválido em {}: {e}", f.display()) }
-        })?;
+        let value: serde_json::Value =
+            serde_json::from_str(&raw).map_err(|e| RegError::InvalidValue {
+                field: FIELD.into(),
+                reason: format!("JSON inválido em {}: {e}", f.display()),
+            })?;
         let Some(cases_json) = value.get("cases").cloned() else {
             // manifesto (not_extracted.json etc.), não é arquivo de casos
             continue;
         };
-        let file_cases: Vec<GoldenCase> = serde_json::from_value(cases_json).map_err(|e| {
-            RegError::InvalidValue { field: FIELD.into(), reason: format!("casos inválidos em {}: {e}", f.display()) }
-        })?;
+        let file_cases: Vec<GoldenCase> =
+            serde_json::from_value(cases_json).map_err(|e| RegError::InvalidValue {
+                field: FIELD.into(),
+                reason: format!("casos inválidos em {}: {e}", f.display()),
+            })?;
         cases.extend(file_cases);
     }
     cases.sort_by(|a, b| a.id.cmp(&b.id));
@@ -226,13 +236,19 @@ mod tests {
                 {"id":"c2","testName":"t","ruleCode":"A1","xml":"<x/>","expect":null},
                 {"id":"c1","testName":"t","ruleCode":"B2","xml":"<x/>","expect":null}
             ]}"#,
-        ).unwrap();
+        )
+        .unwrap();
         std::fs::write(
             dir.path().join("fixtures_y.json"),
             r#"{"cases":[{"id":"c0","testName":"t","ruleCode":"B2","xml":"<x/>","expect":null}]}"#,
-        ).unwrap();
+        )
+        .unwrap();
         // Manifesto sem "cases" — pulado como não-caso.
-        std::fs::write(dir.path().join("not_extracted.json"), r#"{"not_extracted":[]}"#).unwrap();
+        std::fs::write(
+            dir.path().join("not_extracted.json"),
+            r#"{"not_extracted":[]}"#,
+        )
+        .unwrap();
 
         let inv = load_inventory(dir.path()).unwrap();
         assert_eq!(inv.total(), Some(2));

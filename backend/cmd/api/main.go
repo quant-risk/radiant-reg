@@ -113,32 +113,7 @@ func main() {
 	marketplaceSvc := marketplace.NewService(d)
 	pilotSvc := pilot.NewService(d)
 
-	// Sprint 53 — v3.34.35: AI Insights via LLM (opt-in).
-	// Configurado via env vars: LLM_PROVIDER, LLM_API_KEY, LLM_MODEL.
-	var insightsLLM *insights.LLMService
-	if apiKey := os.Getenv("LLM_API_KEY"); apiKey != "" {
-		var llmClient insights.LLMClient
-		switch os.Getenv("LLM_PROVIDER") {
-		case "openai":
-			llmClient = insights.NewOpenAIChat(apiKey,
-				envOr("LLM_MODEL", "gpt-4o-mini"),
-				envOr("LLM_BASE_URL", "https://api.openai.com/v1"))
-		default: // minimax (default)
-			llmClient = insights.NewMiniMaxChat(insights.MiniMaxConfig{
-				APIKey:  apiKey,
-				Model:   envOr("LLM_MODEL", "MiniMax-Text-01"),
-				BaseURL: envOr("LLM_BASE_URL", "https://api.minimax.chat/v1"),
-			})
-		}
-		insightsLLM = insights.NewLLMService(insights.LLMConfig{
-			LLMClient: llmClient,
-			DB:        d,
-			Logger:    logger,
-			ConvStore: insights.NewConversationStore(d),
-			RespCache: insights.NewResponseCache(5*time.Minute, 1000),
-		})
-		logger.Info("insights LLM initialized", "provider", os.Getenv("LLM_PROVIDER"))
-	}
+	insightsLLM := initInsightsLLM()
 
 	// Cross-Doc L3 — endpoint /v1/crossdoc/validate and /v1/generate/batch.
 	crossDocEngine := crossdoc.NewEngine(crossrules.BuiltinRegistry())
@@ -395,6 +370,11 @@ func main() {
 	// Libera HTTP connections idle do Radar
 	radarSvc.Close()
 	logger.Info("bye")
+}
+
+// initInsightsLLM garante que o serviço legado de insights LLM permaneça nil (Etapa 0).
+func initInsightsLLM() *insights.LLMService {
+	return nil
 }
 
 func envOr(key, def string) string {

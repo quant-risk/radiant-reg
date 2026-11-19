@@ -1,0 +1,3794 @@
+{
+  "cadoc": "3040",
+  "fonte": "SCR3040_Criticas.xls",
+  "sha256": "163b679f018a2215bc062970e250863921c31c8bc3a4ecf4d788a0c14a355b6b",
+  "contagens": {
+    "total": 255,
+    "habilitado_s": 226,
+    "habilitado_n": 29,
+    "por_categoria": {
+      "Agregadas": {
+        "total": 14,
+        "habilitado_s": 8,
+        "habilitado_n": 6
+      },
+      "Básicas": {
+        "total": 19,
+        "habilitado_s": 19,
+        "habilitado_n": 0
+      },
+      "Campos Obrigatórios": {
+        "total": 81,
+        "habilitado_s": 79,
+        "habilitado_n": 2
+      },
+      "Formato": {
+        "total": 5,
+        "habilitado_s": 4,
+        "habilitado_n": 1
+      },
+      "Individualizadas": {
+        "total": 15,
+        "habilitado_s": 9,
+        "habilitado_n": 6
+      },
+      "Negócio": {
+        "total": 1,
+        "habilitado_s": 1,
+        "habilitado_n": 0
+      },
+      "Semântica": {
+        "total": 111,
+        "habilitado_s": 97,
+        "habilitado_n": 14
+      },
+      "Substituição Parcial": {
+        "total": 9,
+        "habilitado_s": 9,
+        "habilitado_n": 0
+      }
+    }
+  },
+  "criticas": [
+    {
+      "codigo": "B01",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Erro XML",
+      "mensagem": "O arquivo XML deve atender às regras gerais de formatação XML e às regras de formato do XSD disponível dentro do aplicativo validador, considerado para a data-base referida no arquivo. O XSD considerado terá data-base igual ou anterior a data-base referida no arquivo; dentre as opções, será o mais recente.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B02",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Arquivo .ZIP deve ser gerado pelo aplicativo validador",
+      "mensagem": "O documento 3040/3042 enviado ao Banco Central deve ser um arquivo .ZIP gerado pelo aplicativo validador. Qualquer arquivo. ZIP gerado através de outro aplicativo será rejeitado.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B03",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Instituição remetente deve possuir autorização",
+      "mensagem": "Para enviar o documento 3040/3042 que não seja de sua propriedade uma instituição deverá dispor de uma autorização de envio específica para fazê-lo.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B04",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Documento fora do período de admissão",
+      "mensagem": "Somente podem ser enviados ao SCR documentos cujas datas-base estejam dentro do horizonte permitidos (24 datas-base).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B05",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Documentos não esperado",
+      "mensagem": "Para o envio de documentos novos, uma instituição deverá estar cadastrada na lista de documentos esperados do sistema para a data-base a qual deseja proceder o envio. Um documento enviado e não esperado será rejeitado. A declaração de dispensa de envio do documento 3040, ou o cancelamento dessa dispensa deverá ser feita através da interface web do SCR.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B06",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Número de remessa incompatível",
+      "mensagem": "O envio de uma nova remessa (ou seja, uma substituição) do documento 3040 deve conter um novo número de remessa no cabeçalho do documento. Caso seja enviada uma remessa e uma parte repetida, o documento será rejeitado. (Para maiores informações sobre partes e remessas, olhar documento instruções e manuais na página do SCR).\nA utilização do número de remessa do arquivo deverá levar em conta o estado do documento na data-base:\nDocumento Esperado: o número de remessa precisa ser igual ao das outras partes já recebidas da mesma remessa ou ser maior para iniciar o envio de uma nova remessa;\nDocumento em Processamento: o número de remessa precisa ser igual ao das outras partes já recebidas da mesma remessa;\nDocumento Aceito: qualquer número de remessa será rejeitado, pois o documento aceito fica bloqueado enquanto aguarda ser carregado para se tornar disponível;\nDocumento Disponível: o número de remessa precisa ser maior do que a última remessa enviada;\nDocumento Rejeitado: o número de remessa precisa ser maior do que a última remessa enviada.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B07",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Composição da remessa (número de parte e final de remessa)",
+      "mensagem": "Uma remessa do documento 3040 deve ser composta de N partes, onde N >= 1. As partes devem ser numeradas de 1 a N sem repetição de número e tendo a parte N, além do seu número, um marcador de final de remessa <Doc3040 TpArq=\"F\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B08",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Remessa com parte rejeitada",
+      "mensagem": "Se uma remessa do documento 3040 já tiver ao menos uma parte rejeitada, qualquer outra parte recebida da mesma remessa será rejeitada.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B09",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Número máximo de erros",
+      "mensagem": "O aplicativo validador possui um limite máximo de registros de erros possíveis. Se o número máximo de erros for atingido, a validação será interrompida e o arquivo será rejeitado com os erros registrados até então. Neste caso, os erros adicionais que possam existir não são detectados.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B10",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Número máximo de avisos",
+      "mensagem": "O aplicativo validador possui um limite máximo de registros de avisos possíveis. Se o número máximo de avisos for atingido, a validação continuará, mas avisos adicionais não serão registrados no log. Neste caso, os avisos adicionais que possam existir não são apresentados.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B11",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Documento não aceito na data-base anterior",
+      "mensagem": "Caso a instituição não possua um documento 3040 aceito na data-base anterior, o envio de um novo documento na data-base atual será rejeitado.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B12",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Atributo TpFundo no cabeçalho do xml obrigatório apenas para FIDCs a partir da data-base de março/2024",
+      "mensagem": "Caso a instituição remetente seja um Fundo de Investimento em Direitos Creditórios - FIDC, o atributo \"TpFundo\" no cabeçalho do Cadoc 3040 deverá ser preenchido pelos códigos: 36 - FIDC, 46 - FIDC-NP ou 41 - FIDC PIPS. \n\nImportante!! Demais instituições (não FIDCs), não preencher o atributo TpFundo!",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B13",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "IF não é FIDC",
+      "mensagem": "Instituição deve ser FIDC e TpFundo deve assumir valores: 36, 46 ou 41.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B14",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Excedida a quantidade de operações divergentes no 3042",
+      "mensagem": "A quantidade de operações informada excedeu o limite máximo.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B15",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Excedida a quantidade de operações divergentes no 3040",
+      "mensagem": "A quantidade de operações informada excedeu o limite máximo.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B16",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Inclusão de cliente sem operação no documento 3042",
+      "mensagem": "Inclusão de cliente sem operação no documento 3042.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B17",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Arquivo vazio",
+      "mensagem": "Arquivo deve conter clientes <Cli> ou operações <Agreg>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B20",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Correção via web em andamento",
+      "mensagem": "Não é possível remeter arquivo de substituição parcial - 3042 enquanto houver protocolo de correção via web em andamento.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "B21",
+      "habilitado": "s",
+      "categoria_aba": "Básicas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Envios concorrentes do documento 3042",
+      "mensagem": "Um primeiro 3042 foi enviado (e aguardando processamento) e posteriormente o segundo 3042 foi enviado para mesma IF e data-base. Neste caso, o primeiro 3042 é desconsiderado.\nOu o primeiro 3042 foi enviado e estava em processamento, então o segundo 3042 é enviado para mesma IF e data-base, causando a desconsideração do segundo 3042.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C01",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Campos obrigatórios somente para pessoa jurídica",
+      "mensagem": "Tipo de controle\nSe Tp=\"2\" - pessoa jurídica com CNPJ - é obrigatório Detalhamento do Cliente",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C02",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2010-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2010-09-01",
+      "erro_desde": null,
+      "titulo": "Campos não obrigatórios",
+      "mensagem": "Conglomerado econômico\nCaracterística especial",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C03",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2026-04",
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Garantias não fidejussórias",
+      "mensagem": "O campo Valor original da garantia é obrigatório, para garantias não fidejussórias (garantias <> 09), os campos Identificação do garantidor e Percentual garantido é proibido para garantias não fidejussórias",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C04",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2026-04",
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Garantias fidejussórias",
+      "mensagem": "Os campos Identificação do garantidor e Percentual garantido são obrigatórios, para garantias fidejussórias (garantias == 09), dispensada a obrigatoriedade do campo Identificação do garantidor quando a garantia fidejussória for 0903 (PF no exterior) e 0904 (PJ no exterior), o campo Valor original da garantia é proibido para garantias fidejussórias",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C05",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Cessões com coobrigação entre instituições financeiras (informação de cessionário).",
+      "mensagem": "Para Inf==0101 (informação de cessionário), campos obrigatórios: data de cessão (Cd), percentual (Perc) e valor negociado (Valor).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C06",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Cessões com coobrigação entre instituições financeiras (informação de cedente)",
+      "mensagem": "Para Inf==0102, 0103 ou 0104 (informação de cedente), campos obrigatórios: data de cessão (Cd), cessionário (Ident), percentual de coobrigação (Perc) e valor negociado (Valor).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C07",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Porte do cliente PJ",
+      "mensagem": "Deve assumir valores do Anexo 24 para PJ",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C08",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-11-01",
+      "titulo": "Porte do cliente PF",
+      "mensagem": "Deve assumir valores do Anexo 25 para PF para operações concedidas a partir da data-base de julho/2011",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C09",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Campos proibidos para pessoa física",
+      "mensagem": "Tipo de controle\nDetalhamento do cliente\nPorte do Cliente, até habilitação da regra C08",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C10",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2026-04",
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Campos de reavaliação de garantia",
+      "mensagem": "Se houver reavaliação de garantia, deverão ser informados ambos os campos de reavaliação, Data e Valor de reavaliação, ou seja, caso haja o atributo DtReav na tag <Gar>, o atributo VlrData é obrigatório.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C11",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Data de vencimento",
+      "mensagem": "A data de vencimento da operação é obrigatória para todas as operações, exceto para aquelas que possuem vencimentos v199.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C13",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-09-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Saídas (operações cedidas sem coobrigação)",
+      "mensagem": "Para Inf==0303 ou 0304, campos obrigatórios: data da cessão (Cd), cessionário (Ident) e valor negociado (Valor)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C14",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-09-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Saídas (operações renegociadas)",
+      "mensagem": "Para Inf==0305, campos obrigatórios: novo contrato (Cd), modalidade e submodalidade (Ident) e valor renegociado (Valor)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C16",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-09-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Saídas (alteração de código de contrato)",
+      "mensagem": "Para Inf==0307, campos obrigatórios: novo contrato (Cd), modalidade e submodalidade (Ident)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C17",
+      "habilitado": "n",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-11-01",
+      "erro_desde": "2014-05-01",
+      "titulo": "Títulos representativos de operações de crédito",
+      "mensagem": "Para Inf=04XX, campos obrigatórios: código do instrumento (Cd)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C18",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-11-01",
+      "erro_desde": null,
+      "titulo": "Certificados agregadores de títulos representativos de operações de crédito",
+      "mensagem": "Para Inf=05XX, campo obrigatório: código do instrumento (Cd)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C19",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Cessões com coobrigação para instituições não financeiras (informação de cessionário)",
+      "mensagem": "Para Inf==0701 (informação de cessionário), campos obrigatórios: data da cessão (Cd), percentual de coobrigação (Perc) e valor negociado (Valor).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C20",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Cessões com coobrigação para instituições não financeiras (informação de cedente)",
+      "mensagem": "Para Inf==0702, 0703  ou 0704 (informação de cedente), campos obrigatórios: data da cessão (Cd), cessionário (Ident), percentual de coobrigação (Perc) e valor negociado (Valor).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C21",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Cessões com coobrigação para instituições não financeiras (tipo de transferência)",
+      "mensagem": "Para Inf=0705, 0706 ou 0707, campos obrigatórios: data da transferência (Cd), cessionário (Ident), percentual de risco (Perc) e valor negociado (Valor). O percentual de risco só é obrigatório para operações de natureza 15.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C23",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Cessões de operações sem coobrigação (informação de cessionário)",
+      "mensagem": "Para Inf=1001 ou 1002 (informação de cessionário), campos obrigatórios: data de aquisição (Cd), valor negociado (Valor) e cedente (Ident).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C24",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Cessões de operações sem coobrigação (informação de cedente)",
+      "mensagem": "Para Inf=1003 (informação de cedente), campos obrigatórios: data de transferência (Cd), cessionária (Ident) e valor negociado (Valor).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C25",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-11-01",
+      "erro_desde": "2012-04-01",
+      "titulo": "Derivativos",
+      "mensagem": "Para Inf=11XX, campos obrigatórios: código do instrumento (Cd), contraparte (Ident).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C26",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-09-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Saídas (recompra de operação)",
+      "mensagem": "Para Inf==0309, campos obrigatórios: valor de recompra (Valor).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C27",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-09-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Saídas (portabilidade)",
+      "mensagem": "Para Inf==0311, campo obrigatório: instituição para a qual operação foi portada (Ident)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C28",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Valor contratado - obrigatoriedade",
+      "mensagem": "Valor contratado é obrigatório para todas as modalidades não rotativas (todas exceto 0101, 0210, 0213, 0214, 0217, 0406, 1304, 19XX) que possuam vencimentos maiores que 80.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C29",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-09-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Saídas (incorporação)",
+      "mensagem": "Para Inf==0312, campo obrigatório: instituição incorporadora (Ident), novo contrato (Cd), modalidade e submodalidade (Qtd)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C31",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Faturamento Anual - Compatibilidade de data e obrigatoriedade",
+      "mensagem": "O campo Faturamento Anual é obrigatório para operações concedidas a partir da data-base julho/2011 e para operações concedidas para pessoa jurídica",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C32",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-09-01",
+      "erro_desde": "2011-11-01",
+      "titulo": "Percentual do Indexador - Compatibilidade de data",
+      "mensagem": "O campo Percentual do Indexador é obrigatório para operações concedidas a partir da data-base setembro/2011",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C33",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2024-12",
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2012-01-01",
+      "titulo": "Aplicabilidade de Dias de Atraso",
+      "mensagem": "O campo Dias de Atraso é obrigatório apenas para operações vencidas (código de vencimento 205 a 330, inclusive)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C34",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-11-01",
+      "titulo": "Registro adicional de coobrigação - Informações adicionais obrigatórias",
+      "mensagem": "Para Inf==1201, campo obrigatório: valor da coobrigação (Valor) e do percentual de coobrigação (Perc).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C35",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2011-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-11-01",
+      "erro_desde": "2012-08-01",
+      "titulo": "Informações adicionais referentes ao registro adicional de coobrigação",
+      "mensagem": "As operações de modalidade 1511, 1512, 2001 ou 2002 devem possuir informação adicional Tp=\"1201\". Nenhuma outra modalidade poderá possuir informação adicional Tp=\"1201\". (vide observações no HistóricoAtualizações)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C36",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-01-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Informação de identificação do cedente em cessões de crédito pelo cessionário",
+      "mensagem": "Para Inf==0101 e 0701 o atributo Ident (CNPJ Cedente) somente é obrigatório a partir da data-base de março/2012",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C37",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-01-01",
+      "erro_desde": "2012-09-01",
+      "titulo": "Operações originais em cessão de crédito - cedente - Informações adicionais obrigatórias",
+      "mensagem": "Para Inf==1202, campo obrigatório: código do contrato de cessão (Cd)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C38",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-01-01",
+      "erro_desde": "2012-08-01",
+      "titulo": "Coobrigação Assumida – Cedente - Obrigatoriedade da Informação Adicional",
+      "mensagem": "Para cada pacote de registro adicional com modalidade 1512 (cessão com coobrigação para não SFN, controlada ou não, ou para fundo) deve se registrado informação adicional 1203.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C39",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-01-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Coobrigação Assumida – Cedente – Identificação CNPJ",
+      "mensagem": "Para Inf==1203, campo obrigatório: cedente da operação (Ident)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C40",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-03-01",
+      "erro_desde": "2012-09-01",
+      "titulo": "Operações originais em cessão de crédito - cedente - Informações adicionais obrigatórias",
+      "mensagem": "Para Inf==1201, campo obrigatório: data (Cd) e modalidade e submodalidade (Ident)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C41",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-03-01",
+      "erro_desde": "2012-06-01",
+      "titulo": "Obrigatoriedade de adoção da Resolução nº 3.533",
+      "mensagem": "Operações de naturezas 04, 05, 11, 13, 14 ou 15 ou de modalidade 1511, 1512,1513, 2001 ou 2002 e natureza 01 cuja data de cessão (<Inf Cd=\"\">) sejam maiores do que 01/01/2012 devem possuir característica especial 35",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C42",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-03-01",
+      "erro_desde": "2012-06-01",
+      "titulo": "Aplicabilidade da Resolução nº 3.533",
+      "mensagem": "Se uma operação for marcada com a característica especial 35, então deverá satisfazer cumulativamente às 2 condições: 1) ter natureza 04, 05, 11, 13, 14 ou 15 ou modalidade 1511, 1512, 1513, 2001 ou 2002 e natureza 01; 2) ter pelo menos uma informação adicional (<Inf Tp=\"\">)  dentre os tipos {0101 a 0105, 0701 a 0707 ou 1201} com data de cessão ou transferência (<Inf Cd=\"\">) posterior à publicação da Resolução nº 3.533 (31/01/2008) ou uma informação adicional dentre os tipos {03XX}. Operações de naturezas 04, 05, 11, 13, 14 ou 15 ou de modalidade 1511, 1512 ou 1513 e natureza 01 cuja data de cessão (<Inf Cd=\"\">) seja inferior à publicação da Resolução nº 3.533 (31/01/2008) não podem possuir a característica especial 35.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C43",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2012-09-01",
+      "titulo": "Validação de modalidade/submodalidade em Informações Adicionais",
+      "mensagem": "O atributo \"Ident\" é campo obrigatório da Informações Adicional \"1201\" e deve assumir um dos valores possíveis segundo o anexo 3 do Leiaute do doc.3040.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C44",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2012-10-01",
+      "fim_vigencia": "2026-05",
+      "alerta_desde": "2012-10-01",
+      "erro_desde": "2014-05-01",
+      "titulo": "Verificação de formatação de data em Informações Adicionais",
+      "mensagem": "O atributo \"Ident\" das Informações Adicionais 0402, 0405, 0407, 0408, 0409, 0410 e 0411 deve ser informado no formato AAAA-MM-DD, onde AAAA equivale aos 4 dígitos do ano, MM aos 2 dígitos correspondentes ao mês e DD aos 2 dígitos correspondentes ao dia.",
+      "nota_nr": "(NR)"
+    },
+    {
+      "codigo": "C45",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2014-02-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2014-02-01",
+      "erro_desde": "2014-03-01",
+      "titulo": "Campo Renda Mensal - Compatibilidade de data e obrigatoriedade (Pessoa Física)",
+      "mensagem": "O campo Renda Mesal informado por meio do atributo 'FatAnual' na tag 'Cli' quando se tratar de Pessoa Física é obrigatório para operações concedidas a partir da data-base julho/2011 para 'Tp' igual a '1', '3' ou '5' na tag 'Cli'.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C46",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2014-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2014-03-01",
+      "erro_desde": "2014-07-01",
+      "titulo": "Obrigatoriedade dos atributos 'Ident'  ou 'Cd' na Inf Adicional '15xx'.",
+      "mensagem": "O preenchimento dos atributos 'Ident' é obrigatório para 'Tp' igual a '15XX', exceto quando se tratar de operação já desconsignada, quando deverá ser preenchido o atributo 'Cd' com valor \"1\".",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C47",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2013-12-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2013-12-01",
+      "erro_desde": "2014-03-01",
+      "titulo": "Obrigatoriedade do atributo TotalCli",
+      "mensagem": "O preenchimento do atributo 'TotalCli' no cabeçalho do documento é obrigatório",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C48",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2014-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2014-05-01",
+      "erro_desde": null,
+      "titulo": "Obrigatoriedade do Código de Portabilidade atributo 'Cd' na Informação Adicional de Saída por Portabilidade",
+      "mensagem": "O preenchimento do atributo 'Cd' para a Inf Tp=\"0311\" (Clientes PF) é obrigatório para Operações a partir de maio/2014.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C49",
+      "habilitado": "n",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2014-06-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2014-06-01",
+      "erro_desde": "2014-07-01",
+      "titulo": "Títulos representativos de operações de crédito",
+      "mensagem": "Para Inf=04XX, campos obrigatórios: código do instrumento (Cd). Nota: A informação adicional 0401 deverá conter em <Cd> o chassi do veículo ou em <Ident> o valor “1” nos casos de operação sem chassi.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C50",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2015-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2015-11-01",
+      "erro_desde": "2016-01-01",
+      "titulo": "Correspondentes Bancários",
+      "mensagem": "Para Informação de Correspondentes Bancários, campo obrigatório: 'Ident'. O atributo 'Ident' deverá ser preenchido com CNPJ válido (14 dígitos).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C51",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2015-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2015-11-01",
+      "erro_desde": "2016-01-01",
+      "titulo": "Saídas (assunção de dívida)",
+      "mensagem": "Para Inf=0313, campos obrigatórios: 'Cd' e 'Ident'. O tipo de pessoa (Cd) deve ser 1, 2, 3, 4, 5, ou 6, ou seja, se <Inf=\"0313\">, então (<Cd=\"1\">, ou <Cd=\"2\">, ou <Cd=\"3\">, ou <Cd=\"4\">, ou <Cd=\"5\">, ou <Cd=\"6\"> ). O atributo 'Ident' deverá conter o CPF /CNPJ (válidos) do novo devedor.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C52",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2016-11-01",
+      "fim_vigencia": "2026-05",
+      "alerta_desde": "2016-11-01",
+      "erro_desde": "2017-01-01",
+      "titulo": "Títulos representativos de operações de crédito",
+      "mensagem": "Para Informações Adicionais 0401, 0402, 0403, 0405, 0407, 0408, 0409, 0410 e 0411, campo obrigatório: código do instrumento (Cd). Nota: A informação adicional 0401 deverá conter em <Cd> o chassi do veículo ou em <Ident> os valores \"1\" ou \"2\" nos casos de operação sem chassi.",
+      "nota_nr": "(NR)"
+    },
+    {
+      "codigo": "C53",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2018-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2018-11-01",
+      "erro_desde": null,
+      "titulo": "Campos obrigatórios somente para pessoa jurídica no exterior",
+      "mensagem": "Para clientes pessoa jurídica no exterior - <Cli> <Tp=”4”>, é obrigatório o preenchimentos dos campos “NomeCli”, “TpIdentExt”, “CodExt” e “IdPais”.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C54",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2018-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2018-11-01",
+      "titulo": "Obrigatoriedade do atributo 'Cd' na Inf Adicional '18xx'",
+      "mensagem": "O preenchimento do atributo 'Cd' é obrigatório para 'Tp' igual a '18XX'.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C55",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2018-11-01",
+      "fim_vigencia": "2026-05",
+      "alerta_desde": null,
+      "erro_desde": "2018-11-01",
+      "titulo": "Obrigatoriedade do atributo 'Cd' na Inf Adicional '1999'",
+      "mensagem": "O preenchimento do atributo 'Cd' é obrigatório para 'Tp' igual a '1999'.",
+      "nota_nr": "(NR)"
+    },
+    {
+      "codigo": "C56",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2018-07-01",
+      "fim_vigencia": "2026-05",
+      "alerta_desde": null,
+      "erro_desde": "2018-07-01",
+      "titulo": "Obrigatoriedade de informação de credores",
+      "mensagem": "Para <Inf Tp=\"2101\">, são obrigatórios os campos 'Cd', 'Ident' e 'Perc'.",
+      "nota_nr": "(NR)"
+    },
+    {
+      "codigo": "C57",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2018-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2018-11-01",
+      "titulo": "Característica especial de operação vinculada",
+      "mensagem": "Para as modalidades 1501, 1502, 1503, 1504 e 1599, não poderá ser informada a característica especial 10, ou seja, se <Mod=\"1501\">, <Mod=\"1502\">, <Mod=\"1503\">, <Mod=\"1504\">, ou <Mod=\"1599\">, então <CaracEsp≠\"10\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C58",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2020-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-03-01",
+      "erro_desde": "2020-04-01",
+      "titulo": "Fundos Administrados",
+      "mensagem": "Para natureza de operação 34, é obrigatória a informação adicional 2202. Ou seja, para <NatuOp = \"34\">, então <InfTp = \"2202\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C59",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2020-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-03-01",
+      "erro_desde": "2020-04-01",
+      "titulo": "Entidades Assemelhadas - Conglomerado Prudencial",
+      "mensagem": "Para natureza de operação 33, é obrigatória a informação adicional 2201. Ou seja, para <NatuOp = \"33\">, então <InfTp = \"2201\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C60",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2020-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2020-09-01",
+      "titulo": "Tag Sicor",
+      "mensagem": "Os campos \"Saldo médio diário total\" e \"Saldo médio diário vincendo total\" da tag Sicor são obrigatórios, exceto para operações que apresentem vértices de vencimento em prejuízo <v3XX>. Ou seja, se <Sicor> e <v3XX>, então <VlrSaldoTot> e <VlrSaldoVinc> não são obrigatórios.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C61",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2020-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-11-01",
+      "erro_desde": "2020-12-01",
+      "titulo": "Obrigatoriedade do atributo 'Ident' nas informações adicionais '2201' e '2202'.",
+      "mensagem": "O preenchimento do atributo 'Ident' na informação adicional é obrigatório para <Inf Tp=\"2201\"> ou <Inf Tp=\"2202\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C62",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2021-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2021-01-01",
+      "erro_desde": "2021-02-01",
+      "titulo": "Obrigatoriedade do atributo 'Ident' na informação adicional '1408'",
+      "mensagem": "O preenchimento do atributo 'Ident' na informação adicional é obrigatório para <Inf Tp=\"1408\"> e deve assumir um dos valores possíveis segundo o anexo 37 do leiaute do Documento 3040, no formato de dois dígitos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C63",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2021-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2021-05-01",
+      "erro_desde": "2021-06-01",
+      "titulo": "Sistema de Amortização",
+      "mensagem": "As operações de modalidade 0901, 0902, 0903 ou 0990 devem possuir informação adicional do Sistema de Amortização (Tp=\"2301\", Tp=\"2302\", Tp=\"2303\" ou Tp=\"2399\"). Nenhuma outra modalidade poderá possuir informação adicional Tp=\"23XX\".",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C64",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2021-11-01",
+      "fim_vigencia": "2024-12",
+      "alerta_desde": "2021-11-01",
+      "erro_desde": "2022-03-01",
+      "titulo": "Contabilização de Instrumentos Financeiros",
+      "mensagem": "As operações de modalidade 1803 (\"Debêntures\") devem possuir a tag <ContInstFin>. Nenhuma outra modalidade poderá possuir a tag <ContInstFin>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C65",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2021-11-01",
+      "fim_vigencia": "2024-12",
+      "alerta_desde": "2021-11-01",
+      "erro_desde": "2022-03-01",
+      "titulo": "Contabilização de Instrumentos Financeiros - Valor de Mercado",
+      "mensagem": "O atributo 'VlrMercado' da tag <ContInstFin> é obrigatório para as categorias contábeis 02-Mantido para negociação, e 03-Disponível para venda.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C66",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2022-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2022-01-01",
+      "erro_desde": "2022-05-01",
+      "titulo": "Ativo registrado como lastro ou componente de cesta de Instrumento de Cessão Fiduciária",
+      "mensagem": "Os atributos 'Cd' (Tipo de Instrumento) e 'Ident' (Número do Instrumento de Cessão Fiduciária) são obrigatórios para Informação Adicional 06XX, e 'Cd' deve assumir um dos valores segundo o anexo 36 do leiaute do Documento 3040.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C67",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2022-06-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2022-06-01",
+      "erro_desde": "2023-07-01",
+      "titulo": "Tag Sicor - Financiamentos rurais",
+      "mensagem": "Sempre que a modalidade da operação for 08XX (\"Financiamentos rurais\") e a data de contratação for a partir de 2013 e a operação não possuir a Característica Especial 38, a tag <Sicor> deverá ser informada. Nenhuma outra modalidade poderá possuir a tag <Sicor>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C68",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2024-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2024-05-01",
+      "titulo": "Informação Complementar para Apuração do RWA",
+      "mensagem": "O atributo 'Cd' é obrigatório para Informação Adicional 2405 e 2406, e 'Cd' deve assumir um dos valores do Anexo 45 ou 46, respectivamente, do leiaute do Documento 3040.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C69",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Preenchimento obrigatório para o campo Metodologia de Apuração da Provisão para Perdas Esperadas e Metodologia Diferenciada para taxa de juros efetiva",
+      "mensagem": "Se TpFundo = Vazio (não Fundo), então preenchimento obrigatório do campo MetodApPE em \"C\" ou \"S\" e campo MetodDifTJE em \"S\" ou \"N\"",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C70",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Preenchimento obrigatório para o campo Classificação do Ativo Financeiro (ClasAtFin)",
+      "mensagem": "Se TpFundo = Vazio (não Fundo), então preenchimento obrigatório do campo ClasAtFin da tag <ContInstFinRes4966> para as operações nas modalidades 1 a 11, 13, 14 e 18 e Naturezas 1,2,3,11,13,14,15 e 32.\nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C71",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Preenchimento obrigatório para o campo Estágio do Instrumento Financeiro (EstInstFin)",
+      "mensagem": "Se Metodologia de Apuração da Perda Esperada = Completa (MetodApPE = \"C\"), então preenchimento obrigatório do campo EstInstFin da tag <ContInstFinRes4966> para as Naturezas 1,2,3,11,13,14,15 e 32 e seguintes modalidades: \n1 a 14;\n15 com exceção das submodalidades 1511, 1512, 1513;\n18 e\n19 com característica especial 25 (Limite não cancelável unilateralmente). \nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C72",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Preenchimento proibido para o campo Estágio do Instrumento Financeiro (EstInstFin)",
+      "mensagem": "Se Metodologia de Apuração da Perda Esperada for Simplificada (MetodApPE = \"S\"), então preenchimento do campo EstInstFin da tag <ContInstFinRes4966> é proibido.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C73",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-03-01",
+      "titulo": "Preenchimento obrigatório para o campo Taxa de juros efetiva (TJE)",
+      "mensagem": "Se metodologia TJE pura (MetodDifTJE = \"N\") e Classificação do Ativo Financeiro do tipo CA ou VJORA  (ClasAtFin = 1 ou 2), então preenchimento obrigatório do campo TJE da tag <ContInstFinRes4966> para as modalidades de 1 a 11, 13, 14 e 18 para operações de naturezas de 1,2,3,11,13,14,15 e 32. \n\nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C74",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Preenchimento obrigatório para o campo Carteira Provisão Mínima (CartProvMin)",
+      "mensagem": "Se TpFundo = Vazio (não Fundo), então preenchimento obrigatório \"C1\", \"C2\", \"C3\", \"C4\" ou \"C5\" do campo CartProvMin da tag <ContInstFinRes4966> para as modalidades de 1 a 14 e 18 e operações de naturezas 1,2,3,11,13,14,15 e 32.\n\nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C75",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-03-01",
+      "titulo": "Preenchimento obrigatório para o campo Quantidade de Instrumento (QtdInst)",
+      "mensagem": "Se TpFundo = Vazio (não Fundo), então preenchimento obrigatório do campo QtdInst da tag <ContInstFinRes4966> para a modalidade 18xx.\n\nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C76",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-03-01",
+      "titulo": "Preenchimento proibido para o campo Quantidade de Instrumento (QtdInst)",
+      "mensagem": "Se modalidade diferente de 18xx, o preenchimento do campo QtdInst da tag <ContInstFinRes4966> é proibido.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C77",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-03-01",
+      "titulo": "Preenchimento obrigatório para o campo Valor Justo (VlrJusto)",
+      "mensagem": "Se Classificação do Ativo Financeiro = Valor Justo em Outros Resultados Abrangentes - VJORA ou Valor Justo no Resultado - VJR (ClasAtFin = 2 ou 3), então preenchimento obrigatório do campo VlrJusto da tag <ContInstFinRes4966> para operações das modalidades de 1 a 11,13, 14 e 18, naturezas 1,2,3,11,13,14,15 e 32. \n\nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C78",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-05-01",
+      "titulo": "Classificação contábil VJORA permitida apenas nas modalidades 14 e 18 sem característica de concessão de crédito.",
+      "mensagem": "A Classificação do Ativo Financeiro do tipo VJORA (ClasAtFin  = 2) só é permitida nas modalidades 14 e 18 (desde que não tenha característica especial 39 - com caracteristica de concessão de crédito)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C79",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Preenchimento obrigatório para o campo Valor Contábil Bruto (VlrContBr)",
+      "mensagem": "Se TpFundo = Vazio (não Fundo), então preenchimento obrigatório do campo VlrContBr da tag <ContInstFinRes4966> para as operações nas modalidades 1 a 11, 13, 14 e 18 e naturezas de 1,2,3,11,13,14,15 e 32. \n\nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C80",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-11-01",
+      "titulo": "Obrigatório informar o Chassi- SNG quando houver garantia de veículo em até 60 dias da data da contratação",
+      "mensagem": "Se Modalidade = 0401 ou 1206 e Tipo de garantia <Tp> = 0330, 0430 ou 1003 e Situação da garantia <SitGar> = 01 e Sem Característica Especial 1 (Renegociação) e Data de Contratação >= 01/01/2021 e Data-base - Data de Contratação > 60 dias, então preenchimento obrigatório do campo <Ident> da tag de Garantias <Gar>, informando o Chassi do veículo.\n\nSe demais modalidades (ex-0401 e ex-1206) e Tipo de garantia <Tp> = 0330, 0430 ou 1003 e Situação da garantia <SitGar> = 01 e Sem Característica Especial 1 e Data de Contratação >= 01/06/2026, Data-base - Data de Contratação > 60 dias, então preenchimento obrigatório do campo <Ident> da tag de Garantias <Gar>, informando o Chassi do veículo.\n\nNão aplicável para operações com Informação de Saída 03xx;\nNão aplicável a Natureza 32.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C81",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-11-01",
+      "titulo": "Obrigatório informar a identificação do imóvel quando houver garantia imobiliária em até 4 meses da data da contratação",
+      "mensagem": "Se Modalidade = 0211, 0901 a 0990 e 1202 e Tipo de garantia <Tp> = 0332, 0333, 0334, 0432, 0433, 0434, 0566, 0567, 0568 ou 1005 e <SitGar> = 01 e Sem Característica Especial 1 (Renegociação) e Data de Contratação >= 01/01/2021, Data-base - Data de Contratação > 120 dias, então preenchimento obrigatório do campo <Ident> da tag de Garantias <Gar>, informando o CNS (6 dígitos) + Matrícula do Imóvel (7 dígitos) no Formato: CCCCCCNNNNNNN.\n\nSe Demais Modalidades (ex-0211, 0901 a 0990 e 1202) e Tipo de garantia <Tp> = 0332, 0333, 0334, 0432, 0433, 0434, 0566, 0567, 0568 ou 1005 e <SitGar> = 01 e Sem Característica Especial 1 (Renegociação) e Data de Contratação >= 01/06/2026, Data-base - Data de Contratação > 120 dias, então preenchimento obrigatório do campo <Ident> da tag de Garantias <Gar>, informando o CNS (6 dígitos) + Matrícula do Imóvel (7 dígitos) no Formato: CCCCCCNNNNNNN.\n\nNão aplicável para operações com Informação de Saída 03xx;\nNão aplicável a Natureza 32.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C82",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-08-01",
+      "titulo": "Obrigatória identificação do garantidor (PJ com 14 caracteres)",
+      "mensagem": "Se garantia Gar.Tp = 0671, 0672, 0673, 0886, então Gar.Ident deve ser informado com 14 caracteres verificados.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C83",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2026-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-01-01",
+      "erro_desde": "2026-03-01",
+      "titulo": "Obrigatoriedade dos campos Motivo de alocação no Estágio e Data-base da Alocação",
+      "mensagem": "Se informado o Estágio do Instrumento Financeiro (EstInstFin) e sem Informação Adicional de saída 03xx, e MetodApPE=\"C\", então os campos Motivo de alocação no Estágio (Motivo) e Data-base da Alocação (DtAlocacao) são obrigatórios.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C85",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2026-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-01-01",
+      "erro_desde": "2026-06-01",
+      "titulo": "Obrigatoriedade do campo Rendas do mês (RendMes) para Ativo Financeiro",
+      "mensagem": "Se TpFundo = Vazio (não Fundo) e modalidade de 1 a 13 e natureza 1,2,3,11,13,14,15 e 32, então é obrigatório informar o campo RendMes.\nExceção: operações em prejuízo.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "C56b",
+      "habilitado": "s",
+      "categoria_aba": "Campos Obrigatórios",
+      "inicio_vigencia": "2026-07-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-07-01",
+      "erro_desde": "2026-09-01",
+      "titulo": "Informação obrigatória para SEPs",
+      "mensagem": "Se TpFundos = 44 (SEP), então a Informação Adicional <Inf><Tp> 2101 é obrigatória, devendo ser preenchidos os campos:\n\n<Cd> (1 se PF ou 2 se PJ),\n<Ident> (11 dígitos se Cd = 1 ou 8 dígitos se Cd = 2),\n<Perc> (decimal de 0 a 100) e\n<Qtd> (0 ou 1)\n\nExceto se operação de Saída Inf = 03xx",
+      "nota_nr": null
+    },
+    {
+      "codigo": "F01",
+      "habilitado": "s",
+      "categoria_aba": "Formato",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Taxa efetiva anual",
+      "mensagem": "Forma de taxa percentual anual, em uma base centesimal, com a utilização de duas a sete casas decimais depois da vírgula e arredondada mediante a aplicação da regra estabelecida pela Associação Brasileira de Normas Técnicas (ABNT).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "F02",
+      "habilitado": "s",
+      "categoria_aba": "Formato",
+      "inicio_vigencia": "2010-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2010-09-01",
+      "titulo": "Datas",
+      "mensagem": "As datas deverão obedecer o formato AAAA-MM-DD, onde AAAA equivale aos 4 dígitos do ano, MM aos 2 dígitos correspondentes ao mês e DD aos 2 dígitos correspondentes ao dia.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "F03",
+      "habilitado": "s",
+      "categoria_aba": "Formato",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Código do contrato",
+      "mensagem": "O código do contrato não pode ser preenchido apenas com espaços em branco.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "F04",
+      "habilitado": "n",
+      "categoria_aba": "Formato",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Conglomerado econômico",
+      "mensagem": "O código alfanumérico do conglomerado não pode ser igual a \"0\" (zero).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "F05",
+      "habilitado": "s",
+      "categoria_aba": "Formato",
+      "inicio_vigencia": "2021-02-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2021-02-01",
+      "erro_desde": null,
+      "titulo": "Formato do campo RefBacen na tag Sicor",
+      "mensagem": "Para operações de crédito contratadas a partir de janeiro de 2013, os quatro primeiros dígitos do atributo 'RefBacen', na tag <Sicor>, devem corresponder a um ano a partir de 2013.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S01",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Detalhamento do cliente",
+      "mensagem": "O campo de “Detalhamento de Cliente” (DetCli) deverá possuir os 8 primeiros números iguais à “Identificação do Cliente” (atributo Cd em <Cli>).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S02",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Vendor - Necessidade de informação adicional",
+      "mensagem": "Se modalidade de operação == 0404 ou 0207 então Tipo de informação adicional == 0201 (e suas implicações de campos de Informação Adicional) \nHabilitado para data-base fevereiro de 2011.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S03",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Ocultação de operação em prejuízo há mais de 48 meses",
+      "mensagem": "Se houver código de vencimento 330, deve haver característica especial 11 \nHabilitado para data-base fevereiro de 2011.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S04",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Crédito a liberar - não aplicabilidade",
+      "mensagem": "Não poderão ter preenchidos os vencimentos de crédito a liberar (vencimentos 60 e 80) as modalidades “crédito rotativo vinculado a cartão de crédito” (0204), “cartão de crédito - compra parcelada” (0210), “cartão de crédito - compra à vista” (1304), “cheque especial e conta garantida” (0201),  cheque especial (0213) e conta garantida (0214)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S05",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Limite de crédito - vencimentos possíveis",
+      "mensagem": "A modalidade “Limite de Crédito” (19) só pode ter vencimentos de limite (20 e 40). Nenhum outro vencimento pode ser aceito quando esta modalidade for informada.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S06",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Vencimentos 20 e 40 - modalidade possível",
+      "mensagem": "Os vencimentos 20 e 40 só podem ser preenchidos com a modalidade “Limite de Crédito” (19).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S08",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Natureza 11 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 11, deve haver pelo menos uma Informação Adicional sobre “cessão com coobrigação entre instituições financeiras – informação de cedente” (InfoAdicional == 0102 ou 0103 ou 0104)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S09",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Natureza 04 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 04, deve haver uma (e apenas uma) Informação Adicional sobre “cessão com coobrigação entre instituições financeiras – informação de cessionário” (InfoAdicional == 0101 ou 0105).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S10",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Verificação de CNPJ e CPF",
+      "mensagem": "Verificação de CNPJ 14 para Tp=“2” e CPF 11 para Tp=“1”",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S12",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Compatibilidade entre data de vencimento e valor dos vencimentos distribuídos no fluxo",
+      "mensagem": "A data de vencimento da operação “DtVencOp” deve ser compatível com o máximo fluxo de vencimento informado nas parcelar a vencer, ou seja, a data de vencimento tem que ser menor ou igual ao maior código onde houver informação (códigos v110 a v190).\nSe DtVencOp - Data-Base (de referência) <  5400, não pode haver vencimento = v190\nSe DtVencOp - Data-Base (de referência) <  1801, não pode haver v180 <= vencimento <= v200\nSe DtVencOp - Data-Base (de referência) <  1441, não pode haver v175 <= vencimento <= v200\nSe DtVencOp - Data-Base (de referência) <  1081, não pode haver v170 <= vencimento <= v200\nSe DtVencOp - Data-Base (de referência) <  721, não pode haver v165 <= vencimento <= v200\nSe DtVencOp - Data-Base (de referência) <  361, não pode haver v160 <= vencimento <= v200\nSe DtVencOp - Data-Base (de referência) <  181, não pode haver v150 <= vencimento <= v200\nSe DtVencOp - Data-Base (de referência) <  91, não pode haver v140 <= vencimento <= v200\nSe DtVencOp - Data-Base (de referência) <  61, não pode haver v130 <= vencimento <= v200\nSe DtVencOp - Data-Base (de referência) <  31, não pode haver v120 <= vencimento <= v200",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S13",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2012-02-01",
+      "titulo": "Garantidor fidejussório não pode ser cliente principal",
+      "mensagem": "Dentro de uma operação, um garantidor fidejussório não pode ser o próprio cliente. Para pessoas físicas, <Cli Cd=\"\"> deve ser diferente de <Gar Ident=\"\">. Para pessoas jurídicas, <Op DetCli=\"\"> deve ser diferente de <Gar Ident=\"\"> - para pessoa jurídica devem ser utilizados 14 dígitos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S14",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Compatibilidade entre data de vencimento e data de contratação de uma operação",
+      "mensagem": "A data de vencimento da operação “DtVencOp”, quando houver, deve ser maior ou igual à data de contratação da operação “DtContr”. Regra não aplicada nas operações com informação adicional de saída e nas operações adquiridas de naturezas 02 a 05 com créditos vencidos ou baixados.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S15",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Compatibilidade de data de contratação",
+      "mensagem": "Data de contratação da operação (DtContr) tem de ser menor ou igual do que data atual (hoje()).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S17",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Compatibilidade de tipo de cliente e identificação do cliente",
+      "mensagem": "Se TpCli=1, Cd deve ter 11 dígitos.\nSe TpCli=2, Cd deve ter 8 dígitos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S19",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2010-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2010-09-01",
+      "erro_desde": null,
+      "titulo": "Data-base anterior à menor data-base admissível",
+      "mensagem": "A data-base do documento deve ser igual ou posterior à data-base 09/2010.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S20",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2024-12",
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Distribuição de vencimentos de créditos baixados como prejuízo com Classificação de risco incompatível",
+      "mensagem": "Exceto para operações de natureza 34, quando vencimentos = 310, 320 e 330, ClassOp deve ser HH.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S21",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Coobrigação com distribuição de vencimentos incompatíveis",
+      "mensagem": "As operações com modalidade de operação 15 (Mod=15XX) não podem ter códigos de vencimento igual a 310, 320 e 330",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S22",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Coobrigação com tipo de pessoa incompatível",
+      "mensagem": "Operações com a modalidade 1511 não podem ser ter pessoa física como devedor.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S23",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Incompatibilidade de tipo de pessoa em aquisição de operações",
+      "mensagem": "Operações de natureza 04 não podem ter pessoa física como devedor",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S25",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Não pode haver autocessão",
+      "mensagem": "Uma instituição não pode fazer cessões de crédito para ela mesma, ou seja, o CNPJ do cabeçalho não pode ser igual a nenhum código de informações adicionais do tipo 0102 ou 0103 ou 0104 (<Doc3040 CNPJ=\"\"> deve ser diferente de <Inf Ident=\"\"> quando <Inf Tp=\"0102 ou 0103 ou 0104\">).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S26",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Natureza 02 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 02, deve haver pelo menos uma Informação Adicional sobre “Aquisição de operações sem retenção de risco - de pessoa integrante do SFN” (InfoAdicional == 1001).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S27",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2011-09-01",
+      "titulo": "Natureza 03 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 03, deve haver pelo menos uma Informação Adicional sobre “Aquisição de operações sem retenção de risco - de pessoa não integrante do SFN” (InfoAdicional == 1002).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S28",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2012-01-01",
+      "titulo": "Dias de atraso da parcela mais atrasada de operações vencidas deve ser compatível com vencimentos",
+      "mensagem": "Se 0 < DiaAtraso <= 14, não pode haver vencimentos de v210 a 290\nSe 15 =< DiaAtraso <= 30, não pode haver vencimentos de v220 a 290 \nSe 31 =< DiaAtraso <= 60, não pode haver vencimentos de v230 a 290 \nSe 61 =< DiaAtraso <= 90, não pode haver vencimentos de v240 a 290 \nSe 91 =< DiaAtraso <= 120, não pode haver vencimentos de v245 a 290 \nSe 121 =< DiaAtraso <= 150, não pode haver vencimentos de v250 a 290 \nSe 151 =< DiaAtraso <= 180, não pode haver vencimentos de v255 a 290\nSe 181 =< DiaAtraso <= 240, não pode haver vencimentos de v260 a 290\nSe 241 =< DiaAtraso <= 300, não pode haver vencimentos de v270 a 290\nSe 301 =< DiaAtraso <= 360, não pode haver vencimentos de v280 a 290\nSe 361 =< DiaAtraso <= 540, não pode haver vencimentos 290\nSe não houver DiaAtraso, não pode haver vencimentos de v205 a 290",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S29",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2024-10",
+      "alerta_desde": "2011-01-01",
+      "erro_desde": null,
+      "titulo": "Dias de atraso da parcela mais atrasada de operações em prejuízo deve ser compatível com vencimentos",
+      "mensagem": "Se houver vencimento 310, DiaAtraso deve ser maior do que 180\nSe houver vencimento 320, DiaAtraso deve ser maior do que 540\nSe houver vencimento 330, DiaAtraso deve ser maior do que 1620",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S30",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-10-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-10-01",
+      "erro_desde": "2012-04-01",
+      "titulo": "Natureza 05 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 05, deve haver uma (e apenas uma) Informação Adicional sobre “Negociação de operações com pessoa não integrante do SFN com retenção de risco - Informação de cessionário” ou \"Cessão com retenção de risco entre instituições financeiras - Informação de cessionário\" (InfoAdicional == 0701).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S31",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-10-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-10-01",
+      "erro_desde": "2012-08-01",
+      "titulo": "Natureza 12 e 16 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 12 ou 16, deve haver pelo menos uma Informação Adicional sobre “Negociação de operações sem retenção de risco - Transferido a pessoa não integrante do SFN” (InfoAdicional == 1003).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S32",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2011-10-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-10-01",
+      "erro_desde": "2012-08-01",
+      "titulo": "Natureza 13, 14 e 15 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 13 ou 14 ou 15, deve haver pelo menos uma Informação Adicional sobre “Negociação de operações com pessoa não integrante do SFN com retenção de risco - transferidor de operação\" (InfoAdicional == 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S33",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-01-01",
+      "erro_desde": "2012-04-01",
+      "titulo": "Compatibilidade entre informações adicionais e naturezas",
+      "mensagem": "Informações adicionais de negociação de operações exigem a correta natureza de operação:\nSe InfoAdicional = 0101 ou 0105, natureza de operação deve ser 04 ou 11 a 16\nSe InfoAdicional = 0102 ou 0103 ou 0104, natureza de operação deve ser 11\nSe InfoAdicional = 0701, natureza de operação deve ser 05 ou 11 a 16\nSe InfoAdicional = 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707, natureza de operação deve ser 13 ou 14 ou 15\nSe InfoAdicional = 1001, natureza de operação deve ser 02 ou 11 a 16\nSe InfoAdicional = 1002, natureza de operação deve ser 03 ou 11 a 16\nSe InfoAdicional = 1003, natureza de operação deve ser 12 ou 16",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S34",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-09-01",
+      "erro_desde": null,
+      "titulo": "Compatibilidade de código de contrato de cessão",
+      "mensagem": "Numa operação cedida: \n\n1) o código do contrato de cessão, instruído na informação adicional <Inf Tp=\"1202\">, deve referenciar a operação de cessão no documento 3040. Assim, o atributo \"Cd\" da informação adicional <Inf Tp=\"1202\"> da operação cedida deve ser igual ao atributo \"Cd\" de outra operação com a ”tag” <Op Mod=\"1511\">, <Op Mod=\"1512\">,  <Op Mod=\"2001\"> ou <Op Mod=\"2002\"> ; \n\n2) A modalidade informada na operação cedida deve ser igual a informada na informação adicional <Inf Tp=\"1201\"> do respectivo contrato de cessão. Ou seja, o atributo \"Mod\" da” tag” <Op> da operação cedida que possui informação adicional <Inf Tp=\"1202\"> (referencia para o contrato de cessão) deve ser igual ao atributo \"Ident\" da informação adicional <Inf Tp=\"1201\"> do respectivo contrato de cessão; e \n\n3) O cessionário informado na informação adicional <Inf Tp=\"0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707\"> da operação cedida deve ser igual ao informado no respectivo contrato de cessão. Ou seja, o atributo \"Ident\" da informação adicional <Inf Tp=\"0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707\"> da operação cedida que também possui a informação adicional <Inf Tp=\"1202\"> (referência para o contrato de cessão) deve ser igual ao atributo \"Cd\" da tag <Cli> do contrato de cessão referenciado. Deve haver pelo menos um código de registro de retenção de risco em contrato de cessão igual ao código de contrato(s) de cessão informado(s) em operações cedidas. Ou seja, deve haver pelo menos um registro de um código de contrato de cessão (identificado pelo atributo \"Cd\" na tag <Op Mod=\"1511\"> ou <Op Mod=\"1512\">) igual ao informado no código informado no atributo \"Cd\" de operações com informação adicional <Inf Tp=\"1202\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S35",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-10-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-10-01",
+      "erro_desde": null,
+      "titulo": "Compatibilidade de modalidade em contrato de cessão",
+      "mensagem": "Consolidação da regra na Regra S34. A modalidade informada na operação cedida deve ser igual a informada na informação adicional <Inf Tp=\"1201\"> do respectivo contrato de cessão. Ou seja, o atributo \"Mod\" da” tag” <Op> da operação cedida que possui informação adicional <Inf Tp=\"1202\"> (referencia para o contrato de cessão) deve ser igual ao atributo \"Ident\" da informação adicional <Inf Tp=\"1201\"> do respectivo contrato de cessão. A modalidade informada em operações que possuem InfoAdicional 1202 deve ser a mesma modalidade informada em seu registro de retenção de risco em contrato de cessão associado. Ou seja, se o atributo \"Cd\" na tag <Inf Tp=\"1202\"> for igual ao atributo \"Cd\" na tag <Op> de operações com <Inf Tp=\"1201\">, o atributo \"Mod\" da tag <Op> quando <Inf Tp=\"1202\"> deve ser igual ao atributo \"Ident\" da tag <Inf Tp=\"1201\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S36",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-09-01",
+      "erro_desde": null,
+      "titulo": "Compatibilidade de valores informados em contrato de cessão",
+      "mensagem": "O valor original das operações, informado na informação adicional <Inf Tp=\"1201\"> do contrato de cessão, deve ser maior ou igual à somatória dos vencimentos das respectivas operações cedidas. Ou seja, o atributo \"Valor\" da informação adicional <Inf Tp=\"1201\"> do contrato de cessão deve ser maior ou igual à somatória dos vencimentos da “tag” <Venc> das operações cedidas que possuem a informação adicional <Inf Tp=\"1202\"> (referencia para o contrato de cessão).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S37",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Compatibilidade de nível de risco informado em contrato de cessão",
+      "mensagem": "Eliminação da regra. A classificação de risco no contrato de cessão deve ser equivalente à classificação de risco ponderada das operações que possuam o mesmo código de contrato informado no atributo nas InfoAdicionais. Ou seja, quando o atributo \"Cd\" da tag <Inf Tp=\"1202\"> [pacote A] for igual ao atributo \"Cd\" da tag <Op> em operações que possuam <Inf Tp=\"1201\"> [contrato B], a classificação de risco do contrato no atributo \"ClassOp\" do contrato B deve ser igual à ponderação das classificações de risco das operações contidas no pacote A. Para maior detalhamento sobre como calcular a ponderação, acesse o \"Manual de Informações de Negociação de Operações\" na página do SCR.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S38",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-09-01",
+      "erro_desde": null,
+      "titulo": "Compatibilidade de datas em contrato de cessão",
+      "mensagem": "A data informada na informação adicional <Inf Tp=\"0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707\"> da operação cedida deve ser igual a informada na informação adicional <Inf Tp=\"1201\"> do respectivo contrato de cessão. Ou seja, o atributo \"Cd\" da informação adicional <Inf Tp=\"0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707\"> da operação cedida que também possui a informação adicional <Inf Tp=\"1202\"> (referência para o contrato de cessão) deve ser igual ao atributo \"Cd\" da informação adicional <Inf Tp=\"1201\"> do contrato de cessão referenciado. A data informada em operações que possuem InfoAdicional 1201 deve ser a mesma modalidade informada nas operações originais que se referem ao contrato de cessão. Ou seja, se o atributo \"Cd\" na tag <Inf Tp=\"1202\"> for igual ao atributo \"Cd\" na tag <Op> de operações com <Inf Tp=\"1201\">, o atributo \"Cd\" da tag <Inf Tp=\"0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706\"> quando houver <Inf Tp=\"1202\"> deve ser igual ao atributo \"Cd\" da tag <Inf Tp=\"1201\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S39",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-10-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-10-01",
+      "erro_desde": null,
+      "titulo": "Compatibilidade de cessionário informados em contrato de cessão",
+      "mensagem": "Consolidação da regra na Regra S34. O cessionário informado na informação adicional <Inf Tp=\"0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707\"> da operação cedida deve ser igual ao informado no respectivo contrato de cessão. Ou seja, o atributo \"Ident\" da informação adicional <Inf Tp=\"0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707\"> da operação cedida que também possui a informação adicional <Inf Tp=\"1202\"> (referência para o contrato de cessão) deve ser igual ao atributo \"Cd\" da tag <Cli> do contrato de cessão referenciado. O cessionário informado em operações que possuem InfoAdicional 1201 deve ser igual ao cessionário informado nas operações originais que se referem ao contrato de cessão. Ou seja, se o atributo \"Cd\" na tag <Inf Tp=\"1202\"> for igual ao atributo \"Cd\" na tag <Op> de operações com <Inf Tp=\"1201\">, o atributo \"Ident\" da tag <Inf Tp=\"0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706\"> quando houver <Inf Tp=\"1202\"> deve ser igual ao atributo \"Cd\" da tag <Cli> quando <Inf Tp=\"1201\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S40",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-08-01",
+      "erro_desde": "2012-09-01",
+      "titulo": "Informações completas de cessão nas operações originais",
+      "mensagem": "Exceto nos casos de informação adicional de saída, Quando houver informações adicionais 0102 ou 0103 ou 0104 ou 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707 deve haver informação adicional 1202.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S41",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2012-08-01",
+      "titulo": "Verificação de formatação de CNPJ",
+      "mensagem": "O atributo “Ident” das informações adicionais 01 (exceto 0105), 0303, 1001 e 1203 devem ser CNPJs de 8 dígitos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S42",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2012-03-01",
+      "titulo": "Compatibilidade de informação de cedente de operação - cedente",
+      "mensagem": "O informante do documento deve ser igual ao cedente de operações de modalidade 1512. Ou seja, se <Inf Tp=\"1203\">, o atributo <Inf Tp=\"1203\" Ident=\"\"> deve ser igual a <Doc3040 CNPJ=\"\">",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S43",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2012-08-01",
+      "titulo": "Compatibilidade de informação de cedente de operação - cessionário",
+      "mensagem": "O cedente informado nas informações adicionais de tipo 0101 ou 0701 deve ser igual ao cliente dessa operação. Ou seja, se <Inf Tp=\"0101\"> ou <Inf Tp=\"0701\">, o atributo <Inf Tp=\"0101\" Ident=\"\"> ou <Inf Tp=\"0701\" Ident=\"\"> deve ser igual a <Cli Cd=\"\">",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S44",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-02-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2012-02-01",
+      "titulo": "Característica especial “35” para operações cedidas a partir de 01/01/12",
+      "mensagem": "A característica especial “35” só pode ser utilizada para marcar operações cedidas ou adquiridas, ou seja, para operações que sejam: de naturezas 04, 05, 11 e 13 a 15 e modalidades 01 a 13, 1402 ou 1403; ou natureza 01 e modalidade 1511 ou 1512 ou 1513 ou 2001 ou 2002.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S45",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2012-08-01",
+      "titulo": "Verificação de formatação de CNPJ e CPF",
+      "mensagem": "O atributo “Ident” das informações adicionais 0304, 07, 1002, 1003 e 2101 devem ser CPFs válidos de 11 dígitos ou CNPJs de 8 dígitos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S46",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2012-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-05-01",
+      "erro_desde": "2012-06-01",
+      "titulo": "Verificação de formatação de data em Informações Adicionais",
+      "mensagem": "O atributo \"Cd\" das Informações Adicionais 01, 0303, 0304, 07, 10, 1201 e 1701 deve ser informado no formato AAAA-MM-DD, onde AAAA equivale aos 4 dígitos do ano, MM aos 2 dígitos correspondentes ao mês e DD aos 2 dígitos correspondentes ao dia.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S47",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2014-02-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2014-02-01",
+      "erro_desde": "2014-02-01",
+      "titulo": "Proibição de Modalidades excluídas",
+      "mensagem": "As modalidades 0201 (cheque especial e conta garantida), 0205 (capital de giro com prazo de vencimento inferior a 30 d) e 0206 (capital de giro com prazo vencim. igual ou superior 30 d) são proibidas a partir da database fev/2014. Exceção: “Na database fevereiro/2014, operações nas modalidades 0201, 0205 ou 2006 serão excepcionalmente aceitas apenas nos casos em que possuam informação adicional de saída.” (Esta regra será referenciada como erro de XSD, apontando para a Regra B01)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S48",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2014-09-01",
+      "fim_vigencia": "2026-04",
+      "alerta_desde": "2014-09-01",
+      "erro_desde": "2015-11-01",
+      "titulo": "Obrigatoriedade da informação do SNG para modalidades “0401” e “1206”",
+      "mensagem": "Exceto em casos de Informação Adicional de Saída, as modalidades “0401” (aquisição de bens – veículos automotores) e “1206” (arrendamento financeiro de veículos automotores) requerem a Informação Adicional Inf Tp=”0401” (Registro do Chassi do veículo na Cetip - Sistema Nacional de Gravames).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S49",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Compatibilidade de informação de cessionário de operação - cedente",
+      "mensagem": "O cedente informado nas informações adicionais de tipo 1001 ou 1002 deve ser diferente do cliente dessa operação. Ou seja, se <Inf Tp=\"1001\"> ou <Inf Tp=\"1002\">, o atributo <Inf Tp=\"1001\" Ident=\"\"> ou <Inf Tp=\"1002\" Ident=\"\"> deve ser diferente do <Cli Cd=\"\">",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S50",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2014-10-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2014-10-01",
+      "erro_desde": "2015-11-01",
+      "titulo": "Compatibilidade de informação de cliente - crédito pessoal",
+      "mensagem": "Na carteira ativa, as submodalidades 0202 e 0203 de Naturezas de 1 a 3, o tipo de cliente informado deve ser 1, 3 ou 5, ou seja, para operações  com código de vencimento “vCOD” entre “v110” e “v290”, se (<Op NatuOp=\"x\">, onde x pode assumir os valores 1, 2 ou 3) e (<Op Mod=\"0202\"> ou <Op Mod=\"0203\">), então (<Cli Tp=\"1\"> ou <Cli Tp=\"3\"> ou <Cli Tp=\"5\">).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S51",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2014-10-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2014-10-01",
+      "erro_desde": "2015-11-01",
+      "titulo": "Compatibilidade de informação de cliente - repasses",
+      "mensagem": "Para a submodalidade 1401, o tipo de cliente informado deve ser 2, 4 ou 6, ou seja, se <Op Mod=\"1401\">, então (<Cli Tp=\"2\"> ou <Cli Tp=\"4\"> ou <Cli Tp=\"6\">).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S52",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2014-10-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2014-10-01",
+      "erro_desde": "2015-11-01",
+      "titulo": "Compatibilidade de informação de taxa de juros - cartão de crédito - compra à vista e parcelado lojista",
+      "mensagem": "Para a submodalidade 1304, a taxa de juros informada deve ser 0 (zero), ou seja, se <Op Mod=\"1304\">, então <Op TaxEft=0>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S53",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2016-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2016-08-01",
+      "erro_desde": "2016-09-01",
+      "titulo": "Crédito a liberar - não aplicabilidade",
+      "mensagem": "Não poderão ter preenchidos os vencimentos de crédito a liberar (vencimentos 60 e 80) as modalidades \"adiantamento a depositantes\"  (0101), “crédito rotativo vinculado a cartão de crédito” (0204), “cartão de crédito - compra parcelada” (0210), “cartão de crédito - compra à vista” (1304), “cheque especial (0213) e conta garantida” (0214).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S54",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2016-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2016-08-01",
+      "erro_desde": "2016-09-01",
+      "titulo": "Natureza 11 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 11, deve haver uma (e apenas uma) Informação Adicional sobre “cessão com coobrigação entre instituições financeiras – informação de cedente” (InfoAdicional == 0102 ou 0103 ou 0104)",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S55",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2016-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2016-08-01",
+      "erro_desde": "2016-09-01",
+      "titulo": "Natureza 13, 14 e 15 - informação adicional necessária",
+      "mensagem": "Exceto nos casos de informação adicional de saída, se a natureza for 13 ou 14 ou 15, deve haver uma (e somente uma) Informação Adicional sobre “Negociação de operações com pessoa não integrante do SFN com retenção de risco - transferidor de operação\" (InfoAdicional == 0702 ou 0703 ou 0704 ou 0705 ou 0706 ou 0707).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S56",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2016-11-01",
+      "fim_vigencia": "2024-12",
+      "alerta_desde": "2016-11-01",
+      "erro_desde": "2017-01-01",
+      "titulo": "Mapeamento de Vencimentos de Operação de Risco HH",
+      "mensagem": "Exceto em casos de informação adicional de saída, quando ClassOp= HH , é necessário que haja vencimentos em algum dos vértices de prejuízo (v310, v320 ou v330).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S57",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2016-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2016-11-01",
+      "erro_desde": "2017-01-01",
+      "titulo": "Falta de percentual de coobrigação",
+      "mensagem": "Nas informações adicionais 0101 a 0105 e 0702 a 0704, o percentual não pode ser igual a zero. Ou seja, se  <Inf Tp=“0101”> ou <Inf Tp=“0102”> ou <Inf Tp=“0103”> ou <Inf Tp=“0104”> ou <Inf Tp=“0105”> ou <Inf Tp=“0702”> ou <Inf Tp=“0703”> ou <Inf Tp=“0704”>, então <Perc ≠ 0>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S58",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2016-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2016-11-01",
+      "erro_desde": "2017-01-01",
+      "titulo": "Cliente é a própria IF",
+      "mensagem": "Com exceção das modalidades 0204, 0406, 1304, 1403, 1501, 1502, 1599, 19XX, o cliente não pode ser igual ao CNPJ da instituição informante. Ou seja, se <Cli Cd= \"XXXXXXXX\", onde XXXXXXXX é o CNPJ da IF, então <Op Mod=“0204”> ou <Op Mod=“0406”> ou <Op Mod=“1304”> ou <Op Mod=“1403”> ou <Op Mod=“1501”> ou <Op Mod=“1502”> ou <Op Mod=“1599”> ou <Op Mod=“19XX”>. Esta regra não será aplicada para operações de natureza 32, 33 e 34.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S59",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2017-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2017-05-01",
+      "erro_desde": "2017-06-01",
+      "titulo": "Garantia FGTS",
+      "mensagem": "Só é permitida garantia de FGTS para operações de crédito pessoal – com ou sem consignação em folha de pagamento. Ou seja, se <Gar Tp=\"0889\">, então <Op Mod=\"0202\"> ou <Op Mod=\"0203\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S60",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2017-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2017-05-01",
+      "erro_desde": "2017-06-01",
+      "titulo": "Crédito rotativo - não migrado",
+      "mensagem": "Para operações cuja modalidade é 0218, não é permitida a característica especial 18. Ou seja,  se <Op Mod = \"0218\">, então <CaracEspecial ≠ 18>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S61",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2017-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2017-05-01",
+      "erro_desde": "2017-06-01",
+      "titulo": "Obrigatoriedade do campo valor contratado para as modalidades 0210 e 0406 provenientes de saldo remanescente do crédito rotativo",
+      "mensagem": "Para operações cujas modalidades são 0210 ou 0406 e característica especial 18, é obrigatório o campo valor contratado da operação. Ou seja, se <Op Mod = \"0210\"> ou <Op Mod = \"0406\"> e <CaracEspecial = \"18\">, então <VlrContr ≠ 0>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S62",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2018-04-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2018-04-01",
+      "erro_desde": "2018-05-01",
+      "titulo": "Proibição da informação adicional 0308 - saída por baixa de limite de identificação - para clientes com operações individualizadas",
+      "mensagem": "Clientes informados de forma individualizada não podem apresentar operações com motivo de saída por baixa de limite de identificação (0308) e valores no vértice de vencimentos de outra operação pertencente a eles, exceto para operações de natureza 32. Ou seja, para <Cli> que apresentar <Inf Tp= \"0308\">, não poderá haver qualquer outra tag <Op> sem <Inf Tp = \"03XX\">. Esta regra não será aplicada para operações de natureza 32.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S63",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-03-01",
+      "erro_desde": null,
+      "titulo": "Compatibilidade de informação entre Porte e Faturamento",
+      "mensagem": "Clientes informados com porte igual a zero não podem apresentar faturamento maior que 1. Ou seja, para tag <Cli>, se <PorteCli=0>, então <FatAnual<=1>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S64",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2018-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2018-11-01",
+      "titulo": "Campos existentes somente para pessoa jurídica no exterior",
+      "mensagem": "Para clientes diferentes de pessoa jurídica no exterior - <Cli> <Tp≠\"4\">, não é permitido o preenchimentos dos campos “NomeCli”, “TpIdentExt”, “CodExt”, IdLiderBR” e “IdPais”",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S65",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2019-02-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2019-02-01",
+      "erro_desde": "2019-04-01",
+      "titulo": "Verificação de formatação de CNPJ - Informação Adicional 0201 - Vendor/Interveniência",
+      "mensagem": "O atributo “Ident” da informação adicional 0201 - Vendor/Interveniência deve ser informado com CNPJ de 8 dígitos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S66",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2019-04-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2019-04-01",
+      "erro_desde": "2019-07-01",
+      "titulo": "Aquisição de Recebíveis",
+      "mensagem": "Para a modalidade 1350, deverão ser aceitas todas as naturezas de operação, com exceção da 01. Ou seja, para <Mod=\"1350\">, então <NatuOp≠\"01\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S67",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2019-04-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2019-04-01",
+      "erro_desde": "2019-05-01",
+      "titulo": "Natureza da operação - Recebíveis de Arranjo de Pagamento",
+      "mensagem": "Para a modalidade 1402, deverão ser aceitas apenas as naturezas de operação 01, 02 e 03. Ou seja, para <Mod=\"1402\">, então <NatuOp=\"01\">, <NatuOp=\"02\"> ou <NatuOp=\"03\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S68",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2019-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2019-05-01",
+      "erro_desde": "2019-07-01",
+      "titulo": "Compatibilidade de informação entre Porte e Faturamento",
+      "mensagem": "Clientes informados com faturamento menor ou igual a 1,  só poderão apresentar porte igual a zero ou 1. Ou seja, para tag <Cli>, se <FatAnual<=1>, então <PorteCli=0>, ou <PorteCli=1>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S69",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2019-07-01",
+      "fim_vigencia": "2024-12",
+      "alerta_desde": "2019-07-01",
+      "erro_desde": "2019-08-01",
+      "titulo": "Compatibilidade de informação entre classificação de risco e provisão constituída",
+      "mensagem": "Para operações classificadas como prejuízo, o valor da provisão constituída deve ser zero. Ou seja, se <ClassOp>=HH, então <ProvConsttd>=0.00.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S70",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-03-01",
+      "erro_desde": "2020-05-01",
+      "titulo": "Compatibilidade entre a data da contratação e a data-base para operações intramês",
+      "mensagem": "Para operações intramês, originadas e cedidas dentro do mesmo mês, a data da contratação deve ser igual à data-base. Ou seja, se <CaracEspecial> = 22, então <DtContr> = <DtBase>",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S71",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-03-01",
+      "erro_desde": "2020-05-01",
+      "titulo": "Ente Consignante",
+      "mensagem": "O atributo \"Ident\" da informação adicional de Ente Consignante não pode ser igual ao Cliente da operação. Ou seja, para <Inf Tp> = 15XX, <Ident> ≠ <Cli Cd>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S72",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-03-01",
+      "erro_desde": "2020-05-01",
+      "titulo": "Correspondente Bancário",
+      "mensagem": "O atributo \"Ident\" da informação adicional de Correspondente Bancário não pode ser igual ao Cliente da operação. Ou seja, para <Inf Tp> = 1601, <Ident> ≠ <DetCli>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S73",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-03-01",
+      "erro_desde": "2020-05-01",
+      "titulo": "Saídas por cessão sem retenção de riscos e benefícios",
+      "mensagem": "O atributo \"Ident\" das informações adicionais de saída por cessão sem retenção de riscos a pessoa integrante ou não do SFN não pode ser igual ao Cliente da operação. Ou seja, para <Inf Tp> = 0303 ou <Inf Tp> = 0304, <Ident> ≠ <Cli Cd>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S74",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Ativo Problemático",
+      "mensagem": "Operações que apresentem informação adicional de Reestruturação, e/ou vértice de vencimento acima de 240, e/ou classificação da operação de E a H, devem ser acompanhadas da característica especial de Ativo Problemático. Ou seja, se <Inf Tp = \"1701\">, e/ou <venc >= v240> e/ou <ClassOp = \"E\", \"F\", \"G\", ou \"H\">, então <CaracOp = \"19\">.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S75",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-03-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-03-01",
+      "erro_desde": "2020-07-01",
+      "titulo": "Duplicidade de Informações Adicionais",
+      "mensagem": "Para cada operação, a mesma informação adicional não pode ser repetida, caso possua exatamente os mesmos atributos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S76",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-08-01",
+      "erro_desde": "2020-09-01",
+      "titulo": "Formato do campo CEP para operações realizadas em dependências no exterior",
+      "mensagem": "Para operações de natureza 32, o campo CEP deve assumir um dos valores relacionados no Anexo 30 do Leiaute do Documento 3040, no formato \"00000XXX\".",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S77",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Formato do campo Localização para operações realizadas em dependências no exterior",
+      "mensagem": "Para operações de natureza 32, o campo Localização deve assumir um dos valores relacionados no Anexo 30 do Leiaute do Documento 3040, no formato \"00XXX\".",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S78",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-08-01",
+      "erro_desde": "2020-09-01",
+      "titulo": "Correspondente Bancário",
+      "mensagem": "O atributo 'Ident' da informação adicional não pode ser igual ao Cliente da operação, nem sua raiz (oito primeiros dígitos do atributo 'Ident') pode coincidir com o CNPJ da instituição. Ou seja, para <Inf Tp> = 1601, <Ident> ≠ <Detcli> e <Ident>(raiz) ≠ <CNPJ>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S79",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-09-01",
+      "erro_desde": "2020-11-01",
+      "titulo": "Saídas - Alteração do IPOC",
+      "mensagem": "Nas declarações de saída de IPOC (Inf Tp> = “0316”), os campos <Cd> e <Qtd> são de preenchimento obrigatório, sendo o atributo <Cd> o “IPOC” de uma outra operação informada na mesma remessa.\nOu seja, se <Inf Tp> = “0316”, então <Cd> = <IPOC> de outra operação e <Qtd> ≠  nulo",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S80",
+      "habilitado": "n",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Concatenação IPOC - data da contratação",
+      "mensagem": "Na data da contratação da operação, os elementos da concatenação do campo \"IPOC\" devem corresponder aos valores informados para a operação. Ou seja, se <DtContr> = <DtBase>, então <IPOC> = \"CNPJModCliTpCliCdContrt\"",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S81",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-08-01",
+      "erro_desde": "2020-11-01",
+      "titulo": "Concatenação IPOC - data posterior à de contratação",
+      "mensagem": "Na data posterior à de contratação da operação, os elementos CNPJ da instituição e Cliente da operação da concatenação do campo \"IPOC\" devem corresponder aos respectivos valores informados para a operação. Adicionalmente, a A submodalidade, outro componente um dos componentes de formação do IPOC, deve ser um dos valores relacionados no Anexo 3 do leiaute do 3040 (com 4 dígitos). Ou seja, para <IPOC> = \"CNPJModCliTpCliCdContrt\", então CNPJ = <CNPJ>, CliTp = <Tp>, CliCd = <Cd> e Mod pertencente a um dos valores do anexo 3.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S82",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2020-11-01",
+      "titulo": "Concatenação IPOC - – tratamento do estoque até Novembro/2020",
+      "mensagem": "Os elementos da concatenação do campo \"IPOC\" do estoque da IF devem corresponder aos valores informados para cada operação. Ou seja, se <DtBase> = “202011”, então <IPOC> = \"CNPJModCliTpCliCdContrt\".",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S83",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-08-01",
+      "erro_desde": "2020-11-01",
+      "titulo": "Compatibilidade de tipo de cliente e identificação do cliente",
+      "mensagem": "O número de dígitos informados para a identificação do cliente deve ser compatível com seu tipo. Ou seja, se Cli Tp = 1, Cli Cd deve ter 11 dígitos, se Cli Tp = 2, Cli Cd deve ter 8 dígitos e se Cli Tp = 3, 4, 5 ou 6, Cli Cd deve ter 14 dígitos",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S84",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2020-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-11-01",
+      "erro_desde": "2020-12-01",
+      "titulo": "Operação não própria",
+      "mensagem": "O atributo 'Ident' na informação adicional <Inf Tp=\"2201\"> ou <Inf Tp=\"2202\"> deve ser um CNPJ válido com 14 dígitos, não pode coincidir com o detalhamento do cliente na operação, nem sua raiz (oito primeiros dígitos do atributo 'Ident') pode coincidir com o CNPJ da instituição. Ou seja, para <Inf Tp> = 2201 ou <Inf Tp> = 2202, <Ident> ≠ <Detcli> e <Ident>(raiz) ≠ <CNPJ>.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S85",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2021-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2021-05-01",
+      "erro_desde": "2021-09-01",
+      "titulo": "Data da próxima prestação a vencer",
+      "mensagem": "A data da próxima prestação a vencer (atributo \"DtaProxParcela\" da tag <Op>) não pode ser anterior à data de contratação da operação (atributo \"DtContr\" da tag <Op>) e não pode ser anterior à data de início do relacionamento com o cliente (atributo \"IniRelactCli\" da tag <Cli>).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S86",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2021-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2021-05-01",
+      "titulo": "Característica especial “25” para operações de modalidade \"19 - Limite\".",
+      "mensagem": "A característica especial “25” só pode ser utilizada para marcar operações de modalidade \"19 - Limite\", ou seja, 1901 até 1910, ou 1999.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S87",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2021-06-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2021-06-01",
+      "titulo": "Conexão de IPOCs - Unicidade",
+      "mensagem": "O IPOC informado através do atributo \"ipoc\" da tag \"<ipocCon>\" não deve ser informado mais de uma vez dentro da mesma tag \"<ConIpocs>\" ou dentro de outra tag \"<ConIpocs>\".",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S88",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2021-06-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2021-06-01",
+      "titulo": "Conexão de IPOCs - Integridade",
+      "mensagem": "O IPOC informado através do atributo \"ipoc\" da tag \"<ipocCon>\" deve estar presente no documento 3040. Ou seja, deve ser informado em alguma operação através do atributo \"IPOC\" da tag \"<Op>\".",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S89",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2021-12-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2021-12-01",
+      "erro_desde": "2026-07-01",
+      "titulo": "Garantia de Penhor Civil, apenas Caixa Econômica Federal",
+      "mensagem": "Garantia de penhor civil só pode ser utilizada se Instituição Financeira = 360305.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S90",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2023-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2023-08-01",
+      "erro_desde": "2023-09-01",
+      "titulo": "Tag Sicor - Créditos a liberar",
+      "mensagem": "Sempre que a modalidade da operação for 08XX (\"Financiamentos rurais\") e a operação for exclusiva de créditos a liberar (tiver somente vértices v60 e/ou v80), a tag <Sicor> não poderá ser informada.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S91",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2023-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2023-08-01",
+      "erro_desde": "2023-09-01",
+      "titulo": "Tag Sicor - Outras modalidades",
+      "mensagem": "Sempre que a modalidade da operação for diferente de 08XX (\"Financiamentos rurais\"), a tag <Sicor> não poderá ser informada.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S92",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2023-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2023-11-01",
+      "titulo": "Tag Sicor - Situação de Crédito Rural",
+      "mensagem": "Exceto nos casos de informação adicional de saída, a operação de crédito rural deve observar as seguintes condições em relação à situação informada na tag <Sicor> (Anexo 32 do leiaute do Documento 3040):\na) Se situação SOR01, SOR03 a SOR06, SOR11 ou SOR12, a operação deve possuir carteira ativa;\nb) Se situação SOR02, a operação deve possuir carteira ativa vencida;\nc) Se situação SOR09, a operação deve estar baixada para prejuízo;\nd) Se situação SOR07 ou SOR08, a operação não pode possuir carteira ativa.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S93",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2024-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2024-11-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Marcação Ativo Problemático operações vencidas acima de 90 dias",
+      "mensagem": "Se operação vencida acima de 90 dias, a marcação de Ativo Problemático é obrigatória. Se (V240 + V245 + V250 + V255 + V260 + V270 + V280 + V290) > 0, então característica especial 19 é obrigatória.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S94",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2024-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2024-11-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Marcação Ativo Problemático para operações reestruturadas",
+      "mensagem": "Reestruturação ocorrida na data-base, marcação do Ativo Problemático é obrigatória. Se \"Inf\" = 1701 e campo \"Cd\" / data da reestruturação contida na data-base, então característica especial 19 é obrigatória.\nObs.: a marcação de reestruturação Inf 1701 e Ativo Problemático CE 19 deve ser mantida enquanto a operação se mantiver em tais condições.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S95",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-03-01",
+      "titulo": "Estágio 1 e 2 não pode haver Ativo Problemático",
+      "mensagem": "Para operações classificadas como Estágio 1 e 2, não poderá haver marcação de Ativo Problemático. Se EstFin = 1/2, então característíca especial 19 é proibida.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S96",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-03-01",
+      "titulo": "Marcação Ativo Problemático operações no Estágio 3",
+      "mensagem": "Para operações classificadas como Estágio 3, marcação de Ativo Problemático obrigatória. Se EstFin = 3, então característíca especial 19 é obrigatória.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S97",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-03-01",
+      "titulo": "Se atraso superior a 60 dias, não pode ser classificada como Estágio 1",
+      "mensagem": "Se metodologia de apuração da provisão para perdas esperadas = Completa e atraso superior a 60 dias, não pode estar classificada em Estágio 1. Se MetodApPE = 'C' e (V230 + V240 + V245 + V250 + V255 + V260 + V270 + V280 + V290) > 0, então o EstInstFin <> 1.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S98",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-05-01",
+      "titulo": "Uso da Característica Especial 39 (TVM com característica de concessão de crédito) exclusivo para TVMs 18xx",
+      "mensagem": "Somente a modalidade 18xx pode conter a característica especial 39 - Ttulos com característica de concessão de crédito. \n\nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S99",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2024-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2024-11-01",
+      "erro_desde": "2025-05-01",
+      "titulo": "Exigência de valor no vértice vencido correspondente aos dias de atraso da parcela mais atrasada (DiaAtraso), exceto para operações em prejuízo.",
+      "mensagem": "Se 1 =< DiaAtraso <= 14, deve haver valor em v205\nSe 15 =< DiaAtraso <= 30, deve haver valor em v210\nSe 31 =< DiaAtraso <= 60, deve haver valor em v220\nSe 61 =< DiaAtraso <= 90, deve haver valor em v230\nSe 91 =< DiaAtraso <= 120, deve haver valor em v240\nSe 121 =< DiaAtraso <= 150, deve haver valor em v245\nSe 151 =< DiaAtraso <= 180, deve haver valor em v250\nSe 181 =< DiaAtraso <= 240, deve haver valor em v255\nSe 241 =< DiaAtraso <= 300, deve haver valor em v260\nSe 301 =< DiaAtraso <= 360, deve haver valor em v270\nSe 361 =< DiaAtraso <= 540, deve haver valor em v280\nSe DiaAtraso>540, deve haver valor em v290\n\nNão se aplica a regra se houver V310, V320 ou V330.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S100",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-08-01",
+      "erro_desde": "2026-03-01",
+      "titulo": "Modalidade de Crédito Consignado é obrigatório o Ente Consignante",
+      "mensagem": "Se modalidade de operação = 0202 - Crédito Consignado, então Informação Adicional 1501, 1502 ou 1503 - Ente Consignante é obrigatória.\nExceção: operações com Informação Adicional de saída 03xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S101",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-08-01",
+      "erro_desde": "2026-03-01",
+      "titulo": "Se Ente Consignante INSS, CNPJ indicado deve ser do INSS ou Fundo Previdência",
+      "mensagem": "Se Informação Adicional = 1503 - Ente Consignante INSS e campo \"Cd\" diferente de 1, então campo \"Ident\" deve ser 29979036000140 ou 16727230000197.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S102",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-08-01",
+      "erro_desde": "2026-03-01",
+      "titulo": "Se modalidade 1899 - Outros TVMs, obrigatória marcação com característica de concessão de crédito",
+      "mensagem": "Se modalidade = 1899 - TVM Outros, então obrigatória a característica especial 39 - com característica de concessão de crédito.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S103",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-08-01",
+      "erro_desde": "2026-03-01",
+      "titulo": "Se operação baixada para prejuízo, não deve haver valor de carteira nem provisão constituída",
+      "mensagem": "Se v3xx > 0, então demais vértices devem ser = zero e Valor de Provisão Constituída deve ser = zero.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S104",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-08-01",
+      "erro_desde": "2026-08-01",
+      "titulo": "Valor de provisão constituída deve ser menor igual ao VCB + crédito a liberar",
+      "mensagem": "Se TpFundo = Vazio (não Fundo) e operações nas modalidades 1 a 11, 13, 14 e 18 e naturezas de 1,2,3,11,13,14,15 e 32 e sem informação adicional de saída, então Valor da provisão constituída (ProvConsttd) <= Valor Contábil Bruto (VlrContBr) + Valor do crédito a liberar (v60 + v80).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S105",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-07-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-07-01",
+      "erro_desde": "2025-08-01",
+      "titulo": "Se operação contratada no âmbito do Programa EcoInvest, informar o número do leilão.",
+      "mensagem": "Se Informação Adicional = 1408 e campo \"Ident\" = 11, então campo \"Valor\" deve ser preenchido.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S106",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-05-01",
+      "titulo": "Compatibilidade dos campos Tipo de Valor e Valor da Garantia",
+      "mensagem": "Se Tipo de Valor da Garantia <TpVlrGar> = 01, então Valor original da garantia <VlrOrig> é obrigatório e campos Percentual de garantia <PercGar> e Percentual reavaliado <PercData> proibidos;\nSe Tipo de Valor da Garantia <TpVlrGar> = 02, então Percentual de garantia <PercGar> é obrigatório e campos Valor original da garantia <VlrOrig> e Valor Reavaliado <VlrData> proibidos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S107",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-05-01",
+      "titulo": "Compatibilidade dos campos Reavaliação da garantia e Valor/Percentual",
+      "mensagem": "Se Data de reavaliação (DtReav) informado e o Tipo de Valor da Garantia <TpVlrGar> = 01, então Valor reavaliado <VlrData> deve ser informado.\nSe Data de reavaliação (DtReav) informado e o Tipo de Valor da Garantia <TpVlrGar> = 02, então Percentual reavaliado <PercData> deve ser informado.\nSe Data de reavaliação (DtReav) não informado, campos <VlrData> e <PercData> proibidos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S108",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-06-01",
+      "titulo": "Saída 0315 disponível apenas para modalidades de garantias prestadas",
+      "mensagem": "A saída 0315 - Encerramento de obrigação referente Garantias Prestadas só pode ser utilizada para as modalidades 15xx.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S109",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-11-01",
+      "titulo": "Saída 0317 deve haver uma garantia honrada",
+      "mensagem": "A saída 0317 - Operação de saída com execução da garantia deve ser acompanhada de uma garantia informada com Situação Honrada SitGar = 03.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S110",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-11-01",
+      "titulo": "Para garantia honrada, deve haver atualização do valor da garantia",
+      "mensagem": "Se Situação da Garantia for honrada (SitGar = 03), então os campos de valores reavaliados devem ser atualizados, ou seja, DtReav e VlrData ou PercData devem ser preenchidos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S111",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-11-01",
+      "erro_desde": "2026-07-01",
+      "titulo": "Compatibilidade entre prazo e Modalidade de capital de giro 215 / 216",
+      "mensagem": "Modalidade 215 ou 216, exceto Saídas (Info adicional 03xx) ou Operações Renegociadas (Característica Especial = 1):\nSe modalidade 0215 - vencimento até 365 dias, então Data de vencimento (DtVencOp) menos Data de contratação (DtContr) deve ser menor ou igual a 365 dias;\nSe modalidade 0216 - vencimento acima de 365 dias, então Data de vencimento (DtVencOp) menos Data de contratação (DtContr) deve ser maior que 365 dias.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S112",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2025-11-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-11-01",
+      "erro_desde": "2026-07-01",
+      "titulo": "Saída por liquidação antecipada, operação não pode estar vencida",
+      "mensagem": "Informação adicional de Saída por liquidação antecipada - 0302, data-base deve ser menor ou igual que data de vencimento da operação.\nNão avaliado para operações com características rotativas: 0101, 0204, 0210, 0213, 0214, 0217, 0218, 0406, 1001, 1304, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1999.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S115",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-01-01",
+      "erro_desde": "2026-03-01",
+      "titulo": "Motivo consistente com o estágio",
+      "mensagem": "Se informado o campo Motivo de alocação no Estágio (Motivo), então o domínio do Motivo deve ser igual ao estágio do instrumento financeiro (EstInstFin).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S116",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-01-01",
+      "erro_desde": "2026-06-01",
+      "titulo": "Quantidade de motivos de alocação a depender do estágio",
+      "mensagem": "Se informado o campo Motivo de alocação no Estágio (Motivo), então admite-se apenas uma tag Estagio (campos Motivo e DtAlocacao) se estiver no estágio 1 ou 2, mas podem ser múltiplos se for estágio 3.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S117",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-05-01",
+      "erro_desde": "2026-06-01",
+      "titulo": "Se operação contratada no âmbito do Programa Desenrola 2.0, informar o Valor Renegociado.",
+      "mensagem": "Se Informação Adicional = 1408 e campo \"Ident\" = 13, então campo \"Valor\" deve ser preenchido.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "S118",
+      "habilitado": "s",
+      "categoria_aba": "Semântica",
+      "inicio_vigencia": "2026-07-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2026-07-01",
+      "erro_desde": "2026-07-01",
+      "titulo": "Informações adicionais sobre crédito imobiliário",
+      "mensagem": "Se Informação Adicional = 1408 e campo \"Ident\" = 12, então:\ncampo \"Cd\" deve ser preenchido conforme Anexo 50 (01 ou 02);\ncampo \"Qtd\" deve ser preenchido conforme Anexo 51 (1 ou 2).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I01",
+      "habilitado": "n",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Mapeamento de Classificação da Operação x Provisão Constituída, exceto para a modalidade 19XX",
+      "mensagem": "Exceto quando se tratar das modalidades 19XX:\nQuando ClassOp= AA, 0% <= ProvConsttd < 0,5% * ∑VlrVenc\nQuando ClassOp= A, 0,5% <= ProvConsttd < 1% * ∑VlrVenc\nQuando ClassOp= B, 1% <= ProvConsttd < 3% * ∑VlrVenc\nQuando ClassOp= C, 3% <= ProvConsttd < 10% * ∑VlrVenc\nQuando ClassOp= D, 10% <= ProvConsttd < 30% * ∑VlrVenc\nQuando ClassOp= E, 30% <= ProvConsttd < 50% * ∑VlrVenc\nQuando ClassOp= F, 50% <= ProvConsttd < 70% * ∑VlrVenc\nQuando ClassOp= G, 70% <= ProvConsttd < 100% * ∑VlrVenc\nQuando ClassOp= H, ProvConsttd = 100% * ∑VlrVenc\nQuando ClassOp= HH, ProvConsttd = 0",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I02",
+      "habilitado": "n",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Mapeamento de Classificação da Operação x Vencimentos, quando o prazo a decorrer da operação for inferior a 36 meses (ou seja, se DtVencOp <  Dia/Mês/(Ano+3) da DtBase de Referência)",
+      "mensagem": "Quando ClassOp= AA , Não pode haver vencimentos >= 210\nQuando ClassOp= A , Não pode haver vencimentos >= 210\nQuando ClassOp= B , Não pode haver vencimentos >= 220\nQuando ClassOp= C , Não pode haver vencimentos >=230\nQuando ClassOp= D , Não pode haver vencimentos >=240\nQuando ClassOp= E , Não pode haver vencimentos >=245\nQuando ClassOp= F , Não pode haver vencimentos >=250\nQuando ClassOp= G , Não pode haver vencimentos >=255",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I03",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Cliente informado mais de uma vez",
+      "mensagem": "Não é admitida repetição, simultânea, de código do cliente (atributo Cd da tag Cli) e tipo do cliente (atributo TpCli da tag Cli) em uma mesma parte de remessa do documento.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I04",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2024-10",
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Operação informada mais de uma vez para o mesmo cliente",
+      "mensagem": "Não é admitida repetição, simultânea, de código de contrato (atributo Contrt da tag Op) e modalidade (atributo Mod da Tag Op) para um mesmo cliente (atributo Cd da tag Cli) em uma mesma parte de remessa do documento e na remessa completa do documento.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I05",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Código de vencimento informado mais de uma vez na operação",
+      "mensagem": "Não é admitida, em uma única operação, a repetição de vencimentos, tanto em cada parte, como na remessa completa de um documento.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I06",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Garantidor fidejussório informado mais de uma vez na mesma operação",
+      "mensagem": "Não é admitida, em uma única operação, a repetição do garantidor fidejussório (atributo Ident da tag Gar) tanto em cada parte, como na remessa completa de um documento.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I07",
+      "habilitado": "n",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Mapeamento de Classificação da Operação x Vencimentos, quando o prazo a decorrer da operação for superior a 36 meses (ou seja, se DtVencOp <  Dia/Mês/(Ano+3) da DtBase de Referência)",
+      "mensagem": "Quando ClassOp= AA , Não pode haver vencimentos >= 220\nQuando ClassOp= A , Não pode haver vencimentos >= 220\nQuando ClassOp= B , Não pode haver vencimentos >= 240\nQuando ClassOp= C , Não pode haver vencimentos >=250\nQuando ClassOp= D , Não pode haver vencimentos >=255\nQuando ClassOp= E , Não pode haver vencimentos >=260\nQuando ClassOp= F , Não pode haver vencimentos >=270\nQuando ClassOp= G , Não pode haver vencimentos >=280",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I08",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2011-01-01",
+      "erro_desde": "2012-04-01",
+      "titulo": "Garantidor fidejussório deve ser compatível com o tipo de garantidor informado",
+      "mensagem": "Se o garantidor fidejussório for pessoa física (0901), o atributo Ident deve obrigatoriamente ter 11 dígitos verificados.\nSe o garantidor fidejussório for pessoa jurídica (0902), o atributo Ident deve obrigatoriamente ter 14 dígitos verificados.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I09",
+      "habilitado": "n",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2012-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-01-01",
+      "erro_desde": "2012-04-01",
+      "titulo": "Conjunto de operações do cliente não pode ser inferior a R$1.000,00",
+      "mensagem": "Exceto nos casos de informação adicional de saída, o somatório dos vencimentos de todas as operações de um cliente deve ser igual ou superior a R$1.000,00. Não são considerados os códigos de vencimento: 20, 40, 60 e 80 na composição do limite de identificação.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I10",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2024-12",
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Compatibilidade de informações de saída e valores",
+      "mensagem": "É obrigatório informar os vencimentos, provisão constituída e classificação da operação para as operações de crédito com exceção das saídas de operação. Nas saídas de operação é proibido informar os vencimentos, provisão constituída e garantia.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I11",
+      "habilitado": "n",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2012-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2012-01-01",
+      "erro_desde": "2012-03-01",
+      "titulo": "Impede a identificação de operações de natureza 32",
+      "mensagem": "Operações individualizadas (tag <Cli>) não podem ter natureza de operação 32",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I12",
+      "habilitado": "n",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2016-06-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2016-06-01",
+      "titulo": "Conjunto de operações do cliente não pode ser inferior a R$ 200,00",
+      "mensagem": "Exceto nos casos de informação adicional de saída, o somatório dos vencimentos de todas as operações de um cliente deve ser igual ou superior a R$ 200,00. Não são considerados os códigos de vencimento: 20, 40, 60 e 80 na composição do limite de identificação.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I13",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2019-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2019-05-01",
+      "titulo": "Clientes com responsabilidade total acima de R$ 200,00 devem ser informados de forma individualizada",
+      "mensagem": "Exceto nos casos de informação adicional de saída, o somatório dos vencimentos de todas as operações de um cliente deve ser igual ou superior a R$ 200,00. Passam a ser considerados todos os domínios do Anexo 1 na composição do limite de identificação.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I14",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2020-09-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-09-01",
+      "erro_desde": "2020-11-01",
+      "titulo": "IPOC informado mais de uma vez",
+      "mensagem": "Não é admitida repetição de número de IPOC em uma mesma remessa do documento.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "I15",
+      "habilitado": "s",
+      "categoria_aba": "Individualizadas",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Compatibilidade de informações de saída e valores",
+      "mensagem": "É obrigatório informar os vencimentos, provisão constituída.\nNas saídas de operação é proibido informar os vencimentos, provisão constituída e garantia.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A01",
+      "habilitado": "n",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Mapeamento de Classificação da Operação x Provisão Constituída",
+      "mensagem": "Quando ClassOp= AA, 0% * ∑VlrVenc <= ProvConsttd < 0,5% * ∑VlrVenc\nQuando ClassOp= A, 0,5% * ∑VlrVenc <= ProvConsttd < 1% * ∑VlrVenc\nQuando ClassOp= B, 1% * ∑VlrVenc <= ProvConsttd < 3% * ∑VlrVenc\nQuando ClassOp= C, 3% * ∑VlrVenc <= ProvConsttd < 10% * ∑VlrVenc\nQuando ClassOp= D, 10% * ∑VlrVenc <= ProvConsttd < 30% * ∑VlrVenc\nQuando ClassOp= E, 30% * ∑VlrVenc <= ProvConsttd < 50% * ∑VlrVenc\nQuando ClassOp= F, 50% * ∑VlrVenc <= ProvConsttd < 70% * ∑VlrVenc\nQuando ClassOp= G, 70% * ∑VlrVenc <= ProvConsttd < 100% * ∑VlrVenc\nQuando ClassOp= H, ProvConsttd 100% * ∑VlrVenc\nSerá habilitado em data a ser definida.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A02",
+      "habilitado": "n",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Mapeamento de Classificação da Operação x Vencimentos, quando não houver Prazo em Dobro para Provisionamento",
+      "mensagem": "Quando ClassOp= AA , Não pode haver vencimentos >= 210\nQuando ClassOp= A , Não pode haver vencimentos >= 210\nQuando ClassOp= B , Não pode haver vencimentos >= 220\nQuando ClassOp= C , Não pode haver vencimentos >=230\nQuando ClassOp= D , Não pode haver vencimentos >=240\nQuando ClassOp= E , Não pode haver vencimentos >=245\nQuando ClassOp= F , Não pode haver vencimentos >=250\nQuando ClassOp= G , Não pode haver vencimentos >=255\nSerá habilitado em data a ser definida.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A03",
+      "habilitado": "n",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Mapeamento de Classificação da Operação x Vencimentos, quando houver Prazo em Dobro para Provisionamento",
+      "mensagem": "Quando ClassOp= AA , Não pode haver vencimentos >= 220\nQuando ClassOp= A , Não pode haver vencimentos >= 220\nQuando ClassOp= B , Não pode haver vencimentos >= 240\nQuando ClassOp= C , Não pode haver vencimentos >=250\nQuando ClassOp= D , Não pode haver vencimentos >=255\nQuando ClassOp= E , Não pode haver vencimentos >=260\nQuando ClassOp= F , Não pode haver vencimentos >=270\nQuando ClassOp= G , Não pode haver vencimentos >=280\nSerá habilitado em data a ser definida.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A04",
+      "habilitado": "s",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Cada agregação deve conter pelo menos um vencimento",
+      "mensagem": "Não é admitida Agregação sem vencimentos.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A05",
+      "habilitado": "n",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Compatibilidade entre natureza e localização para operações no exterior",
+      "mensagem": "A natureza 32 (NatuOp=“32”) exige localização 10100 (Localiz=“10100”).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A06",
+      "habilitado": "s",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Compatibilidade entre desempenho da operação somente e vencimentos correspondentes",
+      "mensagem": "Quando DesempOp= 01 - Operações a Vencer, não pode haver vencimentos > 205\nQuando DesempOp= 02 - Operações Vencidas de 15 a 30 dias, não pode haver vencimentos >= 220 e deve haver vencimento = 210\nQuando DesempOp= 03 - Operações Vencidas de 31 a 60 dias, não pode haver vencimentos >= 230 e deve haver vencimento = 220\nQuando DesempOp= 04 - Operações Vencidas de 61 a 90 dias, não pode haver vencimentos >= 240 e deve haver vencimento = 230\nQuando DesempOp= 05 - Operações Vencidas acima de 90 dias, não pode haver vencimentos >= 310 e deve haver vencimento >= 240 \nQuando DesempOp= 06 – Operações em Prejuízo, deve haver vencimentos >= 310",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A07",
+      "habilitado": "s",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": "2024-12",
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Agregado informado mais de uma vez",
+      "mensagem": "Não é admitida repetição, simultânea, de Natureza da operação (NatuOp), Modalidade da operação (Mod), Origem dos recursos (OrigemRec), Vinculação à moeda estrangeira (VincME), Classificação de risco da operação (ClassOp), Faixa de valor (FaixaVlr), Prazo em dobro para provisionamento (PrzProvm), Localização (Localiz), Tipo de cliente (TpCli), Tipo de controle (TpCtrl), Desempenho da operação (DesempOp), Característica especial (CaracEspecial) em uma mesma parte de uma remessa ou na remessa completa do documento.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A09",
+      "habilitado": "s",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Faixa de valor compatível com a média de valor das operações",
+      "mensagem": "A faixa de valor deve ser compatível com a média das operações informadas, ou seja, o atributo FaixaVlr deve ser compatível com a soma do vencimento das operações ponderada pela quantidade de operações:\nPara FaixaVlr=1, 0 < (∑VlrVenc/QtdOperações) < 100\nPara FaixaVlr=2, 100 <= (∑VlrVenc/QtdOperações) < 500\nPara FaixaVlr=3, 500 <= (∑VlrVenc/QtdOperações) < 1000\nPara FaixaVlr=4, 1000 <= (∑VlrVenc/QtdOperações) < 5000\nPara FaixaVlr=5, (∑VlrVenc/QtdOperações) >= 5000",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A10",
+      "habilitado": "s",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2011-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2011-01-01",
+      "titulo": "Número de operações compatíveis com o número de clientes",
+      "mensagem": "Em cada uma das agregações, o número de operações deve ser maior ou igual ao número de clientes.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A11",
+      "habilitado": "n",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2012-07-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2012-07-01",
+      "titulo": "No agregado, o somatório de vencimentos v110 a v330 dividido pela quantidade de operações só pode ser maior ou igual a R$ 1000,00 se a natureza da operação for 32",
+      "mensagem": "É proibido informar faixa de valor 4 ou 5 para agregados cujo somatório dos vencimentos v110 a v330 dividido pela quantidade de operações seja maior ou igual a 1000,00.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A12",
+      "habilitado": "n",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2016-06-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2016-06-01",
+      "titulo": "No agregado, o somatório de vencimentos v110 a v330 dividido pela quantidade de operações só pode ser maior ou igual a R$ 200,00 se a natureza da operação for 32",
+      "mensagem": "É proibido informar faixa de valor 4 ou 5 para agregados cujo somatório dos vencimentos v110 a v330 dividido pela quantidade de operações seja maior ou igual a 200,00.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A13",
+      "habilitado": "s",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2019-05-01",
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": "2019-05-01",
+      "titulo": "Risco direto médio menor que R$ 200,00 deve ser informado no agregado",
+      "mensagem": "No agregado, exceto para operações de natureza 32, o somatório de vencimentos v20 a v330 dividido pela quantidade de operações deve ser menor que R$ 200,00. Ou seja, (∑Venc v20 a v330/QtdOperações) < R$ 200,00, se Natuop ≠ 32.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A14",
+      "habilitado": "s",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2020-08-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2020-08-01",
+      "erro_desde": "2020-09-01",
+      "titulo": "Formato do campo Localização para operações realizadas em dependências no exterior",
+      "mensagem": "Para operações de natureza 32, o campo Localização deve assumir um dos valores relacionados no Anexo 30 do Leiaute do Documento 3040, no formato \"00XXX\".",
+      "nota_nr": null
+    },
+    {
+      "codigo": "A15",
+      "habilitado": "s",
+      "categoria_aba": "Agregadas",
+      "inicio_vigencia": "2025-01-01",
+      "fim_vigencia": null,
+      "alerta_desde": "2025-01-01",
+      "erro_desde": "2025-01-01",
+      "titulo": "Agregado informado mais de uma vez",
+      "mensagem": "Não é admitida repetição, simultânea, de Natureza da operação (NatuOp), Modalidade da operação (Mod), Origem dos recursos (OrigemRec), Vinculação à moeda estrangeira (VincME),Faixa de valor (FaixaVlr), Localização (Localiz), Tipo de cliente (TpCli), Tipo de controle (TpCtrl), Desempenho da operação (DesempOp), Característica especial (CaracEspecial) em uma mesma parte de uma remessa ou na remessa completa do documento.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "N01",
+      "habilitado": "s",
+      "categoria_aba": "Negócio",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Rejeição na validação interna e batimento Cosif",
+      "mensagem": "Rejeição nas validações internas, inclusive no batimento com o documento 4010. As rejeições podem ocorrer por não aceitação de respostas de questionamento, por decurso de prazo ou a critério do Banco Central do Brasil.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H01",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Inclusão de cliente",
+      "mensagem": "Se TipoAcao=\"I\" (inclusão) for informado na tag <Cli>, o cliente a ser incluído não deve existir previamente na data-base carregada da Instituição.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H02",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Inclusão de operação",
+      "mensagem": "Se TipoAcao=\"I\" (inclusão) for informado na tag <Op>, a operação a ser incluída não deve existir previamente na data-base carregada da Instituição (mesmo IPOC).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H03",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Alteração ou exclusão de cliente",
+      "mensagem": "Se TipoAcao=\"A\" (alteração) ou TipoAcao=\"E\" (exclusão) for informado na tag <Cli>, o cliente deve existir previamente na data-base carregada da Instituição.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H04",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Alteração ou exclusão de operação",
+      "mensagem": "Se TipoAcao=\"A\" (alteração) ou TipoAcao=\"E\" (exclusão) for informado na tag <Op>, a operação deve existir previamente na data-base carregada da Instituição (mesmo IPOC).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H05",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Campos obrigatórios (cliente)",
+      "mensagem": "Os campos de cliente \"IniRelactCli\", \"Autorzc\", \"ClassCli\", \"Tp\" e \"Cd\" são obrigatórios. Se TipoAcao=\"E\" (exclusão) for informado na tag <Cli>, somente os campos \"Tp\" e \"Cd\" são obrigatórios.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H06",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Campos obrigatórios (operação)",
+      "mensagem": "Os campos de operação \"Contrt\", \"Mod\", \"Cosif\", \"OrigemRec\", \"Indx\", \"VarCamb\", \"CEP\", \"TaxEft\", \"DtContr\", \"NatuOp\" e \"IPOC\" são obrigatórios. Se TipoAcao=\"E\" (exclusão) for informado na tag <Op>, somente o campo \"IPOC\" é obrigatório.",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H07",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Exclusão de operação e tipo de ação sobre o cliente",
+      "mensagem": "Se TipoAcao=\"E\" (exclusão) for informado na tag <Op> (excluir operação), o tipo de ação\nsobre o respectivo cliente na tag <Cli> deve ser obrigatoriamente TipoAcao=\"A\" (alteração).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H08",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Alteração de operação e tipo de ação sobre o cliente",
+      "mensagem": "Se TipoAcao=\"A\" (alteração) for informado na tag <Op> (alterar operação), o tipo de ação\nsobre o respectivo cliente na tag <Cli> deve ser obrigatoriamente TipoAcao=\"A\" (alteração).",
+      "nota_nr": null
+    },
+    {
+      "codigo": "H09",
+      "habilitado": "s",
+      "categoria_aba": "Substituição Parcial",
+      "inicio_vigencia": null,
+      "fim_vigencia": null,
+      "alerta_desde": null,
+      "erro_desde": null,
+      "titulo": "Inclusão de operação e tipo de ação sobre o cliente",
+      "mensagem": "Se TipoAcao=\"I\" (inclusão) for informado na tag <Op> (incluir operação), o tipo de ação\nsobre o respectivo cliente na tag <Cli> não pode ser TipoAcao=\"E\" (exclusão).",
+      "nota_nr": null
+    }
+  ],
+  "historico_atualizacoes": [
+    {
+      "data": "2011-07-06",
+      "atualizacao": "Publicação original",
+      "detalhamento": "Publicação original do leiaute com o nome definitivo - SCR3040_Criticas.xls",
+      "observacoes": "As versões antigas ainda podem ser resgatadas pelos nomes originais (SCR3040_Criticas_vXX.xls)"
+    },
+    {
+      "data": "2011-07-07",
+      "atualizacao": "Alteração das críticas B",
+      "detalhamento": "Correção de regras B",
+      "observacoes": null
+    },
+    {
+      "data": "2011-07-27",
+      "atualizacao": "Críticas C",
+      "detalhamento": "Eliminação da regra C30\nCriação das regras C34 e C35",
+      "observacoes": null
+    },
+    {
+      "data": "2011-08-05",
+      "atualizacao": "Correção I08",
+      "detalhamento": "Correção da regra I08",
+      "observacoes": null
+    },
+    {
+      "data": null,
+      "atualizacao": "Alteração de Regra S28",
+      "detalhamento": "Correção da regra para operações em prejuízo",
+      "observacoes": null
+    },
+    {
+      "data": "2011-09-06",
+      "atualizacao": "Correção C28",
+      "detalhamento": "Correção da regra C28",
+      "observacoes": null
+    },
+    {
+      "data": "2011-09-09",
+      "atualizacao": "Nova regra B11 e Alteração I08",
+      "detalhamento": "Nova regra B11 e alteração de cronograma I08",
+      "observacoes": null
+    },
+    {
+      "data": "2011-09-26",
+      "atualizacao": "Remoção e alteração de regras",
+      "detalhamento": "Remoção das regras C12, C15, S18, S24, alteração da regra S28, S29, correção da regra S25 e regras de rejeição de negócio",
+      "observacoes": null
+    },
+    {
+      "data": "2011-10-04",
+      "atualizacao": "Remoção e alteração de regras",
+      "detalhamento": "Remoção da regra S11 e alteração das regras S23 e I10.",
+      "observacoes": null
+    },
+    {
+      "data": "2011-10-27",
+      "atualizacao": "Alteração de regras e novas regras",
+      "detalhamento": "Novas regras S30 a S33, alteração da regra C21 e I09",
+      "observacoes": null
+    },
+    {
+      "data": "2011-12-14",
+      "atualizacao": "Alteração no cronograma da regra I08",
+      "detalhamento": "Erro apenas nas data-base janeiro/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-01-12",
+      "atualizacao": "Alterações",
+      "detalhamento": "Alterações nas críticas C05, C19, C36, I09 e criação de regras C38, C39 S41 a S45, I11",
+      "observacoes": null
+    },
+    {
+      "data": "2012-01-17",
+      "atualizacao": "Alterações",
+      "detalhamento": "Alterações de datas para algumas críticas",
+      "observacoes": null
+    },
+    {
+      "data": null,
+      "atualizacao": "Correções e alterações de cronograma",
+      "detalhamento": "Correções e alterações de data para entrada em erro, novas regras (C41, C42) a serem implementadas em março",
+      "observacoes": null
+    },
+    {
+      "data": "2012-02-23",
+      "atualizacao": "Alteração no cronograma da regra I08",
+      "detalhamento": "Regra I08 permanece como alerta.",
+      "observacoes": null
+    },
+    {
+      "data": "2012-02-23",
+      "atualizacao": "Alteração S33",
+      "detalhamento": "Inclusão das naturezas 11 a 16 para Inf Adicional 0101, 0105, 0701, 1001, 1002.",
+      "observacoes": null
+    },
+    {
+      "data": "2012-03-27",
+      "atualizacao": "C26",
+      "detalhamento": "Correção da descrição da regra C26",
+      "observacoes": null
+    },
+    {
+      "data": "2012-03-05",
+      "atualizacao": "Alteração S44",
+      "detalhamento": "Operação de natureza 01 e modalidade 20 também pode ter característica especial 35",
+      "observacoes": null
+    },
+    {
+      "data": "2012-01-01",
+      "atualizacao": "Alteração da regra S33",
+      "detalhamento": "Para Informação Adicional 0101, 0105, 0701, 1001 e 1002 também podem ter naturezas 11 a 16",
+      "observacoes": null
+    },
+    {
+      "data": "2012-04-01",
+      "atualizacao": "Regra C05 e C19",
+      "detalhamento": "Cd e Ident são obrigatórios a partir da data-base de março/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-04-17",
+      "atualizacao": "I08",
+      "detalhamento": "Regra passa para erro para data-base abr/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-04-17",
+      "atualizacao": "C35, S30 a S33, S41 e S45",
+      "detalhamento": "Regra passa para erro na data-base abr/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-04-07",
+      "atualizacao": "C38 e S43",
+      "detalhamento": "Regra passa para erro na data-base mai/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-04-24",
+      "atualizacao": "C41, C42, S41 e S45",
+      "detalhamento": "Regras passam para erro na data-base mai/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-05-10",
+      "atualizacao": "C35, S31, S32",
+      "detalhamento": "Entrada para erro adiada de abr/2012 para maio/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-05-22",
+      "atualizacao": "C05, C19, C36",
+      "detalhamento": "Reativação da regra C36. Retirada do campo Ident para as regras C05 e C19.",
+      "observacoes": null
+    },
+    {
+      "data": "2012-05-22",
+      "atualizacao": "C41 e C42",
+      "detalhamento": "Entrada para erro adiada de mai/2012 para junho/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-05-22",
+      "atualizacao": "S46",
+      "detalhamento": "Criação da regra S46.",
+      "observacoes": null
+    },
+    {
+      "data": "2012-05-22",
+      "atualizacao": "C35, C38, S31, S32, S41, S43, S45",
+      "detalhamento": "Entrada para erro adiada de mai/2012 para agosto/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-08-27",
+      "atualizacao": "S40",
+      "detalhamento": "Entrada como Alerta na Data Base de ago/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-08-27",
+      "atualizacao": "C35, C38, S31, S32, S41, S43 e S45",
+      "detalhamento": "Regra passa para Erro na Data Base de ago/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2012-08-31",
+      "atualizacao": "S37",
+      "detalhamento": "Eliminação da regra S37",
+      "observacoes": "A Regra S37 não precisa ser implementada."
+    },
+    {
+      "data": "2012-08-31",
+      "atualizacao": "S34, S35, S36, S38 e S39",
+      "detalhamento": "Nova redação das regras S34, S35, S36, S38 e S39",
+      "observacoes": null
+    },
+    {
+      "data": "2012-09-01",
+      "atualizacao": "S34, S35 e S39",
+      "detalhamento": "Consolidação das redações das regras S34, S35 e S39 como uma única regra S34",
+      "observacoes": "Esta consolidação não requer qualquer alteração por parte das Instituições Fianceiras."
+    },
+    {
+      "data": "2012-09-01",
+      "atualizacao": "C43",
+      "detalhamento": "Criação da Regra S47 para aumento de qualidade no preenchimento do doc.3040",
+      "observacoes": null
+    },
+    {
+      "data": "2012-09-28",
+      "atualizacao": "S08, S09, S26, S27, S30, S31 e S32",
+      "detalhamento": "Alteração das regras S08, S09, S26, S27, S30, S31 e S32 para que não sejam ativadas em casos de informação de saída Inf Tp=\"03xx\".",
+      "observacoes": null
+    },
+    {
+      "data": "2012-09-28",
+      "atualizacao": "S40, C37 e C40",
+      "detalhamento": "Alteração das regras S40, C37 e C40 para erro",
+      "observacoes": null
+    },
+    {
+      "data": "2012-10-31",
+      "atualizacao": "C44 e S40",
+      "detalhamento": "Inclusão da regra C44 e alteração da regra S40",
+      "observacoes": null
+    },
+    {
+      "data": "2012-11-30",
+      "atualizacao": "C35",
+      "detalhamento": "Inclusão das modalidades 2001 e 2002",
+      "observacoes": "A regra C35 alterada será ligada como alerta para a data-base nov/2012, voltando a ser ligada como erro a partir da data-base dez/2012."
+    },
+    {
+      "data": "2012-12-28",
+      "atualizacao": "C35",
+      "detalhamento": "Execução do que havia sido determinado na data de 30/11/2012",
+      "observacoes": "A regra C35 volta a ser ligada como erro a partir da data-base dez/2012."
+    },
+    {
+      "data": "2013-01-08",
+      "atualizacao": "C41 e C42",
+      "detalhamento": "Alteração nas Regras C41 e C42",
+      "observacoes": "Inclusão das modalidades 2001 e 2002 nas regras C41 e C42, e alteração nas descrições."
+    },
+    {
+      "data": "2013-01-08",
+      "atualizacao": "S34, S36 e S38",
+      "detalhamento": "Entrada como erro para a data-base de Dez/2012",
+      "observacoes": null
+    },
+    {
+      "data": "2013-01-09",
+      "atualizacao": "S34, S36 e S39",
+      "detalhamento": "Volta a considerar como alerta.",
+      "observacoes": null
+    },
+    {
+      "data": "2013-11-06",
+      "atualizacao": "C04, C41 e C42",
+      "detalhamento": "Alteração das regras C04, C41 e C42",
+      "observacoes": "C04 --> Dispensa da obrigatoriedade do campo Identificação do garantidor quando a garantia fidejussória for 0903 (PF no exterior) e 0904 (PJ no exterior).\nC41 --> Flexibilização da Natureza 14 na obrigatoriedade da marcação da característica especial 35.\nC42 --> Flexibilização da informação adicional de cedente/cessionário quando houver informação adicional de saída."
+    },
+    {
+      "data": "2014-02-26",
+      "atualizacao": "C45, C46, C47 e S47",
+      "detalhamento": "Inclusão das regras C45, C46, C47 e S47",
+      "observacoes": "C45 --> Obrigatoriedade do campo Rendas Mensal para Pessoa Física.\nC46 --> Obrigatoriedade dos atributos 'Ident' e 'Valor' para Informação Adicional '15XX'\nC47 --> Obrigatoriedade do atributo 'TotalCli' no cabeçalho.\nS47 --> Proibidas as modalidades 0201, 0205e 0206 a partir da data-base fev/2014."
+    },
+    {
+      "data": "2014-07-01",
+      "atualizacao": "C49",
+      "detalhamento": "Inclusão da regra C49",
+      "observacoes": "C49 --> Obrigatoriedade do campo <Cd> nas Inf Adic 04XX. No caso da Inf Adic. 0401, <Cd> ou <ident>=\"1\" para operações sem chassi."
+    },
+    {
+      "data": "2014-08-25",
+      "atualizacao": "C48 e C17",
+      "detalhamento": "Entrada em vigor da regra C49 como erro. Exclusão da regra C17",
+      "observacoes": "C49 entrada como erro. Exclusão da C17."
+    },
+    {
+      "data": "2014-09-30",
+      "atualizacao": "I01, F04, S48, S49, S50, S51 e S52",
+      "detalhamento": "Introdução de novas regras de validação",
+      "observacoes": "I01 --> Alerta em out/2014 e erro em nov/2014\nF04 --> Alerta em out/2014 e erro em nov/2014\nS48 --> Alerta em set/2014 e erro em out/2014\nS49 --> Alerta em set/2014 e erro em out/2014\nS50 --> Alerta em out/2014 e erro em dez/2014\nS51 --> Alerta em out/2014 e erro em nov/2014\nS52 --> Alerta em out/2014 e erro em nov/2014"
+    },
+    {
+      "data": "2014-10-31",
+      "atualizacao": "I01, F04, S49, S50",
+      "detalhamento": "Alteração das regras",
+      "observacoes": "I01 --> Alerta em nov/2014 e erro em dez/2014\nF04 --> Alerta em nov/2014 e erro em dez/2014\nS48 --> Alerta em set/2014 e erro em nov/2014\nS49 --> Alerta em set/2014 e erro em data-base a definir\nS50 --> Teste apenas na carteira ativa"
+    },
+    {
+      "data": "2015-02-25",
+      "atualizacao": "I01, F04, S48, S49, S50, S51 e S52",
+      "detalhamento": "Alteração das regras",
+      "observacoes": "I01 --> Alerta e erro em data-base a definir\nF04 --> Alerta e erro em data-base a definir\nS48 --> Erro em mai/2015\nS49 --> Alerta e erro em data-base a definir\nS50 -->  Erro em mai/2015, teste apenas para as naturezas 1 a 3                                                                                                                S51 --> Erro em mai/2015                                                                              S52 --> Erro em mai/2015"
+    },
+    {
+      "data": "2015-05-08",
+      "atualizacao": "S50",
+      "detalhamento": "Alteração da regra",
+      "observacoes": "S50 -->  Erro em Nov/2015, teste apenas para as naturezas 1 a 3, contratadas a partir de 01/11/2015 (inclusive)."
+    },
+    {
+      "data": "2015-11-27",
+      "atualizacao": "C50, C51, S48, S50, S51 e S52",
+      "detalhamento": "Introdução de novas regras de validação e entrada como erro para a data-base Nov/2015",
+      "observacoes": "C50 --> Alerta em nov/2015 e erro em jan/2016\nC51 --> Alerta em nov/2015 e erro em jan/2016\nS48 --> Alerta em set/2014 e erro em nov/2015\nS50 --> Alerta em out/2014 e erro em nov/2015\nS51 --> Alerta em out/2014 e erro em nov/2015\nS52 --> Alerta em out/2014 e erro em nov/2015"
+    },
+    {
+      "data": "2016-06-02",
+      "atualizacao": "A11, I09, A12 e I12",
+      "detalhamento": "Introdução de novas regras de validação e eliminação das regras A11 e I09",
+      "observacoes": "Erro em jun/2016"
+    },
+    {
+      "data": "2016-08-30",
+      "atualizacao": "S04, S08, S32, S53, S54, S55",
+      "detalhamento": "Introdução de novas regras de validação e eliminação das regras S04, S08 e S32",
+      "observacoes": "Alerta em ago/2016 e erro em set/2016"
+    },
+    {
+      "data": "2016-11-30",
+      "atualizacao": "C52, S56, S57 e S58",
+      "detalhamento": "Introdução de novas regras de validação e entrada como erro para a data-base Jan/2017",
+      "observacoes": "C52 --> Alerta em nov/2016 e erro em jan/2017\nS56 --> Alerta em nov/2016 e erro em jan/2017\nS57 --> Alerta em nov/2016 e erro em jan/2017\nS58 --> Alerta em nov/2016 e erro em jan/2017"
+    },
+    {
+      "data": "2017-06-01",
+      "atualizacao": "S59, S60 e S61",
+      "detalhamento": "Introdução de novas regras de validação e entrada como erro para a data-base Jun/2017",
+      "observacoes": "S59 --> Alerta em mai/2017 e erro em jun/2017\nS60 --> Alerta em mai/2017 e erro em jun/2017\nS61 --> Alerta em mai/2017 e erro em jun/2017"
+    },
+    {
+      "data": "2018-04-17",
+      "atualizacao": "C53, C54, C55, S62, S63 e S64",
+      "detalhamento": "Introdução de novas regras de validação e entrada como alerta/erro para as data-bases Mai/2018 e Nov/2018",
+      "observacoes": "C53 --> Alerta em nov/2018\nC54 --> Erro em nov/2018\nC55 --> Erro em nov/2018\nS62 --> Alerta em abr/2018 e erro em mai/2018                                             S63 --> Erro em nov/2018                                                                                         S64 --> Erro em nov/2018"
+    },
+    {
+      "data": "2018-05-10",
+      "atualizacao": "S63",
+      "detalhamento": "Alteração da regra",
+      "observacoes": "Erro em nov/2018"
+    },
+    {
+      "data": "2018-06-28",
+      "atualizacao": "S45 e C56",
+      "detalhamento": "Alteração e introdução de regra de validação e entrada como erro para a data-base Jul/2018",
+      "observacoes": "Erro em jul/2018"
+    },
+    {
+      "data": "2018-10-18",
+      "atualizacao": "C57, S33",
+      "detalhamento": "Alteração e introdução de regra de validação e entrada como erro para a data-base Nov/2018",
+      "observacoes": "C53 --> Alerta em nov/2018\nC54 --> Erro em nov/2018\nC55 --> Erro em nov/2018\nS62 --> Alerta em abr/2018 e erro em mai/2018                                                S63 --> Erro em nov/2018                                                                                         S64 --> Erro em nov/2018"
+    },
+    {
+      "data": "2018-12-04",
+      "atualizacao": "A05, I11, S58",
+      "detalhamento": "Alteração da regra S58 e eliminação das regras A05 e I11",
+      "observacoes": "Erro em nov/2018"
+    },
+    {
+      "data": "2019-02-28",
+      "atualizacao": "S58, S62, S65",
+      "detalhamento": "Alteração das regras S58 e S62 e inclusão da regra S65",
+      "observacoes": "S65 --> Alerta em fev/2019 e erro em mar/2019"
+    },
+    {
+      "data": "2019-04-05",
+      "atualizacao": "I13, S63, S66, S67, S68",
+      "detalhamento": "Alteração da regra S63 e inclusão das regras C58, I13, S66, S67 e S68",
+      "observacoes": "I13 --> Erro em mai/2019                                                                                   S63 --> Erro em mai/2019\nS66 --> Alerta em abr/2019 e erro em jul/2019                                                   S67 --> Alerta em abr/2019 e erro em mai/2019                                                 S68 --> Alerta em mai/2019 e erro em jul/2019"
+    },
+    {
+      "data": "21/06/219",
+      "atualizacao": "S69",
+      "detalhamento": "Introdução da regra S69",
+      "observacoes": "Alerta em jul/2019 e erro em ago/2019"
+    },
+    {
+      "data": "2019-09-13",
+      "atualizacao": "S66, S67",
+      "detalhamento": "Desligamento temporário da regra S66 e eliminação da regra S67",
+      "observacoes": "Regra S66 será alterada para tornar proibida apenas a Natureza 01"
+    },
+    {
+      "data": "2019-09-19",
+      "atualizacao": "S44",
+      "detalhamento": "Alteração da regra S44",
+      "observacoes": "Inclusão das modalidades 1402 e 1403"
+    },
+    {
+      "data": "2019-12-11",
+      "atualizacao": "S20",
+      "detalhamento": "Alteração da regra S20",
+      "observacoes": "A Regra S20 será alterada para tornar exceção as operações de natureza 34."
+    },
+    {
+      "data": "2020-02-19",
+      "atualizacao": "C58, C59, S70, S71, S72, S73, S74 e S75",
+      "detalhamento": "Inclusão das regras C58, C59, S70, S71, S72, S73, S74 e S75",
+      "observacoes": "C58 --> Alerta em mar/2020 e erro em abr/2020\nC59 --> Alerta em mar/2020 e erro em abr/2020\nS70 --> Alerta em mar/2020 e erro em abr/2020\nS71 --> Alerta em mar/2020 e erro em abr/2020                                                 S72 --> Alerta em mar/2020 e erro em abr/2020                                                                                         S73 --> Alerta em mar/2020 e erro em abr/2020                                                S74 --> Alerta em mar/2020 e erro em abr/2020                                                 S75 --> Alerta em mar/2020 e erro em abr/2020"
+    },
+    {
+      "data": "2020-03-30",
+      "atualizacao": "S72",
+      "detalhamento": "Alteração da regra S72",
+      "observacoes": "A Regra S72 passará a comparar o campo <Ident> com <DetCli>."
+    },
+    {
+      "data": "2020-04-20",
+      "atualizacao": "S70, S71, S72, S73, S74, S75 e S46",
+      "detalhamento": "Alteração das regras S70, S71, S72, S73, S74, S75 e S46",
+      "observacoes": "S70 --> Alerta em mar/2020 e erro em mai/2020\nS71 --> Alerta em mar/2020 e erro em mai/2020                                               S72 --> Alerta em mar/2020 e erro em mai/2020                                                                                          S73 --> Alerta em mar/2020 e erro em mai/2020                                                S74 --> Alerta em data-base a definir                                                                  S75 --> Alerta em mar/2020 e erro em jul/2020                                                  S46 --> Inclusão da informação adicional 1701"
+    },
+    {
+      "data": "2020-04-23",
+      "atualizacao": "C44 e C52",
+      "detalhamento": "Alteração das regras C44 4 C52",
+      "observacoes": "As regras C44 e C52 desconsiderarão as informações adicionais 0404 e 0406."
+    },
+    {
+      "data": "2020-04-29",
+      "atualizacao": "S58",
+      "detalhamento": "Alteração da regra S58",
+      "observacoes": "A regra S58 desconsiderará operações de naturezas 33 e 34."
+    },
+    {
+      "data": "2020-07-30",
+      "atualizacao": "I14, S72, S76, S77, S78",
+      "detalhamento": "Introdução de novas regras de validação e entrada como erro para a data-base Set/2020. Exclusão da regra S72",
+      "observacoes": "I14 --> Alerta em ago/2020 e erro em set/2020                                                                                   S76 --> Alerta em ago/2020 e erro em set/2020\nS77 --> Alerta em ago/2020 e erro em set/2020                                                   S78 --> Alerta em ago/2020 e erro em set/2020"
+    },
+    {
+      "data": "2020-08-07",
+      "atualizacao": "C60",
+      "detalhamento": "Introdução da regra C60",
+      "observacoes": "Alerta em ago/2020 e erro em set/2020"
+    },
+    {
+      "data": "2020-08-31",
+      "atualizacao": "A14, S77, S79, S80, S81, S82, S83",
+      "detalhamento": "Introdução de novas regras de validação. Exclusão da  regra S77",
+      "observacoes": "A14 --> Alerta em ago/2020 e erro em set/2020                                                  S79 --> Alerta em set/2020 e erro em nov/2020                                                                                   S80 --> Alerta em ago/2020 e erro em nov/2020\nS81 --> Alerta em ago/2020 e erro em nov/2020                                                   S82 -->Erro em nov/2020\nS83 --> Alerta em ago/2020 e erro em nov/2020"
+    },
+    {
+      "data": "2020-09-23",
+      "atualizacao": "S80, S81",
+      "detalhamento": "Exclusão da regra S80.\nAlteração da regra S81",
+      "observacoes": "S80 --> Alerta em ago/2020 e erro em nov/2020\nS81 --> Alerta em ago/2020 e erro em nov/2020"
+    },
+    {
+      "data": "2020-11-03",
+      "atualizacao": "C61, S84",
+      "detalhamento": "Introdução de novas regras de validação",
+      "observacoes": "C61 --> Alerta em nov/2020 e erro em dez/2020\nS84 --> Alerta em nov/2020 e erro em dez/2020"
+    },
+    {
+      "data": "2020-11-03",
+      "atualizacao": "I14",
+      "detalhamento": "Alteração da regra I14",
+      "observacoes": "I14 --> Alerta em set/2020 e erro em nov/2020"
+    },
+    {
+      "data": "2020-12-15",
+      "atualizacao": "S50",
+      "detalhamento": "Remoção do trecho final da descrição: \"Regra válida para operações contratadas a partir de 01/11/2015 (inclusive).\"",
+      "observacoes": null
+    },
+    {
+      "data": "2021-02-23",
+      "atualizacao": "C62, F05",
+      "detalhamento": "Introdução de novas regras de validação",
+      "observacoes": "C62 --> Alerta em jan/2021 e erro em fev/2021\nF05 --> Alerta em fev/2021 e erro em mar/2021"
+    },
+    {
+      "data": "2021-03-25",
+      "atualizacao": "F05",
+      "detalhamento": "Ajuste na descrição da regra de validação",
+      "observacoes": "Ajuste na descrição da regra de validação, para melhor clareza."
+    },
+    {
+      "data": "2021-04-05",
+      "atualizacao": "S85",
+      "detalhamento": "Introdução da regra S85",
+      "observacoes": "Alerta em mai/2021 e erro em set/2021"
+    },
+    {
+      "data": "2021-04-13",
+      "atualizacao": "F05",
+      "detalhamento": "Regra F05 permanece como alerta.",
+      "observacoes": null
+    },
+    {
+      "data": "2021-05-20",
+      "atualizacao": "C28, C63, S86",
+      "detalhamento": "Alteração da regra C28 e introdução das regras C63 e S86",
+      "observacoes": "C28 --> Inclusão das modalidades 19XX\nC63 --> Erro em mai/2021\nS86 --> Erro em mai/2021"
+    },
+    {
+      "data": "2021-06-07",
+      "atualizacao": "C63",
+      "detalhamento": "Alteração da regra C63",
+      "observacoes": "Alerta em mai/2021 e erro em jun/2021"
+    },
+    {
+      "data": "2021-06-08",
+      "atualizacao": "S58",
+      "detalhamento": "Alteração da regra S58",
+      "observacoes": "S58 --> Inclusão das modalidades 19XX no rol de exceções"
+    },
+    {
+      "data": "2021-06-30",
+      "atualizacao": "S87, S88",
+      "detalhamento": "Introdução de novas regras de validação",
+      "observacoes": "S87 --> Alerta em jun/2021 e erro em nov/2021\nS88 --> Alerta em jun/2021 e erro em nov/2021"
+    },
+    {
+      "data": "2021-08-09",
+      "atualizacao": "S87, S88",
+      "detalhamento": "Alteração das regras S87 e S88",
+      "observacoes": "S87 --> Erro em jun/2021\nS88 --> Erro em jun/2021"
+    },
+    {
+      "data": "2021-09-15",
+      "atualizacao": "S59",
+      "detalhamento": "Alteração da regra S59",
+      "observacoes": "Inclusão da modalidade 0203."
+    },
+    {
+      "data": "2021-11-29",
+      "atualizacao": "C64, C65",
+      "detalhamento": "Introdução de novas regras de validação",
+      "observacoes": "C64 --> Alerta em nov/2021 e erro em mar/2022\nC65 --> Alerta em nov/2021 e erro em mar/2022"
+    },
+    {
+      "data": "2021-12-22",
+      "atualizacao": "S89",
+      "detalhamento": "Introdução de nova regra de validação",
+      "observacoes": "S89 --> Alerta em dez/2021"
+    },
+    {
+      "data": "2022-01-31",
+      "atualizacao": "C66, S14, C44, C52",
+      "detalhamento": "Introdução da regra C66.\nAlteração nas regras S14, C44 e C52.",
+      "observacoes": "C66 --> Alerta em jan/2022 e erro em mai/2022.\nS14 --> Regra desconsiderará operações adquiridas com créditos vencidos ou baixados.\nC44 e C52 --> Acréscimo das informações adicionais 0407 a 0411 no rol de verificação."
+    },
+    {
+      "data": "2022-06-27",
+      "atualizacao": "C67",
+      "detalhamento": "Introdução de nova regra de validação",
+      "observacoes": "C67 --> Alerta em jun/2022 e erro em set/2022"
+    },
+    {
+      "data": "2022-08-26",
+      "atualizacao": "C67",
+      "detalhamento": "Alteração da regra C67",
+      "observacoes": "C67 --> Somente alerta em jun/2022; data de contratação a partir de 2013 considerada."
+    },
+    {
+      "data": "2023-06-22",
+      "atualizacao": "C67",
+      "detalhamento": "Alteração da regra C67",
+      "observacoes": "C67 --> Erro em jul/2023; Característica Especial 38 considerada na verificação (domínio válido a partir da data-base jul/2023); Remoção da verificação sobre modalidades diferentes de 08XX."
+    },
+    {
+      "data": "2023-08-31",
+      "atualizacao": "S14, S90, S91",
+      "detalhamento": "Alteração da regra S14\nIntrodução das novas regras de validação S90 e S91",
+      "observacoes": "S14 --> Regra desconsiderará operações com informação adicional de saída.\nS90 --> Alerta em ago/2023 e erro em set/2023\nS91 --> Alerta em ago/2023 e erro em set/2023"
+    },
+    {
+      "data": "2023-09-29",
+      "atualizacao": "S92",
+      "detalhamento": "Introdução de nova regra de validação",
+      "observacoes": "S92 --> Erro em nov/2023"
+    },
+    {
+      "data": "2023-12-08",
+      "atualizacao": "B12",
+      "detalhamento": "Introdução de novo atributo no cabeçalho",
+      "observacoes": "B12 --> Rejeição do arquivo se uso inadequado do atributo a partir de Jan/24"
+    },
+    {
+      "data": "2023-12-19",
+      "atualizacao": "B12",
+      "detalhamento": "Introdução de novo atributo no cabeçalho",
+      "observacoes": "B12 --> Adiada a entrada em produção da data-base 01/2024 para 02/2024"
+    },
+    {
+      "data": "2024-02-26",
+      "atualizacao": "B12",
+      "detalhamento": "Introdução de novo atributo no cabeçalho",
+      "observacoes": "B12 --> Adiada a entrada em produção da data-base 02/2024 para 03/2024"
+    },
+    {
+      "data": "2024-04-18",
+      "atualizacao": "C68;\nB02, B03, B06, B07, B08 e B11;\nB13, B14, B15, B16, B20 e B21;\nS79 e S89;\nH01 a H09.",
+      "detalhamento": "Introdução de novas regras de validação e ajustes em regras existentes",
+      "observacoes": "C68 --> Erro em mai/2024 (nova regra).\nB02, B03, B06, B07, B08 e B11 --> Ajustes nas descrições das regras de validação, para melhor clareza.\nInclusão das novas regras B13, B14, B15, B16, B20 e B21.\nS79 e S89 --> Ajustes nas descrições das regras de validação, para melhor clareza.\nInclusão das novas regras H01 a H09, referentes a substituição parcial (Documento 3042)."
+    },
+    {
+      "data": "2024-11-08",
+      "atualizacao": "S20, S29, S56, S69;\nC33, C64, C65;\nI04, I10;\nA07.",
+      "detalhamento": "Regras desativadas ou a desativar",
+      "observacoes": "Atenção para a data-base de cancelamento de cada regra (indicada na respectiva linha)"
+    },
+    {
+      "data": "2024-11-08",
+      "atualizacao": "C69, C70, C71, C72, C73, C74, C75, C76, C77, C78, C79,\nS93, S94, S95, S96, S97, S98, S99,\nI15,\nA15,\nB17",
+      "detalhamento": "Introdução de novas regras de validação",
+      "observacoes": null
+    },
+    {
+      "data": "2025-07-31",
+      "atualizacao": "S58, S105",
+      "detalhamento": "Alteração da regra S58.\nInclusão da regra S105.",
+      "observacoes": "S58 --> Inclusão da modalidade 1403 no rol de exceções.\nS105 --> Alerta em jul/2025 e erro em ago/2025."
+    },
+    {
+      "data": "2025-12-15",
+      "atualizacao": "S100, S101, S102, S103",
+      "detalhamento": "Introdução de novas regras de validação",
+      "observacoes": "S100 a S103 --> Alerta em ago/2025 e erro em mar/2026."
+    },
+    {
+      "data": "2026-02-05",
+      "atualizacao": "S104",
+      "detalhamento": "Introdução de nova regra de validação",
+      "observacoes": "S104 --> Alerta em ago/2025 e erro em mar/2026."
+    },
+    {
+      "data": "2026-03-12",
+      "atualizacao": "C83, C85,\nS115, S116",
+      "detalhamento": "Introdução de novas regras de validação",
+      "observacoes": "C83, C85, S115, S116 --> Alerta em jan/2026 e erro em mar/2026."
+    },
+    {
+      "data": "2026-03-26",
+      "atualizacao": "S111, S112,\nS89, S100, S104",
+      "detalhamento": "Introdução das regras S111 e S112.\nAjustes nas regras S89, S100 e S104.",
+      "observacoes": "S111, S112 --> Alerta a partir de nov/2025 e erro a partir de jul/2026.\nS89 --> Erro a partir de jul/2026 e simplificação na descrição.\nS100 --> Desconsiderada em operações com inf. adicional de saída.\nS104 --> Erro a partir de ago/2026."
+    },
+    {
+      "data": "2026-04-08",
+      "atualizacao": "C85, S116",
+      "detalhamento": "Ajustes nas regras C85 e S116.",
+      "observacoes": "C85 --> Erro a partir da data-base jun/2026; regra não aplicada em operações em prejuízo (v3XX > 0).\nS116 --> Erro a partir da data-base jun/2026."
+    },
+    {
+      "data": "2026-05-20",
+      "atualizacao": "C80, C81, C82;\nS106, S107, S108, S109, S110;\nC03, C04, C10, S48;\nC52, I15",
+      "detalhamento": "Introdução de novas regras de validação\n(C80 a C82, S106 a S110)\nDesativações e ajustes em regras existentes",
+      "observacoes": "C80, C81 --> Alerta a partir de mai/2026 e erro a partir de nov/2026.\nC82  --> Alerta a partir de mai/2026 e erro a partir de ago/2026.\nS106, S107 --> Erro a partir de mai/2026.\nS108 --> Alerta a partir de mai/2026 e erro a partir de jun/2026.\nS109, S110 --> Alerta a partir de mai/2026 e erro a partir de nov/2026.\nC03, C04, C10, S48 --> Desativadas a partir de mai/2026.\nC52 --> Informação adicional 0401 excluída a partir de mai/2026.\nI15 --> Informação de garantia permitida em saída a partir de mai/2026."
+    },
+    {
+      "data": "2026-05-29",
+      "atualizacao": "C62, S117",
+      "detalhamento": "Alteração na regra C62.\nIntrodução da regra S117.",
+      "observacoes": "C62 --> Acréscimo do domínio Ident=\"13\" no rol de verificação.\nS117 --> Alerta a partir de mai/2026 e erro a partir de jun/2026."
+    },
+    {
+      "data": "2026-07-10",
+      "atualizacao": "C44, C52, C55, C56",
+      "detalhamento": "Desativação de regras",
+      "observacoes": "C44, C52, C55, C56 --> Desativadas a partir de jun/2026."
+    },
+    {
+      "data": "2026-07-30",
+      "atualizacao": "C56b, S118",
+      "detalhamento": "Introdução de novas regras de validação (C56b, em substituição ao C56 desativado e S118)",
+      "observacoes": "C56b --> Alerta a partir de jul/2026 e erro a partir de set/2026.\nS118 --> Erro a partir de jul/2026."
+    }
+  ]
+}

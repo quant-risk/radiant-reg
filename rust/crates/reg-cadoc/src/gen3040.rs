@@ -52,8 +52,8 @@
 //!   remanescente de crédito rotativo é condição do validator), 0406, 1304
 //!   e 1901.
 
-use quick_xml::events::{BytesDecl, BytesEnd, BytesStart, Event};
 use quick_xml::Writer;
+use quick_xml::events::{BytesDecl, BytesEnd, BytesStart, Event};
 use reg_core::cnpj::CnpjIdentifier;
 use reg_core::error::RegError;
 use reg_core::ipoc::Ipoc;
@@ -228,7 +228,8 @@ pub struct OpInput {
 /// para todas as modalidades menos 0201, 0204, 0210 (contanto que não
 /// provenha de saldo remanescente do crédito rotativo), 0406, 1304, 1901".
 /// A condição de 0210 é validada pela camada de validação.
-pub const MODALIDADES_ISENTAS_VLR_CONTR: &[&str] = &["0201", "0204", "0210", "0406", "1304", "1901"];
+pub const MODALIDADES_ISENTAS_VLR_CONTR: &[&str] =
+    &["0201", "0204", "0210", "0406", "1304", "1901"];
 
 /// Cliente individualizado (`<Cli>`).
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -274,7 +275,9 @@ pub struct Doc3040Input {
 fn require(field: &str, raw: &str) -> Result<String, RegError> {
     let s = raw.trim();
     if s.is_empty() {
-        return Err(RegError::MissingField { field: field.to_string() });
+        return Err(RegError::MissingField {
+            field: field.to_string(),
+        });
     }
     Ok(s.to_string())
 }
@@ -283,7 +286,9 @@ fn require(field: &str, raw: &str) -> Result<String, RegError> {
 fn valida_cd_cliente(cd: &str) -> Result<String, RegError> {
     let s = cd.trim();
     if s.is_empty() {
-        return Err(RegError::MissingField { field: "Doc3040/Cli/@Cd".to_string() });
+        return Err(RegError::MissingField {
+            field: "Doc3040/Cli/@Cd".to_string(),
+        });
     }
     let len = s.chars().count();
     if !(1..=14).contains(&len) {
@@ -292,7 +297,10 @@ fn valida_cd_cliente(cd: &str) -> Result<String, RegError> {
             reason: format!("esperado 1..=14 caracteres (IN 729), recebido {len}"),
         });
     }
-    if !s.chars().all(|c| c.is_ascii_digit() || c.is_ascii_uppercase()) {
+    if !s
+        .chars()
+        .all(|c| c.is_ascii_digit() || c.is_ascii_uppercase())
+    {
         return Err(RegError::InvalidValue {
             field: "Doc3040/Cli/@Cd".to_string(),
             reason: "caractere fora de [0-9A-Z] (IN 729)".to_string(),
@@ -393,7 +401,10 @@ pub fn gerar(input: &Doc3040Input) -> Result<GeneratedDoc, RegError> {
 }
 
 fn xml_err(e: std::io::Error) -> RegError {
-    RegError::InvalidValue { field: "gen3040.xml".to_string(), reason: format!("falha ao serializar XML: {e}") }
+    RegError::InvalidValue {
+        field: "gen3040.xml".to_string(),
+        reason: format!("falha ao serializar XML: {e}"),
+    }
 }
 
 fn push_attr(start: &mut BytesStart<'static>, name: &str, value: &str) -> Result<(), RegError> {
@@ -413,8 +424,16 @@ fn emit_cli(writer: &mut Writer<Cursor<Vec<u8>>>, cli: &CliInput) -> Result<(), 
     let mut tag = start_tag("Cli");
     push_attr(&mut tag, "Cd", &cd)?;
     push_attr(&mut tag, "Tp", &require("Doc3040/Cli/@Tp", &cli.tp)?)?;
-    push_attr(&mut tag, "Autorzc", &require("Doc3040/Cli/@Autorzc", &cli.autorzc)?)?;
-    push_attr(&mut tag, "PorteCli", &require("Doc3040/Cli/@PorteCli", &cli.porte_cli)?)?;
+    push_attr(
+        &mut tag,
+        "Autorzc",
+        &require("Doc3040/Cli/@Autorzc", &cli.autorzc)?,
+    )?;
+    push_attr(
+        &mut tag,
+        "PorteCli",
+        &require("Doc3040/Cli/@PorteCli", &cli.porte_cli)?,
+    )?;
     // TpCtrl (A1, L21 — PJ, Anexo 10) e FatAnual (N19,2, L24 — PJ/PF):
     // condicionais emitidas quando informadas; a exigência por perfil
     // (PJ/PF/FIDC) é da camada de validação.
@@ -424,7 +443,11 @@ fn emit_cli(writer: &mut Writer<Cursor<Vec<u8>>>, cli: &CliInput) -> Result<(), 
     if let Some(fa) = cli.fat_anual {
         push_attr(&mut tag, "FatAnual", &n192(fa))?;
     }
-    push_attr(&mut tag, "IniRelactCli", &require("Doc3040/Cli/@IniRelactCli", &cli.ini_relact_cli)?)?;
+    push_attr(
+        &mut tag,
+        "IniRelactCli",
+        &require("Doc3040/Cli/@IniRelactCli", &cli.ini_relact_cli)?,
+    )?;
     if let Some(nome) = &cli.nome_cli {
         push_attr(&mut tag, "NomeCli", nome)?;
     }
@@ -434,34 +457,74 @@ fn emit_cli(writer: &mut Writer<Cursor<Vec<u8>>>, cli: &CliInput) -> Result<(), 
         emit_op(writer, op)?;
     }
 
-    writer.write_event(Event::End(BytesEnd::new("Cli".to_string()))).map_err(xml_err)?;
+    writer
+        .write_event(Event::End(BytesEnd::new("Cli".to_string())))
+        .map_err(xml_err)?;
     Ok(())
 }
 
 fn emit_op(writer: &mut Writer<Cursor<Vec<u8>>>, op: &OpInput) -> Result<(), RegError> {
     if op.ipoc_raw.trim().is_empty() {
-        return Err(RegError::MissingField { field: "Doc3040/Cli/Op/@IPOC".to_string() });
+        return Err(RegError::MissingField {
+            field: "Doc3040/Cli/Op/@IPOC".to_string(),
+        });
     }
     let ipoc = Ipoc::new(&op.ipoc_raw)?;
     let mut tag = start_tag("Op");
     push_attr(&mut tag, "IPOC", ipoc.as_str())?;
-    push_attr(&mut tag, "Contrt", &require("Doc3040/Cli/Op/@Contrt", &op.contrt)?)?;
-    push_attr(&mut tag, "NatuOp", &require("Doc3040/Cli/Op/@NatuOp", &op.natu_op)?)?;
+    push_attr(
+        &mut tag,
+        "Contrt",
+        &require("Doc3040/Cli/Op/@Contrt", &op.contrt)?,
+    )?;
+    push_attr(
+        &mut tag,
+        "NatuOp",
+        &require("Doc3040/Cli/Op/@NatuOp", &op.natu_op)?,
+    )?;
     push_attr(&mut tag, "Mod", &require("Doc3040/Cli/Op/@Mod", &op.mod_)?)?;
     // Cosif (A255, L44 — "Sim"): obrigatório na emissão (a exceção FIDC
     // informa "1"; o valor é do input, nunca default silencioso).
-    push_attr(&mut tag, "Cosif", &require("Doc3040/Cli/Op/@Cosif", &op.cosif)?)?;
+    push_attr(
+        &mut tag,
+        "Cosif",
+        &require("Doc3040/Cli/Op/@Cosif", &op.cosif)?,
+    )?;
     // DetCli (A14, L40 — PJ): condicional, emitido quando informado.
     if let Some(dc) = &op.det_cli {
         push_attr(&mut tag, "DetCli", &require("Doc3040/Cli/Op/@DetCli", dc)?)?;
     }
-    push_attr(&mut tag, "OrigemRec", &require("Doc3040/Cli/Op/@OrigemRec", &op.origem_rec)?)?;
-    push_attr(&mut tag, "Indx", &require("Doc3040/Cli/Op/@Indx", &op.indx)?)?;
-    push_attr(&mut tag, "VarCamb", &require("Doc3040/Cli/Op/@VarCamb", &op.var_camb)?)?;
+    push_attr(
+        &mut tag,
+        "OrigemRec",
+        &require("Doc3040/Cli/Op/@OrigemRec", &op.origem_rec)?,
+    )?;
+    push_attr(
+        &mut tag,
+        "Indx",
+        &require("Doc3040/Cli/Op/@Indx", &op.indx)?,
+    )?;
+    push_attr(
+        &mut tag,
+        "VarCamb",
+        &require("Doc3040/Cli/Op/@VarCamb", &op.var_camb)?,
+    )?;
     push_attr(&mut tag, "CEP", &require("Doc3040/Cli/Op/@CEP", &op.cep)?)?;
-    push_attr(&mut tag, "DtContr", &require("Doc3040/Cli/Op/@DtContr", &op.dt_contr)?)?;
-    push_attr(&mut tag, "DtVencOp", &require("Doc3040/Cli/Op/@DtVencOp", &op.dt_venc_op)?)?;
-    push_attr(&mut tag, "ClassOp", &require("Doc3040/Cli/Op/@ClassOp", &op.class_op)?)?;
+    push_attr(
+        &mut tag,
+        "DtContr",
+        &require("Doc3040/Cli/Op/@DtContr", &op.dt_contr)?,
+    )?;
+    push_attr(
+        &mut tag,
+        "DtVencOp",
+        &require("Doc3040/Cli/Op/@DtVencOp", &op.dt_venc_op)?,
+    )?;
+    push_attr(
+        &mut tag,
+        "ClassOp",
+        &require("Doc3040/Cli/Op/@ClassOp", &op.class_op)?,
+    )?;
     push_attr(&mut tag, "ProvConsttd", &n192(op.prov_consttd))?;
     match op.vlr_contr {
         Some(v) => push_attr(&mut tag, "VlrContr", &n192(v))?,
@@ -471,7 +534,9 @@ fn emit_op(writer: &mut Writer<Cursor<Vec<u8>>>, op: &OpInput) -> Result<(), Reg
             // (0210 sem saldo remanescente de crédito rotativo) é do
             // validator, não do gerador.
             if !MODALIDADES_ISENTAS_VLR_CONTR.contains(&op.mod_.as_str()) {
-                return Err(RegError::MissingField { field: "Doc3040/Cli/Op/@VlrContr".to_string() });
+                return Err(RegError::MissingField {
+                    field: "Doc3040/Cli/Op/@VlrContr".to_string(),
+                });
             }
         }
     }
@@ -487,7 +552,9 @@ fn emit_op(writer: &mut Writer<Cursor<Vec<u8>>>, op: &OpInput) -> Result<(), Reg
         if op.dias_atraso == 0 {
             return Err(RegError::InvalidValue {
                 field: "Doc3040/Cli/Op/@DiaAtraso".to_string(),
-                reason: "operação com valores em fluxos vencidos (v205..v330) exige dias de atraso ≥ 1".to_string(),
+                reason:
+                    "operação com valores em fluxos vencidos (v205..v330) exige dias de atraso ≥ 1"
+                        .to_string(),
             });
         }
         push_attr(&mut tag, "DiaAtraso", &op.dias_atraso.to_string())?;
@@ -503,7 +570,9 @@ fn emit_op(writer: &mut Writer<Cursor<Vec<u8>>>, op: &OpInput) -> Result<(), Reg
         emit_cont_inst_fin(writer, cif, op.dias_atraso)?;
     }
 
-    writer.write_event(Event::End(BytesEnd::new("Op".to_string()))).map_err(xml_err)?;
+    writer
+        .write_event(Event::End(BytesEnd::new("Op".to_string())))
+        .map_err(xml_err)?;
     Ok(())
 }
 
@@ -659,7 +728,9 @@ mod tests {
             dt_venc_op: "2027-01-10".into(),
             class_op: "A".into(),
             prov_consttd: Centavos::parse("0", reg_core::money::MonetaryUnit::Reais).unwrap(),
-            vlr_contr: Some(Centavos::parse("1234,56", reg_core::money::MonetaryUnit::Reais).unwrap()),
+            vlr_contr: Some(
+                Centavos::parse("1234,56", reg_core::money::MonetaryUnit::Reais).unwrap(),
+            ),
             caract_especial: None,
             venc: Venc4966::default(),
             cont_inst_fin: None,
@@ -688,16 +759,35 @@ mod tests {
     #[test]
     fn declaracao_e_data_base_yyyy_mm() {
         let xml = gerar_xml(&input(vec![cli_min("CLI00001", &"A".repeat(20))]));
-        assert!(xml.starts_with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"), "{xml}");
+        assert!(
+            xml.starts_with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"),
+            "{xml}"
+        );
         assert!(xml.contains("DtBase=\"2026-08\""), "{xml}");
-        assert!(!xml.contains("2026-08-01"), "data-base NUNCA tem dia (bug v1 §1.8)");
+        assert!(
+            !xml.contains("2026-08-01"),
+            "data-base NUNCA tem dia (bug v1 §1.8)"
+        );
     }
 
     #[test]
     fn attrs_case_sensitive_como_o_parser_das_regras_espera() {
         let xml = gerar_xml(&input(vec![cli_min("CLI00001", &"A".repeat(20))]));
-        for attr in ["DtBase", "CNPJ", "Remessa", "Parte", "TpArq", "NomeResp", "EmailResp", "TelResp", "TotalCli"] {
-            assert!(xml.contains(&format!("{attr}=\"")), "attr {attr} ausente: {xml}");
+        for attr in [
+            "DtBase",
+            "CNPJ",
+            "Remessa",
+            "Parte",
+            "TpArq",
+            "NomeResp",
+            "EmailResp",
+            "TelResp",
+            "TotalCli",
+        ] {
+            assert!(
+                xml.contains(&format!("{attr}=\"")),
+                "attr {attr} ausente: {xml}"
+            );
         }
         assert!(xml.contains("<Cli Cd=\"CLI00001\" Tp="), "{xml}");
         assert!(xml.contains("IPOC="), "{xml}");
@@ -708,7 +798,9 @@ mod tests {
     #[test]
     fn venc_completo_incl_v130_v140_que_o_v1_nunca_emitia() {
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
-        let cents = |v: i128| Centavos::parse(&v.to_string(), reg_core::money::MonetaryUnit::Centavos).unwrap();
+        let cents = |v: i128| {
+            Centavos::parse(&v.to_string(), reg_core::money::MonetaryUnit::Centavos).unwrap()
+        };
         cli.ops[0].venc = Venc4966 {
             v110: Some(cents(110)),
             v120: Some(cents(120)),
@@ -721,10 +813,18 @@ mod tests {
         };
         let xml = gerar_xml(&input(vec![cli]));
         for (name, v) in [
-            ("v110", 110), ("v120", 120), ("v130", 130), ("v140", 140),
-            ("v150", 150), ("v160", 160), ("v165", 165),
+            ("v110", 110),
+            ("v120", 120),
+            ("v130", 130),
+            ("v140", 140),
+            ("v150", 150),
+            ("v160", 160),
+            ("v165", 165),
         ] {
-            assert!(xml.contains(&format!("{name}=\"{v}\"")), "{name} ausente: {xml}");
+            assert!(
+                xml.contains(&format!("{name}=\"{v}\"")),
+                "{name} ausente: {xml}"
+            );
         }
     }
 
@@ -735,9 +835,8 @@ mod tests {
     fn venc_completo_incl_todos_os_codigos_do_anexo_1() {
         const CODIGOS: [&str; 31] = [
             "v20", "v40", "v60", "v80", "v110", "v120", "v130", "v140", "v150", "v160", "v165",
-            "v170", "v175", "v180", "v190", "v199",
-            "v205", "v210", "v220", "v230", "v240", "v245", "v250", "v255", "v260", "v270", "v280", "v290",
-            "v310", "v320", "v330",
+            "v170", "v175", "v180", "v190", "v199", "v205", "v210", "v220", "v230", "v240", "v245",
+            "v250", "v255", "v260", "v270", "v280", "v290", "v310", "v320", "v330",
         ];
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
         cli.ops[0].venc = Venc4966 {
@@ -776,15 +875,20 @@ mod tests {
         cli.ops[0].dias_atraso = 45;
         let xml = gerar_xml(&input(vec![cli]));
         for cod in CODIGOS {
-            assert!(xml.contains(&format!("{cod}=\"1\"")), "código {cod} do Anexo 1 ausente do <Venc>: {xml}");
+            assert!(
+                xml.contains(&format!("{cod}=\"1\"")),
+                "código {cod} do Anexo 1 ausente do <Venc>: {xml}"
+            );
         }
         // 31 códigos + DiaAtraso obrigatório por haver fluxos v205..v330.
         assert!(xml.contains("DiaAtraso=\"45\""), "{xml}");
-        assert!(Venc4966 {
-            v205: Some(Centavos::ZERO),
-            ..Venc4966::default()
-        }
-        .tem_fluxos_vencidos());
+        assert!(
+            Venc4966 {
+                v205: Some(Centavos::ZERO),
+                ..Venc4966::default()
+            }
+            .tem_fluxos_vencidos()
+        );
     }
 
     /// DiaAtraso (N6, L61): obrigatório APENAS quando há valores em fluxos
@@ -801,16 +905,21 @@ mod tests {
         // Com fluxo vencido: @DiaAtraso presente.
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
         cli.ops[0].dias_atraso = 45;
-        cli.ops[0].venc.v220 = Some(Centavos::parse("500", reg_core::money::MonetaryUnit::Reais).unwrap());
+        cli.ops[0].venc.v220 =
+            Some(Centavos::parse("500", reg_core::money::MonetaryUnit::Reais).unwrap());
         let xml = gerar_xml(&input(vec![cli]));
         assert!(xml.contains("DiaAtraso=\"45\""), "{xml}");
 
         // Fluxo vencido + 0 dias → erro tipado, nunca XML inválido.
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
-        cli.ops[0].venc.v205 = Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap());
+        cli.ops[0].venc.v205 =
+            Some(Centavos::parse("1", reg_core::money::MonetaryUnit::Centavos).unwrap());
         cli.ops[0].dias_atraso = 0;
         let e = gerar(&input(vec![cli])).unwrap_err();
-        assert!(matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("DiaAtraso")), "{e}");
+        assert!(
+            matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("DiaAtraso")),
+            "{e}"
+        );
     }
 
     /// Campos condicionais do leiaute emitidos quando informados (Cosif L44,
@@ -819,7 +928,8 @@ mod tests {
     fn cosif_detcli_tpctrl_fatanual_emitidos_conforme_leiaute() {
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
         cli.tp_ctrl = Some("1".into());
-        cli.fat_anual = Some(Centavos::parse("5000000,00", reg_core::money::MonetaryUnit::Reais).unwrap());
+        cli.fat_anual =
+            Some(Centavos::parse("5000000,00", reg_core::money::MonetaryUnit::Reais).unwrap());
         cli.ops[0].det_cli = Some("12345678000195".into());
         let xml = gerar_xml(&input(vec![cli]));
         assert!(xml.contains("TpCtrl=\"1\""), "{xml}");
@@ -831,7 +941,10 @@ mod tests {
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
         cli.ops[0].cosif = String::new();
         let e = gerar(&input(vec![cli])).unwrap_err();
-        assert!(matches!(e, RegError::MissingField { ref field } if field.contains("Cosif")), "{e}");
+        assert!(
+            matches!(e, RegError::MissingField { ref field } if field.contains("Cosif")),
+            "{e}"
+        );
     }
 
     #[test]
@@ -839,7 +952,10 @@ mod tests {
         let mut i = input(vec![cli_min("CLI00001", &"A".repeat(20))]);
         i.nome_resp = "Mal<&>\"Quoted\"'Name'".into();
         let xml = gerar_xml(&i);
-        assert!(xml.contains("NomeResp=\"Mal&lt;&amp;&gt;&quot;Quoted&quot;&apos;Name&apos;\""), "{xml}");
+        assert!(
+            xml.contains("NomeResp=\"Mal&lt;&amp;&gt;&quot;Quoted&quot;&apos;Name&apos;\""),
+            "{xml}"
+        );
         // Parse de volta com quick-xml recupera o valor original:
         let mut reader = quick_xml::Reader::from_reader(xml.as_bytes());
         let mut found = None;
@@ -851,15 +967,26 @@ mod tests {
                     for a in s.attributes() {
                         let a = a.unwrap();
                         if a.key.as_ref() == "NomeResp" {
-                            found = Some(quick_xml::escape::unescape(a.value.as_ref()).unwrap().into_owned());
+                            found = Some(
+                                quick_xml::escape::unescape(a.value.as_ref())
+                                    .unwrap()
+                                    .into_owned(),
+                            );
                         }
                     }
                     break;
                 }
                 Event::Eof => break,
-                Event::Start(_) | Event::End(_) | Event::Empty(_) | Event::Text(_)
-                | Event::CData(_) | Event::Comment(_) | Event::Decl(_) | Event::PI(_)
-                | Event::DocType(_) | Event::GeneralRef(_) => {}
+                Event::Start(_)
+                | Event::End(_)
+                | Event::Empty(_)
+                | Event::Text(_)
+                | Event::CData(_)
+                | Event::Comment(_)
+                | Event::Decl(_)
+                | Event::PI(_)
+                | Event::DocType(_)
+                | Event::GeneralRef(_) => {}
             }
         }
         assert_eq!(found.as_deref(), Some("Mal<&>\"Quoted\"'Name'"));
@@ -869,21 +996,38 @@ mod tests {
     fn missing_field_nunca_default() {
         // IPOC ausente (vazio):
         let e = gerar(&input(vec![cli_min("CLI00001", "")])).unwrap_err();
-        assert_eq!(e, RegError::MissingField { field: "Doc3040/Cli/Op/@IPOC".to_string() });
+        assert_eq!(
+            e,
+            RegError::MissingField {
+                field: "Doc3040/Cli/Op/@IPOC".to_string()
+            }
+        );
         // Valor contratado ausente em modalidade NÃO isenta (0213):
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
         cli.ops[0].vlr_contr = None;
         let e = gerar(&input(vec![cli])).unwrap_err();
-        assert_eq!(e, RegError::MissingField { field: "Doc3040/Cli/Op/@VlrContr".to_string() });
+        assert_eq!(
+            e,
+            RegError::MissingField {
+                field: "Doc3040/Cli/Op/@VlrContr".to_string()
+            }
+        );
         // TpArq ausente — NUNCA vira "F" silenciosamente (fio desligado nº 5):
         let mut i = input(vec![cli_min("CLI00001", &"A".repeat(20))]);
         i.tp_arq = String::new();
         let e = gerar(&i).unwrap_err();
-        assert_eq!(e, RegError::MissingField { field: "Doc3040/@TpArq".to_string() });
+        assert_eq!(
+            e,
+            RegError::MissingField {
+                field: "Doc3040/@TpArq".to_string()
+            }
+        );
         // EmailResp ausente — NUNCA email fake:
         let mut i = input(vec![cli_min("CLI00001", &"A".repeat(20))]);
         i.email_resp = String::new();
-        assert!(matches!(gerar(&i), Err(RegError::MissingField { field } ) if field.contains("EmailResp")));
+        assert!(
+            matches!(gerar(&i), Err(RegError::MissingField { field } ) if field.contains("EmailResp"))
+        );
         // Cd do cliente fora do domínio IN 729:
         assert!(valida_cd_cliente("CLI-01!").is_err());
     }
@@ -910,7 +1054,10 @@ mod tests {
         let op_c = xml.find(&format!("IPOC=\"{}\"", "C".repeat(18))).unwrap();
         let op_b = xml.find(&format!("IPOC=\"{}\"", "B".repeat(21))).unwrap();
         // As duas Ops do Cli00001 vêm em ordem de IPOC; CLI00002 depois.
-        assert!(pos_cli1 < op_a && op_a < op_c && op_c < pos_cli2 && pos_cli2 < op_b, "{xml}");
+        assert!(
+            pos_cli1 < op_a && op_a < op_c && op_c < pos_cli2 && pos_cli2 < op_b,
+            "{xml}"
+        );
     }
 
     #[test]
@@ -927,7 +1074,8 @@ mod tests {
 
     #[test]
     fn n192_formato_bacen() {
-        let f = |raw: &str| n192(Centavos::parse(raw, reg_core::money::MonetaryUnit::Reais).unwrap());
+        let f =
+            |raw: &str| n192(Centavos::parse(raw, reg_core::money::MonetaryUnit::Reais).unwrap());
         assert_eq!(f("1234,56"), "123456");
         assert_eq!(f("0"), "0");
         assert_eq!(f("1000000000"), "100000000000");
@@ -943,20 +1091,35 @@ mod tests {
             // Informado explicitamente — validado contra o domínio do Anexo 41.
             est_inst_fin: Some("2".into()),
             qtd_inst: Some(10),
-            vlr_cont_br: Some(Centavos::parse("1000", reg_core::money::MonetaryUnit::Reais).unwrap()),
+            vlr_cont_br: Some(
+                Centavos::parse("1000", reg_core::money::MonetaryUnit::Reais).unwrap(),
+            ),
             vlr_perda_acum: None,
-            vlr_justo: Some(Centavos::parse("990", reg_core::money::MonetaryUnit::Centavos).unwrap()),
-            rend_mes: Some(Centavos::parse("1234", reg_core::money::MonetaryUnit::Centavos).unwrap()),
+            vlr_justo: Some(
+                Centavos::parse("990", reg_core::money::MonetaryUnit::Centavos).unwrap(),
+            ),
+            rend_mes: Some(
+                Centavos::parse("1234", reg_core::money::MonetaryUnit::Centavos).unwrap(),
+            ),
             pd_est1: None,
             cart_prov_min: None,
             trat_risc: None,
-            estagios: vec![EstagioAloc { motivo: Some("01".into()), dt_alocacao: db() }],
+            estagios: vec![EstagioAloc {
+                motivo: Some("01".into()),
+                dt_alocacao: db(),
+            }],
         });
         let xml = gerar_xml(&input(vec![cli]));
-        assert!(xml.contains("<ContInstFinRes4966 ClasAtFin=\"1\" EstInstFin=\"2\" QtdInst=\"10\""), "{xml}");
+        assert!(
+            xml.contains("<ContInstFinRes4966 ClasAtFin=\"1\" EstInstFin=\"2\" QtdInst=\"10\""),
+            "{xml}"
+        );
         assert!(xml.contains("VlrContBr=\"100000\""), "{xml}");
         assert!(xml.contains("RendMes=\"1234\""), "{xml}");
-        assert!(xml.contains("<Estagio Motivo=\"01\" DtAlocacao=\"2026-08\"/>"), "{xml}");
+        assert!(
+            xml.contains("<Estagio Motivo=\"01\" DtAlocacao=\"2026-08\"/>"),
+            "{xml}"
+        );
     }
 
     /// EstInstFinanceiro fora do domínio do Anexo 41 ({1,2,3}) é rejeitado —
@@ -965,7 +1128,10 @@ mod tests {
     fn est_inst_fin_fora_do_dominio_anexo_41_erra() {
         for invalido in ["4", "5", "0", "x"] {
             let e = valida_est_inst_fin(invalido).unwrap_err();
-            assert!(matches!(e, RegError::InvalidValue { .. }), "{invalido}: {e}");
+            assert!(
+                matches!(e, RegError::InvalidValue { .. }),
+                "{invalido}: {e}"
+            );
         }
         for valido in ["1", "2", "3"] {
             assert!(valida_est_inst_fin(valido).is_ok());
@@ -985,7 +1151,10 @@ mod tests {
             estagios: vec![],
         });
         let e = gerar(&input(vec![cli])).unwrap_err();
-        assert!(matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("EstInstFin")), "{e}");
+        assert!(
+            matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("EstInstFin")),
+            "{e}"
+        );
     }
 
     /// EstInstFin ausente NÃO é mais derivado de dias-de-atraso (mapeamento
@@ -1030,7 +1199,8 @@ mod tests {
         // Isenta COM valor também emite o atributo (informável).
         let mut cli = cli_min("CLI00001", &"A".repeat(20));
         cli.ops[0].mod_ = "0201".into();
-        cli.ops[0].vlr_contr = Some(Centavos::parse("100", reg_core::money::MonetaryUnit::Reais).unwrap());
+        cli.ops[0].vlr_contr =
+            Some(Centavos::parse("100", reg_core::money::MonetaryUnit::Reais).unwrap());
         let xml = gerar_xml(&input(vec![cli]));
         assert!(xml.contains("VlrContr=\"10000\""), "{xml}");
         // Não-isenta sem valor → erro (caminho principal já coberto em
@@ -1041,7 +1211,10 @@ mod tests {
     #[test]
     fn ipoc_validado_pelo_reg_core() {
         let mut i = input(vec![cli_min("CLI00001", "curto")]);
-        assert!(gerar(&i).is_err(), "IPOC com menos de 15 chars rejeitado (regra I14)");
+        assert!(
+            gerar(&i).is_err(),
+            "IPOC com menos de 15 chars rejeitado (regra I14)"
+        );
         i.clientes[0].ops[0].ipoc_raw = "ABC".repeat(5); // 15 chars — mínimo válido
         assert!(gerar(&i).is_ok());
     }

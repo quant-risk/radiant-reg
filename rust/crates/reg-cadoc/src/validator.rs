@@ -222,11 +222,10 @@ impl BacenValidatorAdapter {
         // O wrapper oficial resolve `java` do PATH — prepend do diretório da
         // JRE validada no builder (garante que o java usado é o validado).
         if let Some(bin_dir) = self.jre.as_path().parent()
-            && let Ok(path_prependido) = std::env::join_paths(
-                std::iter::once(bin_dir.to_path_buf()).chain(std::env::split_paths(
-                    &std::env::var_os("PATH").unwrap_or_default(),
-                )),
-            )
+            && let Ok(path_prependido) =
+                std::env::join_paths(std::iter::once(bin_dir.to_path_buf()).chain(
+                    std::env::split_paths(&std::env::var_os("PATH").unwrap_or_default()),
+                ))
         {
             cmd.env("PATH", path_prependido);
         }
@@ -386,7 +385,11 @@ fn is_executable_file(p: &Path) -> bool {
 /// Conta CHARS, não bytes — corte em limite de char nunca entra em pânico
 /// com saída multibyte do validador.
 fn tail_message(stderr: &str, stdout: &str) -> String {
-    let raw = if stderr.trim().is_empty() { stdout } else { stderr };
+    let raw = if stderr.trim().is_empty() {
+        stdout
+    } else {
+        stderr
+    };
     let trimmed = raw.trim();
     const MAX_CHARS: usize = 2000;
     let total = trimmed.chars().count();

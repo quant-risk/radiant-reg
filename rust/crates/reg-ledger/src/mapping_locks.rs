@@ -135,7 +135,9 @@ impl ContratoUnidades {
     /// Contrato propositalmente vazio — serve para TESTAR a negação da
     /// trava 1 (nunca para produção).
     pub fn vazio() -> Self {
-        Self { unidades: BTreeMap::new() }
+        Self {
+            unidades: BTreeMap::new(),
+        }
     }
 
     /// Quantidade de campos contratados.
@@ -248,7 +250,10 @@ impl MappingLock<UnidadesContratadas> {
     /// **Trava 2 — conservação ZERO**: o dry-run só fecha com
     /// `depois − antes == Centavos::ZERO`. Qualquer delta é negado
     /// nomeando a trava, com o valor do delta no motivo.
-    pub fn fechar_dry_run(self, check: ConservationCheck) -> Result<MappingLock<DryRunLimpo>, LockError> {
+    pub fn fechar_dry_run(
+        self,
+        check: ConservationCheck,
+    ) -> Result<MappingLock<DryRunLimpo>, LockError> {
         let delta = check.depois.checked_sub(check.antes)?;
         if delta != Centavos::ZERO {
             return Err(LockError::EvidenciaFaltante {
@@ -331,7 +336,10 @@ impl MappingLock<AmostraAssinada> {
             metadata: Some(&metadata),
         })?;
         let mut historico = self.historico;
-        historico.push(Self::registrar(Trava::CustodiaSha256, mapping_sha256.clone()));
+        historico.push(Self::registrar(
+            Trava::CustodiaSha256,
+            mapping_sha256.clone(),
+        ));
         Ok(MappingFechado {
             mapping_cod: self.mapping_cod,
             historico,
@@ -407,10 +415,8 @@ mod tests {
     use super::*;
     use crate::sign::SeedAssinatura;
 
-    const SEED_A: &str =
-        "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60";
-    const SEED_B: &str =
-        "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb";
+    const SEED_A: &str = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60";
+    const SEED_B: &str = "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb";
 
     fn contrato_cheio() -> ContratoUnidades {
         let mut unidades = BTreeMap::new();
@@ -427,8 +433,12 @@ mod tests {
     }
 
     fn dual_aprovada(amostra: &[u8]) -> DualApproval {
-        DualApproval::nova(amostra, &SeedAssinatura::de_hex(SEED_A).unwrap(), &SeedAssinatura::de_hex(SEED_B).unwrap())
-            .unwrap()
+        DualApproval::nova(
+            amostra,
+            &SeedAssinatura::de_hex(SEED_A).unwrap(),
+            &SeedAssinatura::de_hex(SEED_B).unwrap(),
+        )
+        .unwrap()
     }
 
     /// NEGAÇÃO TRAVA 1: contrato vazio → erro nomeando unidade_por_campo.
@@ -438,7 +448,13 @@ mod tests {
             .contratar_unidades(&ContratoUnidades::vazio())
             .unwrap_err();
         assert!(
-            matches!(err, LockError::EvidenciaFaltante { trava: Trava::UnidadePorCampo, .. }),
+            matches!(
+                err,
+                LockError::EvidenciaFaltante {
+                    trava: Trava::UnidadePorCampo,
+                    ..
+                }
+            ),
             "{err}"
         );
         assert!(err.to_string().contains("unidade_por_campo"), "{err}");
@@ -453,7 +469,13 @@ mod tests {
             .contratar_unidades(&ContratoUnidades::novo(unidades))
             .unwrap_err();
         assert!(
-            matches!(err, LockError::EvidenciaFaltante { trava: Trava::UnidadePorCampo, .. }),
+            matches!(
+                err,
+                LockError::EvidenciaFaltante {
+                    trava: Trava::UnidadePorCampo,
+                    ..
+                }
+            ),
             "{err}"
         );
     }
@@ -461,7 +483,9 @@ mod tests {
     /// TRAVA 1 aceita com contrato válido e registra a trilha.
     #[test]
     fn trava1_aceita_contrato_valido() {
-        let lock = MappingLock::novo("map-3040").contratar_unidades(&contrato_cheio()).unwrap();
+        let lock = MappingLock::novo("map-3040")
+            .contratar_unidades(&contrato_cheio())
+            .unwrap();
         assert_eq!(lock.mapping_cod(), "map-3040");
         assert_eq!(lock.historico().len(), 1);
         assert_eq!(lock.historico()[0].trava, Trava::UnidadePorCampo);
@@ -485,7 +509,13 @@ mod tests {
                 })
                 .unwrap_err();
             assert!(
-                matches!(err, LockError::EvidenciaFaltante { trava: Trava::ConservacaoZero, .. }),
+                matches!(
+                    err,
+                    LockError::EvidenciaFaltante {
+                        trava: Trava::ConservacaoZero,
+                        ..
+                    }
+                ),
                 "{err}"
             );
             assert!(err.to_string().contains("conservacao_zero"), "{err}");
@@ -525,7 +555,13 @@ mod tests {
             .assinar_amostra(&aprov, b"amostra adulterada")
             .unwrap_err();
         assert!(
-            matches!(err, LockError::EvidenciaFaltante { trava: Trava::QuatroOlhos, .. }),
+            matches!(
+                err,
+                LockError::EvidenciaFaltante {
+                    trava: Trava::QuatroOlhos,
+                    ..
+                }
+            ),
             "{err}"
         );
         assert!(err.to_string().contains("quatro_olhos"), "{err}");
@@ -577,7 +613,13 @@ mod tests {
             .custodiar_e_fechar(b"", &chain)
             .unwrap_err();
         assert!(
-            matches!(err, LockError::EvidenciaFaltante { trava: Trava::CustodiaSha256, .. }),
+            matches!(
+                err,
+                LockError::EvidenciaFaltante {
+                    trava: Trava::CustodiaSha256,
+                    ..
+                }
+            ),
             "{err}"
         );
         assert!(err.to_string().contains("custodia_sha256"), "{err}");

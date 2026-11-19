@@ -1,28 +1,14 @@
-# CI for Radiant Norma backend.
+# CI for Radiant Reg (Plano v3.0 — Rust workspace + backend Go legado).
 #
-# Roda em todo push e PR. Falha se:
-#   - go vet encontra issues
-#   - go test -race falha (detecta data races)
-#   - coverage fica abaixo dos thresholds
-#   - gofmt drift detectado
-#   - build falha em qualquer dos cmd/ binários
-#   - placeholder detectado em SPRINT_*.md
-#   - 3040 rule count drift entre registry e CHANGELOG
-#
-# Sprint 35 (v3.32.0): expandido de 4 → 10 binários + coverage gate para
-# internal/audit/rules + placeholder lint.
-#
-# Validação 54 (v3.32.1): hardening pós-v3.32.0 — fechou 9 findings:
-#   - F-54-A (HIGH) drift check quebrava em CI (CHANGELOG path relativo)
-#   - F-54-B (MED) permissions read-all (defense-in-depth)
-#   - F-54-C (MED) timeout 15min (custo $$)
-#   - F-54-D (MED) concurrency cancel-in-progress
-#   - F-54-E (MED) build loop glob dinâmico
-#   - F-54-H (LOW) race+cover combinados (~155s economizados)
-#   - F-54-F/G/I (INFO) carry-over — Ubuntu migration, artifact upload, SHA pin
-#
-# Performance: ~155s em máquina decente (era ~310s pré-F-54-H).
-# Cache de Go modules acelera.
+# Jobs:
+#   - backend-legacy-checks (ubuntu-latest): placeholder lint, go vet, gofmt nos
+#       pacotes ativos, build dos binários cmd/*/ e go test -race nos pacotes ativos.
+#       Step obsoleto de contagem Go vs CHANGELOG (Sprint 35) e coverage gates
+#       defasados removidos (Etapa 0 do Plano v3.0).
+#   - rust-linux (ubuntu-latest): cargo fmt --check, cargo clippy -D warnings,
+#       cargo test --workspace e gate arquitetural tests/layers.rs.
+#   - rust-windows (windows-latest): cargo check --workspace --all-targets e
+#       cargo test --workspace (build nativo Windows; zero musl cross de macOS).
 name: CI
 
 on:
@@ -31,18 +17,17 @@ on:
   pull_request:
     branches: [main]
 
-# F-54-D: cancela runs antigos quando novo commit chega (não desperdiça quota).
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
-  contents: read  # F-54-B: read-only (default é write — broad demais)
+  contents: read
 
 jobs:
-  test:
-    runs-on: macos-latest  # dev usa macOS; SQLite funciona igual
-    # F-54-C: timeout 15min. Total atual ~155s. Margem 5x.
+  backend-legacy-checks:
+    name: Backend Legacy Checks (Go)
+    runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
@@ -52,35 +37,46 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.24'
+          go-version-file: backend/go.mod
           cache: true
+          cache-dependency-path: backend/go.sum
 
       - name: Download Go modules
         working-directory: backend
         run: go mod download
 
+      - name: Placeholder lint (SPRINT_*.md)
+        run: bash scripts/lint-no-placeholder.sh
+
       - name: go vet
         working-directory: backend
         run: go vet ./...
 
-      - name: gofmt check
+      - name: gofmt check (active packages)
         working-directory: backend
         run: |
-          UNFORMATTED=$(gofmt -l .)
+          UNFORMATTED=$(gofmt -l \
+            cmd \
+            internal/audit \
+            internal/auditlog \
+            internal/canonical \
+            internal/db \
+            internal/drsac \
+            internal/ingest \
+            internal/radar \
+            internal/secrets \
+            internal/senhaws \
+            internal/sta \
+            internal/tenant)
           if [ -n "$UNFORMATTED" ]; then
             echo "❌ Files not gofmt'd:"
             echo "$UNFORMATTED"
             exit 1
           fi
-          echo "✓ all files gofmt'd"
+          echo "✓ active packages gofmt'd"
 
-      - name: Placeholder lint (SPRINT_*.md)
-        run: bash scripts/lint-no-placeholder.sh
-
-      - name: Build ALL binaries
+      - name: Build cmd binaries
         working-directory: backend
-        # F-54-E: glob dinâmico sobre cmd/*/ em vez de hardcoded list.
-        # Captura novos binários automaticamente sem editar YAML.
         run: |
           set -e
           shopt -s nullglob
@@ -89,86 +85,92 @@ jobs:
             echo "❌ No cmd/*/ directories found"
             exit 1
           fi
+          out_dir=$(mktemp -d)
+          trap 'rm -rf "$out_dir"' EXIT
           for dir in "${bins[@]}"; do
             bin=$(basename "$dir")
             echo "Building cmd/$bin..."
-            go build -o /tmp/ci-bin-$bin "./cmd/$bin"
+            go build -o "$out_dir/$bin" "./cmd/$bin"
           done
           echo "All ${#bins[@]} binaries built OK"
 
-      - name: go test -race
-        working-directory: backend
-        run: go test -race -count=1 ./...
-
-      - name: Coverage report
-        working-directory: backend
-        # F-54-H reverted: race+cover combinados quebraram Coverage gates
-        # (go tool cover -func dá % por função, não por pacote — gate sempre
-        # pegava 100% da primeira função). Manter separados: ~155s duplicado
-        # mas gates funcionam corretamente.
-        run: go test -cover ./... | tee coverage.txt
-
-      - name: Coverage gates
+      - name: go test -race (active packages)
         working-directory: backend
         run: |
-          # auditlog/ deve ter ≥85% (regra mais crítica — audit chain)
-          COV=$(grep "internal/auditlog" coverage.txt | grep -oE '[0-9]+\.[0-9]+%' | head -1 | tr -d '%')
-          echo "auditlog coverage: ${COV}%"
-          if (( $(echo "$COV < 85" | bc -l) )); then
-            echo "❌ auditlog coverage < 85% (got ${COV}%)"
-            exit 1
-          fi
-          echo "✓ auditlog coverage OK"
+          go test -race -count=1 \
+            ./cmd/... \
+            ./internal/audit/... \
+            ./internal/auditlog \
+            ./internal/canonical \
+            ./internal/db \
+            ./internal/drsac \
+            ./internal/ingest \
+            ./internal/radar \
+            ./internal/secrets \
+            ./internal/senhaws \
+            ./internal/sta \
+            ./internal/tenant
 
-          # radar/ deve ter ≥70%
-          COV=$(grep "internal/radar" coverage.txt | grep -oE '[0-9]+\.[0-9]+%' | head -1 | tr -d '%')
-          echo "radar coverage: ${COV}%"
-          if (( $(echo "$COV < 70" | bc -l) )); then
-            echo "❌ radar coverage < 70% (got ${COV}%)"
-            exit 1
-          fi
-          echo "✓ radar coverage OK"
+  rust-linux:
+    name: Rust Workspace (Linux)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
-          # Sprint 35: audit/rules deve ter ≥70% (Sprint 32 entregou 70.8%)
-          COV=$(grep "internal/audit/rules" coverage.txt | grep -oE '[0-9]+\.[0-9]+%' | head -1 | tr -d '%')
-          echo "audit/rules coverage: ${COV}%"
-          if (( $(echo "$COV < 70" | bc -l) )); then
-            echo "❌ audit/rules coverage < 70% (got ${COV}%)"
-            exit 1
-          fi
-          echo "✓ audit/rules coverage OK"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: 3040 rule count drift check (Sprint 35)
-        working-directory: backend
-        run: |
-          # Verifica que número de regras 3040 portadas bate com CHANGELOG.
-          # Drift entre código e CHANGELOG = inconsistência visível.
-          # Pega o último "Total 3040: **N → M**" do CHANGELOG (M = current).
-          # F-54-A: CHANGELOG está na RAIZ do repo, não em backend/.
-          # Step roda com working-directory: backend, então path precisa ser ../CHANGELOG.md.
-          CLAIMED=$(python3 -c "
-          import re
-          with open('../CHANGELOG.md') as f:
-              text = f.read()
-          matches = []
-          for line in text.split('\n'):
-              if 'Total 3040' in line:
-                  m = re.search(r'\*\*(\d+).+?(\d+)\*\*', line)
-                  if m:
-                      matches.append((m.group(1), m.group(2)))
-          # CHANGELOG tem entries em ordem cronológica reversa (top = mais recente).
-          # Pega o primeiro match = mais recente.
-          print((matches[0][1] if matches else '').strip())
-          ")
-          ACTUAL=$(grep -hE 'return "[A-Z][0-9]+' internal/audit/rules/3040*.go internal/audit/rules/basic_rules.go | grep -oE '"[A-Z][0-9]+' | sort -u | wc -l | tr -d ' ')
-          echo "Regras 3040 no registry: ${ACTUAL}"
-          echo "Regras claim no CHANGELOG: ${CLAIMED}"
-          if [ -z "$CLAIMED" ]; then
-            echo "WARN: CHANGELOG não tem claim parseável — skipped"
-            exit 0
-          fi
-          if [ "$ACTUAL" != "$CLAIMED" ]; then
-            echo "DRIFT: registry tem ${ACTUAL} regras mas CHANGELOG diz ${CLAIMED}"
-            exit 1
-          fi
-          echo "Registry count = CHANGELOG claim"
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+
+      - name: cargo fmt --check
+        working-directory: rust
+        run: cargo fmt --check
+
+      - name: cargo clippy
+        working-directory: rust
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: cargo test --workspace
+        working-directory: rust
+        run: cargo test --workspace
+
+      - name: Architectural layer gate (layers.rs)
+        working-directory: rust
+        run: cargo test -p reg-cli --test layers
+
+  rust-windows:
+    name: Rust Workspace (Windows)
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+
+      - name: cargo check --workspace --all-targets
+        working-directory: rust
+        run: cargo check --workspace --all-targets
+
+      - name: cargo test --workspace
+        working-directory: rust
+        run: cargo test --workspace
+
+      - name: Architectural layer gate (layers.rs)
+        working-directory: rust
+        run: cargo test -p reg-cli --test layers

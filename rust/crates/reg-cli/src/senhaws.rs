@@ -38,8 +38,8 @@ use zeroize::Zeroizing;
 
 use crate::secrets::ProvedorSegredos;
 use crate::sta::{
-    ler_corpo_limitado, truncar_bytes, validar_url_permitida, validar_usuario_sisbacen, xml_parsear,
-    StaError,
+    StaError, ler_corpo_limitado, truncar_bytes, validar_url_permitida, validar_usuario_sisbacen,
+    xml_parsear,
 };
 
 /// Cap de respostas do senhaws — 1 MiB (senhaws.go:339, responses minúsculas).
@@ -51,9 +51,16 @@ fn mapear_erro_sta(e: StaError) -> SenhawsError {
     match e {
         StaError::Transporte(inner) => SenhawsError::Transporte(inner),
         StaError::LeituraCorpo(inner) => SenhawsError::LeituraCorpo(inner),
-        StaError::ErroBacen { status, codigo, mensagem, .. } => {
-            SenhawsError::ErroBacen { status, codigo, mensagem }
-        }
+        StaError::ErroBacen {
+            status,
+            codigo,
+            mensagem,
+            ..
+        } => SenhawsError::ErroBacen {
+            status,
+            codigo,
+            mensagem,
+        },
         StaError::Validacao(_)
         | StaError::ContentHashMismatch { .. }
         | StaError::ContentHashHeaderMalformed { .. }
@@ -200,8 +207,8 @@ impl SenhawsClient {
             .header(reqwest::header::ACCEPT, "application/xml")
             .body(corpo.into_bytes())
             .send()?;
-        let resp_corpo =
-            ler_corpo_limitado(&mut resp, MAX_CORPO_SENHAWS_BYTES as u64).map_err(mapear_erro_sta)?;
+        let resp_corpo = ler_corpo_limitado(&mut resp, MAX_CORPO_SENHAWS_BYTES as u64)
+            .map_err(mapear_erro_sta)?;
         let status = resp.status().as_u16();
         if status != 204 {
             return Err(erro_senhaws_de_corpo(status, &resp_corpo));
@@ -214,8 +221,8 @@ impl SenhawsClient {
     pub fn consultar_vencimento(&self) -> Result<u32, SenhawsError> {
         let url = format!("{}/senha/vencimento", self.base_url);
         let mut resp = self.requisicao(reqwest::Method::GET, &url).send()?;
-        let resp_corpo =
-            ler_corpo_limitado(&mut resp, MAX_CORPO_SENHAWS_BYTES as u64).map_err(mapear_erro_sta)?;
+        let resp_corpo = ler_corpo_limitado(&mut resp, MAX_CORPO_SENHAWS_BYTES as u64)
+            .map_err(mapear_erro_sta)?;
         let status = resp.status().as_u16();
         if status != 200 {
             return Err(erro_senhaws_de_corpo(status, &resp_corpo));
@@ -310,7 +317,7 @@ fn erro_senhaws_de_corpo(status: u16, corpo: &[u8]) -> SenhawsError {
 #[allow(clippy::unwrap_used, clippy::expect_used)]
 mod tests {
     use super::*;
-    use crate::sta::tests::{base64_padrao, resposta_http, ServidorHttp};
+    use crate::sta::tests::{ServidorHttp, base64_padrao, resposta_http};
     use std::sync::Arc;
     use std::time::Duration;
 
@@ -321,7 +328,9 @@ mod tests {
     }
 
     fn xml_erro(status: u16, descricao: &str) -> String {
-        format!("<Resultado><Erro><Codigo>{status}</Codigo><Descricao>{descricao}</Descricao></Erro></Resultado>")
+        format!(
+            "<Resultado><Erro><Codigo>{status}</Codigo><Descricao>{descricao}</Descricao></Erro></Resultado>"
+        )
     }
 
     #[test]
@@ -348,7 +357,10 @@ mod tests {
 
         let corpo = String::from_utf8_lossy(&servidor.capturas()[0].corpo).into_owned();
         assert!(corpo.contains("<Senha>senha-atual</Senha>"), "{corpo}");
-        assert!(corpo.contains("<NovaSenha>new-password-12345</NovaSenha>"), "{corpo}");
+        assert!(
+            corpo.contains("<NovaSenha>new-password-12345</NovaSenha>"),
+            "{corpo}"
+        );
         assert!(
             corpo.contains("<ConfirmacaoNovaSenha>new-password-12345</ConfirmacaoNovaSenha>"),
             "{corpo}"
@@ -368,7 +380,10 @@ mod tests {
         }));
         let cliente = cliente_para(&servidor.url);
         let err = cliente.alterar_senha("weak-pwd-1").unwrap_err();
-        let SenhawsError::ErroBacen { status, mensagem, .. } = &err else {
+        let SenhawsError::ErroBacen {
+            status, mensagem, ..
+        } = &err
+        else {
             panic!("esperava ErroBacen 400, got {err:?}")
         };
         assert_eq!(*status, 400);
@@ -378,9 +393,8 @@ mod tests {
     #[test]
     fn alterar_senha_validacoes_locais_sem_rede() {
         // Port de senhaws_test.go:273 (8-128 chars, ≠ atual, não vazia).
-        let servidor = ServidorHttp::iniciar(Arc::new(|_| {
-            resposta_http(204, "No Content", &[], b"")
-        }));
+        let servidor =
+            ServidorHttp::iniciar(Arc::new(|_| resposta_http(204, "No Content", &[], b"")));
         let cliente = cliente_para(&servidor.url);
         let longa = "x".repeat(129);
         for nova in ["", "curta", longa.as_str(), "senha-atual"] {
@@ -395,7 +409,8 @@ mod tests {
             "validação local falha ANTES da rede"
         );
         // Limite inferior válido (8 chars exatos) passa a validação local:
-        let servidor_ok = ServidorHttp::iniciar(Arc::new(|_| resposta_http(204, "No Content", &[], b"")));
+        let servidor_ok =
+            ServidorHttp::iniciar(Arc::new(|_| resposta_http(204, "No Content", &[], b"")));
         cliente_para(&servidor_ok.url)
             .alterar_senha("12345678")
             .unwrap();
@@ -410,7 +425,12 @@ mod tests {
         );
         let servidor = ServidorHttp::iniciar(Arc::new(move |captura| {
             assert_eq!(captura.caminho, "/senha/vencimento");
-            resposta_http(200, "OK", &[("Content-Type", "application/xml")], xml.as_bytes())
+            resposta_http(
+                200,
+                "OK",
+                &[("Content-Type", "application/xml")],
+                xml.as_bytes(),
+            )
         }));
         let cliente = cliente_para(&servidor.url);
         assert_eq!(cliente.consultar_vencimento().unwrap(), 30);
@@ -427,34 +447,57 @@ mod tests {
                 xml_erro(400, "Usuário não autenticado").as_bytes(),
             )
         }));
-        let err = cliente_para(&servidor_400.url).consultar_vencimento().unwrap_err();
+        let err = cliente_para(&servidor_400.url)
+            .consultar_vencimento()
+            .unwrap_err();
         let SenhawsError::ErroBacen { status, .. } = &err else {
             panic!("esperava ErroBacen 400, got {err:?}")
         };
         assert_eq!(*status, 400);
         // XML válido com valor vazio (port de senhaws_test.go:433):
         let servidor_vazio = ServidorHttp::iniciar(Arc::new(|_| {
-            resposta_http(200, "OK", &[], b"<Resultado><DiasVencimentoSenha></DiasVencimentoSenha></Resultado>")
+            resposta_http(
+                200,
+                "OK",
+                &[],
+                b"<Resultado><DiasVencimentoSenha></DiasVencimentoSenha></Resultado>",
+            )
         }));
-        let err = cliente_para(&servidor_vazio.url).consultar_vencimento().unwrap_err();
+        let err = cliente_para(&servidor_vazio.url)
+            .consultar_vencimento()
+            .unwrap_err();
         let SenhawsError::RespostaInvalida { motivo } = &err else {
             panic!("esperava RespostaInvalida, got {err:?}")
         };
         assert!(motivo.contains("vazio"), "{motivo}");
         // Não-inteiro (port de senhaws_test.go:454):
         let servidor_abc = ServidorHttp::iniciar(Arc::new(|_| {
-            resposta_http(200, "OK", &[], b"<Resultado><DiasVencimentoSenha>abc</DiasVencimentoSenha></Resultado>")
+            resposta_http(
+                200,
+                "OK",
+                &[],
+                b"<Resultado><DiasVencimentoSenha>abc</DiasVencimentoSenha></Resultado>",
+            )
         }));
-        let err = cliente_para(&servidor_abc.url).consultar_vencimento().unwrap_err();
+        let err = cliente_para(&servidor_abc.url)
+            .consultar_vencimento()
+            .unwrap_err();
         let SenhawsError::RespostaInvalida { motivo } = &err else {
             panic!("esperava RespostaInvalida, got {err:?}")
         };
         assert!(motivo.contains("não é inteiro válido"), "{motivo}");
         // Negativo (port de senhaws_test.go:475):
         let servidor_neg = ServidorHttp::iniciar(Arc::new(|_| {
-            resposta_http(200, "OK", &[], b"<Resultado><DiasVencimentoSenha>-5</DiasVencimentoSenha></Resultado>")
+            resposta_http(
+                200,
+                "OK",
+                &[],
+                b"<Resultado><DiasVencimentoSenha>-5</DiasVencimentoSenha></Resultado>",
+            )
         }));
-        let err = cliente_para(&servidor_neg.url).consultar_vencimento().unwrap_err();
+        let err = cliente_para(&servidor_neg.url)
+            .consultar_vencimento()
+            .unwrap_err();
         let SenhawsError::RespostaInvalida { motivo } = &err else {
             panic!("esperava RespostaInvalida, got {err:?}")
         };
@@ -468,7 +511,9 @@ mod tests {
             let senha = gerar_senha_hex().unwrap();
             assert_eq!(senha.len(), 32);
             assert!(
-                senha.chars().all(|c| c.is_ascii_digit() || ('a'..='f').contains(&c)),
+                senha
+                    .chars()
+                    .all(|c| c.is_ascii_digit() || ('a'..='f').contains(&c)),
                 "chars não-hex em {senha:?}"
             );
             // Zeroizing<String> no retorno — a cópia é zerada no Drop.

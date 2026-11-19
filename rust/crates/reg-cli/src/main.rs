@@ -8,8 +8,10 @@
 //! backend/internal/sta/ws.go, retry.go e backend/internal/senhaws/senhaws.go;
 //! doc de módulo de `sta`/`senhaws` detalha o protocolo) e os subcomandos
 //! LOCAIS `dossier` (S5 — RC Conjunta 18/2025; doc de módulo de
-//! `dossier.rs`) e `shadow-diff` (S5 — gate de desligamento do legado; doc
-//! de módulo de `shadow.rs`). Os demais (`generate`, `xray`, `mutate`)
+//! `dossier.rs`), `shadow-diff` (S5 — gate de desligamento do legado; doc
+//! de módulo de `shadow.rs`) e `extract-catalog` (extração determinística
+//! dos `.xls` oficiais BACEN em `criticas_3040.json` e
+//! `leiaute_3040_campos.json`). Os demais (`generate`, `xray`, `mutate`)
 //! chegam nas fases seguintes.
 //!
 //! Mapeamento de exit codes do `validate` (contrato do cabeçalho):
@@ -34,8 +36,8 @@
 //! explícito (exit 2) — rede é sempre opt-out explícito. O validador oficial
 //! é processo LOCAL headless e continua funcionando sob `--offline` (doc de
 //! módulo do `reg_cadoc::validator` detalha a doutrina e a allowlist de argv).
-//! `dossier` e `shadow-diff` são 100% LOCAIS (sem rede) e funcionam sob
-//! `--offline`. Contrato deles: `dossier` usa 0 (dossiê gerado) / 1
+//! `dossier`, `shadow-diff` e `extract-catalog` são 100% LOCAIS (sem rede) e
+//! funcionam sob `--offline`. Contrato deles: `dossier` usa 0 (dossiê gerado) / 1
 //! (rejeição-transporte: mapping.toml ilegível, --out não criado/escrito) /
 //! 2 (validação-cliente: mapping.toml inválido, cadoc sem suporte no wedge
 //! V1, seed ausente/inválida, ledger indisponível) — 3 não se aplica (não há
@@ -45,8 +47,8 @@
 //! próprio gate).
 
 mod dossier;
-mod senhaws;
 mod secrets;
+mod senhaws;
 mod shadow;
 mod sta;
 
@@ -56,6 +58,9 @@ use std::process::ExitCode;
 use std::time::Duration;
 
 use clap::{Parser, Subcommand};
+use reg_cadoc::catalog_xls::{
+    CatalogError, extrair_criticas_3040, extrair_leiaute_3040, to_json_deterministico,
+};
 use reg_cadoc::validator::{BacenValidatorAdapter, JrePath, ValidationError};
 use reg_ledger::Chain;
 use sha2::Digest as _;
@@ -63,8 +68,8 @@ use zeroize::Zeroizing;
 
 use crate::dossier::{ENV_SEED_1, ENV_SEED_2};
 use crate::secrets::ProvedorEnv;
-use crate::sta::{Ambiente, RetryPolicy, SituacaoTransferencia, StaError};
 use crate::senhaws::SenhawsError;
+use crate::sta::{Ambiente, RetryPolicy, SituacaoTransferencia, StaError};
 
 /// Timeout por chamada HTTP dos subcomandos de rede — default do v1
 /// (ws.go:234-236).
@@ -152,6 +157,20 @@ enum Comando {
         /// XML emitido pelo Radiant Reg.
         #[arg(long)]
         rust: PathBuf,
+    },
+    /// Extrai catálogos canônicos do CADOC 3040 diretamente das planilhas
+    /// oficiais BACEN (.xls) para JSON determinístico (`criticas_3040.json` e
+    /// `leiaute_3040_campos.json`). 100% LOCAL — funciona sob --offline.
+    ExtractCatalog {
+        /// Planilha oficial de críticas (ex.: 3040/SCR3040_Criticas.xls).
+        #[arg(long)]
+        criticas: PathBuf,
+        /// Planilha oficial de leiaute (ex.: 3040/SCR3040_Leiaute.xls).
+        #[arg(long)]
+        leiaute: PathBuf,
+        /// Diretório de saída para `criticas_3040.json` e `leiaute_3040_campos.json`.
+        #[arg(long)]
+        out_dir: PathBuf,
     },
 }
 
@@ -336,10 +355,15 @@ fn main() -> ExitCode {
         Some(Comando::Senhaws { operacao }) => run_senhaws(cli.json, operacao),
         Some(Comando::Dossier { operacao }) => run_dossier_operacao(cli.json, operacao),
         Some(Comando::ShadowDiff { legacy, rust }) => run_shadow(cli.json, &legacy, &rust),
+        Some(Comando::ExtractCatalog {
+            criticas,
+            leiaute,
+            out_dir,
+        }) => run_extract_catalog(cli.json, &criticas, &leiaute, &out_dir),
         None => {
             eprintln!(
                 "reg-cli: esqueleto — nenhum subcomando informado (implementados: validate, \
-                 sta, senhaws, dossier, shadow-diff)"
+                 sta, senhaws, dossier, shadow-diff, extract-catalog)"
             );
             ExitCode::from(2)
         }
@@ -370,7 +394,11 @@ fn run_validate(
 ) -> ExitCode {
     // validação-cliente: CADOC sem suporte no wedge V1.
     if cadoc != "3040" {
-        erro(json, 2, format!("--cadoc {cadoc} sem suporte no wedge V1 (só 3040)"));
+        erro(
+            json,
+            2,
+            format!("--cadoc {cadoc} sem suporte no wedge V1 (só 3040)"),
+        );
         return ExitCode::from(2);
     }
 
@@ -381,7 +409,10 @@ fn run_validate(
             erro(
                 json,
                 1,
-                format!("rejeição-transporte: não foi possível ler {}: {e}", input.display()),
+                format!(
+                    "rejeição-transporte: não foi possível ler {}: {e}",
+                    input.display()
+                ),
             );
             return ExitCode::from(1);
         }
@@ -392,7 +423,10 @@ fn run_validate(
         erro(
             json,
             3,
-            format!("erro formal: XML mal-formado em {}: {motivo}", input.display()),
+            format!(
+                "erro formal: XML mal-formado em {}: {motivo}",
+                input.display()
+            ),
         );
         return ExitCode::from(3);
     }
@@ -428,7 +462,11 @@ fn run_validate(
     let (jar_dir, jre) = match (jar_dir, jre) {
         (Some(jd), Some(jr)) => (jd, jr),
         (None, None) | (None, Some(_)) | (Some(_), None) => {
-            erro(json, 2, "--chancela exige --jar-dir <dist> e --jre <java>".to_string());
+            erro(
+                json,
+                2,
+                "--chancela exige --jar-dir <dist> e --jre <java>".to_string(),
+            );
             return ExitCode::from(2);
         }
     };
@@ -475,7 +513,9 @@ fn run_validate(
             erro(
                 json,
                 3,
-                format!("erro formal BACEN: oráculo oficial rejeitou o documento (código {codigo}): {mensagem}"),
+                format!(
+                    "erro formal BACEN: oráculo oficial rejeitou o documento (código {codigo}): {mensagem}"
+                ),
             );
             ExitCode::from(3)
         }
@@ -521,23 +561,45 @@ fn falha_sta(json: bool, e: &StaError) -> ExitCode {
 }
 
 fn cliente_sta(usuario: &str, ambiente: Ambiente) -> Result<sta::StaClient, StaError> {
-    sta::StaClient::nova(ambiente.url_sta(), usuario, &ProvedorEnv, TIMEOUT_REDE, RetryPolicy::padrao())
+    sta::StaClient::nova(
+        ambiente.url_sta(),
+        usuario,
+        &ProvedorEnv,
+        TIMEOUT_REDE,
+        RetryPolicy::padrao(),
+    )
 }
 
 fn run_sta(json: bool, operacao: StaOperacao) -> ExitCode {
     match operacao {
-        StaOperacao::Enviar { cadoc, input, usuario, ambiente } => {
-            sta_enviar(json, &cadoc, &input, &usuario, ambiente)
-        }
-        StaOperacao::PosicaoUpload { protocolo, usuario, ambiente } => {
-            sta_posicao_upload(json, &protocolo, &usuario, ambiente)
-        }
-        StaOperacao::EnviarRange { protocolo, input, inicio, fim, total, usuario, ambiente } => {
-            sta_enviar_range(json, &protocolo, &input, inicio, fim, total, &usuario, ambiente)
-        }
-        StaOperacao::Baixar { protocolo, output, usuario, ambiente } => {
-            sta_baixar(json, &protocolo, &output, &usuario, ambiente)
-        }
+        StaOperacao::Enviar {
+            cadoc,
+            input,
+            usuario,
+            ambiente,
+        } => sta_enviar(json, &cadoc, &input, &usuario, ambiente),
+        StaOperacao::PosicaoUpload {
+            protocolo,
+            usuario,
+            ambiente,
+        } => sta_posicao_upload(json, &protocolo, &usuario, ambiente),
+        StaOperacao::EnviarRange {
+            protocolo,
+            input,
+            inicio,
+            fim,
+            total,
+            usuario,
+            ambiente,
+        } => sta_enviar_range(
+            json, &protocolo, &input, inicio, fim, total, &usuario, ambiente,
+        ),
+        StaOperacao::Baixar {
+            protocolo,
+            output,
+            usuario,
+            ambiente,
+        } => sta_baixar(json, &protocolo, &output, &usuario, ambiente),
         StaOperacao::Disponiveis {
             data_hora_inicio,
             identificador_documento,
@@ -554,9 +616,12 @@ fn run_sta(json: bool, operacao: StaOperacao) -> ExitCode {
             &usuario,
             ambiente,
         ),
-        StaOperacao::Situacao { protocolos, situacao, usuario, ambiente } => {
-            sta_situacao(json, protocolos, situacao, &usuario, ambiente)
-        }
+        StaOperacao::Situacao {
+            protocolos,
+            situacao,
+            usuario,
+            ambiente,
+        } => sta_situacao(json, protocolos, situacao, &usuario, ambiente),
     }
 }
 
@@ -567,14 +632,23 @@ fn ler_entrada(json: bool, input: &PathBuf) -> Result<Vec<u8>, ExitCode> {
             erro(
                 json,
                 1,
-                format!("rejeição-transporte: não foi possível ler {}: {e}", input.display()),
+                format!(
+                    "rejeição-transporte: não foi possível ler {}: {e}",
+                    input.display()
+                ),
             );
             Err(ExitCode::from(1))
         }
     }
 }
 
-fn sta_enviar(json: bool, cadoc: &str, input: &PathBuf, usuario: &str, ambiente: Ambiente) -> ExitCode {
+fn sta_enviar(
+    json: bool,
+    cadoc: &str,
+    input: &PathBuf,
+    usuario: &str,
+    ambiente: Ambiente,
+) -> ExitCode {
     let payload = match ler_entrada(json, input) {
         Ok(bytes) => bytes,
         Err(codigo) => return codigo,
@@ -596,7 +670,10 @@ fn sta_enviar(json: bool, cadoc: &str, input: &PathBuf, usuario: &str, ambiente:
                     })
                 );
             } else {
-                println!("envio aceito pelo BACEN STA — protocolo {}", envio.protocolo);
+                println!(
+                    "envio aceito pelo BACEN STA — protocolo {}",
+                    envio.protocolo
+                );
             }
             ExitCode::from(0)
         }
@@ -701,7 +778,13 @@ fn sta_enviar_range(
     }
 }
 
-fn sta_baixar(json: bool, protocolo: &str, output: &PathBuf, usuario: &str, ambiente: Ambiente) -> ExitCode {
+fn sta_baixar(
+    json: bool,
+    protocolo: &str,
+    output: &PathBuf,
+    usuario: &str,
+    ambiente: Ambiente,
+) -> ExitCode {
     let cliente = match cliente_sta(usuario, ambiente) {
         Ok(c) => c,
         Err(e) => return falha_sta(json, &e),
@@ -712,7 +795,10 @@ fn sta_baixar(json: bool, protocolo: &str, output: &PathBuf, usuario: &str, ambi
                 erro(
                     json,
                     1,
-                    format!("rejeição-transporte: não foi possível escrever {}: {e}", output.display()),
+                    format!(
+                        "rejeição-transporte: não foi possível escrever {}: {e}",
+                        output.display()
+                    ),
                 );
                 return ExitCode::from(1);
             }
@@ -775,7 +861,11 @@ fn sta_disponiveis(
     while let Some(ref url) = pagina.proxima_pagina_url {
         paginas += 1;
         if paginas > 10_000 {
-            erro(json, 2, format!("limite defensivo de {paginas} páginas excedido"));
+            erro(
+                json,
+                2,
+                format!("limite defensivo de {paginas} páginas excedido"),
+            );
             return ExitCode::from(2);
         }
         pagina = match cliente.seguir_pagina(url) {
@@ -821,7 +911,11 @@ fn sta_disponiveis(
         for a in &todos {
             println!(
                 "  {} — {} ({}) — {} — hash {}",
-                a.protocolo, a.codigo_documento, a.sistema, a.situacao_atual.como_str(), a.hash
+                a.protocolo,
+                a.codigo_documento,
+                a.sistema,
+                a.situacao_atual.como_str(),
+                a.hash
             );
         }
     }
@@ -860,7 +954,10 @@ fn sta_situacao(
                     })
                 );
             } else {
-                println!("situação alterada para {} nos protocolo(s) informado(s)", situacao.como_str());
+                println!(
+                    "situação alterada para {} nos protocolo(s) informado(s)",
+                    situacao.como_str()
+                );
             }
             ExitCode::from(0)
         }
@@ -888,27 +985,27 @@ fn falha_senhaws(json: bool, e: &SenhawsError) -> ExitCode {
     ExitCode::from(codigo)
 }
 
-fn cliente_senhaws(usuario: &str, ambiente: Ambiente) -> Result<senhaws::SenhawsClient, SenhawsError> {
+fn cliente_senhaws(
+    usuario: &str,
+    ambiente: Ambiente,
+) -> Result<senhaws::SenhawsClient, SenhawsError> {
     senhaws::SenhawsClient::nova(ambiente.url_senhaws(), usuario, &ProvedorEnv, TIMEOUT_REDE)
 }
 
 fn run_senhaws(json: bool, operacao: SenhawsOperacao) -> ExitCode {
     match operacao {
-        SenhawsOperacao::AlterarSenha { usuario, ambiente, gerar } => {
-            senhaws_alterar_senha(json, &usuario, ambiente, gerar)
-        }
+        SenhawsOperacao::AlterarSenha {
+            usuario,
+            ambiente,
+            gerar,
+        } => senhaws_alterar_senha(json, &usuario, ambiente, gerar),
         SenhawsOperacao::Vencimento { usuario, ambiente } => {
             senhaws_vencimento(json, &usuario, ambiente)
         }
     }
 }
 
-fn senhaws_alterar_senha(
-    json: bool,
-    usuario: &str,
-    ambiente: Ambiente,
-    gerar: bool,
-) -> ExitCode {
+fn senhaws_alterar_senha(json: bool, usuario: &str, ambiente: Ambiente, gerar: bool) -> ExitCode {
     // A nova senha NUNCA vem de argv (doutrina de secrets.rs: apareceria no
     // `ps` e no histórico do shell) — só da geração interna (--gerar).
     let nova: Zeroizing<String> = if gerar {
@@ -1001,9 +1098,11 @@ fn codigo_saida_dossie(e: &dossier::DossieErro) -> u8 {
 
 fn run_dossier_operacao(json: bool, operacao: DossierOperacao) -> ExitCode {
     match operacao {
-        DossierOperacao::Build { mapping, out, ledger } => {
-            run_dossier_build(json, &mapping, &out, ledger.as_deref())
-        }
+        DossierOperacao::Build {
+            mapping,
+            out,
+            ledger,
+        } => run_dossier_build(json, &mapping, &out, ledger.as_deref()),
     }
 }
 
@@ -1014,7 +1113,10 @@ fn run_dossier_build(json: bool, mapping: &Path, out: &Path, ledger: Option<&Pat
             erro(
                 json,
                 1,
-                format!("rejeição-transporte: não foi possível ler {}: {e}", mapping.display()),
+                format!(
+                    "rejeição-transporte: não foi possível ler {}: {e}",
+                    mapping.display()
+                ),
             );
             return ExitCode::from(1);
         }
@@ -1023,7 +1125,10 @@ fn run_dossier_build(json: bool, mapping: &Path, out: &Path, ledger: Option<&Pat
         erro(
             json,
             1,
-            format!("rejeição-transporte: não foi possível criar {}: {e}", out.display()),
+            format!(
+                "rejeição-transporte: não foi possível criar {}: {e}",
+                out.display()
+            ),
         );
         return ExitCode::from(1);
     }
@@ -1038,14 +1143,20 @@ fn run_dossier_build(json: bool, mapping: &Path, out: &Path, ledger: Option<&Pat
             erro(
                 json,
                 2,
-                format!("erro de ambiente: ledger {} indisponível: {e}", ledger_path.display()),
+                format!(
+                    "erro de ambiente: ledger {} indisponível: {e}",
+                    ledger_path.display()
+                ),
             );
             return ExitCode::from(2);
         }
     };
     // Seeds NUNCA em argv (aparecem no `ps`/histórico — doutrina de
     // secrets.rs): vêm de RADIANT_SECRET_DOSSIER_SEED_1/2.
-    let seeds = match (dossier::seed_do_ambiente(ENV_SEED_1), dossier::seed_do_ambiente(ENV_SEED_2)) {
+    let seeds = match (
+        dossier::seed_do_ambiente(ENV_SEED_1),
+        dossier::seed_do_ambiente(ENV_SEED_2),
+    ) {
         (Ok(s1), Ok(s2)) => (s1, s2),
         (Err(e), _) | (_, Err(e)) => {
             erro(
@@ -1074,7 +1185,10 @@ fn run_dossier_build(json: bool, mapping: &Path, out: &Path, ledger: Option<&Pat
             erro(
                 json,
                 1,
-                format!("rejeição-transporte: não foi possível escrever o dossiê em {}: {e}", out.display()),
+                format!(
+                    "rejeição-transporte: não foi possível escrever o dossiê em {}: {e}",
+                    out.display()
+                ),
             );
             return ExitCode::from(1);
         }
@@ -1120,7 +1234,10 @@ fn run_shadow(json: bool, legacy: &Path, rust_doc: &Path) -> ExitCode {
             erro(
                 json,
                 1,
-                format!("rejeição-transporte: não foi possível ler {}: {e}", legacy.display()),
+                format!(
+                    "rejeição-transporte: não foi possível ler {}: {e}",
+                    legacy.display()
+                ),
             );
             return ExitCode::from(1);
         }
@@ -1131,7 +1248,10 @@ fn run_shadow(json: bool, legacy: &Path, rust_doc: &Path) -> ExitCode {
             erro(
                 json,
                 1,
-                format!("rejeição-transporte: não foi possível ler {}: {e}", rust_doc.display()),
+                format!(
+                    "rejeição-transporte: não foi possível ler {}: {e}",
+                    rust_doc.display()
+                ),
             );
             return ExitCode::from(1);
         }
@@ -1171,6 +1291,132 @@ fn run_shadow(json: bool, legacy: &Path, rust_doc: &Path) -> ExitCode {
         );
         ExitCode::from(3)
     }
+}
+
+// ============================================================
+// extract-catalog — subcomando LOCAL (planilhas oficiais .xls → JSON)
+// ============================================================
+
+fn codigo_saida_catalogo(e: &CatalogError) -> u8 {
+    match e {
+        CatalogError::Io { .. } => 1,
+        CatalogError::Xls { .. }
+        | CatalogError::SheetAusente { .. }
+        | CatalogError::HeaderInvalido { .. }
+        | CatalogError::ValorInvalido { .. }
+        | CatalogError::Json(_) => 2,
+    }
+}
+
+fn falha_catalogo(json: bool, e: &CatalogError) -> ExitCode {
+    let codigo = codigo_saida_catalogo(e);
+    let prefixo = if codigo == 1 {
+        "rejeição-transporte"
+    } else {
+        "validação-cliente"
+    };
+    erro(json, codigo, format!("{prefixo}: {e}"));
+    ExitCode::from(codigo)
+}
+
+fn run_extract_catalog(json: bool, criticas: &Path, leiaute: &Path, out_dir: &Path) -> ExitCode {
+    let cat_criticas = match extrair_criticas_3040(criticas) {
+        Ok(c) => c,
+        Err(e) => return falha_catalogo(json, &e),
+    };
+    let cat_leiaute = match extrair_leiaute_3040(leiaute) {
+        Ok(l) => l,
+        Err(e) => return falha_catalogo(json, &e),
+    };
+    let criticas_json_str = match to_json_deterministico(&cat_criticas) {
+        Ok(s) => s,
+        Err(e) => return falha_catalogo(json, &e),
+    };
+    let leiaute_json_str = match to_json_deterministico(&cat_leiaute) {
+        Ok(s) => s,
+        Err(e) => return falha_catalogo(json, &e),
+    };
+
+    if let Err(e) = std::fs::create_dir_all(out_dir) {
+        erro(
+            json,
+            1,
+            format!(
+                "rejeição-transporte: não foi possível criar {}: {e}",
+                out_dir.display()
+            ),
+        );
+        return ExitCode::from(1);
+    }
+
+    let criticas_out = out_dir.join("criticas_3040.json");
+    if let Err(e) = std::fs::write(&criticas_out, criticas_json_str.as_bytes()) {
+        erro(
+            json,
+            1,
+            format!(
+                "rejeição-transporte: não foi possível gravar {}: {e}",
+                criticas_out.display()
+            ),
+        );
+        return ExitCode::from(1);
+    }
+
+    let leiaute_out = out_dir.join("leiaute_3040_campos.json");
+    if let Err(e) = std::fs::write(&leiaute_out, leiaute_json_str.as_bytes()) {
+        erro(
+            json,
+            1,
+            format!(
+                "rejeição-transporte: não foi possível gravar {}: {e}",
+                leiaute_out.display()
+            ),
+        );
+        return ExitCode::from(1);
+    }
+
+    if json {
+        println!(
+            "{}",
+            serde_json::json!({
+                "resultado": "aceito",
+                "criticas_json": criticas_out.display().to_string(),
+                "leiaute_json": leiaute_out.display().to_string(),
+                "criticas": {
+                    "sha256": cat_criticas.sha256,
+                    "total": cat_criticas.contagens.total,
+                    "habilitado_s": cat_criticas.contagens.habilitado_s,
+                    "habilitado_n": cat_criticas.contagens.habilitado_n,
+                },
+                "leiaute": {
+                    "sha256": cat_leiaute.sha256,
+                    "total_campos": cat_leiaute.contagens.total_campos,
+                    "total_anexos": cat_leiaute.contagens.total_anexos,
+                    "total_anexo26_itens": cat_leiaute.contagens.total_anexo26_itens,
+                    "total_historico": cat_leiaute.contagens.total_historico,
+                }
+            })
+        );
+    } else {
+        println!(
+            "extract-catalog OK: {} ({} regras: {} Habilitado=s, {} Habilitado=n; sha256 {})",
+            criticas_out.display(),
+            cat_criticas.contagens.total,
+            cat_criticas.contagens.habilitado_s,
+            cat_criticas.contagens.habilitado_n,
+            cat_criticas.sha256
+        );
+        println!(
+            "extract-catalog OK: {} ({} campos, {} anexos, {} itens Anexo 26, {} histórico; sha256 {})",
+            leiaute_out.display(),
+            cat_leiaute.contagens.total_campos,
+            cat_leiaute.contagens.total_anexos,
+            cat_leiaute.contagens.total_anexo26_itens,
+            cat_leiaute.contagens.total_historico,
+            cat_leiaute.sha256
+        );
+    }
+    ExitCode::from(0)
 }
 
 /// Pré-validação de FORMA (cliente, quick-xml 0.42):

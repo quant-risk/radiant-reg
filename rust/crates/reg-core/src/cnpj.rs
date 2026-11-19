@@ -44,7 +44,9 @@ impl CnpjIdentifier {
         if !valido {
             return Err(RegError::InvalidValue {
                 field: "cnpj".into(),
-                reason: format!("caractere inválido para formato {formato:?} (IN BCB 729/2026) em {raw:?}"),
+                reason: format!(
+                    "caractere inválido para formato {formato:?} (IN BCB 729/2026) em {raw:?}"
+                ),
             });
         }
         // DV módulo-11 verificado para o formato numérico completo. O DV do
@@ -104,11 +106,7 @@ fn dv_numerico_valido(s: &str) -> bool {
             .map(|(d, w)| usize::from(*d) * usize::from(*w))
             .sum();
         let rest = sum % 11;
-        if rest < 2 {
-            0
-        } else {
-            (11 - rest) as u8
-        }
+        if rest < 2 { 0 } else { (11 - rest) as u8 }
     };
     let d1 = calc(&[5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
     if dv[0] != d1 {

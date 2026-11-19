@@ -34,20 +34,64 @@ use super::{ColumnMapping, FieldPath, MonetaryInput};
 /// REAL e prova a cobertura (drift do leiaute quebra o teste).
 pub const MONETARY_FIELDS: &[&str] = &[
     // Substantivos genéricos do domínio (herdados da versão anterior).
-    "saldo", "valor", "limite", "parcela", "encargo", "principal", "garantia",
+    "saldo",
+    "valor",
+    "limite",
+    "parcela",
+    "encargo",
+    "principal",
+    "garantia",
     // Cli (L24) e Op (L54/L60/L64) da aba Doc3040.
-    "fat_anual", "vlr_contr", "prov_consttd", "vlr_prox_parcela",
+    "fat_anual",
+    "vlr_contr",
+    "prov_consttd",
+    "vlr_prox_parcela",
     // Venc — todos os códigos do Anexo 1 (vCOD, L69).
-    "v20", "v40", "v60", "v80", "v110", "v120", "v130", "v140", "v150", "v160", "v165",
-    "v170", "v175", "v180", "v190", "v199",
-    "v205", "v210", "v220", "v230", "v240", "v245", "v250", "v255", "v260", "v270", "v280", "v290",
-    "v310", "v320", "v330",
+    "v20",
+    "v40",
+    "v60",
+    "v80",
+    "v110",
+    "v120",
+    "v130",
+    "v140",
+    "v150",
+    "v160",
+    "v165",
+    "v170",
+    "v175",
+    "v180",
+    "v190",
+    "v199",
+    "v205",
+    "v210",
+    "v220",
+    "v230",
+    "v240",
+    "v245",
+    "v250",
+    "v255",
+    "v260",
+    "v270",
+    "v280",
+    "v290",
+    "v310",
+    "v320",
+    "v330",
     // Gar (L81/L82) e Inf (L95).
-    "vlr_orig", "vlr_data",
+    "vlr_orig",
+    "vlr_data",
     // Agregado (L105/L106/L109).
-    "vlr_saldo_tot", "vlr_saldo_vinc", "vlr_bonus_rebate",
+    "vlr_saldo_tot",
+    "vlr_saldo_vinc",
+    "vlr_bonus_rebate",
     // ContAquisicao (L118/L119) e ContInstFinRes4966 (L137-141).
-    "cst_amort", "vlr_mercado", "vlr_cont_br", "vlr_perda_acum", "vlr_justo", "rend_mes",
+    "cst_amort",
+    "vlr_mercado",
+    "vlr_cont_br",
+    "vlr_perda_acum",
+    "vlr_justo",
+    "rend_mes",
     // Perda (L161).
     "vlr_perda",
 ];
@@ -104,11 +148,16 @@ pub struct MappingDocument {
 /// enforceada aqui: coluna monetária sem `unit` → `RegError::MissingField`.
 pub fn parse_mapping_toml(raw_toml: &str) -> Result<MappingDocument, RegError> {
     const FIELD: &str = "mapping.toml";
-    let raw: RawMapping = toml::from_str(raw_toml)
-        .map_err(|e| RegError::InvalidValue { field: FIELD.into(), reason: format!("TOML inválido: {e}") })?;
+    let raw: RawMapping = toml::from_str(raw_toml).map_err(|e| RegError::InvalidValue {
+        field: FIELD.into(),
+        reason: format!("TOML inválido: {e}"),
+    })?;
 
     if raw.columns.is_empty() {
-        return Err(RegError::InvalidValue { field: FIELD.into(), reason: "nenhuma coluna mapeada".into() });
+        return Err(RegError::InvalidValue {
+            field: FIELD.into(),
+            reason: "nenhuma coluna mapeada".into(),
+        });
     }
 
     let mut columns = Vec::with_capacity(raw.columns.len());
@@ -135,8 +184,12 @@ pub fn parse_mapping_toml(raw_toml: &str) -> Result<MappingDocument, RegError> {
     }
 
     let meta = raw.meta;
-    let data_base = reg_core::period::DataBase::parse(meta.data_base.trim())
-        .map_err(|e| RegError::InvalidValue { field: format!("{FIELD}.meta.data_base"), reason: e.to_string() })?;
+    let data_base = reg_core::period::DataBase::parse(meta.data_base.trim()).map_err(|e| {
+        RegError::InvalidValue {
+            field: format!("{FIELD}.meta.data_base"),
+            reason: e.to_string(),
+        }
+    })?;
 
     Ok(MappingDocument {
         data_base,
@@ -191,7 +244,10 @@ mod tests {
     #[test]
     fn parse_valido() {
         let doc = parse_mapping_toml(VALID).unwrap();
-        assert_eq!(doc.data_base, reg_core::period::DataBase::new(2026, 6).unwrap());
+        assert_eq!(
+            doc.data_base,
+            reg_core::period::DataBase::new(2026, 6).unwrap()
+        );
         assert_eq!(doc.columns.len(), 2);
         assert_eq!(doc.columns[0].unit, Some(MonetaryUnit::Reais));
     }
@@ -269,8 +325,18 @@ mod tests {
 
         let mut cobertos = 0usize;
         for row in &rows[header_idx + 1..] {
-            let formato = row.get(col_formato).map(String::as_str).unwrap_or("").trim().to_string();
-            let attr = row.get(col_attr).map(String::as_str).unwrap_or("").trim().to_string();
+            let formato = row
+                .get(col_formato)
+                .map(String::as_str)
+                .unwrap_or("")
+                .trim()
+                .to_string();
+            let attr = row
+                .get(col_attr)
+                .map(String::as_str)
+                .unwrap_or("")
+                .trim()
+                .to_string();
             if formato != "N19,2" || attr.is_empty() {
                 continue; // Venc (L69) tem Atributo vazio — códigos v* cobertos pela lista estática
             }
@@ -282,10 +348,16 @@ mod tests {
             cobertos += 1;
         }
         // Guarda mínima: o leiaute REAL tem campos N19,2 com atributo nomeado.
-        assert!(cobertos >= 10, "leiaute inesperado: só {cobertos} N19,2 com atributo");
+        assert!(
+            cobertos >= 10,
+            "leiaute inesperado: só {cobertos} N19,2 com atributo"
+        );
         // E os códigos de Venc (Anexo 1) estão todos na trava:
         for cod in ["v110", "v130", "v205", "v330"] {
-            assert!(MONETARY_FIELDS.contains(&cod), "código de Venc {cod} fora da trava");
+            assert!(
+                MONETARY_FIELDS.contains(&cod),
+                "código de Venc {cod} fora da trava"
+            );
         }
     }
 }

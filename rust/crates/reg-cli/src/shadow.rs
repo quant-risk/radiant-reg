@@ -182,10 +182,7 @@ pub(crate) fn relatorio_humano(rel: &RelatorioShadow) -> String {
     ));
     out.push_str(&format!(
         "linhas da união: {} | equivalentes: {} | COSMETIC: {} | LEGACY_BUG: {}\n",
-        rel.total_linhas,
-        rel.equivalentes,
-        rel.categorias.cosmetic,
-        rel.categorias.legacy_bug,
+        rel.total_linhas, rel.equivalentes, rel.categorias.cosmetic, rel.categorias.legacy_bug,
     ));
     if rel.linhas.is_empty() {
         out.push_str("sem divergências classificadas\n");
@@ -247,14 +244,22 @@ fn nome_qualificado(q: quick_xml::name::QName<'_>) -> String {
 /// Coleta os atributos na ordem original com valores normalizados
 /// (`normalized_value` resolve entidades predefinidas e normaliza whitespace
 /// conforme XML 1.0 — mesmo idioma de `sta.rs::coletar_atributos`).
-fn coletar_attrs(e: &quick_xml::events::BytesStart<'_>, lado: &str) -> Result<Vec<(String, String)>, RegError> {
+fn coletar_attrs(
+    e: &quick_xml::events::BytesStart<'_>,
+    lado: &str,
+) -> Result<Vec<(String, String)>, RegError> {
     e.attributes()
         .map(|a| {
             let a = a.map_err(|err| erro_lado(lado, format!("atributo XML inválido: {err}")))?;
             let nome = a.key.0.to_string();
             let valor = a
                 .normalized_value(quick_xml::XmlVersion::Implicit1_0)
-                .map_err(|err| erro_lado(lado, format!("valor de atributo XML inválido em {nome}: {err}")))?
+                .map_err(|err| {
+                    erro_lado(
+                        lado,
+                        format!("valor de atributo XML inválido em {nome}: {err}"),
+                    )
+                })?
                 .into_owned();
             Ok((nome, valor))
         })
@@ -316,9 +321,9 @@ fn parsear_arvore(bytes: &[u8], lado: &str) -> Result<NoXml, RegError> {
                 });
             }
             Event::End(_) => {
-                let mut no = pilha
-                    .pop()
-                    .ok_or_else(|| erro_lado(lado, "fechamento sem abertura correspondente".into()))?;
+                let mut no = pilha.pop().ok_or_else(|| {
+                    erro_lado(lado, "fechamento sem abertura correspondente".into())
+                })?;
                 if pilha.is_empty() {
                     finalizar_arvore(&mut no);
                     raiz = Some(no);
@@ -428,11 +433,7 @@ struct LinhaAchatada {
 /// Renderiza o valor SEMÂNTICO da linha (o que vai no relatório para
 /// DATA_DRIFT / LEGACY_BUG / RADIANT_GAP).
 fn render_semantico(l: &LinhaAchatada) -> String {
-    let mut partes: Vec<String> = l
-        .attrs
-        .iter()
-        .map(|(k, v)| format!("@{k}={v:?}"))
-        .collect();
+    let mut partes: Vec<String> = l.attrs.iter().map(|(k, v)| format!("@{k}={v:?}")).collect();
     partes.push(format!("texto={:?}", l.texto));
     partes.join(" ")
 }
@@ -484,11 +485,7 @@ fn colapsar_whitespace(s: &str) -> String {
 
 /// Achata a árvore em `caminho[i] → linha`. O índice de ocorrência entre
 /// irmãos homônimos é SEMPRE emitido (determinístico e à prova de colisão).
-fn achatamento_rec(
-    no: &NoXml,
-    caminho: &str,
-    mapa: &mut BTreeMap<String, LinhaAchatada>,
-) {
+fn achatamento_rec(no: &NoXml, caminho: &str, mapa: &mut BTreeMap<String, LinhaAchatada>) {
     let linha = LinhaAchatada {
         // Atributo repetido: a última ocorrência vence (subset declarado).
         attrs: no.attrs.iter().cloned().collect(),
@@ -691,7 +688,8 @@ mod tests {
     /// inflado: união 4 → relatório antigo dizia 5 e 80% em vez de 75%).
     #[test]
     fn total_eh_a_uniao_quando_cosmetic_coexiste_com_drift() {
-        let legado = r#"<Doc3040><Cli><Saldo>100</Saldo><Sufixo>A</Sufixo><Obs>v1</Obs></Cli></Doc3040>"#;
+        let legado =
+            r#"<Doc3040><Cli><Saldo>100</Saldo><Sufixo>A</Sufixo><Obs>v1</Obs></Cli></Doc3040>"#;
         let rust = r#"<Doc3040><Cli><Saldo>110</Saldo><Sufixo> A </Sufixo><Novo>r4</Novo></Cli></Doc3040>"#;
         let rel = diff(legado.as_bytes(), rust.as_bytes()).unwrap();
         // União: Doc3040, Cli, Saldo (drift), Sufixo (cosmetic), Obs (legacy_bug), Novo (radiant_gap).
@@ -701,7 +699,10 @@ mod tests {
         assert_eq!(rel.categorias.radiant_gap, 1);
         // equivalentes = Doc3040 + Cli + Sufixo (cosmetic incluído) = 3.
         assert_eq!(rel.equivalentes, 3);
-        assert_eq!(rel.total_linhas, 6, "total = união (não 7 = equivalentes + cosmetic + drift + bug + gap)");
+        assert_eq!(
+            rel.total_linhas, 6,
+            "total = união (não 7 = equivalentes + cosmetic + drift + bug + gap)"
+        );
         // Honestos: (6 - 1 drift - 1 gap) / 6 = 4/6 → 6666 bps (66.66%).
         assert_eq!(rel.smer_bps, 6_666);
         assert!(!rel.gate_passa());
@@ -731,7 +732,8 @@ mod tests {
     /// documentado), mas a linha aparece no relatório.
     #[test]
     fn legacy_bug_nao_reduz_smer() {
-        let legado = r#"<Doc3040><Cli><Saldo>100</Saldo><Obs>v1 emitia obs sem fonte</Obs></Cli></Doc3040>"#;
+        let legado =
+            r#"<Doc3040><Cli><Saldo>100</Saldo><Obs>v1 emitia obs sem fonte</Obs></Cli></Doc3040>"#;
         let rust = r#"<Doc3040><Cli><Saldo>100</Saldo></Cli></Doc3040>"#;
         let rel = diff(legado.as_bytes(), rust.as_bytes()).unwrap();
         assert_eq!(rel.categorias.legacy_bug, 1);
@@ -770,11 +772,13 @@ mod tests {
         assert_eq!(rel.categorias.cosmetic, 1);
         assert_eq!(rel.smer_bps, 10_000);
         assert!(rel.gate_passa());
-        assert!(rel.linhas[0]
-            .legado
-            .as_deref()
-            .unwrap()
-            .contains("forma=empty"));
+        assert!(
+            rel.linhas[0]
+                .legado
+                .as_deref()
+                .unwrap()
+                .contains("forma=empty")
+        );
     }
 
     /// Pretty-print (whitespace inter-elemento) NÃO gera linha — subset
@@ -801,11 +805,13 @@ mod tests {
         let rel = diff(legado.as_bytes(), rust.as_bytes()).unwrap();
         assert_eq!(rel.categorias.cosmetic, 1);
         assert!(rel.linhas[0].caminho.contains("Cli[0]"));
-        assert!(rel.linhas[0]
-            .rust
-            .as_deref()
-            .unwrap()
-            .contains("comentario=\" revisado \""));
+        assert!(
+            rel.linhas[0]
+                .rust
+                .as_deref()
+                .unwrap()
+                .contains("comentario=\" revisado \"")
+        );
     }
 
     /// NBSP é DADO (não é whitespace ASCII) — divergência semântica.
@@ -883,7 +889,10 @@ mod tests {
     fn elemento_aberto_sem_fechamento_err() {
         let err = diff(b"<Doc3040>", b"<Doc3040/>").unwrap_err();
         let msg = err.to_string();
-        assert!(msg.contains("fechamento") || msg.contains("mal-formado"), "{msg}");
+        assert!(
+            msg.contains("fechamento") || msg.contains("mal-formado"),
+            "{msg}"
+        );
     }
 
     /// Documento sem elemento-raiz — erro tipado.

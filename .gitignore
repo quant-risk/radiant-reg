@@ -59,3 +59,6 @@ rust/target/
 backend/bin/
 backend/generator-server
 *.db.backup
+
+# Binarios pesados do Bacen (> 2 MB; URL + SHA-256 registrados em docs/normativos/MANIFESTO.md)
+tools/bacen/

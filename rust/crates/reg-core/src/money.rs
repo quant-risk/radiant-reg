@@ -166,11 +166,7 @@ impl Centavos {
         })?;
         let (q, r) = (raw / 10_000, raw % 10_000); // sinal de r acompanha raw
         let bump: i128 = if r.abs() >= 5_000 {
-            if raw < 0 {
-                -1
-            } else {
-                1
-            }
+            if raw < 0 { -1 } else { 1 }
         } else {
             0
         };
@@ -210,37 +206,93 @@ mod tests {
 
     #[test]
     fn parse_reais_br_e_us() {
-        assert_eq!(Centavos::parse("1.234,56", MonetaryUnit::Reais).unwrap().as_i128(), 123_456);
-        assert_eq!(Centavos::parse("1234.56", MonetaryUnit::Reais).unwrap().as_i128(), 123_456);
-        assert_eq!(Centavos::parse("123456", MonetaryUnit::Reais).unwrap().as_i128(), 12_345_600);
-        assert_eq!(Centavos::parse("1.234", MonetaryUnit::Reais).unwrap().as_i128(), 123_400);
-        assert_eq!(Centavos::parse("0,05", MonetaryUnit::Reais).unwrap().as_i128(), 5);
+        assert_eq!(
+            Centavos::parse("1.234,56", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            123_456
+        );
+        assert_eq!(
+            Centavos::parse("1234.56", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            123_456
+        );
+        assert_eq!(
+            Centavos::parse("123456", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            12_345_600
+        );
+        assert_eq!(
+            Centavos::parse("1.234", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            123_400
+        );
+        assert_eq!(
+            Centavos::parse("0,05", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            5
+        );
     }
 
     /// Contrato PINADO (doc do módulo): ponto único + 3 dígitos = milhar BR.
     /// "0.500" é milhar (R$500), não R$0,50 — BRL não tem 3 casas decimais.
     #[test]
     fn heuristica_milhar_br_pinada() {
-        assert_eq!(Centavos::parse("0.500", MonetaryUnit::Reais).unwrap().as_i128(), 50_000);
-        assert_eq!(Centavos::parse("12.340", MonetaryUnit::Reais).unwrap().as_i128(), 1_234_000);
         assert_eq!(
-            Centavos::parse("1.234.567,89", MonetaryUnit::Reais).unwrap().as_i128(),
+            Centavos::parse("0.500", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            50_000
+        );
+        assert_eq!(
+            Centavos::parse("12.340", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            1_234_000
+        );
+        assert_eq!(
+            Centavos::parse("1.234.567,89", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
             123_456_789
         );
         assert_eq!(
-            Centavos::parse("1.234.567", MonetaryUnit::Reais).unwrap().as_i128(),
+            Centavos::parse("1.234.567", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
             123_456_700
         );
     }
 
     #[test]
     fn parse_centavos_e_mil_reais() {
-        assert_eq!(Centavos::parse("123456", MonetaryUnit::Centavos).unwrap().as_i128(), 123_456);
-        assert_eq!(Centavos::parse("2", MonetaryUnit::MilReais).unwrap().as_i128(), 200_000);
-        // MilReais COM decimais (achado do revisor: antes descartava "1,5"→1 mil)
-        assert_eq!(Centavos::parse("1,5", MonetaryUnit::MilReais).unwrap().as_i128(), 150_000);
         assert_eq!(
-            Centavos::parse("1.250,75", MonetaryUnit::MilReais).unwrap().as_i128(),
+            Centavos::parse("123456", MonetaryUnit::Centavos)
+                .unwrap()
+                .as_i128(),
+            123_456
+        );
+        assert_eq!(
+            Centavos::parse("2", MonetaryUnit::MilReais)
+                .unwrap()
+                .as_i128(),
+            200_000
+        );
+        // MilReais COM decimais (achado do revisor: antes descartava "1,5"→1 mil)
+        assert_eq!(
+            Centavos::parse("1,5", MonetaryUnit::MilReais)
+                .unwrap()
+                .as_i128(),
+            150_000
+        );
+        assert_eq!(
+            Centavos::parse("1.250,75", MonetaryUnit::MilReais)
+                .unwrap()
+                .as_i128(),
             125_075_000
         );
     }
@@ -253,9 +305,24 @@ mod tests {
 
     #[test]
     fn negativos_suportados_com_sinal() {
-        assert_eq!(Centavos::parse("-100,00", MonetaryUnit::Reais).unwrap().as_i128(), -10_000);
-        assert_eq!(Centavos::parse("-123456", MonetaryUnit::Centavos).unwrap().as_i128(), -123_456);
-        assert_eq!(Centavos::parse("-1,5", MonetaryUnit::MilReais).unwrap().as_i128(), -150_000);
+        assert_eq!(
+            Centavos::parse("-100,00", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            -10_000
+        );
+        assert_eq!(
+            Centavos::parse("-123456", MonetaryUnit::Centavos)
+                .unwrap()
+                .as_i128(),
+            -123_456
+        );
+        assert_eq!(
+            Centavos::parse("-1,5", MonetaryUnit::MilReais)
+                .unwrap()
+                .as_i128(),
+            -150_000
+        );
     }
 
     #[test]
@@ -280,21 +347,46 @@ mod tests {
 
     #[test]
     fn basis_points_half_away_from_zero() {
-        assert_eq!(Centavos(1_000).mul_basis_points(10_000).unwrap().as_i128(), 1_000); // 100%
+        assert_eq!(
+            Centavos(1_000).mul_basis_points(10_000).unwrap().as_i128(),
+            1_000
+        ); // 100%
         assert_eq!(Centavos(100).mul_basis_points(5_000).unwrap().as_i128(), 50); // 50%
         assert_eq!(Centavos(1).mul_basis_points(15_000).unwrap().as_i128(), 2); // 1,5 → 2
-        assert_eq!(Centavos(105).mul_basis_points(10_000).unwrap().as_i128(), 105);
+        assert_eq!(
+            Centavos(105).mul_basis_points(10_000).unwrap().as_i128(),
+            105
+        );
         // ramos negativos (achado do revisor: cobertura ausente)
         assert_eq!(Centavos(-1).mul_basis_points(15_000).unwrap().as_i128(), -2);
-        assert_eq!(Centavos(-1_000).mul_basis_points(-10_000).unwrap().as_i128(), 1_000);
-        assert_eq!(Centavos(-150).mul_basis_points(5_000).unwrap().as_i128(), -75);
+        assert_eq!(
+            Centavos(-1_000)
+                .mul_basis_points(-10_000)
+                .unwrap()
+                .as_i128(),
+            1_000
+        );
+        assert_eq!(
+            Centavos(-150).mul_basis_points(5_000).unwrap().as_i128(),
+            -75
+        );
     }
 
     #[test]
     fn decimais_3_casas_half_up_unico() {
         // "0,999" → 99,9 centavos → 100 (uma operação, sem cascata)
-        assert_eq!(Centavos::parse("0,999", MonetaryUnit::Reais).unwrap().as_i128(), 100);
-        assert_eq!(Centavos::parse("0,994", MonetaryUnit::Reais).unwrap().as_i128(), 99);
+        assert_eq!(
+            Centavos::parse("0,999", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            100
+        );
+        assert_eq!(
+            Centavos::parse("0,994", MonetaryUnit::Reais)
+                .unwrap()
+                .as_i128(),
+            99
+        );
     }
 
     #[test]

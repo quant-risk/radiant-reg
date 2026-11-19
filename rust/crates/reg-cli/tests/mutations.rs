@@ -88,7 +88,11 @@ impl RelatorioMutation {
             );
         }
         for s in &self.sobreviventes {
-            falhas.push(format!("mutante sobrevivente: {} ({})", s.nome, descrever(&s.motivo)));
+            falhas.push(format!(
+                "mutante sobrevivente: {} ({})",
+                s.nome,
+                descrever(&s.motivo)
+            ));
         }
         if falhas.is_empty() {
             Ok(())
@@ -351,7 +355,11 @@ fn cada_mutacao_altera_exatamente_um_campo_e_eh_individual() {
         // julgamento isolado: só ela, contra o subject
         let rel = rodar_mutacoes(GOLDEN, &ParserCsv, std::slice::from_ref(m));
         assert_eq!(rel.total, 1);
-        assert_eq!(rel.mortas, 1, "mutação {} sobreviveu isolada: {rel:?}", m.nome);
+        assert_eq!(
+            rel.mortas, 1,
+            "mutação {} sobreviveu isolada: {rel:?}",
+            m.nome
+        );
     }
 }
 
@@ -368,7 +376,10 @@ fn harness_detecta_mutante_sobrevivente_e_o_nomeia() {
     let falhas = rel.exigir_score_100().expect_err("gate deve falhar");
     assert_eq!(falhas.len(), 1);
     assert!(falhas[0].contains("saldo_negativo"), "falhas: {falhas:?}");
-    assert!(falhas[0].contains("subject aceitou o mutante"), "falhas: {falhas:?}");
+    assert!(
+        falhas[0].contains("subject aceitou o mutante"),
+        "falhas: {falhas:?}"
+    );
 }
 
 #[test]

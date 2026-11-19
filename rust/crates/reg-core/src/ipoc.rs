@@ -20,7 +20,10 @@ impl Ipoc {
                 reason: format!("esperado 15..=67 caracteres, recebido {len} (regra I14)"),
             });
         }
-        if !s.chars().all(|c| c.is_ascii_digit() || c.is_ascii_uppercase() || c == '-') {
+        if !s
+            .chars()
+            .all(|c| c.is_ascii_digit() || c.is_ascii_uppercase() || c == '-')
+        {
             return Err(RegError::InvalidValue {
                 field: "ipoc".into(),
                 reason: "caractere fora de [0-9A-Z-] (regra I14)".into(),

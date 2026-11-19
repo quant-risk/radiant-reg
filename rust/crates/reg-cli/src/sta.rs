@@ -136,7 +136,9 @@ pub enum StaError {
     },
     /// SHA-256 do body não bate com X-Content-Hash — ws.go:111-114
     /// (`ErrContentHashMismatch`). NÃO é retryable (corrupção permanente).
-    #[error("STA: X-Content-Hash do BACEN não bate com SHA-256 do body (esperado={esperado}, obtido={obtido})")]
+    #[error(
+        "STA: X-Content-Hash do BACEN não bate com SHA-256 do body (esperado={esperado}, obtido={obtido})"
+    )]
     ContentHashMismatch { esperado: String, obtido: String },
     /// Header X-Content-Hash existe mas não é `SHA-256 {64-hex}` — ws.go:117-120
     /// (`ErrContentHashHeaderMalformed`). NÃO é retryable.
@@ -365,12 +367,18 @@ pub struct ArquivoDisponivel {
 pub(crate) fn validar_usuario_sisbacen(usuario: &str) -> Result<(), RegError> {
     let invalido = |motivo: String| RegError::InvalidValue {
         field: "usuario".to_string(),
-        reason: format!("formato Sisbacen exato UUUUUDDDD.operador (ou UUUUU/DDDD.operador) inválido: {motivo} (got {usuario:?})"),
+        reason: format!(
+            "formato Sisbacen exato UUUUUDDDD.operador (ou UUUUU/DDDD.operador) inválido: {motivo} (got {usuario:?})"
+        ),
     };
     let Some((prefixo, operador)) = usuario.split_once('.') else {
         return Err(invalido("sem '.' separador".to_string()));
     };
-    if operador.is_empty() || !operador.chars().all(|c| c.is_ascii_alphanumeric() || c == '_' || c == '-') {
+    if operador.is_empty()
+        || !operador
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || c == '_' || c == '-')
+    {
         return Err(invalido(format!(
             "operador deve casar com [A-Za-z0-9_-]+ (got {operador:?})"
         )));
@@ -413,7 +421,8 @@ pub(crate) fn validar_url_permitida(base_url: &str) -> Result<(), RegError> {
     if base_url.ends_with('/') {
         return Err(invalido("base_url não deve terminar com /".to_string()));
     }
-    let url = reqwest::Url::parse(base_url).map_err(|e| invalido(format!("base_url inválida: {e}")))?;
+    let url =
+        reqwest::Url::parse(base_url).map_err(|e| invalido(format!("base_url inválida: {e}")))?;
     let Some(host) = url.host_str() else {
         return Err(invalido("base_url sem host".to_string()));
     };
@@ -453,7 +462,11 @@ impl RetryPolicy {
 
     /// Port das validações de `NewRetryingClient` (retry.go:74-107):
     /// tentativas em [1, 10], jitter em [0, 10000] bp (±100%).
-    pub fn nova(max_tentativas: u32, backoff_base: Duration, jitter_bp: u32) -> Result<Self, RegError> {
+    pub fn nova(
+        max_tentativas: u32,
+        backoff_base: Duration,
+        jitter_bp: u32,
+    ) -> Result<Self, RegError> {
         if !(1..=10).contains(&max_tentativas) {
             return Err(RegError::InvalidValue {
                 field: "max_tentativas".to_string(),
@@ -478,7 +491,10 @@ impl RetryPolicy {
     /// para toda operação: sucesso retorna; erro não-retryable retorna CRU;
     /// esgotamento wrapa em `AposTentativas` (retry.go:171). Cancelamento de
     /// contexto não existe no CLI blocking — o sleep é direto.
-    pub fn executar<T>(&self, mut rotina: impl FnMut() -> Result<T, StaError>) -> Result<T, StaError> {
+    pub fn executar<T>(
+        &self,
+        mut rotina: impl FnMut() -> Result<T, StaError>,
+    ) -> Result<T, StaError> {
         let mut tentativa: u32 = 1;
         loop {
             match rotina() {
@@ -725,7 +741,10 @@ impl StaClient {
                 return Err(erro_bacen_de_corpo(status, &resp_corpo, ""));
             }
             let doc = xml_parsear(&resp_corpo)?;
-            let protocolo = doc.primeiro_texto("Resultado/Protocolo").unwrap_or("").to_string();
+            let protocolo = doc
+                .primeiro_texto("Resultado/Protocolo")
+                .unwrap_or("")
+                .to_string();
             if protocolo.is_empty() {
                 return Err(StaError::RespostaInvalida {
                     motivo: format!(
@@ -786,7 +805,10 @@ impl StaClient {
                 .unwrap_or("")
                 .to_string();
             Ok(StatusUpload {
-                protocolo: doc.primeiro_texto("Resultado/Protocolo").unwrap_or("").to_string(),
+                protocolo: doc
+                    .primeiro_texto("Resultado/Protocolo")
+                    .unwrap_or("")
+                    .to_string(),
                 ranges_recebidos: parsear_ranges(&ranges_cru),
                 ranges_recebidos_cru: ranges_cru,
                 situacao: parsear_situacao_upload(&situacao_cru),
@@ -920,9 +942,13 @@ impl StaClient {
                 field: "dataHoraInicio".to_string(),
             }));
         }
-        let mut consulta: Vec<(&str, &str)> = vec![("dataHoraInicio", opcoes.data_hora_inicio.as_str())];
+        let mut consulta: Vec<(&str, &str)> =
+            vec![("dataHoraInicio", opcoes.data_hora_inicio.as_str())];
         for (chave, valor) in [
-            ("identificadorDocumento", opcoes.identificador_documento.as_deref()),
+            (
+                "identificadorDocumento",
+                opcoes.identificador_documento.as_deref(),
+            ),
             ("sistemas", opcoes.sistemas.as_deref()),
             ("dependencia", opcoes.dependencia.as_deref()),
         ] {
@@ -1058,7 +1084,9 @@ pub(crate) fn parsear_x_content_hash(header: &str) -> Result<String, StaError> {
         )));
     };
     if !algo.trim().eq_ignore_ascii_case("SHA-256") {
-        return Err(malformado(format!("algoritmo esperado SHA-256, got {algo:?}")));
+        return Err(malformado(format!(
+            "algoritmo esperado SHA-256, got {algo:?}"
+        )));
     }
     let hash = hash.trim();
     if hash.len() != 64 {
@@ -1185,10 +1213,7 @@ impl XmlDoc {
     pub(crate) fn primeiro_texto(&self, caminho: &str) -> Option<&str> {
         self.itens.iter().find_map(|item| match item {
             ItemXml::Abertura { .. } => None,
-            ItemXml::Texto {
-                caminho: c,
-                valor,
-            } if c == caminho => Some(valor.as_str()),
+            ItemXml::Texto { caminho: c, valor } if c == caminho => Some(valor.as_str()),
             ItemXml::Texto { .. } => None,
         })
     }
@@ -1199,9 +1224,13 @@ impl XmlDoc {
             ItemXml::Abertura {
                 caminho: c,
                 atributos,
-            } if c == caminho => atributos
-                .iter()
-                .find_map(|(n, v)| if n == nome_attr { Some(v.as_str()) } else { None }),
+            } if c == caminho => atributos.iter().find_map(|(n, v)| {
+                if n == nome_attr {
+                    Some(v.as_str())
+                } else {
+                    None
+                }
+            }),
             ItemXml::Abertura { .. } | ItemXml::Texto { .. } => None,
         })
     }
@@ -1247,11 +1276,12 @@ fn registro_para_arquivo(registro: &[(String, String)]) -> Result<ArquivoDisponi
     let inteiro = |nome: &str| -> Result<i64, StaError> {
         match registro.iter().find(|(c, _)| c == nome) {
             None => Ok(0),
-            Some((_, v)) => v.trim().parse::<i64>().map_err(|_| {
-                StaError::RespostaInvalida {
+            Some((_, v)) => v
+                .trim()
+                .parse::<i64>()
+                .map_err(|_| StaError::RespostaInvalida {
                     motivo: format!("<{nome}> não é inteiro válido: {v:?}"),
-                }
-            }),
+                }),
         }
     };
     let codigo_situacao = inteiro("SituacaoAtual/Codigo")?;
@@ -1322,7 +1352,11 @@ pub(crate) fn xml_parsear(bytes: &[u8]) -> Result<XmlDoc, StaError> {
                 }
             }
             Event::Eof => break,
-            Event::CData(_) | Event::Comment(_) | Event::Decl(_) | Event::PI(_) | Event::DocType(_) => {}
+            Event::CData(_)
+            | Event::Comment(_)
+            | Event::Decl(_)
+            | Event::PI(_)
+            | Event::DocType(_) => {}
         }
     }
     Ok(doc)
@@ -1439,7 +1473,10 @@ pub(crate) mod tests {
     impl ServidorHttp {
         pub(crate) fn iniciar(tratador: Tratador) -> Self {
             let listener = TcpListener::bind("127.0.0.1:0").expect("bind mock em 127.0.0.1:0");
-            let url = format!("http://{}", listener.local_addr().expect("local_addr do mock"));
+            let url = format!(
+                "http://{}",
+                listener.local_addr().expect("local_addr do mock")
+            );
             let vivo = Arc::new(AtomicBool::new(true));
             let capturas = Arc::new(Mutex::new(Vec::new()));
             let vivo_thread = vivo.clone();
@@ -1506,13 +1543,21 @@ pub(crate) mod tests {
     /// cliente fecha (EOF). NUNCA o mock fecha primeiro — isso eliminava o
     /// race de reuso do pool do hyper (conexão morta no pool →
     /// `IncompleteMessage` flaky nos retries).
-    fn tratar_conexao(mut stream: TcpStream, tratador: &Tratador, capturas: &Mutex<Vec<CapturaRequisicao>>) {
-        let Ok(clone) = stream.try_clone() else { return };
+    fn tratar_conexao(
+        mut stream: TcpStream,
+        tratador: &Tratador,
+        capturas: &Mutex<Vec<CapturaRequisicao>>,
+    ) {
+        let Ok(clone) = stream.try_clone() else {
+            return;
+        };
         let mut reader = std::io::BufReader::new(clone);
         let mut linha = String::new();
         loop {
             linha.clear();
-            if reader.read_line(&mut linha).is_err() || linha.trim_end_matches(['\r', '\n']).is_empty() {
+            if reader.read_line(&mut linha).is_err()
+                || linha.trim_end_matches(['\r', '\n']).is_empty()
+            {
                 return; // EOF ou requisição vazia — cliente fechou.
             }
             let mut partes = linha.split_whitespace();
@@ -1585,7 +1630,8 @@ pub(crate) mod tests {
     /// base64 RFC 4648 std (com padding) — só para as asserções do header
     /// Authorization nos testes (o cliente usa `RequestBuilder::basic_auth`).
     pub(crate) fn base64_padrao(dados: &[u8]) -> String {
-        const TABELA: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        const TABELA: &[u8; 64] =
+            b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         let mut out = String::new();
         for trio in dados.chunks(3) {
             let b = [
@@ -1632,7 +1678,9 @@ pub(crate) mod tests {
     }
 
     fn xml_erro(status: u16, descricao: &str) -> String {
-        format!("<Resultado><Erro><Codigo>{status}</Codigo><Descricao>{descricao}</Descricao></Erro></Resultado>")
+        format!(
+            "<Resultado><Erro><Codigo>{status}</Codigo><Descricao>{descricao}</Descricao></Erro></Resultado>"
+        )
     }
 
     // ------------------------------------------------------------
@@ -1647,7 +1695,10 @@ pub(crate) mod tests {
                 assert_eq!(captura.cabecalho("content-type"), Some("application/xml"));
                 // Auth Basic PREEMPTIVA — presente na 1ª tentativa.
                 assert!(
-                    captura.cabecalho("authorization").unwrap_or("").starts_with("Basic "),
+                    captura
+                        .cabecalho("authorization")
+                        .unwrap_or("")
+                        .starts_with("Basic "),
                     "Authorization Basic preemptiva ausente no POST"
                 );
                 return resposta_http(
@@ -1673,7 +1724,11 @@ pub(crate) mod tests {
 
         let resultado = cliente.enviar("3040", &payload).unwrap();
 
-        assert!(resultado.aceito, "envio deveria ser aceito: {:?}", resultado);
+        assert!(
+            resultado.aceito,
+            "envio deveria ser aceito: {:?}",
+            resultado
+        );
         assert_eq!(resultado.protocolo, "123");
         assert!(resultado.rejeicao.is_none());
 
@@ -1689,12 +1744,18 @@ pub(crate) mod tests {
             corpo_post.contains("<IdentificadorDocumento>3040</IdentificadorDocumento>"),
             "{corpo_post}"
         );
-        assert!(corpo_post.contains(&format!("<Hash>{hash_esperado}</Hash>")), "{corpo_post}");
+        assert!(
+            corpo_post.contains(&format!("<Hash>{hash_esperado}</Hash>")),
+            "{corpo_post}"
+        );
         assert!(
             corpo_post.contains(&format!("<Tamanho>{}</Tamanho>", payload.len())),
             "{corpo_post}"
         );
-        assert!(corpo_post.contains("<NomeArquivo>3040.zip</NomeArquivo>"), "{corpo_post}");
+        assert!(
+            corpo_post.contains("<NomeArquivo>3040.zip</NomeArquivo>"),
+            "{corpo_post}"
+        );
         assert_eq!(capturas[1].metodo, "PUT");
         assert_eq!(capturas[1].caminho, "/arquivos/123/conteudo");
         assert_eq!(capturas[1].corpo, payload);
@@ -1735,7 +1796,11 @@ pub(crate) mod tests {
         };
         assert_eq!(field, "payload");
         assert!(reason.contains("vazia"), "{reason}");
-        assert_eq!(servidor.total_capturas(), 0, "nenhuma requisição deveria sair");
+        assert_eq!(
+            servidor.total_capturas(),
+            0,
+            "nenhuma requisição deveria sair"
+        );
     }
 
     // ------------------------------------------------------------
@@ -1754,7 +1819,10 @@ pub(crate) mod tests {
         }));
         let cliente = cliente_para(&servidor.url);
         let err = cliente.enviar("3040", b"abc").unwrap_err();
-        let StaError::ErroBacen { status, mensagem, .. } = &err else {
+        let StaError::ErroBacen {
+            status, mensagem, ..
+        } = &err
+        else {
             panic!("esperava ErroBacen, got {err:?}")
         };
         assert_eq!(*status, 400);
@@ -1790,8 +1858,16 @@ pub(crate) mod tests {
         let cliente = cliente_para(&servidor.url);
         let resultado = cliente.enviar("3040", b"XYZ").unwrap();
         assert!(resultado.aceito);
-        assert_eq!(contador.load(Ordering::SeqCst), 3, "2×503 + 1×201 = 3 tentativas do POST");
-        assert_eq!(servidor.total_capturas(), 4, "3 POSTs (retry) + 1 PUT da fase 2");
+        assert_eq!(
+            contador.load(Ordering::SeqCst),
+            3,
+            "2×503 + 1×201 = 3 tentativas do POST"
+        );
+        assert_eq!(
+            servidor.total_capturas(),
+            4,
+            "3 POSTs (retry) + 1 PUT da fase 2"
+        );
     }
 
     #[test]
@@ -1849,7 +1925,11 @@ pub(crate) mod tests {
         assert_eq!(resultado.protocolo, "456");
         let rejeicao = resultado.rejeicao.expect("rejeicao populada");
         assert_eq!(rejeicao.codigo, "UPLOAD_FAILED");
-        assert!(rejeicao.mensagem.contains("não pertence"), "{}", rejeicao.mensagem);
+        assert!(
+            rejeicao.mensagem.contains("não pertence"),
+            "{}",
+            rejeicao.mensagem
+        );
         assert_eq!(servidor.total_capturas(), 2);
     }
 
@@ -1909,7 +1989,11 @@ pub(crate) mod tests {
         };
         assert_eq!(*esperado, hash_assert);
         assert_eq!(*obtido, hex::encode(Sha256::digest(&corpo)));
-        assert_eq!(servidor.total_capturas(), 1, "hash divergente NUNCA re-tenta");
+        assert_eq!(
+            servidor.total_capturas(),
+            1,
+            "hash divergente NUNCA re-tenta"
+        );
     }
 
     #[test]
@@ -1938,7 +2022,13 @@ pub(crate) mod tests {
         }));
         let cliente = cliente_para(&servidor.url);
         let err = cliente.baixar("999").unwrap_err();
-        let StaError::ErroBacen { status, mensagem, protocolo, .. } = &err else {
+        let StaError::ErroBacen {
+            status,
+            mensagem,
+            protocolo,
+            ..
+        } = &err
+        else {
             panic!("esperava ErroBacen 410, got {err:?}")
         };
         assert_eq!(*status, 410);
@@ -1975,13 +2065,32 @@ pub(crate) mod tests {
             cliente.enviar_range("55", 0, 3, 10, b"abc").is_err(),
             "len(chunk) != fim-inicio+1"
         );
-        assert!(cliente.enviar_range("55", 0, 3, 2, b"abc").is_err(), "fim > total-1");
-        assert!(cliente.enviar_range("55", 3, 0, 10, b"abc").is_err(), "fim < inicio");
-        assert!(cliente.enviar_range("55", 0, 3, 0, b"abcd").is_err(), "total = 0");
-        assert!(cliente.enviar_range("", 0, 3, 10, b"abcd").is_err(), "protocolo vazio");
+        assert!(
+            cliente.enviar_range("55", 0, 3, 2, b"abc").is_err(),
+            "fim > total-1"
+        );
+        assert!(
+            cliente.enviar_range("55", 3, 0, 10, b"abc").is_err(),
+            "fim < inicio"
+        );
+        assert!(
+            cliente.enviar_range("55", 0, 3, 0, b"abcd").is_err(),
+            "total = 0"
+        );
+        assert!(
+            cliente.enviar_range("", 0, 3, 10, b"abcd").is_err(),
+            "protocolo vazio"
+        );
         let grande = vec![0u8; MAX_CHUNK_UPLOAD_BYTES + 1];
         assert!(
-            cliente.enviar_range("55", 0, (grande.len() - 1) as u64, grande.len() as u64, &grande)
+            cliente
+                .enviar_range(
+                    "55",
+                    0,
+                    (grande.len() - 1) as u64,
+                    grande.len() as u64,
+                    &grande
+                )
                 .is_err(),
             "chunk acima de 8 MiB"
         );
@@ -2076,7 +2185,12 @@ pub(crate) mod tests {
                     "<SituacaoAtual><Codigo>1</Codigo><Descricao>Recebido</Descricao></SituacaoAtual>",
                     "</Arquivo></Resultado>"
                 );
-                return resposta_http(200, "OK", &[("Content-Type", "application/xml")], xml.as_bytes());
+                return resposta_http(
+                    200,
+                    "OK",
+                    &[("Content-Type", "application/xml")],
+                    xml.as_bytes(),
+                );
             }
             let host = captura.cabecalho("host").unwrap_or("127.0.0.1:0");
             let proxima = format!("http://{host}/arquivos/disponiveis?pagina=2");
@@ -2094,7 +2208,12 @@ pub(crate) mod tests {
                 ),
                 proxima
             );
-            resposta_http(200, "OK", &[("Content-Type", "application/xml")], xml.as_bytes())
+            resposta_http(
+                200,
+                "OK",
+                &[("Content-Type", "application/xml")],
+                xml.as_bytes(),
+            )
         }));
         let cliente = cliente_para(&servidor.url);
         let opcoes = OpcoesDisponiveis {
@@ -2106,9 +2225,15 @@ pub(crate) mod tests {
         let pagina1 = cliente.listar_disponiveis(&opcoes).unwrap();
         assert_eq!(pagina1.arquivos.len(), 2);
         assert_eq!(pagina1.arquivos[0].protocolo, "111");
-        assert_eq!(pagina1.arquivos[0].situacao_atual, SituacaoArquivo::AReceber);
+        assert_eq!(
+            pagina1.arquivos[0].situacao_atual,
+            SituacaoArquivo::AReceber
+        );
         assert_eq!(pagina1.arquivos[0].tamanho_arquivo, 100);
-        assert_eq!(pagina1.arquivos[1].situacao_atual, SituacaoArquivo::Desconhecida);
+        assert_eq!(
+            pagina1.arquivos[1].situacao_atual,
+            SituacaoArquivo::Desconhecida
+        );
         assert!(pagina1.tem_proxima_pagina);
         // Página 2: via buscar_pagina (privada) porque o mock roda fora da
         // allowlist de produção; a pública seguir_pagina valida allowlist e
@@ -2117,13 +2242,18 @@ pub(crate) mod tests {
         let pagina2 = cliente.buscar_pagina(&url2).unwrap();
         assert_eq!(pagina2.arquivos.len(), 1);
         assert_eq!(pagina2.arquivos[0].protocolo, "888");
-        assert_eq!(pagina2.arquivos[0].situacao_atual, SituacaoArquivo::Recebido);
+        assert_eq!(
+            pagina2.arquivos[0].situacao_atual,
+            SituacaoArquivo::Recebido
+        );
         assert!(!pagina2.tem_proxima_pagina);
         assert!(pagina2.proxima_pagina_url.is_none());
         // dataHoraInicio foi como query no primeiro GET:
         let capturas = servidor.capturas();
         assert!(
-            capturas[0].caminho.contains("dataHoraInicio=2025-11-18T00%3A00%3A00.000"),
+            capturas[0]
+                .caminho
+                .contains("dataHoraInicio=2025-11-18T00%3A00%3A00.000"),
             "{}",
             capturas[0].caminho
         );
@@ -2150,7 +2280,12 @@ pub(crate) mod tests {
         }));
         let url_destino = destino.url.clone();
         let origem = ServidorHttp::iniciar(Arc::new(move |_captura| {
-            resposta_http(307, "Temporary Redirect", &[("Location", &url_destino.clone())], b"")
+            resposta_http(
+                307,
+                "Temporary Redirect",
+                &[("Location", &url_destino.clone())],
+                b"",
+            )
         }));
         let cliente = cliente_para(&origem.url);
         let opcoes = OpcoesDisponiveis {
@@ -2160,9 +2295,16 @@ pub(crate) mod tests {
             dependencia: None,
         };
         let resultado = cliente.listar_disponiveis(&opcoes);
-        assert!(resultado.is_err(), "3xx não seguido não pode parecer sucesso");
+        assert!(
+            resultado.is_err(),
+            "3xx não seguido não pode parecer sucesso"
+        );
         // O host de destino NUNCA recebeu nada — o corpo não vazou.
-        assert_eq!(destino.total_capturas(), 0, "redirect cross-host não é seguido");
+        assert_eq!(
+            destino.total_capturas(),
+            0,
+            "redirect cross-host não é seguido"
+        );
         // A origem recebeu UMA tentativa: o 3xx vira erro de status do BACEN
         // (não-retriável), então o RetryPolicy não re-tenta.
         assert_eq!(origem.total_capturas(), 1);
@@ -2214,7 +2356,10 @@ pub(crate) mod tests {
             )
             .unwrap();
         let corpo = String::from_utf8_lossy(&servidor.capturas()[0].corpo).into_owned();
-        assert!(corpo.contains("<Protocolos>111;222</Protocolos>"), "{corpo}");
+        assert!(
+            corpo.contains("<Protocolos>111;222</Protocolos>"),
+            "{corpo}"
+        );
         assert!(corpo.contains("<Situacao>REC</Situacao>"), "{corpo}");
         assert_eq!(servidor.total_capturas(), 1);
     }
@@ -2285,8 +2430,14 @@ pub(crate) mod tests {
             "https://www9.bcb.gov.br/senhaws",
             "https://www3.bcb.gov.br/senhaws",
         ] {
-            StaClient::nova(url, USUARIO_TESTE, &segredos, TIMEOUT_PADRAO, RetryPolicy::padrao())
-                .unwrap_or_else(|e| panic!("URL {url:?} da allowlist deveria construir: {e}"));
+            StaClient::nova(
+                url,
+                USUARIO_TESTE,
+                &segredos,
+                TIMEOUT_PADRAO,
+                RetryPolicy::padrao(),
+            )
+            .unwrap_or_else(|e| panic!("URL {url:?} da allowlist deveria construir: {e}"));
         }
     }
 
@@ -2350,10 +2501,16 @@ pub(crate) mod tests {
         assert_eq!(parsear_ranges("0-3"), vec![Intervalo { inicio: 0, fim: 3 }]);
         assert_eq!(
             parsear_ranges("0-3;5-8"),
-            vec![Intervalo { inicio: 0, fim: 3 }, Intervalo { inicio: 5, fim: 8 }]
+            vec![
+                Intervalo { inicio: 0, fim: 3 },
+                Intervalo { inicio: 5, fim: 8 }
+            ]
         );
         // Malformados descartados (ws_types.go:212-222):
-        assert_eq!(parsear_ranges("x-y;5-8"), vec![Intervalo { inicio: 5, fim: 8 }]);
+        assert_eq!(
+            parsear_ranges("x-y;5-8"),
+            vec![Intervalo { inicio: 5, fim: 8 }]
+        );
         assert_eq!(parsear_ranges("8-5"), Vec::new());
         assert_eq!(parsear_ranges("-3"), Vec::new());
     }
@@ -2366,17 +2523,32 @@ pub(crate) mod tests {
 
     #[test]
     fn retry_policy_validacoes() {
-        assert!(RetryPolicy::nova(0, Duration::from_secs(1), 0).is_err(), "0 tentativas");
-        assert!(RetryPolicy::nova(11, Duration::from_secs(1), 0).is_err(), "11 > 10");
-        assert!(RetryPolicy::nova(3, Duration::from_secs(1), 10_001).is_err(), "jitter > 100%");
+        assert!(
+            RetryPolicy::nova(0, Duration::from_secs(1), 0).is_err(),
+            "0 tentativas"
+        );
+        assert!(
+            RetryPolicy::nova(11, Duration::from_secs(1), 0).is_err(),
+            "11 > 10"
+        );
+        assert!(
+            RetryPolicy::nova(3, Duration::from_secs(1), 10_001).is_err(),
+            "jitter > 100%"
+        );
         assert!(RetryPolicy::nova(1, Duration::from_millis(1), 0).is_ok());
         assert!(RetryPolicy::nova(3, Duration::from_millis(1), 10_000).is_ok());
     }
 
     #[test]
     fn situacao_transferencia_parse_estrito() {
-        assert_eq!(SituacaoTransferencia::parsear("A_REC").unwrap(), SituacaoTransferencia::AReceber);
-        assert_eq!(SituacaoTransferencia::parsear("REC").unwrap(), SituacaoTransferencia::Recebido);
+        assert_eq!(
+            SituacaoTransferencia::parsear("A_REC").unwrap(),
+            SituacaoTransferencia::AReceber
+        );
+        assert_eq!(
+            SituacaoTransferencia::parsear("REC").unwrap(),
+            SituacaoTransferencia::Recebido
+        );
         // Dispatch exaustivo: valor fora do domínio é ERRO, nunca Unknown silencioso.
         assert!(SituacaoTransferencia::parsear("RECIBO").is_err());
         assert!(SituacaoTransferencia::parsear("").is_err());

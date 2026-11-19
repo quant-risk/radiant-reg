@@ -104,7 +104,8 @@ type Server struct {
 	// Sprint 46 — v3.34.27: WhiteLabel branding por tenant.
 	Branding *branding.BrandingService
 
-	// Sprint 53 — v3.34.35: AI Insights via LLM (opt-in).
+	// Sprint 53 — v3.34.35: AI Insights via LLM (aposentado na Etapa 0; mantido apenas
+	// para compatibilidade de assinatura — handlers retornam 410 Gone).
 	InsightsLLM *insights.LLMService
 
 	// Sprint 61 — v3.34.43: Webhooks outbound.
@@ -286,9 +287,9 @@ func (s *Server) Router() http.Handler {
 			// Sprint 12 (v3.5.0) — drill-down de recommendation.
 			r.Post("/recommendations/{id}/acknowledge", s.acknowledgeRecommendation)
 			r.Delete("/recommendations/{id}/acknowledge", s.unacknowledgeRecommendation)
-			// Sprint 53 (v3.34.35) — AI Insights via LLM.
+			// Sprint 53 (v3.34.35) — AI Insights via LLM (aposentado na Etapa 0 — 410 Gone).
 			r.Post("/ask", s.AskLLM)
-			r.Get("/ask/stream", s.streamAskLLM) // SSE streaming
+			r.Get("/ask/stream", s.streamAskLLM) // aposentado (410 Gone)
 			r.Get("/history", s.getInsightsHistory)
 			r.Delete("/history", s.deleteInsightsHistory)
 		})

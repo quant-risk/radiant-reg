@@ -73,7 +73,10 @@ impl ParityReport {
 
 /// Classifica um caso implementado contra a expectativa do corpus.
 /// `Ok(())` = resultado casou; `Err(())` = regressão.
-fn classifica_com_expectativa(case: &GoldenCase, resultado: Result<(), RegError>) -> Result<(), ()> {
+fn classifica_com_expectativa(
+    case: &GoldenCase,
+    resultado: Result<(), RegError>,
+) -> Result<(), ()> {
     match case.expect.as_str() {
         Some("nil") => match resultado {
             Ok(()) => Ok(()),
@@ -119,7 +122,10 @@ pub fn run_parity(cases: &[GoldenCase], registry: &[&dyn Rule]) -> ParityReport 
                     }
                     Err(()) => {
                         if case.expect.as_str().is_none()
-                            || case.expect.as_str().is_some_and(|e| e != "nil" && e != "substring")
+                            || case
+                                .expect
+                                .as_str()
+                                .is_some_and(|e| e != "nil" && e != "substring")
                         {
                             report.expect_nao_interpretadas += 1;
                         } else {
@@ -131,7 +137,10 @@ pub fn run_parity(cases: &[GoldenCase], registry: &[&dyn Rule]) -> ParityReport 
             }
             None => {
                 report.skipped_not_implemented += 1;
-                *report.skipped_by_rule.entry(case.rule_code.clone()).or_default() += 1;
+                *report
+                    .skipped_by_rule
+                    .entry(case.rule_code.clone())
+                    .or_default() += 1;
             }
         }
     }
@@ -161,7 +170,10 @@ mod tests {
             "DUM-FAIL"
         }
         fn apply(&self, _xml: &str) -> Result<(), RegError> {
-            Err(RegError::InvalidValue { field: "xml".into(), reason: "dummy".into() })
+            Err(RegError::InvalidValue {
+                field: "xml".into(),
+                reason: "dummy".into(),
+            })
         }
     }
 
@@ -192,7 +204,10 @@ mod tests {
             if xml.contains("ok") {
                 Ok(())
             } else {
-                Err(RegError::InvalidValue { field: "xml".into(), reason: "sem ok".into() })
+                Err(RegError::InvalidValue {
+                    field: "xml".into(),
+                    reason: "sem ok".into(),
+                })
             }
         }
     }

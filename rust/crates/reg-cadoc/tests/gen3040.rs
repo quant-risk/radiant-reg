@@ -7,8 +7,8 @@
 #![allow(clippy::expect_used)] // testes
 
 use reg_cadoc::gen3040::{
-    gerar, CadocCode, CliInput, ContInstFinRes4966, Doc3040Input, EstagioAloc, GeneratedDoc,
-    OpInput, Venc4966,
+    CadocCode, CliInput, ContInstFinRes4966, Doc3040Input, EstagioAloc, GeneratedDoc, OpInput,
+    Venc4966, gerar,
 };
 use reg_core::cnpj::CnpjIdentifier;
 use reg_core::error::RegError;
@@ -136,7 +136,11 @@ fn roundtrip_attrs_case_sensitive() {
 
     let root = first_start(&xml, b"Doc3040");
     let get = |attrs: &[(String, String)], k: &str| -> String {
-        attrs.iter().find(|(a, _)| a == k).map(|(_, v)| v.clone()).unwrap_or_default()
+        attrs
+            .iter()
+            .find(|(a, _)| a == k)
+            .map(|(_, v)| v.clone())
+            .unwrap_or_default()
     };
     assert_eq!(get(&root, "DtBase"), "2026-08");
     assert_eq!(get(&root, "CNPJ"), "12345678");
@@ -173,7 +177,10 @@ fn roundtrip_attrs_case_sensitive() {
 fn declaracao_xml_e_data_base_yyyy_mm() {
     let doc = gerar(&fixtures::input()).unwrap();
     let xml = String::from_utf8(doc.xml).unwrap();
-    assert!(xml.starts_with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"), "{xml}");
+    assert!(
+        xml.starts_with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"),
+        "{xml}"
+    );
     assert!(xml.contains("DtBase=\"2026-08\""), "{xml}");
     assert!(!xml.contains("2026-08-"), "DtBase nunca tem dia");
 }
@@ -191,7 +198,12 @@ fn escaping_de_atributos() {
     );
     // E o parser de referência recupera o valor original:
     let attrs = first_start(&doc.xml, b"Doc3040");
-    let nome = attrs.iter().find(|(k, _)| k == "NomeResp").unwrap().1.clone();
+    let nome = attrs
+        .iter()
+        .find(|(k, _)| k == "NomeResp")
+        .unwrap()
+        .1
+        .clone();
     assert_eq!(nome, "Ana <&> \"A\" 'B'");
 }
 
@@ -202,23 +214,31 @@ fn missing_field_nunca_default() {
     i.clientes[0].ops[0].ipoc_raw = "   ".into();
     assert_eq!(
         gerar(&i).unwrap_err(),
-        RegError::MissingField { field: "Doc3040/Cli/Op/@IPOC".to_string() }
+        RegError::MissingField {
+            field: "Doc3040/Cli/Op/@IPOC".to_string()
+        }
     );
 
     let mut i = fixtures::input();
     i.clientes[0].ops[0].vlr_contr = None;
     assert_eq!(
         gerar(&i).unwrap_err(),
-        RegError::MissingField { field: "Doc3040/Cli/Op/@VlrContr".to_string() }
+        RegError::MissingField {
+            field: "Doc3040/Cli/Op/@VlrContr".to_string()
+        }
     );
 
     // Fio desligado nº 5: TpArq/EmailResp ausentes NUNCA ganham default.
     let mut i = fixtures::input();
     i.tp_arq = String::new();
-    assert!(matches!(gerar(&i), Err(RegError::MissingField { field }) if field == "Doc3040/@TpArq"));
+    assert!(
+        matches!(gerar(&i), Err(RegError::MissingField { field }) if field == "Doc3040/@TpArq")
+    );
     let mut i = fixtures::input();
     i.email_resp = String::new();
-    assert!(matches!(gerar(&i), Err(RegError::MissingField { field }) if field.contains("EmailResp")));
+    assert!(
+        matches!(gerar(&i), Err(RegError::MissingField { field }) if field.contains("EmailResp"))
+    );
 }
 
 /// Teste 6: determinismo — mesma entrada → bytes idênticos.
@@ -269,14 +289,23 @@ fn cont_inst_fin_res4966_e_estagio() {
         pd_est1: None,
         cart_prov_min: None,
         trat_risc: None,
-        estagios: vec![EstagioAloc { motivo: Some("01".into()), dt_alocacao: fixtures::db() }],
+        estagios: vec![EstagioAloc {
+            motivo: Some("01".into()),
+            dt_alocacao: fixtures::db(),
+        }],
     });
     let doc = gerar(&i).unwrap();
     let xml = String::from_utf8(doc.xml).unwrap();
-    assert!(xml.contains("<ContInstFinRes4966 ClasAtFin=\"1\" EstInstFin=\"3\" QtdInst=\"10\""), "{xml}");
+    assert!(
+        xml.contains("<ContInstFinRes4966 ClasAtFin=\"1\" EstInstFin=\"3\" QtdInst=\"10\""),
+        "{xml}"
+    );
     assert!(xml.contains("VlrContBr=\"100000\""), "{xml}");
     assert!(xml.contains("RendMes=\"1234\""), "{xml}");
-    assert!(xml.contains("<Estagio Motivo=\"01\" DtAlocacao=\"2026-08\"/>"), "{xml}");
+    assert!(
+        xml.contains("<Estagio Motivo=\"01\" DtAlocacao=\"2026-08\"/>"),
+        "{xml}"
+    );
 }
 
 /// EstInstFin ausente → RuleNotImplemented (estado DECLARADO — nunca o
@@ -329,7 +358,10 @@ fn dia_atraso_regra_leiaute_l61() {
     i.clientes[0].ops[0].venc.v205 = Some(Centavos::parse("1", MonetaryUnit::Centavos).unwrap());
     i.clientes[0].ops[0].dias_atraso = 0;
     let e = gerar(&i).unwrap_err();
-    assert!(matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("DiaAtraso")), "{e}");
+    assert!(
+        matches!(e, RegError::InvalidValue { ref field, .. } if field.contains("DiaAtraso")),
+        "{e}"
+    );
 }
 
 /// GeneratedDoc carrega cadoc e data_base corretos; sha256 é hex de 64 chars.
