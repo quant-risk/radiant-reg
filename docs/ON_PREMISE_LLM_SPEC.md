@@ -1,3 +1,9 @@
+> [!CAUTION]
+> **DOCUMENTO DEPRECIADO / HISTÓRICO (Atualizado em 19/11/2026):** Esta especificação de 09/07/2026 refere-se ao legado Go v1 (`chi`, Python MCP, ChromaDB, Ollama com `Qwen2.5` / `Mistral-7B` / `Phi-3-mini`). Ela foi **substituída integralmente** pela arquitetura Rust v3.0 em:
+> - [`docs/blueprint/21-ENGINE-IA.md`](blueprint/21-ENGINE-IA.md) (Engine IA Dual API ZDR + Open-Weights 2026 Apache 2.0/MIT + Serving `mistral.rs`/`SGLang`/`vLLM`)
+> - [`docs/blueprint/26-SYSTEM-ONE-DECISION-MODEL.md`](blueprint/26-SYSTEM-ONE-DECISION-MODEL.md) (`System One` + `reg-s1-tabular` zero-float + `ort` INT8)
+> - O conteúdo abaixo é mantido apenas como referência histórica.
+
 # Radiant Norma — On-Premise LLM Hardware Specification
 
 **Data:** 2026-07-09

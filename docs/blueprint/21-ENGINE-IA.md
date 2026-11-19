@@ -1,370 +1,304 @@
-# 21 — ENGINE DE IA
+# 21 — ENGINE DE IA v3.0 (Arquitetura Dual API ZDR + Open-Weights 2026 & Conexão com `System 1`)
 
-> Seção do blueprint de reconstrução do Radiant Norma em Rust. Define como a IA entra no produto sem contaminar o determinismo que o vende: extração norma→regra, copiloto de validação, RAG normativo, residência de dados/LGPD, MCP, corpus sintético, fine-tuning, TCO e riscos.
-> **Data:** 2026-11-16 · **Fontes:** research/07-engine-ia.md (principal), research/04-rust-stack.md (R11 IA/MCP, R12 workspace), research/09-harness.md (challenger/solver/judge) · Preços verificados em fontes públicas em nov/2026.
+> **Versão:** 3.0 · **Data-base:** 19/11/2026 · **Status:** Arquitetura consolidada (Plano v3.0 — sem modificação de código até aprovação das etapas)
+> **Documentos irmãos:** [`26-SYSTEM-ONE-DECISION-MODEL.md`](26-SYSTEM-ONE-DECISION-MODEL.md) (`System 1` completo) · [`20-ARQUITETURA-RUST.md`](20-ARQUITETURA-RUST.md) (`System 0` & zero-float) · [`22-HARNESS-V4.md`](22-HARNESS-V4.md) (`M1–M10`) · [`25-ROADMAP-EXECUCAO.md`](25-ROADMAP-EXECUCAO.md) (Plano v3.0 Etapas 0–4)
+> **Fontes:** `research/07-engine-ia.md`, `research/04-rust-stack.md`, `research/09-harness.md`, verificação de código do workspace (`rust/` e `backend/internal/{insights,synth}/`), auditoria de licenças/hardware nov/2026 e revisão adversarial (C1–C6).
 
 ---
 
-## 0. Veredito em uma página
+## 0. Veredito Executivo & Diagnóstico do Estado Real (19/11/2026)
 
-| Função | Pick primário | Fallback / secundário | Custo |
+### Estado Atual Verificado no Repositório
+| Camada Inspecionada | Estado Real Verificado | Diagnóstico Técnico |
+|---|---|---|
+| **Workspace Rust (`rust/`)** (`reg-core`, `reg-cadoc`, `reg-ledger`, `reg-cli`) | **0% IA implementada.** Protegido por `unsafe_code = "forbid"`, `float_arithmetic = "deny"`, `float_cmp = "deny"`, `cast_precision_loss = "deny"` e `wildcard_enum_match_arm = "deny"` ([`Cargo.toml`](../../rust/Cargo.toml), vigiado por [`layers.rs`](../../rust/crates/reg-cli/tests/layers.rs)). `reg-cli` impõe `--offline=true` default ([`main.rs`](../../rust/crates/reg-cli/src/main.rs)). | Núcleo jurídico-financeiro sólido. A camada de IA deve acoplar **na borda**, nunca dentro de `reg-core/cadoc/ledger`. |
+| **Legado Go (`backend/internal/insights/` & `synth/`)** | `llm.go` (`MiniMaxChat`/`OpenAIChat`) usa `sanitizeForPrompt` que só trunca 200 chars e remove `\n\r\t`; `conversation.go` (`ResponseCache.Invalidate`) apaga cache de **todos os tenants**; `synth/weak.go` é stub (`1.0` se `XML != ""`); `judge.go` aceita caso por default em erro JSON. | **Passivo ativo de compliance LC 105 / multi-tenancy.** Aposentar/desativar imediatamente na **Etapa 0** do Plano v3.0. |
+| **Docs Jul/2026 (`ON_PREMISE_LLM_SPEC.md`, `LLM_INTEGRATION_GUIDE.md`)** | Descrevem Go 1.25 + Python MCP + ChromaDB + Ollama + `Qwen2.5`/`Mistral-7B`/`Phi-3-mini` + LLM lendo XLSX. | **Depreciados e arquivados** (marcados no topo com redirecionamento para este doc e `26`). |
+
+### Veredito de Stack IA v3.0 (Resumo em Uma Página)
+
+| Camada / Função | Pick Primário (Nov/2026) | Alternativa / Fallback | Governança / Custo |
 |---|---|---|---|
-| Extração norma→regra (draft) | **Gemini 3 Pro** ($2/$12, ctx 1M, visão nativa) | Claude Opus 4.5 ($5/$25) p/ casos duros | ~$0.30–3/candidato |
-| Crítica contra o § fonte | **Claude Sonnet 4.5** ($3/$15) | Opus 4.5 | incluído no candidato |
-| Copiloto de validação | **Claude Sonnet 4.5** + prompt caching | **GPT-5.1** ($1.25/$10) contratual | ~$0.03–0.12/validação |
-| Insights não-críticos (opt-in) | **Gemini 3 Flash** ($0.50/$3) | GPT-5.1-mini | <$0.02/insight |
-| RAG embeddings | **Qwen3-Embedding** on-prem / **Gemini Embedding 2** ($0.20/M) cloud | BGE-M3 | $0–20/mês |
-| Reranking | **BGE-Reranker-v2-M3** self-hosted | Cohere Rerank (~$2/1k buscas) | $0 (self) |
-| Vetor store + BM25 | **pgvector (HNSW) + Tantivy** (Rust-native, RRF) | Qdrant se filtragem pesada | $0 infra extra |
-| Parsing | **calamine** (XLSX, determinístico) + **Docling** (PDF) | Mistral OCR ($2/1k págs) só escaneados | $0–50/mês |
-| LLM on-prem (PII/air-gap) | **GPT-OSS-120B** em 1×H100 OCI SP ($10/h) | Qwen3-30B-A3B em 1×L40S | $2.6–7.3k/mês GPU |
-| Serving | **vLLM** (default) / **SGLang** (copiloto, RadixAttention) | llama.cpp só dev | — |
-| Agentes/conectores | **MCP spec 2026-07-28 + rmcp** (SDK oficial Rust) | — | dev time |
-| Fine-tuning | **Não** para conhecimento versionado; LoRA só estilo | Distillation se copiloto for on-prem | $5–500/run |
+| **System 1 (Decision Models)** | `reg-s1-tabular` (GBDT `i64` + `TreeSHAP`) + `ort` INT8 (`moBERTo`, `DeB3RTa`, `debertinha`) | Heurísticas léxicas + parsers `reg-core` (`--offline` nativo) | `$0`/token · zero-float na fronteira · [`26`](26-SYSTEM-ONE-DECISION-MODEL.md) |
+| **Extração Norma→Regra** | **Local:** `gpt-oss-120b` / `Qwen3.6-35B-A3B` · **Cloud ZDR:** `Gemini 3.x Pro` (visão) | `Claude Opus 4.5+` (Cloud) · `Qwen3.5-397B-A17B` (Cluster) | Two-Pass `Draft→Critic→Compile→Human` |
+| **Crítica & Copiloto Interativo** | **Local:** `Mistral Small 3.2 24B` / `Gemma 4 26B-A4B` / `gpt-oss-20b` · **Cloud ZDR:** `Claude Sonnet 4.5+` | `Qwen3.5-9B` (Mac/Edge) · `GPT-5.1+` | Single-pass sem *thinking* no chat; **3 campos `Provenance`** |
+| **Batch / Challenger Sintético (`M4`)** | **Local:** `Qwen3.5-4B` / `Gemma 4 E4B` · **Cloud:** `Gemini 3.x Flash` (Batch 50% off) | `GPT-5 mini` / `Claude Haiku 4.5+` | Somente perfis sintéticos/públicos (zero PII) |
+| **Embeddings & Reranking PT-BR** | **`BGE-M3`** (MIT, Dense+Sparse) + **`BGE-Reranker-v2-M3`** (MIT) | **`Qwen3-Embedding` / `Qwen3-Reranker`** (`0.6B/4B/8B`, Apache 2.0) | `$0` self-hosted (`ort` CPU RAM ou GPU) |
+| **RAG Store Dual-Mode** | **Single-Node:** `Tantivy` + `sqlite-vec`/HNSW · **Plataforma:** `pgvector` HNSW + `Tantivy` + RRF `i64` | Qdrant apenas se filtragem pesada | Corpus **público** separado de dados de tenant |
+| **Parsing de Fontes BCB** | **`calamine`** (XLS/XLSX determinístico, Rust) + **`Docling`** (PDF nativo) | OCR (`Mistral OCR`) apenas em PDF escaneado | **Nunca OCR para XLSX** |
+| **Serving Local** | **`mistral.rs`** (in-process Rust/CLI/Mac/Workstation) · **`SGLang`** (Copiloto `RadixAttn`) | **`vLLM`** (`XGrammar` batch) · **`llama.cpp`** (`--jinja` + KV `q8_0`) | Versão engine + SHA-256 do template Jinja pinados em CI |
+| **MCP & Agentes** | **`rmcp`** (SDK oficial Rust, spec 2026-07-28) | — | **Read-only default**, zero sampling, HITL p/ remessa STA |
+| **Política de Dados** | `TenantAiConfig` (`AirGapped` · `HybridPolicyRouter` · `CloudZdrFirst`) | Fail-closed para `RouteOnPremOnly` | **Zero texto livre com cliente na nuvem estrangeira (LC 105)** |
 
-**Princípio arquitetural em uma frase:** determinismo no engine (Rust compila e executa regras), IA na fronteira (extração, crítica, explicação, geração de teste), e verificação objetiva antes de qualquer output de LLM entrar no produto.
+**Princípio arquitetural em uma frase:** **System 0** determina a verdade legal e contábil em Rust (`forbid(unsafe)`, zero-float); **System 1** classifica, protege, sana e roteia localmente em milissegundos; **System 2** raciocina e explica na borda (Local Open-Weights ou Cloud ZDR), sempre sob verificação objetiva (`jsonschema` + `reg-core` + compilação/XSD + humano).
 
 ---
 
-## 1. Filosofia: determinismo no engine + IA na fronteira + verificação objetiva
+## 1. Arquitetura em 3 Camadas & Papel Exato por Superfície do Produto
 
-Este é o padrão consolidado do RegTech de 2026 — **Norm AI** converte regulação em "programas executáveis + agentes" (a unidade de entrega é código + suite de testes por regra, auditável — não um resumo do normativo) e a **Regnology** (relatório "The Agentic Gap") mostra que camada agêntica só funciona sobre dados e regras normalizadas. Ambos chegam à mesma conclusão: agência de IA é a borda, o motor determinístico é o núcleo.
+A arquitetura cognitiva unificada divide o produto em **System 0 (Motor Determinístico) → System 1 (Decision Models) → System 2 (LLMs Local/Cloud)** (detalhes de tipos e algoritmos `S1.1..S1.4` em [`26-SYSTEM-ONE-DECISION-MODEL.md`](26-SYSTEM-ONE-DECISION-MODEL.md)).
 
-**A vantagem estrutural do Radiant já existe:** a literatura de rejection sampling é clara — gerar N candidatos e filtrar funciona bem **quando o verificador é objetivo** (execução de código, validação de schema) e degrada para alucinação quando o único filtro é um LLM-judge. O Radiant já possui o verificador objetivo: **XSD do leiaute BACEN + engine Rust** que compila e executa a regra contra golden fixtures. Isso é o que separa *rejection sampling* de *alucinação* — concorrentes que só têm "LLM lê norma e responde" não têm essa linha de defesa.
+### Fronteira de Crates no Workspace Rust (Sem Invadir `layers.rs`)
+1. **`reg-core`, `reg-cadoc`, `reg-validate-core` (`no_fs`, `wasm32`), `reg-ledger`, `reg-sta`:** **zero dependências de IA/ML**, zero floats, 100% determinísticos.
+2. **`reg-s1-tabular`:** árvores GBDT (`LightGBM`/`CatBoost`), calibradores isotônicos, priors cold-start e `TreeSHAP` compilados para **ponto fixo `i64` puro** — zero float, compatível com `--no-default-features` e compilável para `wasm32-unknown-unknown` no navegador.
+3. **`reg-ai` (camada de borda):** implementa `TenantAiConfig`, `DataPolicy`, `LlmTransport`, `EmbeddingPort`, `RerankPort`, `PiiAllowlistMasker`, `Tantivy`/`pgvector` RRF inteiro e `rmcp` — importa apenas `reg-core` e `reg-s1-tabular`.
+4. **`reg-ai-runtime` (folha isolada atrás de `--features ai-onnx` / `--features ai-local-llm` ou sidecar UDS):** único ponto com `#[allow(clippy::float_arithmetic)]` para tensores `f32` de `ort` (ONNX Runtime INT8) e opcional `mistral.rs`; exporta para fora apenas `ScoreBps(u16)`, `i32` e `Vec<i16>` (`Q15`).
 
-Regras do jogo (não negociáveis):
+### Papel Permitido vs. Proibições Absolutas por Superfície
 
-1. **Nenhum output de LLM entra no produto sem verificação objetiva** — `jsonschema` (crate Rust, Draft 2020-12) valida o JSON candidato; o engine compila e roda a regra contra XSD + fixtures; o humano aprova o que é crítico. JSON válido ≠ semântica correta: a validação de valores é sempre necessária.
-2. **IA onde o juízo é difuso** (interpretar texto de norma, explicar violação, gerar caso de teste, criticar candidato); **determinismo onde a resposta existe** (executar regra, validar XSD, transmitir ao STA).
-3. **Provenance obrigatória** — toda explicação, toda regra e todo insight cita a fonte (regra do catálogo + § do normativo). Sem citação, não sai.
-4. **Regras são dados, não pesos** — conhecimento regulatório vive no catálogo versionado (Postgres) e no RAG, nunca em fine-tune (ver §8).
-5. **Agente livre em reporting regulatório = risco de auditoria** — workflow graph com nós de verificação, nunca loop aberto (ver §6).
-
----
-
-## 2. Pipeline EXTRAÇÃO NORMA→REGRA (o gargalo atual é manual)
-
-Hoje o catálogo de **~1.099 regras** foi montado à mão: ~8h de trabalho por resolução grande, lendo norma + planilha de leiaute e transcrevendo para regras. Este pipeline é o maior alavancador de custo do produto: IA pré-extrai ~80% com confiança verificada, humano confirma em ~20min/doc.
-
-```
- Normativo (DOU / Carta Circular, PDF)          Leiaute (XLSX do BCB)
-         │                                              │
-         ▼                                              ▼
-   Docling (layout+tabelas,                     calamine (Rust, célula-a-célula,
-   markdown hierárquico com §)                  determinístico — NUNCA OCR)
-         │                                              │
-         └──────────────────┬───────────────────────────┘
-                            ▼
- ┌─ DRAFT ─────────────────────────────────────────────────────────┐
- │ Gemini 3 Pro (visão nativa, ctx 1M, $2/$12) lê resolução +      │
- │ planilha JUNTOS; rejection sampling n=3, temp 0.2; output       │
- │ JSON schema-constrained (id, classe, ator, condição, evento,    │
- │ limite, fonte §, vigência)                                      │
- └───────────────────────────┬─────────────────────────────────────┘
-                             ▼
- ┌─ CRITIC ────────────────────────────────────────────────────────┐
- │ Claude Sonnet 4.5 critica candidato vs § fonte: diff §-a-§,     │
- │ aloca/rejeita evidência, score de confiança por campo           │
- └───────────────────────────┬─────────────────────────────────────┘
-                             ▼
- ┌─ TEST (verificação objetiva) ───────────────────────────────────┐
- │ Engine Rust compila a regra e roda contra golden fixtures       │
- │ (CADOCs reais + XSD do leiaute) — passa ou reprova, sem juízo   │
- └───────────────────────────┬─────────────────────────────────────┘
-                             ▼
- ┌─ HUMAN ─────────────────────────────────────────────────────────┐
- │ Fila de aprovação em UI de diff (§ da norma ↔ JSON da regra);   │
- │ aprova → catálogo versionado (Postgres)                         │
- └───────────────────────────┬─────────────────────────────────────┘
-                             ▼
-   RADAR: hash por § detecta mudança → re-dispara o pipeline
-   só nos § alterados (delta), com regras afetadas sinalizadas
-```
-
-**Custo:** ~$0.30–3 por candidato (draft + critic + test) — ordem de grandeza abaixo das ~8h manuais que substitui. A revisão humana deixa de ser transcrição e passa a ser confirmação (~20min/doc).
-
-**Parsing — regra de ouro:**
-
-| Entrada | Ferramenta | Por quê |
+| Superfície do Produto | O Que a IA (`S1` + `S2`) Faz | O Que É Expressamente Proibido (Exclusivo `System 0`) |
 |---|---|---|
-| XLSX/XLS de leiaute | **calamine 0.38** (Rust) | Determinístico, célula-a-célula, headers mesclados resolvidos por regra. **Nunca OCR** — OCR erra merged cells (o melhor do setor, Reducto, faz 90.2%); o LLM só interpreta o JSON já estruturado |
-| PDF nativo (cartas, resoluções) | **Docling** | Melhor recuperação de layout/tabelas gratuita (94–96% estrutural); markdown com § e tabelas preservados |
-| PDF escaneado (raro) | **Mistral OCR** ($2/1k págs) | Só quando não há camada de texto |
-
-**Taxonomia de regras em 5 classes** (alinhada a LegalRuleML/deôntica derrotável — a extração aponta a classe, o engine sabe como executar cada uma):
-
-| Classe | Exemplo CADOC | Execução |
-|---|---|---|
-| 1. Estrutural | campo existe, tamanho, tipo, obrigatoriedade | XSD/leiaute — determinístico |
-| 2. Deôntica | "obrigatório se X", limite, proibição | motor de regras Rust compilada |
-| 3. Cross-doc | consistência entre CADOCs / quadro↔quadro | motor + join de dados |
-| 4. Temporal | vigência, base de cálculo por data, backporting | motor + timeline versionada |
-| 5. Interpretativa | "preencher quando aplicável", julgamento | IA sugere, humano decide |
-
-O catálogo manual atual é majoritariamente classes 1–2; **as classes 3–4 são o diferencial competitivo** e o maior ganho da extração automática — é trabalho que não escala à mão.
+| **1. Ingestão & Geração (`calamine`, `ingest/mapping.rs`, `gen3040`)** | `S1.1` pré-preenche `mapping.toml.draft` (`Proposal<MappingDraft>`) com `ScoreBps` calibrado e sugestão de `MonetaryUnit`/`Transform`. Faixa cinzenta escala ao `S2` enviando **somente** headers higienizados + estatísticas sintéticas de formato. | **Nunca** contorna as 4 travas de [`mapping_locks.rs`](../../rust/crates/reg-ledger/src/mapping_locks.rs) (`UnidadePorCampo`, `ConservacaoZero`, `QuatroOlhos`, `CustodiaSha256`), **nunca** gera XML bruto e **nunca** imputa no chute `@EstInstFin` (Anexo 41), `@ClassOp`, `@Mod` ou `@NatuOp`. |
+| **2. Validação & Copiloto (`reg-validate-core`, WASM, SSE)** | `S1.4` resolve dúvidas simples via lookup `RuleSpec` (`Tier 0`, `<5 ms`, `$0`). Dúvidas contextuais usam RAG híbrido + `S2` gerando explicações e cards `FixSuggestion` (1-clique humano) com **3 campos de `Provenance`** + Output Guardrail. | **Nunca** calcula saldo, PDD ou DV; **nunca** altera/suprime veredito `E/A/I` de L1–L4; do **WASM no browser** só envia `{cadoc, catalog_version, rule_code, field_path, error_class}` — zero XML ou dados de tomador sobem para IA cloud. |
+| **3. Pré-Envio & STA (`BacenValidatorAdapter`, `reg-sta`, `senhaws`)** | `S1.3` audita estatisticamente os agregados já gerados para detectar erros silenciosos que passam no `.jar` (escala `1000×` Reais vs MilReais, queda abrupta de PDD, salto anômalo de atraso), emitindo `SanityReviewAdvisory` ou `SanityHoldGate` com justificativa gravada no `reg-ledger`. | **Zero IA** no `.jar` BCB (ADR-0018), no SHA-256 de `*_VALIDADO.zip`, no transporte HTTP/Basic do STA ou no `senhaws`. Submissão ao STA é sempre confirmação humana explícita (HITL). |
+| **4. Radar Normativo (`norma-radar` & Norma→Regra)** | Crawler allowlisted (`*.bcb.gov.br`, `*.in.gov.br`, `*.cvm.gov.br`) com SHA-256 + magic bytes + `calamine` diff (XLS) + `Docling` (PDF). `S1` filtra boilerplate; `S2` (Two-Pass `Draft→Critic`) propõe `RuleSpec` + fixtures testados no motor Rust antes do PR humano. | **Nunca** lê planilhas XLS com OCR/LLM; **nunca** promove regra em produção sem compilação + golden fixtures + aprovação humana; trata todo conteúdo externo sob *spotlighting*. |
+| **5. Governança RC 18/2025 & Harness (`M1–M10`)** | `S1.2` higieniza retornos STA/CRD (`Canary FNR == 0%`) antes de `M1/M2/M7`; `M4` Challenger gera perfis sintéticos executados pelo `Solver` Rust + `Judge`; `M7` agrupa falhas via embeddings (`>=8 obs`, `>=2 tenants`); `M8` recalibra apenas submodelos `S1` sob gates `M6`. `S1AuditRecord` zero-float entra no `reg-ledger`. | **Nunca** usa fine-tuning para armazenar leis/regras (regras são dados versionados com `Vigencia`), **nunca** publica score placebo no `dossie.html`, e **nunca** compartilha caches ou índices vetoriais com dados entre tenants. |
 
 ---
 
-## 3. COPILOTO DE VALIDAÇÃO
+## 2. Pipeline Extração Norma→Regra (Assíncrono / Two-Pass)
 
-Explicação campo-a-campo das violações dentro do fluxo de validação (opt-in por tenant; o veredito continua sendo 100% do engine).
+Converte o gargalo manual (~8h por resolução grande) em fluxo auditável assistido (~20 min de confirmação humana sobre diff compilado e testado):
 
-| Papel | Modelo | Nota |
-|---|---|---|
-| Default de explicação | **Claude Sonnet 4.5** ($3/$15, cache read $0.30) | **Prompt caching ligado por default**: o contexto de regras (~25k tokens) é estável e reusado — cache hit ~80% derruba o custo efetivo ~10× |
-| Alternativa contratual | **GPT-5.1** ($1.25/$10, batch 50% off) | Router mantém as duas vivas; troca em 1 dia se preço/qualidade mudarem |
-| Insights não-críticos | **Gemini 3 Flash** ($0.50/$3) | Agregações, tendências, resumos — nunca veredito |
-
-**Custo:** ~$0.03–0.12 por validação com copiloto (premissas: LLM em ~10% dos eventos, ~1.500 tokens de saída, cache hit 80%).
-
-**Sanitização PII obrigatória quando há dado de cliente:** pipeline de sanitização on-prem (NER por regex + modelo leve: CPF/CNPJ/nome/agência/conta) roda **antes** de qualquer chamada frontier. A IA frontier vê regra + estrutura + valores mascarados — não precisa de PII para explicar uma violação. Dado público (normativo BACEN) segue direto; dado de cliente sanitizado; dado que não pode sair → rota on-prem (ver §5).
-
-**Explainability campo-a-campo com provenance obrigatória:** cada explicação cita (a) a regra do catálogo com versão, (b) o § do normativo que a originou, (c) o valor do campo e a condição violada. Sem os três, a explicação não é renderizada. Isso transforma o copiloto de "chat sobre erro" em **evidência auditável** — o deliverable que compliance de banco aceita.
-
----
-
-## 4. RAG NORMATIVO
-
-Consulta recorrente de norma/regra durante validação (3 consultas por validação em média). Long-context como banco de dados está descartado: custo de contexto armazenado ($0.50–4.50/Mtok/h no Gemini) e degradação em multi-shot needle tornam RAG mais barato e mais preciso.
-
-```
- Query ("regra de preenchimento do campo 109 do CADOC 4010")
-   ├── BM25 — Tantivy (Rust-native): ids exatos, números de campo, siglas
-   ├── Dense — Qwen3-Embedding (on-prem) ou Gemini Embedding 2 (cloud)
-   ├── Fusão RRF (reciprocal rank fusion) → top 50
-   └── Rerank BGE-Reranker-v2-M3 (self-hosted) → top 8 → LLM/engine
+```text
+ Normativo (DOU / IN / CC — PDF)                 Leiaute Oficial (XLS/XLSX BCB)
+         │                                                      │
+         ▼                                                      ▼
+   Docling (layout + tabelas, §)                       calamine (Rust determinístico — NUNCA OCR)
+         └──────────────────────────┬───────────────────────────┘
+                                    ▼
+ ┌─ PASS 1 (REASONING / DRAFT) ────────────────────────────────────────────────────┐
+ │ Local (`gpt-oss-120b` / `Qwen3.6-35B-A3B`) ou Cloud ZDR (`Gemini 3.x Pro`)       │
+ │ Analisa § + JSON `calamine` juntos no canal de raciocínio isolado (n=3, temp 0.2)│
+ └──────────────────────────────────┬──────────────────────────────────────────────┘
+                                    ▼
+ ┌─ PASS 2 (CRITIC & SERIALIZAÇÃO PORTÁTIL) ───────────────────────────────────────┐
+ │ Critica §-a-§ (Local ou `Claude Sonnet 4.5+`) → serializa c/ `ThinkingPolicy::   │
+ │ Disabled` + `json_schema` portátil (decimais/datas/CNPJs sempre como `string`)   │
+ └──────────────────────────────────┬──────────────────────────────────────────────┘
+                                    ▼
+ ┌─ TEST (VERIFICAÇÃO OBJETIVA EM `System 0`) ─────────────────────────────────────┐
+ │ Validação `jsonschema` Draft 2020-12 + parse `reg-core` + compilação Rust       │
+ │ contra XSD/golden fixtures e `.jar` BCB — passa ou falha sem juízo subjetivo    │
+ └──────────────────────────────────┬──────────────────────────────────────────────┘
+                                    ▼
+ ┌─ HUMAN PR & RADAR DELTA ────────────────────────────────────────────────────────┐
+ │ UI de diff (§ da norma ↔ `RuleSpec` + testes) → catálogo versionado c/ `Vigencia`│
+ └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Stack:** **pgvector com índice HNSW** (zero infra nova — já teremos Postgres; crate `pgvector` com feature `sqlx`) + **Tantivy para BM25** — é Rust, casa com o motor e evita um serviço extra tipo Qdrant. LanceDB é plano B se um dia quisermos tudo embedded; Qdrant só se filtragem por payload virar complexa.
-
-**Por que dense-only falha aqui:** "campo 109", "CADOC 3050", "doc 3044" são identificadores exatos — tokens raros que embeddings não ranqueiam bem (o dense acha textos *parecidos*, não o documento *citado*). BM25 resolve exatamente isso; o consenso de 2026 é que híbrido é obrigatório em domínio com siglas e numeradores. A fusão RRF combina os dois rankings sem tuning de pesos.
-
-**Ingestão e chunking:** por § com overlap semântico; tabelas de leiaute viram **"cartões de campo"** (1 doc estruturado por campo CADOC: nome, tipo, tamanho, domínio, regras associadas), embedados individualmente; fórmulas viram texto canônico + fonte.
-
-**Embeddings:**
-
-| Opção | Custo | Quando |
-|---|---|---|
-| **Qwen3-Embedding (0.6B/4B)** self-host | $0 (GPU pequena/CPU) | on-prem default; top open multilingue |
-| **Gemini Embedding 2** | $0.20/M ($0.10 batch) | se o RAG ficar em cloud |
-
-**Eval:** RAGAS (faithfulness, context precision/recall) rodando em CI (DeepEval/pytest + promptfoo para regressão de prompt) contra **golden set de 200 perguntas** curtadas por compliance no bootstrap do catálogo. Retrieval sem eval é fé.
-
-**Atualização incremental via Radar:** ingestão grava **hash por §**; BACEN publica → diff de § → re-embed só do delta (segundos, **<$1 por documento alterado**) → regras afetadas recebem flag "normativo mudou — regra desatualizada?" → dispara o pipeline da §2 sobre o delta. O RAG envelhece em dias, não em trimestres.
+### Taxonomia de 5 Classes (LegalRuleML)
+1. **Estrutural:** obrigatoriedade, tipo, tamanho (XSD / leiaute determinístico).
+2. **Deôntica:** proibições, limites, obrigações condicionais (motor Rust compilado).
+3. **Cross-Doc (L3):** consistência `3040 ↔ 3050 ↔ 2030 ↔ 4111` sobre `&DocSet`.
+4. **Temporal:** vigência retroativa/futura, arredondamento por leiaute.
+5. **Interpretativa:** enquadramento aberto ("quando aplicável") — IA sugere evidência, humano decide.
 
 ---
 
-## 5. RESIDÊNCIA DE DADOS / LGPD
+## 3. Copiloto de Validação, Output Guardrail & Protocolo Zero-PII Pós-WASM
 
-**Fato de mercado (nov/2026): nenhum provedor frontier tem residência de dados no Brasil.** OpenAI: EU/US/CA/JP/KR/SG/IN/AU/UAE. Anthropic e Vertex: US/EU. O Google Cloud anunciou servidores Blackwell em São Paulo (out/2026), mas isso é residência física de infra — não residência contratual de dados de API de IA. Base legal: ANPD Resolução CD/ANPD nº 29/2024 (transferência internacional, em vigor desde ago/2025; multas até R$50M).
-
-**Padrão: hybrid cloud**, com três condições (as três, sempre):
-
-1. **Sanitizador PII antes do envio** — NER on-prem (CPF/CNPJ/nome/conta) no caminho de toda chamada frontier com dado de cliente (§3).
-2. **Contrato + ZDR + DPA** — tiers de API com zero-data-retention (OpenAI/Anthropic/Gemini oferecem), DPA com cláusula padrão ANPD, opt-out de treino (default nas APIs).
-3. **Router por classificação de dados** — normativo BACEN (público) → frontier sem restrição; dado de cliente sanitizado → frontier com ZDR; dado que não pode sair → rota on-prem. Feature flag por cliente (alguns IFs exigirão 100% on-prem).
-
-**Opção air-gapped (para o cliente que exige never-leave):**
-
-| Componente | Escolha | Por quê |
-|---|---|---|
-| Modelo | **GPT-OSS-120B** (MoE 117B, 5.1B ativos, MXFP4 ~61GB, Apache-2.0) | Melhor open-weight para PT-BR + structured outputs; cabe em 1×H100 80GB |
-| Hardware | **1×H100 OCI São Paulo — $10/h** (preço uniforme global, preemptible −50/70%) | Melhor GPU LatAm por preço; AWS sa-east-1 cobra prêmio ~3× vs região US |
-| Serving | **vLLM** (default; PagedAttention, grammar/XSD constrained decoding) | Melhor throughput bruto |
-| Copiloto on-prem | **SGLang** avaliado no serviço de copiloto — **RadixAttention** com prefixo compartilhado de regras | Nossos prompts de copiloto compartilham 30–60k tokens de contexto estável (catálogo) → radix cache amortiza; até 5× vLLM em geração estruturada com prefixo comum |
-| Alternativa menor | Qwen3-30B-A3B FP8 em 1×L40S ($3.5/h = ~$2.555/mês) | Quando o orçamento manda; queda de qualidade aceitável no copiloto |
-
-Mesma GPU serve embeddings (Qwen3-Embedding) + reranker (BGE-Reranker-v2-M3) junto do LLM.
-
-**Crossover:** a infra on-prem só compensa acima de **100–300 IFs** — ou antecipada por 1–2 clientes enterprise air-gapped que paguem o H100 sozinhos (ver TCO §9).
+- **Tier 0 Antes do LLM (`S1.4`):** dúvidas diretas sobre crítica ou campo (`bm25_exact_rule_hit && rrf_top1_bps >= 8500 && RuleStatus::Implemented`) são respondidas em **`<5 ms` e `$0`** a partir do próprio catálogo `RuleSpec` e dos cartões de campo, com zero risco de alucinação.
+- **Copiloto SSE (`Tier 2/3`):** quando há necessidade de síntese contextual ou comparação entre regras, o `LlmTransport` responde em streaming SSE utilizando modelos **sem latência de thinking ativo no chat** (`Mistral Small 3.2 24B`, `Qwen3.5` instruct, `gpt-oss-20b` `reasoning_effort="low"`, ou `Claude Sonnet 4.5+` ZDR com Prompt Caching de 80–90% no prefixo público de regras).
+- **Protocolo Zero-PII Pós-WASM (Etapa 3):** no navegador, o XML é validado 100% localmente via `reg-validate-core` (`wasm32`). Para explicar uma violação, o frontend envia ao `reg-server` **apenas** a tupla esquemática `{cadoc, catalog_version, rule_code, field_path, error_class}` — nenhum dado de tomador ou operação precisa sair do dispositivo do cliente.
+- **Provenance Obrigatória + Output Guardrail:** nenhuma resposta de Copiloto é renderizada sem citar: **(a)** `rule_code` + versão existente no catálogo real; **(b)** artigo/`§` normativo correspondente; **(c)** condição violada. O guardrail pós-LLM **bloqueia qualquer afirmação de conformidade/aprovação** caso exista severidade `E`/crítica no `ValidationReport` real.
 
 ---
 
-## 6. MCP E AGENTES
+## 4. RAG Normativo Dual-Store (Single-Node On-Prem ↔ Plataforma `reg-server`)
 
-**SDK:** `rmcp`, SDK oficial Rust do projeto MCP (Tier 1 de conformance; spec **2026-07-28**). O Radiant expõe e consome MCP:
-
-- **MCP server** (crate `norma-ia`): tools `query_rule`, `validate_cadoc`, `explain_violation` — todas **read-only, allow-listed, scoped por tenant**. Agentes externos (do próprio time ou do cliente) operam o validador determinístico via MCP; o produto IA-native com tools Rust é o pitch.
-- **MCP client** (conectores das IFs): consumir core banking da IF via tools **read-only, scoped, allow-listed** — nada de escrita em sistema do cliente.
-
-**Segurança contra prompt injection** (vetores via MCP sampling documentados — Unit42; guia oficial Microsoft; conteúdo regulatório de terceiros pode trazer texto malicioso):
-
-1. **Conteúdo recuperado é dado citado, nunca instrução** — normativos e dados da IF entram delimitados como evidência; instrução vive só no system prompt.
-2. Tool allow-list + least privilege; logs de toda tool call (auditoria).
-3. **Humano-no-loop em todo envio ao BACEN** — nenhum agente transmite; o guardrail de output roda antes de qualquer fila de transmissão.
-4. Guardrail de output + validação `jsonschema` antes do consumo de qualquer resposta de modelo.
-
-**Agente "preparar CADOC" = workflow graph, não loop livre:** pipeline fixo por tipo de CADOC (planner determinístico) com nós de verificação entre etapas; LLM só nos nós de decisão/extração (classificar erro ambíguo, sugerir correção). Agentic-loop aberto em reporting regulatório é o anti-padrão que o relatório "Agentic Gap" da Regnology documenta: sem grafo auditável, não há como explicar ao auditor por que o sistema fez X.
-
----
-
-## 7. CORPUS SINTÉTICO (challenger / solver / judge)
-
-O corpus de avaliação cresce por **cobertura da matriz regra×edge** (boundary / negative / mutation / real_world / combo), não por volume. Pipeline em 4 estágios:
-
-```
- Célula vazia da matriz regra×edge
-        ▼
- CHALLENGER (LLM barato — Gemini 3 Flash + personas de IF:
- banco múltiplo, fintech, cooperativa) → gera perfil de dados
- que deve violar/satisfazer regras específicas
-        ▼
- SOLVER (Rust puro, ZERO LLM) → monta o CADOC real (XML/JSON)
- a partir do perfil; grounding no XSD é estrutural
-        ▼
- JUDGE 1 (determinístico) → engine valida contra XSD + regras
- → rótulo ground-truth automático (violou quais regras, por quê)
-        ▼
- JUDGE 2 (LLM, só semântica) → Claude Sonnet revisa realismo
- da narrativa em ~10% de amostra
-        ▼
- eval_case rotulado (provenance='synthetic') → golden set de
- extração + eval de RAG + futuro LoRA de estilo
+```text
+ Query ("regra preenchimento TaxEft / NR3 no 3040")
+   ├── BM25 — Tantivy (Rust-native): códigos exatos (`B12`, `C71`), campos, INs/CCs
+   ├── Denso/Esparso — `BGE-M3` (MIT) ou `Qwen3-Embedding` (Apache 2.0)
+   ├── Fusão RRF em aritmética inteira (`i64`) → top 50
+   └── Rerank — `BGE-Reranker-v2-M3` (MIT) / `Qwen3-Reranker` → top 8 + hash por §
 ```
 
-**Por que funciona:** rejection sampling + distillation funcionam quando o verificador é objetivo — e o nosso judge 1 é o engine Rust/XSD, não um LLM. **Custo:** ~$0.05–0.20 por 1k exemplos (challenger Flash ~2k tokens/exemplo) + juízes; **100k CADOCs sintéticos ≈ $20–80 de API**. O custo real é engenharia do harness e storage, não tokens.
-
-**Honesto sobre self-improvement:** "melhora com o uso" significa delta rotulado por verificador objetivo alimentando eval e futuro destilado — não auto-reescrita de prompt/modelo. Métrica fixa por versão de catálogo + replay de erros reais das IFs (opt-in) como corpus de regressão.
+- **Dois backings atrás do mesmo port `VectorStorePort`:**
+  - **On-Prem / Single-Node / Edge:** `Tantivy` em disco + **`sqlite-vec` / índice mmap HNSW** + `BGE-M3` rodando na CPU/RAM via `ort` INT8 (~600 MB RAM).
+  - **Plataforma `reg-server` (Etapa 3+):** `Tantivy` + **`pgvector` HNSW** (`sqlx` no Postgres 16). **Restrição estrita:** na v1, o RAG indexa **exclusivamente o corpus normativo público e cartões de campo** (zero mistura com dados de clientes; qualquer futuro índice privado de tenant exige partição física dedicada por `tenant_id` sob RLS `with_tenant` + fluxo de exclusão LGPD art. 18 testado).
+- **Eval Contínuo em CI:** RAGAS / DeepEval sobre golden set de 200 perguntas regulatórias curadas (falha de faithfulness / context recall bloqueia merge).
+- **Radar Delta Index:** o Radar mantém `sha256` por `§`; mudanças alteram e re-embeddam apenas os parágrafos modificados.
 
 ---
 
-## 8. FINE-TUNING
+## 5. Conexão Dual Transparente (`DataPolicy`), LC 105 & Transferência Internacional
 
-| Abordagem | Custo | Risco | Quando |
+**Fato regulatório verificado:** nenhum provedor Cloud Frontier possui residência contratual de inferência API no Brasil até nov/2026 (infraestrutura física de data center em SP não equivale a residência contratual de API). Sob a **Res. CD/ANPD nº 29/2024** (multas até R$ 50M) e a **LC 105/2001 (art. 10 — sigilo das operações ativas, ilícito penal)**, a governança de dados é **aplicada em código no crate `reg-ai`**:
+
+```rust
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum DataPolicy {
+    /// Modo A: Zero egress externo. Respeita `--offline=true` do `reg-cli`.
+    /// Só permite `reg-s1-tabular` + `ort` + endpoint local (`mistral.rs`/`llama-server`/`SGLang`/`vLLM`).
+    AirGapped,
+
+    /// Modo B (Default SaaS Pro/Scale): Separação estrutural por classificação.
+    /// • `PublicRegulatory` e `SchemaOnlyTokenized` → Cloud Frontier se `zdr_attested && anpd_scc_signed`.
+    /// • QUALQUER texto livre c/ contexto de cliente/operação (`RestrictedPiiOrUnmasked`) →
+    ///   obrigatoriamente On-Prem / VPC Brasileira (fail-closed: se local estiver off, retorna erro).
+    HybridPolicyRouter,
+
+    /// Modo C (Starter/Pro opt-in contratual): Cloud ZDR+SCC+DPA apenas para
+    /// `PublicRegulatory` e `SchemaOnlyTokenized` (ex: pós-WASM `{cadoc, rule_code, field_path}`).
+    /// `System 1` roda 100% local e qualquer texto livre com risco LC 105 é barrado do egress externo.
+    CloudZdrFirst,
+}
+
+pub struct TenantAiConfig {
+    pub tenant_id: TenantId,            // exclusivo de JWT RS256 verificado (ADR-0017; X-IF-ID banido)
+    pub data_policy: DataPolicy,
+    pub allow_telemetry_m1_m2: bool,    // opt-in contratual explícito
+    pub s2_fast_endpoint: ModelTarget,
+    pub s2_heavy_endpoint: ModelTarget,
+    pub embedding_backend: EmbedTarget,
+    pub vector_store: VectorBackend,
+}
+
+pub enum SensitivityClass {
+    PublicRegulatory,        // DOU, INs/CCs BACEN, XSDs, leiautes públicos
+    SchemaOnlyTokenized,     // apenas {cadoc, rule_code, field_path} ou Allowlist + HMAC efêmero
+    RestrictedPiiOrUnmasked, // registros <Cli>/<Op>, texto livre de chat/ERP, retorno CRD bruto
+}
+
+pub enum ThinkingPolicy {
+    Disabled,                  // obrigatório em JSON schema estrito no chat / Pass 2
+    Budgeted(ReasoningEffort), // Low | Medium | High (Two-Pass assíncrono p/ Norma→Regra L3)
+}
+
+#[async_trait]
+pub trait LlmTransport: Send + Sync {
+    fn meta(&self) -> ProviderMeta; // { is_local, zdr_attested, anpd_scc_signed, max_ctx, jinja_sha256 }
+    async fn complete_json(&self, req: StructuredReq) -> Result<RawModelOutput, AiError>;
+    async fn stream_chat(&self, req: ChatReq) -> Result<SseTokenStream, AiError>;
+}
+
+#[async_trait]
+pub trait EmbeddingPort: Send + Sync {
+    /// Retorna embeddings normalizados quantizados em Q15 (`i16`) — zero float fora do runtime.
+    async fn embed_q15(&self, texts: &[&str]) -> Result<Vec<Vec<i16>>, AiError>;
+}
+
+#[async_trait]
+pub trait RerankPort: Send + Sync {
+    /// Retorna `(indice_doc, score_bps)` em `u16` (`0..=10_000`).
+    async fn rerank(&self, query: &str, docs: &[&str], top_k: usize) -> Result<Vec<(usize, u16)>, AiError>;
+}
+```
+
+### Contratos de Bloqueio Anti-Vazamento
+1. **Regra LC 105 (Resolução C4):** NER probabilístico (`moBERTo`) **não é autorização** para mandar texto livre de tomadores para API nos EUA/UE. Todo payload contendo observação de planilha, retorno bruto de CRD ou pergunta livre citando cliente/contrato é classificado deterministicamente pelo Estágio 0 do `S1.2` como `RestrictedPiiOrUnmasked` e nunca sai do perímetro brasileiro/on-prem.
+2. **Allowlist + Generalização Antecipada:** antes de qualquer telemetria `M1/M2/M7` ou processamento VPC interno: `IPOC → token HMAC efêmero`, `CPF/CNPJ → tipo_pessoa + validade_dv`, `DtContr/DtVencOp → delta_dias`, valores financeiros → ordem de grandeza; `Aho-Corasick` + `moBERTo` + canários (`Canary FNR == 0%` hard blocker).
+3. **Isolamento de Cache & Logs:** banido qualquer cache global estilo `ResponseCache.Invalidate` do Go v1; toda chave inclui `(tenant_id, ruleset_version)`; scrubbing obrigatório em `tracing` e Sentry.
+
+---
+
+## 6. Catálogo Atualizado de Modelos Open-Weights, Embeddings & Cloud (Nov/2026)
+
+> **Critério Comercial Rígido:** [`rust/Cargo.toml`](../../rust/Cargo.toml) declara `license = "Proprietary"`. Portanto, todo o catálogo default on-prem utiliza exclusivamente modelos **Apache 2.0** ou **MIT**.
+> **Explicitamente Bloqueados em Produção:** **`Itau-Unibanco/NorBERTo`** (`CC-BY-NC-SA-4.0`) e **`TabPFN` v2+** (pesos *Non-Commercial* sem licença comercial Prior Labs). Evitam-se também no self-host `Llama 4` (licença customizada e menor eficiência por GB vs `Gemma 4`/`Qwen3.6`), `Qwen3.8-2.4T-A95B`, `GLM-5.3` e `MiniMax-M3` (cláusulas comerciais/MaaS restritivas).
+
+### 6.1 `System 2` Local (Open-Weights 2026) por Hardware & Memória Real
+
+| Perfil Hardware | Modelo Primário | Alternativas | Params (Total / Ativos) | Licença | Memória Real (Pesos + KV Cache) & Observação | Serving Engine |
+|---|---|---|---|---|---|---|
+| **T0: CPU Air-Gap Mínimo** *(8–16 GB RAM, s/ GPU)* | **`Qwen3.5-4B`** *(ou `0.8B`)* | `Gemma 4 E4B` (~4.5B eff) / `E2B` | `4B` denso | Apache 2.0 | `Q4_K_M`: `4B` ~2.5–2.8 GB (~4–5 GB RAM c/ KV) | `mistral.rs` / `llama-server` CPU |
+| **T1a: Mac Apple Silicon 24 GB** *(~16–18 GB úteis GPU)* | **`Qwen3.5-9B`** *(ou `Gemma 4 12B`)* | `gpt-oss-20b` *(MXFP4 ~14 GB, apertado c/ 8K KV)* | `9B` / `12B` | Apache 2.0 | `Q4_K_M`: ~5.5–7 GB total; preserva folga p/ macOS e `BGE-M3` na CPU | `mistral.rs` Metal / `llama.cpp` |
+| **T1a+: Mac 32–48 GB RAM** | **`Gemma 4 26B-A4B`** *(32 GB)* | `Qwen3.6-35B-A3B` *(48 GB)* | `25.2B / ~4B` · `35B / 3B` | Apache 2.0 | `Gemma 4 26B-A4B` `Q4_K_M`: ~16–19 GB; `Qwen3.6-35B-A3B` `Q4`: ~23–26 GB | `mistral.rs` Metal / `llama.cpp` |
+| **T1b: Mac Studio 128 GB** *(M4 Max / Ultra)* | **`gpt-oss-120b`** (`MXFP4`) | `Qwen3.6-35B-A3B` (`Q8`) · `Gemma 4 31B` | `116.8B / 5.1B` | Apache 2.0 | `gpt-oss-120b` `MXFP4`: ~61 GB pesos (~68 GB total c/ KV) | `mistral.rs` Metal / `llama.cpp` |
+| **T2a: GPU 16 GB VRAM** *(RTX 4080S / L4 / T4)* | **`gpt-oss-20b`** (`MXFP4`) | `Qwen3.5-9B` (`FP8`) · `Gemma 4 12B` | `20.9B / 3.6B` | Apache 2.0 | ~13–14 GB VRAM *(Embeddings/`S1` rodam na RAM CPU)* | `vLLM` / `llama-server` CUDA |
+| **T2b: GPU 24 GB VRAM** *(RTX 3090 / 4090)* | **`Mistral Small 3.2 24B`** *(JSON sem atrito)* **ou** **`Gemma 4 26B-A4B`** | `Qwen3.5-27B` *(Q4+KV `q8_0`, justo ~20 GB)* | `24B` · `25.2B / 4B` | Apache 2.0 | ~15–19 GB VRAM (`Q4_K_M` + KV `q8_0` 8–16K); **`BGE-M3`/`moBERTo` na RAM CPU** para evitar OOM. *(`Qwen3.6-35B-A3B` Q4 ~23 GB pede GPU ≥32 GB como RTX 5090).* | `llama.cpp` (`-ctk q8_0 --jinja`) / `mistral.rs` |
+| **T3: GPU 48 GB VRAM** *(L40S / A40 / A6000)* | **`Qwen3.6-35B-A3B`** (`FP8`) | `Gemma 4 31B` (`FP8`) · `Mistral Small 3.2 24B` | `35B / 3B` *(Gated DeltaNet)* | Apache 2.0 | `FP8`: ~35–40 GB + folga p/ KV 256K e Embed/Rerank na GPU | **`SGLang`** (`RadixAttn`) / `vLLM` |
+| **T4: GPU 80 GB VRAM** *(1× H100 / A100 OCI SP)* | **`gpt-oss-120b`** (`MXFP4`) | `Qwen3.6-35B-A3B` (`FP8`) + `Gemma 4 31B` | `116.8B / 5.1B` | Apache 2.0 | ~68 GB c/ KV → co-reside só c/ `BGE-M3` + `BGE-Reranker-v2-M3` (~4–5 GB), **não** `4B/8B` Emb | **`SGLang`** / `vLLM` |
+| **T5: Multi-GPU** *(4×–8× H100/H200)* | **`Qwen3.5-397B-A17B`** (`FP8`) | `DeepSeek-V3.2` · `Kimi K2.5`* | `397B/17B` · `671B/37B` | Apache 2.0 (`Qwen`) · MIT (`DS`) | `397B` FP8 em 4×H200 / 8×H100 *(verificar cláusula UI OEM p/ Kimi Modified MIT)* | `SGLang` / `vLLM` TP+EP |
+
+### 6.2 Embeddings, Rerankers, Encoders `System 1` & Cloud API
+- **Embeddings & Rerankers:**
+  - **`BGE-M3`** (569M, **MIT**, 8.192 ctx, Dense + Sparse + ColBERT) → default edge/on-prem e H100 + `120B` (~600 MB INT8 CPU via `ort` ou ~1.5–2.5 GB VRAM).
+  - **`Qwen3-Embedding-0.6B / 4B / 8B`** (**Apache 2.0**, 32.768 ctx, Matryoshka MRL) → `0.6B` em CPU/24GB quando precisar 32K ctx; `4B/8B` apenas em ≥48 GB dedicados.
+  - **`BGE-Reranker-v2-M3`** (568M, **MIT**) e **`Qwen3-Reranker-0.6B/4B`** (**Apache 2.0**).
+- **Encoders `System 1` (`ort` INT8 em CPU/RAM):**
+  - **`Tropic-AI/moBERTo`** (~150M, **Apache 2.0**, 8K ctx): NER PII / guardrail longa janela (`50–120 ms` CPU ou `<15 ms` GPU/ANE).
+  - **`higopires/DeB3RTa`** (`70M small` / `426M base`, **MIT**): NLU jurídico-financeiro PT-BR para `S1.4` e Radar.
+  - **`sagui-nlp/debertinha-ptbr-xsmall`** (~40M, **MIT**): anti-injection e classificação rápida (`5–15 ms` CPU em prompts curtos).
+- **Cloud API Frontier (apenas Modos B/C com ZDR + DPA + Cláusulas-Padrão ANPD Res. 29/2024):**
+  - `ReasoningVision`: **`Gemini 3 / 3.x Pro`** (1M ctx, visão nativa PDF + `calamine`) · fallback `Claude Opus 4.5+`.
+  - `BalancedCached`: **`Claude Sonnet 4.5+`** (prompt caching no prefixo público de regras) · fallback `GPT-5.1+`.
+  - `FastBatch`: **`Gemini 3 / 3.x Flash`** (Batch 50% off em perfis sintéticos `M4`) · fallback `GPT-5 mini` / `Claude Haiku 4.5+`.
+  - *(APIs open-weights baratas de terceiros são vetadas para qualquer metadado de cliente por opacidade de jurisdição/DPA.)*
+
+---
+
+## 7. Engenharia de Serving 2026 & Hardening Adversarial (`Thinking`, `rmcp`, Injection)
+
+1. **Disciplina `Thinking` vs `json_schema` (Sem Latência Dobrada no Chat):**
+   - Aplicar gramáticas (`XGrammar`/`LLGuidance`/`GBNF`) com modo *thinking* ligado quebra ou gera loops de espaços em modelos híbridos (`Qwen3.6`, `Gemma 4`). Além disso, `Two-Pass` dobra a latência interativa e `--jinja` varia entre versões de engine.
+   - **Solução em 2 trilhos no `LlmTransport`:**
+     * *Copiloto interativo / chamadas rápidas (`Tier 2`):* usar preferencialmente perfis sem thinking (`Mistral Small 3.2 24B`, `Qwen3.5` instruct, `gpt-oss-20b` com `reasoning_effort="low"`), e **pinar versão exata da engine + hash SHA-256 do template Jinja** no manifesto de deploy (validado por *Cross-Engine Contract Tests* em CI).
+     * *Batch assíncrono pesado (`Norma→Regra`, `M3`, `M4`):* usa padrão **Two-Pass** (Pass 1 no canal isolado `reasoning_content` → Pass 2 com `ThinkingPolicy::Disabled` + `json_schema` portátil).
+2. **Portable JSON Schema Profile + Dupla Checagem em Rust:** profundidade `<= 4`, `additionalProperties: false`, zero `if/then/else`, **todos os valores decimais/taxas/datas/CNPJs como `string`**. Toda resposta exige `finish_reason == "stop"`, zero tag `<think>`/`<|channel>thought` residual, validação via `jsonschema` Draft 2020-12, parse via `reg-core` (`Centavos`/`TaxaDecimal`/`CnpjIdentifier`), checagem de `Provenance` contra o catálogo e Output Guardrail.
+3. **Cache de Prefixo (`RadixAttention`):** as 253+ regras 3040 e cartões de campo formam um prefixo estático público de ~25–60K tokens; em GPU on-prem prioriza-se **`SGLang`** (`RadixAttention`) no Copiloto e **`vLLM`** em batches.
+4. **Hardening de `rmcp` (MCP spec 2026-07-28) & Prompt Injection:**
+   - **Desabilitar MCP sampling** (vetor primário de exfiltração/injeção); **pinar SHA-256 dos manifestos/descrições de tools** (*anti tool-poisoning*); expor na v1 apenas tools *read-only* (`query_rule`, `validate_cadoc`, `explain_violation`, `check_dossier`) sob JWT tenant-scoped; geração/transmissão STA exige aprovação humana fora da banda da IA; toda tool call e decisão entra na hash-chain do `reg-ledger`.
+   - Planilhas, PDFs, retornos RAG e histórico entram sempre sob **spotlighting com delimitador randômico por requisição** + instrução isolada no system prompt + allowlist oficial (`*.bcb.gov.br`, `*.in.gov.br`, `*.cvm.gov.br`) no Radar.
+
+---
+
+## 8. Corpus Sintético (`M4`), Política de Fine-Tuning, TCO & Encaixe no Plano v3.0
+
+- **Regras são Dados, Não Pesos:** fine-tuning de LLM jamais deve memorizar regras do BCB (mudam semanalmente e pesos opacos não citam `§`). A aprendizagem contínua (`M1/M2/M7`) alimenta o RAG, os goldens versionados com `Vigencia` e a calibração dos submodelos **`System 1` (`M8`)**.
+- **`M4` Challenger / Solver / Judge:** cobre a matriz `regra × edge` com verificador objetivo (`System 0` Rust + XSD) atuando como `Judge 1` determinístico e `Judge 2` LLM (~10% amostra semântica, família distinta do gerador, calibrado por 30 auditorias humanas semanais no `M10`). Custo sintético: `~$0.05–0.20` por 1k exemplos (`100k CADOCs ≈ $20–80` em Batch).
+
+### Política de Fine-Tuning vs. RAG vs. Destilação `M8`
+| Abordagem | Custo | Risco | Veredito |
 |---|---|---|---|
-| RAG + engine determinístico | ~$0 incremental | baixo | **Default** — regras versionadas mudam toda semana via Radar; RAG atualiza em segundos |
-| LoRA de estilo (tom/formato do texto de explainability) | $50–500/run QLoRA (Unsloth; ~$5 GPU bruta p/ 7–8B) | médio-baixo | Quando o formato do texto ao cliente precisa ser consistente |
-| Fine-tune "aprender regras BACEN" | $5k–30k | **alto** — overfit na versão do normativo, rollback difícil, auditoria não confia em peso opaco sem provenance | **Nunca para conhecimento versionado** |
+| **RAG Híbrido + `System 0` + `System 1`** | `~$0` incremental | Baixo | **Default:** regras mudam semanalmente via Radar; RAG delta atualiza em segundos com provenance. |
+| **Destilação `M8` para `System 1` (`i64` / `DeB3RTa`)** | `$0–50/run` CPU/single-GPU | Baixo (gate `M6` obrigatório) | **Ativo na Etapa 4:** reduz latência para `<5–20 ms` e corta 75–90% do tráfego ao System 2. |
+| **LoRA de estilo de saída (`System 2` local)** | `$50–500/run` (QLoRA) | Médio-baixo | Apenas para padronizar tom/formato de explicações em `S2` on-prem após M8 estável. |
+| **Fine-tune para "aprender regras BACEN"** | `$5k–30k` | **Crítico** (overfit em vigência vencida + sem citação `§`) | **Proibido.** |
 
-**Regra:** não fine-tunar conhecimento versionado. Regulatório é o pior caso para fine-tune: o conteúdo muda semanalmente e cada output exige provenance citável — peso opaco não cita. **Distillation** entra só se o copiloto migrar on-prem: destilar o *formato de saída* do Sonnet (não o conhecimento) no GPT-OSS-120B, que já é CoT-treinável e aceita LoRA leve.
+### Impacto no TCO & Fim do Degrau Binário "Cloud ou H100 ($7.3k/mês)"
 
----
+Premissas base de volume (pós-Etapa 3/4): copiloto em ~10–25% das dúvidas não absorvidas pelo `S1.4 Tier 0/1`, ~25K tokens de prefixo público em cache (cache hit ~80%), ~1.500 tokens de saída, ~40 normativos/mês no Radar, 3 consultas RAG/validação.
 
-## 9. TCO MENSAL (infra IA) + ROLLOUT
-
-Premissas: copiloto em ~10% dos eventos, ~25k tokens de contexto (cache hit 80%), ~1.500 tokens de saída; extração ~40 normativos/mês; RAG 3 consultas/validação.
-
-### Cenário A — 10 IFs (~3.000 chamadas LLM/mês)
-
-| Item | Cloud híbrido | Custo | On-prem | Custo |
-|---|---|---|---|---|
-| Copiloto/explain | Gemini 3 Flash (cache) | ~$90 | GPT-OSS-120B @ L40S OCI | $2.555 |
-| Casos duros (10%) | Sonnet 4.5 | ~$120 | — | — |
-| Extração regras | Gemini 3 Pro + Sonnet critic | ~$200 | idem (frontier) | $200 |
-| Embeddings | Qwen3-Emb self | $0 | self | $0 |
-| Rerank | BGE self | $0 | self | $0 |
-| RAGAS/eval LLM judge | Flash batch | ~$15 | self | $0 |
-| Harness sintético | Flash | ~$60 | idem | $60 |
-| Parsing | Docling CPU | $20 | idem | $20 |
-| **Total** | | **≈ $505/mês** | | **≈ $2.835/mês** |
-
-### Cenário B — 100 IFs (~30.000 chamadas LLM/mês + agêntico)
-
-| Item | Cloud híbrido | Custo | On-prem (híbrido) | Custo |
-|---|---|---|---|---|
-| Copiloto/explain | Flash + Sonnet nos 10% | ~$1.900 | GPT-OSS-120B @ H100 OCI | $7.300 |
-| Extração regras | frontier | ~$400 | frontier | $400 |
-| Harness (2M exemplos/mês) | Flash batch | ~$250 | on-prem | ~$0 marginal |
-| Eval/observabilidade | batch | ~$150 | self | $0 |
-| Embeddings (30M tokens/mês) | Gemini Emb 2 | $6 | self | $0 |
-| Parsing | Docling + OCR | ~$25 | idem | $25 |
-| MCP runtime | self (Rust) | $80 | idem | $80 |
-| **Total** | | **≈ $2.800/mês** | | **≈ $7.800/mês** |
-
-**Leitura:** até ~100 IFs, cloud híbrido custa <$3k/mês; a GPU on-prem só vence quando (a) cliente exige PII never-leave, (b) insights não-opt-in explodem ou (c) batch pesado de sintético. Crossover: **100–300 IFs**.
-
-### Rollout em 3 estágios
-
-| Estágio | Gatilho | O que muda |
+| Estágio / Perfil de Uso | Composição Técnica | Custo Mensal Estimado |
 |---|---|---|
-| **1. MVP — 100% API** | hoje | Frontier + **router multi-modelo + sanitizador PII já no MVP** (~1 sprint; desbloqueia os dois mundos sem comprar GPU) |
-| **2. L40S on-prem** | 1º cliente exigir residência | Nó OCI São Paulo com Qwen3-30B-A3B + Qwen3-Embedding + BGE-Reranker (~$2.555/mês); copiloto degradado consciente |
-| **3. H100 + GPT-OSS-120B** | >~50 IFs ou 2 clientes air-gapped | Copiloto on-prem completo via vLLM/SGLang (~$7.300/mês); frontier mantida só para extração (normativo é público) |
+| **Estágio 0 — Etapas 0–2 do Produto (Core 3040 + CLI + STA)** | **0% IA em runtime** (apenas dev-tooling offline opcional) | **$0 de infra IA** |
+| **Estágio 1 — On-Prem Compacto (`T1a`/`T2a`/`T2b` + `System 1`)** | `S1` absorve `75–90%` em `<20 ms` CPU RAM + `Mistral Small 3.2 24B` / `Gemma 4 26B-A4B` / `gpt-oss-20b` (`mistral.rs`/`llama.cpp`) | **CAPEX único** (Workstation 24 GB VRAM ou Mac 24–32 GB — elimina degrau de $2.5k–7.3k/mês) |
+| **Estágio 2A — Cloud Híbrido ZDR (~10 IFs · ~3k chamadas/mês)** | `S1` local (`$0`) + `BGE-M3`/`BGE-Reranker` self-host (`$0`) + `Flash` cache (`~$90`) + `Sonnet` casos duros (`~$120`) + `Norma→Regra` (`~$200`) + RAGAS/M4/Docling (`~$95`) | **`~$505/mês`** (ou menos c/ corte `Tier 0` do `S1.4`) |
+| **Estágio 2B — Escala SaaS (~100 IFs · ~30k chamadas/mês)** | Mix `Flash`+`Sonnet` (`~$1.900`) + Extração (`~$400`) + Batch `M4`/RAGAS (`~$400`) + Parse/`rmcp` (`~$105`) | **`~$2.800/mês`** (`<15%` da receita projetada) |
+| **Estágio 3 — Datacenter On-Prem Enterprise (`T3`/`T4`)** | `1× L40S 48 GB` (`Qwen3.6-35B-A3B` FP8, `~$2.555/mês`) ou `1× H100 80 GB` OCI SP (`gpt-oss-120b` + `BGE-M3` + `BGE-Reranker`, `~$7.300/mês`) | **Apenas sob gatilho contratual Enterprise** (repassado em contrato) |
+
+### Encaixe nas Etapas 0–4 do Plano v3.0 (Sem Atrasar o 3040)
+- **Etapa 0 (Saneamento):** **0% IA runtime**; aposentar `backend/internal/insights/` & `synth/`; marcar docs de jul/2026 como depreciados; extrair 253 regras de `SCR3040_Criticas.xls` via `calamine` (`224` ativas + `29` `Habilitado=n`).
+- **Etapa 1 (Motor 3040 Provado):** **0% IA runtime**; definir apenas tipos puros `RuleId`, `ProvenanceRef`, `CadocCode` em `reg-core`.
+- **Etapa 2 (CLI, Dossiê RC 18, `reg-ledger`, `reg-sta`):** **sem `ort`/GPU no binário core** (builds `ubuntu-latest` Docker+JRE & `windows-latest`, `--offline=true`); garantir extensibilidade JCS no `reg-ledger`.
+- **Etapa 3 (`reg-server` `axum`, `frontend/` limpo, WASM Streaming):** entram **`reg-s1-tabular` (`i64`)** (no browser WASM apenas `S1.1` léxico + `S1.3` local, protocolo Zero-PII pós-WASM) + **`reg-ai` hexagonal (`--features ai`)** + RAG Público (`Tantivy` + `pgvector` + `BGE-M3` + `BGE-Reranker-v2-M3`) + `S1.2` + `S1.4 Tier 0` + Copiloto SSE com `Provenance` + Output Guardrail.
+- **Etapa 4 (Multi-CADOC, Radar, IA Completa & `M1–M10`):** entram **`System 1` calibrado (`M2/M8`)**, **`S2 Local T0–T5`**, **Radar Two-Pass `Norma→Regra`**, **`M4`/`M7`/`M10`** e **`rmcp` hardened** + suíte `AirGapped` isolada de rede.
 
 ---
 
-## 10. ARQUITETURA COMPLETA DE IA NO MOTOR
+## 9. Matriz Consolidada de Gates Objetivos & Riscos Monitorados
 
-```
-┌────────────────────────────────────────────────────────────────────────────┐
-│                     RADIAN T NORMA — ENGINE DE IA (Rust)                   │
-│                                                                            │
-│  BACEN: DOU / cartas circulares / XLSX de leiaute                          │
-│      │                                                                     │
-│      ▼                                                                     │
-│  ┌────────────┐   ┌─────────────────────────────────────────────────────┐  │
-│  │ RADAR      │──►│ INGESTÃO                                            │  │
-│  │ hash por § │   │ Docling (PDF) · calamine (XLSX, Rust) · Mistral OCR │  │
-│  │ diff delta │   │ → markdown por § + cartões de campo + JSON leiaute  │  │
-│  └────────────┘   └────────┬────────────────────────────────────────────┘  │
-│                            ▼                                               │
-│  ┌──────────────────────────────────────┐  ┌─────────────────────────────┐ │
-│  │ PIPELINE NORMA→REGRA (crate norma-ia)│  │ RAG NORMATIVO               │ │
-│  │ DRAFT  Gemini 3 Pro (visão, 1M ctx)  │  │ pgvector HNSW (embeddings)  │ │
-│  │ CRITIC Claude Sonnet 4.5 (vs §)      │  │ + Tantivy BM25 (Rust)       │ │
-│  │ TEST   engine Rust: XSD + fixtures   │  │ fusão RRF + BGE-Reranker    │ │
-│  │ HUMAN  UI de diff → catálogo         │  │ emb: Qwen3 / Gemini Emb 2   │ │
-│  └───────────────┬──────────────────────┘  └─────────────────────────────┘ │
-│                  ▼                                                         │
-│  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │ CATÁLOGO (Postgres) — ~1.099+ regras versionadas, provenance §       │  │
-│  └──────────────────────────────────────────────────────────────────────┘  │
-│                  ▼                                                         │
-│  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │ MOTOR RUST — execução determinística (validação, XSD, transmissão)  │  │
-│  └──────────────────────────────────────────────────────────────────────┘  │
-│        │                          │                        │               │
-│        ▼                          ▼                        ▼               │
-│  ┌───────────────┐   ┌────────────────────┐   ┌─────────────────────────┐  │
-│  │ COPILOTO      │   │ HARNESS SINTÉTICO  │   │ MCP (rmcp, SDK oficial) │  │
-│  │ Sonnet cloud  │   │ challenger (Flash) │   │ server: query_rule /    │  │
-│  │ ou GPT-OSS    │   │ solver (Rust/XSD,  │   │ validate_cadoc /        │  │
-│  │ 120B on-prem; │   │ zero LLM) →        │   │ explain_violation       │  │
-│  │ sanitizador   │   │ judge det.+LLM 10% │   │ read-only allow-listed; │  │
-│  │ PII antes;    │   │ corpus rotulado    │   │ HITL p/ envio BACEN;    │  │
-│  │ provenance    │   │ ~$0.05–0.2/1k      │   │ conteúdo = dado citado, │  │
-│  │ obrigatória   │   │                    │   │ nunca instrução         │  │
-│  └───────────────┘   └────────────────────┘   └─────────────────────────┘  │
-│                                                                            │
-│  ┌──────────────────────── ROUTER MULTI-MODELO ─────────────────────────┐  │
-│  │ classificação de dados: público → frontier · sanitizado+ZDR → cloud  │  │
-│  │ · PII never-leave → on-prem · feature flag por cliente               │  │
-│  └──────────────────────────────────┬───────────────────────────────────┘  │
-│                                     ▼                                      │
-│   { Gemini 3 Pro/Flash · Claude Sonnet/Opus · GPT-5.1 }                    │
-│   { GPT-OSS-120B / Qwen3-A3B — vLLM ou SGLang, H100/L40S OCI SP }          │
-│                                                                            │
-│  Frontend Next.js ──► API axum (SSE) ──► tudo acima (IA nunca no client)   │
-└────────────────────────────────────────────────────────────────────────────┘
-```
+| Risco / Frente | Severidade | Mitigação & Gate Objetivo de Promoção |
+|---|---|---|
+| **Promo pricing / oscilação API Cloud** | Alta | Interface única `LlmTransport` + modelos Open-Weights Apache 2.0/MIT testados por *Cross-Engine Contract Tests* em CI (`finish_reason == "stop"`, zero `<think>` leak, `100%` parse `jsonschema` + `reg-core`). |
+| **Vazamento LC 105 / ANPD Res. 29/2024** | **Crítica** | Estágio 0 Allowlist determinística proíbe texto livre com cliente na nuvem externa; **`S1.2 Canary FNR == 0.00%`**; `0` violações de roteamento `RouteOnPremOnly`. |
+| **Thinking Mode quebrando JSON Schema** | Alta | Copiloto usa modelos não-thinking / `reasoning_effort=low` + SHA-256 do template Jinja pinado em CI; Two-Pass isolado só em batch assíncrono. |
+| **`rmcp` (tool poisoning / sampling injection)** | Alta | **MCP sampling desabilitado**; SHA-256 dos manifestos pinado; read-only default; HITL fora da banda p/ STA; hash-chain no `reg-ledger`. |
+| **Invasão de floats / regressão determinística** | Crítica | [`layers.rs`](../../rust/crates/reg-cli/tests/layers.rs) (`0` floats/`unsafe` em `reg-core/cadoc/validate-core/ledger`); propriedade **`--no-ai`** bit-idêntica em CI. |
+| **Alucinação no Copiloto / RAG** | Média-Alta | `S1.4 Tier 0` determinístico `<5 ms`; RAGAS/DeepEval em CI sobre 200 perguntas; Output Guardrail bloqueia `100%` respostas sem 3 campos de `Provenance` ou com falsa conformidade. |
+| **Green-wash / OOM Local VRAM** | Média | Limites de VRAM/RAM reais por perfil (`T0–T5`), embeddings em RAM CPU quando GPU ≤24 GB, e gates `M6`/`M10` (`MDR >= 75%`, `Judge TPR/TNR >= 95%`, `ECE <= 0.025`). |
 
 ---
 
-## 11. RISCOS MONITORADOS
+## 10. Fontes & Referências
 
-| # | Risco | Severidade | Mitigação |
-|---|---|---|---|
-| 1 | **Promo pricing Gemini vence dez/26–jan/27** (Flash $0.50 e 3.1 Pro $1 são introdutórios; sobe ~2027) | Alta | **Router multi-modelo é obrigatório, não opcional** — trocar modelo em 1 dia; custo reavaliado no review de jan/27 |
-| 2 | **rmcp jovem** (SDK Tier 1 mas com CVE recente no histórico) | Média | Fixar versão no `[workspace.dependencies]`; **conformance tests no CI**; acompanhar releases do spec 2026-07-28 |
-| 3 | Residência LatAm inexistente nos 3 frontier providers | Média | Sanitização PII obrigatória (§5); monitorar GCP São Paulo (Blackwell out/26) para residência contratual futura |
-| 4 | APIs baratas de terceiros (DeepSeek/Qwen) com jurisdição opaca | Média | Só para normativos públicos ou self-host; nunca dado de cliente |
-| 5 | Long-context tratado como banco de dados (custo armazenado $0.50–4.50/Mtok/h + degradação multi-shot needle) | Média | RAG híbrido é a única via de consulta recorrente; ctx 1M reservado à extração one-shot |
-| 6 | Dependência de revisão humana virar gargalo de novo | Média | SLA de revisão é o produto (audit trail), não custo; meta 20min/doc; medir throughput da fila |
-| 7 | Verifier-gaming / judge virar alvo | Média | Judge determinístico (XSD+engine) como juiz final; LLM-judge só semântica em 10%; judge de família diferente do gerador |
-
----
-
-## 12. Fontes principais
-
-- Norm AI (agentic law; parceria Microsoft fev/2026): https://www.norm.ai
-- Regnology RGI + "The Agentic Gap" (2026): https://www.regnology.net/en/solutions/regnology-platform/rgi
-- LegalRuleML (OASIS): https://docs.oasis-open.org/legalruleml/legalruleml-core-spec/v1.0/legalruleml-core-spec-v1.0.html
-- Preços Gemini/Anthropic/OpenAI (nov/2026): https://aistudio.google.com/docs/pricing · https://www.anthropic.com/pricing · https://developers.openai.com/api/docs/pricing
-- MCP spec 2026-07-28 + SDK Rust (rmcp): https://modelcontextprotocol.io/docs/2026-07-28/sdk · https://github.com/modelcontextprotocol/rust-sdk
-- Injeção via MCP (Unit42 / Microsoft): https://unit42.paloaltonetworks.com/model-context-protocol-attack-vectors · https://developer.microsoft.com/blog/protecting-against-indirect-injection-attacks-mcp
-- vLLM vs SGLang (Red Hat, out/2026): https://developers.redhat.com/articles/2026/10/14/vllm-vs-sglang-choosing-the-right-inference-engine-for-your-workload
-- GPT-OSS-120B hardware: https://openai.com/index/introducing-gpt-oss
-- Preços GPU (OCI uniforme / AWS sa-east-1): https://www.oracle.com/cloud/price-list/ · https://instances.vantage.sh/aws/ec2/g6e.xlarge
-- LGPD/transferência internacional (ANPD Res. 29/2024): https://www.trade.gov/market-intelligence/brazils-new-rules-international-data-transfers
-- Distillation custo ($0.36–8.74/1k): https://arxiv.org/html/2410.18588v1 · RLHF Book cap. 12: https://rlhfbook.com/c/12-synthetic-data
-- RAGAS: https://docs.ragas.io · Docling/parsers: https://agentscamp.com/guides/comparisons/best-document-parsers-for-rag-2026
+- [`26-SYSTEM-ONE-DECISION-MODEL.md`](26-SYSTEM-ONE-DECISION-MODEL.md) · [`20-ARQUITETURA-RUST.md`](20-ARQUITETURA-RUST.md) · [`22-HARNESS-V4.md`](22-HARNESS-V4.md) · [`25-ROADMAP-EXECUCAO.md`](25-ROADMAP-EXECUCAO.md)
+- Norm AI (https://www.norm.ai) · Regnology "The Agentic Gap" (https://www.regnology.net/en/solutions/regnology-platform/rgi) · LegalRuleML OASIS (https://docs.oasis-open.org/legalruleml/legalruleml-core-spec/v1.0/legalruleml-core-spec-v1.0.html)
+- Preços API nov/2026: https://aistudio.google.com/docs/pricing · https://www.anthropic.com/pricing · https://developers.openai.com/api/docs/pricing
+- MCP spec 2026-07-28 & `rmcp` (https://modelcontextprotocol.io/docs/2026-07-28/sdk · https://github.com/modelcontextprotocol/rust-sdk) · Unit42 / Microsoft MCP Prompt Injection
+- vLLM vs SGLang (Red Hat, out/2026: https://developers.redhat.com/articles/2026/10/14/vllm-vs-sglang-choosing-the-right-inference-engine-for-your-workload) · Preços GPU OCI / AWS
+- ANPD Res. CD/ANPD nº 29/2024 · LC 105/2001 · RC Conjunta 18/2025 · RAGAS / Docling
+- HuggingFace Model Cards auditados em nov/2026: Qwen3.5 / Qwen3.6-35B-A3B / Qwen3-Embedding / Qwen3-Reranker (Apache 2.0), Gemma 4 E2B/E4B/12B/26B-A4B/31B (Apache 2.0), Mistral Small 3.2 24B (Apache 2.0), `gpt-oss-20b/120b` (Apache 2.0), `BAAI/bge-m3` & `BAAI/bge-reranker-v2-m3` (MIT), `Tropic-AI/moBERTo` (Apache 2.0), `higopires/DeB3RTa` (MIT), `sagui-nlp/debertinha-ptbr-xsmall` (MIT), `DeepSeek-V3.2` (MIT).

@@ -208,9 +208,8 @@ fica como **teto de referência**. A **FASE 1 é o wedge on-prem com 4 crates** 
 `reg-core` (clona responsabilidades de `norma-domain`), `reg-cadoc` (clona
 `norma-layouts`+`norma-rules`), `reg-ledger` (clona `norma-audit`+`norma-storage`) e
 `reg-cli` (clona `norma-cli`) — com **SQLite WAL portável** (schema migrável para
-Postgres) e receita antes da plataforma. A **FASE 2 consolida a plataforma multi-tenant
-em ~8–10 crates de domínio + wiring**: consolidar o que não tem requisito real de cliente
-(sequenciamento e marcos em `25-ROADMAP-EXECUCAO.md` §0).
+Postgres) e receita antes da plataforma. No **Plano v3.0 (`25-ROADMAP-EXECUCAO.md` §0.1)**,
+esse núcleo evolui incrementalmente com **`reg-validate-core`** (`no_fs`, `wasm32`), **`reg-sta`**, **`reg-server`** (`axum` + Postgres 16 RLS), **`reg-s1-tabular`** (`i64` zero-float) e **`reg-ai` / `reg-ai-runtime`** (feature-flagged `--features ai` na borda, sem nunca quebrar `layers.rs` nem acoplar C++/GPU ao core). A **FASE 2** consolida o teto multi-tenant (~8–10 crates de domínio + wiring; desenho de 17 crates fica como referência).
 
 ### 3.2 Matriz CADOC → generator → fase (decisão explícita)
 
@@ -699,36 +698,15 @@ LCR/LCRS 90%→100% em 2027 (Res CMN 5.296 + Res BCB 560), FRTB SENS 2027 (Res 4
 
 ---
 
-## §12 — IA no motor (pontos de integração; detalhes em 21-ENGINE-IA.md)
+## §12 — IA no motor (pontos de integração; detalhes em `21-ENGINE-IA.md` v3.0 e `26-SYSTEM-ONE-DECISION-MODEL.md`)
 
-O crate `norma-ia` encapsula **toda** fronteira não-determinística. Regra estrutural:
-**IA nunca produz XML, nunca decide verdict** — ela explica, propõe e descobre; o engine
-verifica. Pontos:
+A fronteira não-determinística opera em **3 camadas cognitivas (`System 0 → System 1 → System 2`)** com isolamento estrito de crates e lints. Regra estrutural: **IA nunca produz XML, nunca decide verdict e nunca contamina `reg-core/cadoc/validate-core/ledger/sta` com floats (`float_arithmetic = "deny"`) ou pesos ML**. Pontos:
 
-1. **Copiloto de validação:** dado `ValidationReport`, humaniza críticas campo-a-campo com
-   citação da `Provenance`. Router: Sonnet 4.5 (prompt caching) / GPT-5.1 / Gemini 3 Flash.
-   **Sanitizador PII com sanitização primária por caminho de leiaute** (masking
-   determinístico dos campos declarados no XSD — auditável, sem depender de modelo);
-   NER/regex só secundária (o 3040 é dado por titular — NER sozinho é frágil). Falha do
-   sanitizador é **erro tipado fail-closed que roteia para on-prem** (research/07 §3.5) —
-   **nunca para frontier**; a regra de roteamento é única e vive na ADR-0014. Eval
-   adversarial de PII (leakage + injection) no harness-gate. **Guardrail de output no
-   copiloto também** (não só no MCP): `MensagemGerada` é superfície de prompt injection —
-   frases imperativas e qualquer afirmação de conformidade sem `Verdict::Ok` são
-   bloqueadas; toda `MensagemGerada` cita `Provenance` validada contra o catálogo;
-   documento e RAG entram como **dados com spotlighting**, nunca como instrução.
-2. **Extração norma→regra:** pipeline draft (Gemini 3 Pro, visão, schema-constrained) →
-   critic (Sonnet 4.5) → **compilação no engine + golden fixtures** → humano aprova diff.
-   Saída = `RuleSpec` com `status: DataOnly` até passar no gate.
-3. **MCP server (`rmcp`) com authn/authz próprios:** credencial por IF (OAuth2/mTLS com
-   **binding credencial↔tenant**), escopo por tenant; **toda tool call entra na
-   hash-chain** do norma-audit; recursos resolvidos sob a RLS do chamador (mesmo
-   `with_tenant` do §8). Tools allow-listed: `validate_document`, `explain_rule`,
-   `search_norma` são leitura; **`generate_cadoc` é reclassificado: não é read-only**
-   (gera artefato) e exige **human-in-the-loop** antes de qualquer efeito externo.
-   Conteúdo recuperado é **dado citado, nunca instrução** (mitigação de injection
-   documentada — research/07 §5).
-4. **RAG:** pgvector+Tantivy+RRF+BGE-Reranker; golden set de 200 perguntas no CI.
+1. **`System 1` (`reg-s1-tabular` zero-float `i64` + `reg-ai-runtime` `ort` INT8 atrás de `--features ai`):** implementa `S1.1` Column Auto-Mapper (`Proposal<MappingDraft>` sempre exigindo confirmação humana + 4 travas de `mapping_locks`), `S1.2` PII/LC 105 & Injection Gate (Allowlist estrutural determinística + Aho-Corasick + `debertinha`/`moBERTo` + canários `FNR == 0%`), `S1.3` Portfolio Sanity & Anomaly Scorer (`TreeSHAP` em `i32` bps, `SanityHoldGate` aditivo) e `S1.4` Router 4-tier (`Tier 0` determinístico `<5 ms` antes de qualquer LLM). Exporta na fronteira apenas `ScoreBps(u16)`, `i32` e `Vec<i16>` (`Q15`), além de `S1AuditRecord` zero-float para `reg-ledger::jcs`.
+2. **Copiloto de validação & Conexão Dual (`DataPolicy::{AirGapped, HybridPolicyRouter, CloudZdrFirst}`):** alternável por `TenantAiConfig` sem mudar código de domínio. **Regra LC 105 strict (Resolução C4):** apenas `PublicRegulatory` e `SchemaOnlyTokenized` (ex.: `{cadoc, catalog_version, rule_code, field_path, error_class}` pós-WASM browser) podem usar API Cloud ZDR+DPA+SCC (Res. ANPD 29/2024); qualquer texto livre envolvendo cliente/operação vai **fail-closed** para Local/VPC Brasileira (open-weights 2026 Apache 2.0/MIT via `mistral.rs`/`llama.cpp`/`SGLang`/`vLLM`). **Guardrail de output + 3 campos de `Provenance` obrigatórios** + spot-lighting. Legado Go `backend/internal/insights/` é aposentado na Etapa 0.
+3. **Extração norma→regra (`Norma→Regra` Two-Pass):** `Docling` (PDF) + `calamine` (XLSX, nunca OCR) → Pass 1 reasoning → Pass 2 critic & JSON portátil (`ThinkingPolicy::Disabled`, decimais/datas/CNPJs como `string`) → **compilação no engine + golden fixtures** → aprovação humana (`RuleSpec`).
+4. **MCP server (`rmcp`, spec 2026-07-28) hardened:** JWT/OAuth2 + **binding credencial↔tenant**; **MCP sampling desabilitado**; **hash SHA-256 dos manifestos/descrições de tools pinado**; apenas tools *read-only* expostas por padrão (`validate_cadoc`, `query_rule`, `explain_violation`, `check_dossier`); geração/submissão STA exige HITL fora da banda da IA e **toda tool call entra na hash-chain** do ledger.
+5. **RAG Dual-Store:** On-prem single-node (`Tantivy` BM25 + `BGE-M3` `ort` + `sqlite-vec`/HNSW) e Plataforma (`Tantivy` + `pgvector` HNSW + RRF inteiro + `BGE-Reranker-v2-M3`); golden set de 200 perguntas em CI; **corpus público** isolado de dados de tenant.
 
 ---
 
@@ -761,7 +739,7 @@ verifica. Pontos:
 |---|---|---|
 | Traces/metrics | `tracing` + OTel + Prometheus (`metrics`) + Sentry | setup com mais atrito que Go (research/04 §R9) — compensado por macro próprio `#[instrument_verdict]` |
 | Deploy | distroless/**cc** (convive com xmllint), 20-40MB | Fargate 0.5vCPU/1GB → ~50-75% menos RAM que Go |
-| Binário | 1 api + 1 worker + 1 cli (mesma workspace) | cross-compile musl para VPS on-prem |
+| Binário | 1 api + 1 worker + 1 cli (mesma workspace) | Empacotamento nativo CI: `ubuntu-latest` (Docker `debian-slim` + JRE ≥ 1.8) + `windows-latest` *(Plano v3.0 — sem `musl` cross de macOS; IA isolada atrás de `--features ai`)* |
 | CI | GitHub Actions: fmt+clippy(-D warnings, -D clippy::wildcard_enum_match_arm, -D clippy::float_arithmetic, -D clippy::float_cmp, -D clippy::cast_precision_loss — §4.5) + test + coverage gate por crate + **harness-gate** + catalog gate + fuzz nightly do parser XML (cargo-fuzz, incl. entidades/DOCTYPE) | |
 | SLOs | publicados **só após** produção real (lição v1: SLOs sem prod = ficção) | p95 validação < 500ms é alvo, não claim |
 | Segurança | JWT RS256+CSRF (tenant só de claim verificada — ADR-0017), rate-limit Redis por tenant/rota, RLS, hash-chain audit segmentada, secrets (ADR-0015), LGPD data-map; IdP (OIDC + MFA p/ roles de envio STA) decidido na F3 com `/v1/auth/dev-token` desligado em prod (teste de CI que falha se o endpoint existir) | pentest do pentest-agente antes do launch |
@@ -843,7 +821,7 @@ como ponte STA-h para smoke. Critérios de bloqueio e switch para plano B em
 | **ADR-0011** | **Uma pipeline de validação L1-L4** (fim dos motores paralelos); `&DocSet` emprestado, zero globals; L3 paralelizado. |
 | **ADR-0012** | **XSD em 3 camadas** (codegen + inline + xmllint autoridade com erro explícito de indisponibilidade). **Nota da fusão:** xmllint é autoridade **estrutural**; o oráculo de **submissão** é o validador oficial (**ADR-0018**). O codegen `xsd-parser` aplica-se somente a CADOCs com XSD oficial disponível (3050 V4, 3045 etc.); para o **3040 o modelo vem do leiaute-XLS + validador oficial**, pois **não existe XSD oficial de 3040**. |
 | **ADR-0013** | **Harness como subsistema de build/CI** (gates bloqueiam regressão de precisão; status do produto é machine-generated). |
-| **ADR-0014** | **IA atrás do engine**: determinismo no core, IA na fronteira, verificação objetiva obrigatória, provenance em todo output; **regra única de roteamento frontier/on-prem**: sanitização por leiaute com falha fail-closed → on-prem, nunca frontier (§12). |
+| **ADR-0014** | **IA atrás do engine (`System 0 → System 1 → System 2`)**: determinismo/zero-float no core; `reg-s1-tabular` (`i64`) + `reg-ai` na borda + `reg-ai-runtime` (`--features ai`); barreira estrutural determinística LC 105 (zero texto livre com cliente na nuvem externa), defesa em profundidade `S1.2` fail-closed → on-prem (`AirGapped` / `HybridPolicyRouter` / `CloudZdrFirst`) e `Provenance` obrigatória (§12, `21-ENGINE-IA.md` v3.0 e `26-SYSTEM-ONE-DECISION-MODEL.md`). |
 | **ADR-0015** | **Secrets e material de assinatura**: senhaws/chaves A1-A3 em Secrets Manager/Vault (nunca env/arquivo/tracing), `zeroize` em memória, rotação sob norma-audit, monitor de expiração no Calendário Normativo; fallback A3→A1 bloqueado por config por IF — nunca automático. |
 | **ADR-0016** | **Retenção e transferência internacional**: prazos por tabela/bucket com purge automatizado, CMK por tenant no S3, scrubbing Sentry/OTel, DPA+ZDR para frontier, fluxo export/erase (art. 18) testado no CI; hash-chain segmentada com ancoragem externa. |
 | **ADR-0017** | **Identidade de tenant**: `tenant_id` exclusivamente de claim verificada do JWT RS256 no middleware axum; header `X-IF-ID` (bridge de dev do v1) banido; teste de integração prova que forjar o header não cruza tenants. |

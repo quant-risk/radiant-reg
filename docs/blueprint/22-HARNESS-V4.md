@@ -74,7 +74,7 @@ O flywheel não é um modelo — é um **pipeline de conversão evento→ativo c
 - **Entidades:** `correction` → `eval_case(provenance='user_correction')` | `rule_candidate`.
 - **Por que funciona:** modelo Duco/Grammarly — o rótulo custa o clique que o cliente já daria de qualquer jeito.
 - **Métrica:** correção→eval_case 100% automático; % de correções que revelam rule_candidate.
-- **Telemetria de retornos STA (opt-in, válida também para M7):** a ingestão de retornos do STA (`ListDisponiveis`/`Download`) só acontece com **cláusula contratual opt-in por tenant**; antes de virar fixture, **sanitização zero-PII obrigatória** — detector **Aho-Corasick** sobre os campos declarados do leiaute + **canary tokens** provando que nada escapou; **FNR > 0** (qualquer falso-negativo medido pelos canários) dispara alerta **critical** e bloqueia a fixture.
+- **Telemetria de retornos STA (opt-in, válida também para M7):** a ingestão de retornos do STA (`ListDisponiveis`/`Download`) só acontece com **cláusula contratual opt-in por tenant**; antes de virar fixture, passa obrigatoriamente pelo **`S1.2` Guardrail ([`26-SYSTEM-ONE-DECISION-MODEL.md`](26-SYSTEM-ONE-DECISION-MODEL.md))** — allowlist determinística de schema + generalização anti-quasi-identificador + autômato **Aho-Corasick** + NER `moBERTo` + **canary tokens** provando que nada escapou; **FNR > 0** dispara `PiiSanitizerTrip` (**critical**) e bloqueia a fixture.
 
 ### M3 — Radar detecta mudança → regression suite da nova versão
 
@@ -116,11 +116,12 @@ O flywheel não é um modelo — é um **pipeline de conversão evento→ativo c
 - **Métrica:** regras descobertas/mês; **shadow-rule rate** (% da produção com erro sem regra mapeada).
 - **Restrição de fonte (idem M2):** telemetria de retornos STA (`ListDisponiveis`/`Download`) entra no clustering apenas sob **opt-in por tenant** e depois da **sanitização zero-PII** (Aho-Corasick + canary tokens; **FNR > 0 = alerta critical**) — cluster só sobre dado higienizado.
 
-### M8 — Distillation por gatilho (não por vaidade)
+### M8 — Distillation & Calibração do `System 1` por gatilho (não por vaidade)
 
-- **Gatilhos por regra ou solver:** regra com ≥200 goldens e mensagem ainda gerada por LLM → destilar gerador de mensagem; solver LLM-auxiliado com ≥1.000 pares input→veredito do oráculo → fine-tune do classificador de erros ambíguos; judge com TPR/TNR ≥95% estável por 8 semanas e ≥500 decisões auditadas → congelar como "silver standard" gerador de dados; custo LLM >US$200/mês com padrão repetitivo → destilar componente quente.
-- **Fluxo:** `gatilho atingido (medido pelo harness, não declarado) → modelo destilado entra como engine_version CANDIDATA → A/B no tier release, held-out decide → sobe ou descarta`
-- **Guardrail:** nunca sobe direto; o corpus que a destilação consumiu fica congelado como P2P do novo componente.
+- **Escopo estrito (atualizado v3.0 — [`26-SYSTEM-ONE-DECISION-MODEL.md`](26-SYSTEM-ONE-DECISION-MODEL.md)):** o loop `M2/M8` calibra e destila **exclusivamente os submodelos auxiliares do `System 1` (`S1.1` Auto-Mapper, `S1.2` Guardrail, `S1.3` Anomaly Scorer `i64`, `S1.4` Triage Router)** e templates de resposta — **jamais altera pesos ou lógica para "memorizar" regras legais (`RuleSpec`)**.
+- **Gatilhos por regra ou solver:** `>= 200` rótulos novos validados por `M1/M2` pós-`S1.2` (`Canary FNR == 0%`), ou drift `ECE > 0.025`, ou cadência semanal; solver LLM-auxiliado com ≥1.000 pares → recalibração do `S1.4` Router; custo LLM >US$200/mês com padrão repetitivo → destilar componente quente para `S1` local.
+- **Fluxo:** `gatilho atingido (medido pelo harness, não declarado) → split temporal agrupado por tenant + recalibração isotônica/temperature scaling sobre held-out selado → A/B contra champion pelos hard gates M6 (ECE <= 0.025, Auto-Accept Error <= 0.5%, Canary FNR == 0%, 0 violações PII) → sobe ou descarta`
+- **Guardrail:** nunca sobe direto; o corpus consumido fica congelado como P2P do novo componente e o fingerprint `(s1_model_sha256, s1_calibrator_sha256, s1_policy_sha256)` entra no Scorecard `M5` append-only.
 
 ### M9 — Red-team contínuo (canary + adversarial + mutation)
 

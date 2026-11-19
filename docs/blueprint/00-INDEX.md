@@ -1,6 +1,7 @@
-# Blueprint v2.0 — Reconstrução Rust do Radiant Norma
+# Blueprint v3.0 — Reconstrução Rust do Radiant Norma / Radiant Reg
 
-> **Data:** 16/11/2026 · **Versão:** 2.0 · **Dono:** Henrique Costa · **Orquestração:** ZCode (workflow persistente `.zcode/workflows/blueprint-fecho.dwf.ts`).
+> **Data Original:** 16/11/2026 · **Atualização Soberana (Plano v3.0 + IA/System One):** 19/11/2026 · **Versão:** 3.0 · **Dono:** Henrique Costa.
+> **Governança Atual (19/11/2026):** O produto passa a ser governado pelas **Etapas 0–4 orientadas exclusivamente a Gates Técnicos Verificáveis** ([`25-ROADMAP-EXECUCAO.md`](25-ROADMAP-EXECUCAO.md) §0.1), **sem datas artificiais de calendário**, priorizando **3040 completo + WASM + CLI/Dossiê RC 18 + STA → `reg-server`/Next.js → Multi-CADOC/Radar/IA/Harness**, com a arquitetura de **IA Embarcada + `System One` (`21-ENGINE-IA.md` v3.0 & `26-SYSTEM-ONE-DECISION-MODEL.md`)** plugada na borda sem invadir o determinismo do núcleo.
 > **Contexto em uma linha:** a tese v1 (jul/2026) era ~80% correta sobre o mercado e ~100% falsificada sobre a própria execução — 11 dias de commit burst, 4 meses de congelamento, zero evidência externa; este blueprint reancora o produto em uma reconstrução Rust que converte a classe de bug encontrada na auditoria em erro de compilação ou gate de build, e em um posicionamento que nenhum player BR ocupa hoje.
 
 ---
@@ -58,8 +59,8 @@
 | Você é... | Ordem | Tempo | Por quê |
 |---|---|---|---|
 | **Investidor / executivo** | 00-INDEX → 11-TESE-V2 → 23-PRODUTO-PRICING-GTM | ~70 min | Tese em uma frase + o que sobreviveu/morreu da v1 (§2–3 da 11); mercado medido, ladder de preços, GTM e kill criteria K1–K5 (23). É o contrato comercial do blueprint. |
-| **Arquiteto** | 00-INDEX → 20-ARQUITETURA-RUST → 21-ENGINE-IA → 22-HARNESS-V4; contraponto: research/01 + research/04 | ~2h30 | Doutrina de design em 8 princípios, 17 crates, pipeline única, modelagem do domínio (20); como a IA entra sem contaminar o determinismo (21); o harness como subsistema de build (22). As pesquisas 01/04 são a base empírica dos 6 fios desligados e da escolha de crates. |
-| **Operador / quem executa** | 00-INDEX → 25-ROADMAP-EXECUCAO → 22-HARNESS-V4 → 20 (§fases) | ~1h30 | Fases F0–F6 re-balanceadas, marcos N1–N6 com artefato que prova, ponte DRSAC plano A/B, orçamento, riscos top-10 e as 72 horas (25); os gates que bloqueiam merge (22). |
+| **Arquiteto** | 00-INDEX → 20-ARQUITETURA-RUST → 21-ENGINE-IA → **26-SYSTEM-ONE-DECISION-MODEL** → 22-HARNESS-V4; contraponto: research/01 + research/04 | ~3h | Doutrina de design em 8 princípios, zero-float, pipeline única (20); conexão dual Cloud ZDR / Local Open-Weights 2026 (21); Decision Models `S1.1..S1.4`, ponto fixo `i64`, calibração e LC 105 (26); harness como subsistema de build (22). |
+| **Operador / quem executa** | 00-INDEX → **25-ROADMAP-EXECUCAO (§0.1 Plano v3.0)** → 22-HARNESS-V4 → 20 (§fases) | ~1h30 | Etapas 0–4 orientadas a gates objetivos sem datas artificiais (25 §0.1), saneamento S7, 3040 + WASM, Dossiê RC 18, STA, `reg-server` e gates M6/M10. |
 | **Designer / PM de produto** | 00-INDEX → 24-UX-VISAO | ~40 min | Cinco princípios (Trust-first, HITL 1-clique, calendário como homepage, copiloto citado, status machine-generated); o que KEEP do design system e os 9 P0s que precedem qualquer tela nova. |
 | **Diligência / leitor cético** | research/02 (tese vs realidade) → research/05 (concorrentes) → research/06 (normativos) | ~1h30 | As provas do que a v1 prometeu e não entregou; o mapa competitivo com fonte URL a URL; a verificação ao vivo dos normativos no BCB. |
 
@@ -76,7 +77,7 @@ Tempo por documento (leitura densa): 00-INDEX ~12 min · 11-TESE ~20 min · 20-A
 | **ADR-0011** | Uma única pipeline de validação L1-L4 (fim dos 2 motores paralelos do v1); `&DocSet` emprestado como parâmetro, zero globals; L3 paralelizado com rayon. |
 | **ADR-0012** | XSD em 3 camadas: codegen `xsd-parser` + validação estrutural inline + xmllint/libxml2 como autoridade final com erro explícito `L1AuthorityUnavailable` — nunca degrada para root-tag check. |
 | **ADR-0013** | Harness como subsistema de build/CI: gates bloqueiam regressão de precisão; status do produto é machine-generated (script → JSON → UI), nunca escrito à mão. |
-| **ADR-0014** | IA atrás do engine: determinismo no core, IA na fronteira, verificação objetiva obrigatória, provenance em todo output; regra única de roteamento frontier/on-prem com sanitização fail-closed. |
+| **ADR-0014** | IA atrás do engine em 3 camadas (`System 0 → System 1 → System 2`): determinismo e zero-float no core (`reg-core/cadoc/validate-core/ledger/sta`), `reg-s1-tabular` (`i64`), `DataPolicy` dual (`AirGapped`/`HybridPolicyRouter`/`CloudZdrFirst`), barreira determinística LC 105 (zero texto livre com cliente na nuvem externa) + `S1.2` defesa em profundidade + `Provenance` obrigatória. |
 | **ADR-0015** | Secrets e material de assinatura: senhaws/chaves A1-A3 em Secrets Manager/Vault (nunca env/arquivo/tracing), `zeroize` em memória, fallback A3→A1 bloqueado por config por IF — nunca automático. |
 | **ADR-0016** | Retenção e transferência internacional: prazos por tabela/bucket com purge automatizado, CMK por tenant no S3, scrubbing Sentry/OTel, DPA+ZDR para frontier, fluxo export/erase (art. 18) testado no CI. |
 | **ADR-0017** | Identidade de tenant: `tenant_id` exclusivamente de claim verificada do JWT RS256 no middleware; header `X-IF-ID` (bridge de dev do v1) banido; teste de integração prova que forjar o header não cruza tenants. |
@@ -224,6 +225,15 @@ Estado honesto da FASE 1: **S1–S5 técnica; S6 bloqueado em N0** ("Fase 1 téc
 
 **Workflows:** definição de workflow commitada só do blueprint-fecho; `fase-s3-corpus.dwf.ts` adicionada ao índice em 18/11/2026; runs S4/S6 (`dwfrun-904ae740`, `dwfrun-aba003aa`) ficam gitignored por política, mas os IDs são citados aqui para rastreabilidade.
 
+### 10.2 Auditoria 19/11/2026 & Plano v3.0 (Etapas 0–4 + Arquitetura IA/System One)
+
+Auditoria direta sobre `feat/rust-v4-core` (`510b56f`), planilhas oficiais do BCB e legado Go/Frontend consolidou o **Plano v3.0 orientado a gates objetivos (sem datas artificiais de calendário)** em [`25-ROADMAP-EXECUCAO.md`](25-ROADMAP-EXECUCAO.md) §0.1 e a especificação de IA em [`21-ENGINE-IA.md`](21-ENGINE-IA.md) v3.0 + [`26-SYSTEM-ONE-DECISION-MODEL.md`](26-SYSTEM-ONE-DECISION-MODEL.md):
+
+- **Catálogo 3040 real:** `3040/SCR3040_Criticas.xls` contém `253` regras (`224 Habilitado=s` e `29 Habilitado=n`), enquanto o port não commitado `rules3040/` (187 regras) trouxe stubs `Ok(())` e divergências (`B12`, `C71..C74`) — exige quarentena e reconstrução limpa por ondas sobre as `224` ativas com `catalog-parity` e `mutations.rs` real (**Etapas 0–1**).
+- **Descoberta em `SCR3040_Leiaute.xls`:** abas de atualizações (`r82..r86`) já contêm descontinuação Cosif, IN 733/2026 e IN 735/2026; faltam erratas pós-mai/2026, `.jar` atual, certs raiz BCB (§2.3.1) e preencher `MANIFESTO.md`.
+- **Fronteira Web & Empacotamento:** `musl` cross é substituído por builds nativos `ubuntu-latest` (Docker `debian-slim` + JRE ≥ 1.8) + `windows-latest`; DRSAC 2030 sai do caminho crítico pré-3040 e entra pós-3040 sob demanda; validação web nasce zero-upload em WASM streaming (`reg-validate-core`) isolada do `frontend/` v1 até a Etapa 3.
+- **IA em 3 camadas (`System 0 → System 1 → System 2`):** `0%` runtime ML/GPU nas Etapas 0–2 (aposentadoria imediata de `backend/internal/insights/` & `synth/` na Etapa 0); entrada controlada do `System 1` (`reg-s1-tabular` `i64` zero-float + `ort` INT8) + `reg-ai` (`DataPolicy`) + RAG público na Etapa 3; loop `M2/M8`, `S2` local (`T0–T5`, Apache 2.0/MIT 2026), Radar Two-Pass e `rmcp` na Etapa 4.
+
 ---
 
 ## 11. Riscos top-5 (do roadmap §7 — severidade alta primeiro)
@@ -244,18 +254,20 @@ Os outros 5 (mudança de leiaute no meio do port, cópia por concorrente, migra�
 
 ### 12.1 Arquivos
 
-**Documentos principais (10 — 8 ativos + 2 v1 substituídos):**
+**Documentos principais (11 — 9 ativos + 2 v1 substituídos + 2 legados jul/2026 depreciados):**
 
 | Arquivo | Conteúdo |
 |---|---|
-| `docs/blueprint/00-INDEX.md` | Este índice — ponto de entrada. |
+| `docs/blueprint/00-INDEX.md` | Este índice — ponto de entrada (atualizado v3.0 em 19/11/2026). |
 | `docs/blueprint/11-TESE-V2.md` | Tese v2: o que sobreviveu/morreu da v1, vazio de mercado, posicionamento, 5 pilares de produto, North Star, kill criteria K1–K5, calendário GTM. |
-| `docs/blueprint/20-ARQUITETURA-RUST.md` | Arquitetura: 8 princípios de design, 17 crates, pipeline única L1-L4, modelagem do domínio, XSD em 3 camadas, STA, RLS, ADRs 0009–0017, matriz CADOC→generator→fase. |
-| `docs/blueprint/21-ENGINE-IA.md` | Engine de IA: extração norma→regra (draft→critic→test→human), copiloto, RAG híbrido, sanitização PII/on-prem, MCP rmcp, corpus sintético, TCO por estágio, fine-tuning proibido para conhecimento versionado. |
-| `docs/blueprint/22-HARNESS-V4.md` | Harness v4: tese do moat (taxa de aprendizado por evento), 10 mecanismos M1–M10, modelo de dados, Honesty Engine, Accuracy SLA, roadmap do harness em 6 fases. |
+| `docs/blueprint/20-ARQUITETURA-RUST.md` | Arquitetura: 8 princípios de design, 17 crates (vs wedge + Plano v3.0), pipeline única L1-L4, modelagem do domínio, XSD em 3 camadas, STA, RLS, ADRs 0009–0018, §12 IA zero-float. |
+| `docs/blueprint/21-ENGINE-IA.md` | Engine de IA v3.0: conexão dual Cloud ZDR / Local Open-Weights 2026 (`T0–T5` Apache 2.0/MIT), papel por superfície, barreira LC 105, `Thinking` vs JSON, `rmcp` hardened, RAG dual-store, TCO e rollout Etapas 0–4. |
+| **`docs/blueprint/26-SYSTEM-ONE-DECISION-MODEL.md`** | **System One (Decision Model) v3.0:** camada cognitiva intermediária `S1.1..S1.4` (`reg-s1-tabular` `i64` zero-float + `reg-ai-runtime` `ort`), calibração `ECE <= 0.025`, Conformal OOD, loop `M2/M8` e auditoria RC 18/2025 (`S1AuditRecord`). |
+| `docs/blueprint/22-HARNESS-V4.md` | Harness v4: tese do moat (taxa de aprendizado por evento), 10 mecanismos M1–M10, modelo de dados, Honesty Engine, Accuracy SLA, M8 calibrando `System 1`. |
 | `docs/blueprint/23-PRODUTO-PRICING-GTM.md` | Mercado medido (1.722 entidades, S1–S5, SAM ~1.100 remetentes), ladder de 5 tiers + add-ons, autopsy do pricing antigo, projeção MRR em 3 cenários, GTM híbrido, marca, jogada DRSAC em 3 movimentos, playbook de vendas. |
 | `docs/blueprint/24-UX-VISAO.md` | UX: 5 princípios (Trust-first, HITL 1-clique, calendário como homepage, copiloto citado, status machine-generated), KEEP do design system "Institutional Premium Noir", 9 P0s, Wizard 2.0 com streaming L1–L4, telas novas, roadmap UX por fase. |
-| `docs/blueprint/25-ROADMAP-EXECUCAO.md` | Execução: clean rewrite com golden tests, fases F0–F6 re-balanceadas, ponte DRSAC plano A/B, marcos N1–N6, orçamento (~R$42–50k até launch), regime anti-burnout, riscos top-10, 72 horas. |
+| `docs/blueprint/25-ROADMAP-EXECUCAO.md` | Execução: **§0.1 Plano v3.0 soberano (Etapas 0–4 sem datas artificiais, gates técnicos + IA integrada)** + registro histórico do ciclo 16–18/nov/2026, clean rewrite, orçamento e riscos top-10. |
+| `docs/ON_PREMISE_LLM_SPEC.md` & `docs/LLM_INTEGRATION_GUIDE.md` | Specs Go/Ollama jul/2026 — **depreciados/arquivados** em 19/11/2026 (substituídos por `21` e `26`). |
 | `MASTER_PLAN.md` (raiz) | Plano Ouro v1 — **substituído** pela 11-TESE-V2; mantido como registro histórico e fonte da auditoria (tese vs realidade). |
 | `PRODUTO_TESE_ROADMAP.md` (raiz) | Tese v1 — **substituída**; idem. |
 

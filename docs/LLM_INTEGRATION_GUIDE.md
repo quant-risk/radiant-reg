@@ -1,3 +1,9 @@
+> [!CAUTION]
+> **DOCUMENTO DEPRECIADO / HISTÓRICO (Atualizado em 19/11/2026):** Este guia de 09/07/2026 refere-se ao legado Go v1 (Go HTTP + Python MCP + `Docling` + `qwen2.5:14b` para ler XLSX). Planilhas XLS/XLSX são lidas hoje de forma **100% determinística via `calamine` em Rust** (nunca OCR/LLM), e a arquitetura vigente está especificada em:
+> - [`docs/blueprint/21-ENGINE-IA.md`](blueprint/21-ENGINE-IA.md)
+> - [`docs/blueprint/26-SYSTEM-ONE-DECISION-MODEL.md`](blueprint/26-SYSTEM-ONE-DECISION-MODEL.md)
+> - O conteúdo abaixo é mantido apenas como arquivo histórico.
+
 # Radiant Norma — LLM Integration Guide
 
 **Data:** 2026-07-09
